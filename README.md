@@ -106,11 +106,6 @@ always per realm, minimum 8 = the size of a wave), **fill mode** (*fill* tops ea
 the full number), **keep even** (raise every realm toward the biggest), and the logout delay. Cathal Valley (45-49) is not covered, because the bot
 logic only knows the four classic battlegrounds. This is new code and only lightly tested.
 
-## The client: patching and `launcher.bat`
-
-The server **never starts or talks to the game client**. It only helps with two things, both on the **Client** tab. Point the tab at
-your client folder (a Wine prefix, Lutris, Steam, Bottles... it only needs to be a path your terminal can see).
-
 Bracket bots are equipped once, at their first login, with a full kit for their class and level (weapons, shield, ranged weapon, armor, jewelry), so they never fight bare. Bots do not lose item condition, so they never need repairs. They start with 50 gold.
 
 ## Keeping the server light
@@ -119,6 +114,11 @@ Bracket bots are equipped once, at their first login, with a full kit for their 
 - **Load governor.** Every 10 seconds the server checks its game-loop tick rate and the free memory (Linux). Below 90% of the target rate (`load_governor_min_tps_percent`) or under 1500 MB free (`load_governor_min_free_mb`) it stops logging bots in, and if that lasts two minutes it logs a few bots out at a time, only ones that can leave safely. It resumes after a minute at 95% or better. Turn it off with `load_governor_enabled`.
 
 These are server properties for now (no Options tab entry yet). Both are new and only lightly tested.
+
+## The client: patching and `launcher.bat`
+
+The server **never starts or talks to the game client**. It only helps with three things, all on the **Client** tab: switching the client between patched and original, the battleground fix, and writing a `launcher.bat`. Point the tab at
+your client folder (a Wine prefix, Lutris, Steam, Bottles... it only needs to be a path your terminal can see).
 
 ### Switching the client between patched and original (no copy)
 
