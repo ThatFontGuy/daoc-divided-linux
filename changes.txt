@@ -1,8 +1,8 @@
 CHANGES (short tldr, newest first)
 
 2026-10-30
-- Audit vs the Windows launcher: serverconfig Foreign Keys=False (was True), MailConfig.xml in defaults/; Battleground fix on the Client tab. DEVNOTES rewritten as a handoff.
-- Project created from DividedRealms e7155da (0.38-dev7) minus the Godot client (World Workshop editor kept). See DEVNOTES.md.
+- Audit vs the Windows launcher: serverconfig Foreign Keys=False (was True), MailConfig.xml in defaults/; Battleground fix on the Client tab.
+- Project created from DividedRealms e7155da (0.38-dev7) minus the Godot client (World Workshop editor kept).
 - Server builds on Linux (divided-box, .NET 10): 0 errors, 4887 tests pass. Detour CMake: static libstdc++/libgcc.
 - Admin layer (Admin.Host/Protocol, DaocAdmin) copied from daoc-linux-server-bots; builds. World data to come from DividedRealms' own release DB.
 - tools/build-release.sh: portable dist/daoc-divided (bundled .NET + Python TUI, DividedRealms world DB + 103 navmeshes). Smoke-tested on spare ports: starts, admin status works.
@@ -12,8 +12,8 @@ CHANGES (short tldr, newest first)
 - World updates on Linux: tools/world_update.py (port of their updater) runs on start with a backup; `daoc-server.sh world-update [--check]`; tested by winding the dev7 world back to pre-dev2 and updating it.
 - World Workshop editor on Linux: world-editor.sh + bundled Python (Pillow, NumPy); reads the retail client directly; restored source/new-client/pipeline (Python readers only, 1.5 MB).
 - build.sh: local builds keep HOME/NuGet/XDG caches in .cache/; clean-machine build verified (private .NET SDK, full download, server starts).
-- Battleground bracket bots (new): bots/bracket/*, admin `bracket` commands, TUI tab, Options keys bracket_bots_*; 3 small hooks in DividedRealms files (listed in DEVNOTES).
-- Client tab: Battleground fix toggle (classic zones.mpk, .orig backup). Found: battlegrounds need the classic zones.mpk in the client (the plain 1.130 client kicks you at entry). The battleground exit portal exists but has no graphic; an unneeded Portal Keeper NPC file was added and switched off (see DEVNOTES).
+- Battleground bracket bots (new): bots/bracket/*, admin `bracket` commands, TUI tab, Options keys bracket_bots_*; 3 small hooks in DividedRealms files.
+- Client tab: Battleground fix toggle (classic zones.mpk, .orig backup). Found: battlegrounds need the classic zones.mpk in the client (the plain 1.130 client kicks you at entry). The battleground exit portal exists but has no graphic; an unneeded Portal Keeper NPC file was added and switched off.
 - Live test OK: stock 1.130 client + real classes (Vampiir, Bainshee, Heretic, Valkyrie, Warlock, Mauler) + bots on the Linux build.
 - Bracket bots now get a full gear kit (weapons, shield, armor, jewelry) once at first login instead of buying gear; bots never lose item condition, so no repairs. Built, not yet tried in game.
 - Load governor: stops bot logins (and logs a few bots out) when the game loop falls under 90% of its tick rate or free memory is low; settings load_governor_* in the server properties. Unit tested and checked on the test server (hold and logout).

@@ -23,7 +23,7 @@ You play with the **original retail 1.130 client**. No game files are included i
 | Updates | Launcher applies world updates in place | `daoc-server.sh start` applies them automatically, with a backup (see [Upgrading](#upgrading)) |
 
 The game logic, bots, classes, world data and navmeshes are DividedRealms' own. We change as little of their code as possible
-so their updates stay easy to merge (the few edits are listed in [DEVNOTES.md](DEVNOTES.md)).
+so their updates stay easy to merge (each edit is marked `daoc-divided-linux` in the source).
 
 ## Quick start
 
@@ -104,12 +104,21 @@ minutes after the last player leaves. Ordinary bots keep behaving as before, inc
 The same is on the admin screen's **Bracket Bots** tab, and the settings are on the **Options** tab (`bracket_bots_*`): bots **per realm** (default 12,
 always per realm, minimum 8 = the size of a wave), **fill mode** (*fill* tops each realm up counting players and bots already there; *extra* always adds
 the full number), **keep even** (raise every realm toward the biggest), and the logout delay. Cathal Valley (45-49) is not covered, because the bot
-logic only knows the four classic battlegrounds. This is new code and only lightly tested: see [DEVNOTES.md](DEVNOTES.md).
+logic only knows the four classic battlegrounds. This is new code and only lightly tested.
 
 ## The client: patching and `launcher.bat`
 
 The server **never starts or talks to the game client**. It only helps with two things, both on the **Client** tab. Point the tab at
 your client folder (a Wine prefix, Lutris, Steam, Bottles... it only needs to be a path your terminal can see).
+
+Bracket bots are equipped once, at their first login, with a full kit for their class and level (weapons, shield, ranged weapon, armor, jewelry), so they never fight bare. Bots do not lose item condition, so they never need repairs. They start with 50 gold.
+
+## Keeping the server light
+
+- **No players, no bots.** By default the ordinary bots log out 120 seconds after the last player leaves the world and stay out until a player arrives (server properties `bots_only_with_players`, `bots_only_with_players_grace_seconds`). Bracket bots follow their own battleground rule.
+- **Load governor.** Every 10 seconds the server checks its game-loop tick rate and the free memory (Linux). Below 90% of the target rate (`load_governor_min_tps_percent`) or under 1500 MB free (`load_governor_min_free_mb`) it stops logging bots in, and if that lasts two minutes it logs a few bots out at a time, only ones that can leave safely. It resumes after a minute at 95% or better. Turn it off with `load_governor_enabled`.
+
+These are server properties for now (no Options tab entry yet). Both are new and only lightly tested.
 
 ### Switching the client between patched and original (no copy)
 
