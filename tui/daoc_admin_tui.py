@@ -214,7 +214,7 @@ class DaocAdmin(App):
     #status-box { height: auto; padding: 1 2; border: round $primary; margin: 1 0; }
     #message { height: 1; color: $accent; }
     #pop-max { width: 14; }
-    #client-path, #client-classic, #client-server, #client-account, #client-password { width: 100%; max-width: 70; }
+    #client-path, #client-server, #client-account, #client-password { width: 100%; max-width: 70; }
     .hint { color: $text-muted; height: auto; margin-bottom: 1; }
     """
 
@@ -294,7 +294,6 @@ class DaocAdmin(App):
                         yield Button("Switch to patched", id="client-toggle", variant="warning")
                     yield Static("Switches the two client files (game.dll, pregame/character_creation.xml; about 6 MB) in place. The originals are kept as .orig, so you can switch back at any time.", classes="hint")
                     yield Label("Battleground fix: the plain 1.130 client sends you to the login screen when you enter a battleground (and has no Abermenai)")
-                    yield Input("", placeholder="classic OpenDAoC client folder (the file is copied from here the first time)", id="client-classic")
                     yield Static("", id="bgfix-info")
                     with Horizontal(classes="buttons"):
                         yield Button("Switch battleground fix on", id="bgfix-toggle", variant="warning")
@@ -327,7 +326,6 @@ class DaocAdmin(App):
         self.query_one("#log", RichLog).can_focus = False
         remembered = client_tools.load_settings(HOME).get("client", "")
         self.query_one("#client-path", Input).value = remembered
-        self.query_one("#client-classic", Input).value = client_tools.load_settings(HOME).get("classic", "")
         self.query_one("#client-server", Input).value = client_tools.load_settings(HOME).get("server") or f"127.0.0.1:{server_port()}"
         self.show_client()
         self.set_interval(2, self.tick)
@@ -585,10 +583,6 @@ class DaocAdmin(App):
     @work
     async def _bgfix_toggle(self):
         folder = self.client_folder()
-        source = self.query_one("#client-classic", Input).value.strip()
-        settings = client_tools.load_settings(HOME)
-        settings["classic"] = source
-        client_tools.save_settings(HOME, settings)
         try:
             if client_tools.bgfix_state(folder) == "classic":
                 if not await self.push_screen_wait(Confirm("Battleground fix off", f"Put the original zones/zones.mpk back in\n{folder}?\nBattlegrounds will send you to the login screen again.", "Switch off")):
@@ -598,7 +592,7 @@ class DaocAdmin(App):
             else:
                 if not await self.push_screen_wait(Confirm("Battleground fix on", f"Replace zones/zones.mpk in\n{folder}\nwith the classic zone table? The original is kept as zones.mpk.orig.", "Switch on")):
                     return
-                await asyncio.to_thread(client_tools.bgfix_on, folder, source or None)
+                await asyncio.to_thread(client_tools.bgfix_on, folder, None, bundled=HOME / "tools" / client_tools.CLASSIC_ZONES_FILE)
                 done = "Battleground fix is on."
         except (client_tools.ClientError, OSError) as exc:
             self.say(str(exc), error=True)

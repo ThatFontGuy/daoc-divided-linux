@@ -53,7 +53,7 @@ when port-forwarding TCP 10300 and UDP 10400), and put that address in the Clien
 ### Battleground fix (needed for battlegrounds)
 
 Without it, entering a battleground sends you to the login screen. On the Client tab, **Switch battleground fix on** replaces only `zones/zones.mpk` with the classic zone table
-(point it at a classic OpenDAoC client folder the first time); the original is kept as `zones.mpk.orig`, and switching it off puts it back.
+(the classic table ships in this folder's `tools/`; no other client is needed); the original is kept as `zones.mpk.orig`, and switching it off puts it back.
 
 ### Extra classes (optional client patch)
 

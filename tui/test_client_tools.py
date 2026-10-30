@@ -82,6 +82,20 @@ try:
         c.bgfix_on(cli, src2, LIVE, CLASSIC); raise SystemExit("replaced a file that is not the retail one")
     except c.ClientError:
         pass
+    # the shipped classic table is used when there is no saved copy and no source folder
+    (cli / c.ZONES).write_bytes(live_bytes)
+    for leftover in (cli / (str(c.ZONES) + ".bgfix"), cli / (str(c.ZONES) + ".orig")):
+        leftover.unlink(missing_ok=True)
+    shipped = tmp / "zones-classic.mpk"; shipped.write_bytes(b"wrong")
+    try:
+        c.bgfix_on(cli, None, LIVE, CLASSIC, bundled=shipped); raise SystemExit("accepted a wrong shipped file")
+    except c.ClientError:
+        pass
+    shipped.write_bytes(classic_bytes)
+    assert c.bgfix_on(cli, None, LIVE, CLASSIC, bundled=shipped) == "classic" and (cli / c.ZONES).read_bytes() == classic_bytes
+    # the real shipped file is the one the code expects
+    repo_file = Path(__file__).resolve().parent.parent / "deploy" / "zones-classic.mpk"
+    assert c.sha256(repo_file) == c.CLASSIC_ZONES_SHA, "deploy/zones-classic.mpk is not the expected classic zone table"
     print("OK client tools")
 finally:
     shutil.rmtree(tmp, ignore_errors=True)

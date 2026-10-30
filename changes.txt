@@ -19,3 +19,4 @@ CHANGES (short tldr, newest first)
 - Load governor: stops bot logins (and logs a few bots out) when the game loop falls under 90% of its tick rate or free memory is low; settings load_governor_* in the server properties. Unit tested and checked on the test server (hold and logout).
 - "No players, no bots": ordinary bots log out 120 s after the last player leaves the world and stay out until a player enters (option bots_only_with_players, on by default; bots_only_with_players_grace_seconds). Unit tested; checked on the test server with no player; logout/return with a real player not yet seen.
 - Admin screen: Client tab buttons now resize with their label ("Switch to original" was cut to "Switch to").
+- Battleground fix no longer needs an OpenDAoC client: the classic zone table (zones.mpk, 9.8 KB) ships in the server folder (tools/zones-classic.mpk); the Client tab box for the classic folder is gone.

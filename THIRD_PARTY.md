@@ -6,6 +6,8 @@ The project's AI-developed additions do not remove upstream attribution.
 
 - Dawn of Light / OpenDAoC: server emulator foundation. See source/server/LICENSE,
   gpl.txt, gplheader.txt and source headers.
+- deploy/zones-classic.mpk (shipped as tools/zones-classic.mpk): the classic zone table (zones/zones.mpk, 9,836 bytes) from the
+  OpenDAoC classic client, an original Dark Age of Camelot data file. It is only copied into a player's own client when they switch the Battleground fix on.
 - Navigation builder: see source/development-tools/OpenDAoC-BuildNav/LICENSE and
   the native pathing dependencies' notices.
 - Asset tool: see tools/asset-tool/THIRD PARTY NOTICES.

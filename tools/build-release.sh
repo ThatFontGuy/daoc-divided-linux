@@ -89,6 +89,7 @@ mkdir -p "$OUT/tui/classslots" "$OUT/tools"
 cp "$REPO/tools/world_update.py" "$OUT/tools/"
 cp "$SRC/../tools/classslots/patch_class_slots.py" "$OUT/tui/classslots/"
 cp "$DATA/tools/connect-local1130.exe" "$OUT/tools/"
+cp "$REPO/deploy/zones-classic.mpk" "$OUT/tools/"   # the classic zone table the Battleground fix puts in the client
 
 echo "== World Workshop editor (runs on the bundled Python)"
 mkdir -p "$OUT/editor/source/tools" "$OUT/editor/source/new-client"

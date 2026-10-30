@@ -135,6 +135,7 @@ ZONES = Path("zones") / "zones.mpk"
 BGFIX_COPY = ".bgfix"  # the classic table is kept next to the file, so switching back on needs no source folder
 LIVE_ZONES_SHA = "4f477c2cf99ffe718c11fb04633acff949cea7b691bfa1eb53dbc50b5a314758"     # retail 1.130 zones/zones.mpk
 CLASSIC_ZONES_SHA = "aa72c53ac551827f1f7e1d125a182f10827c90ada2354c5497764ef5b5e346c2"  # classic OpenDAoC client zones/zones.mpk
+CLASSIC_ZONES_FILE = "zones-classic.mpk"  # shipped in the server folder's tools/ (a copy of that file)
 
 
 def bgfix_state(folder, live_sha=LIVE_ZONES_SHA, classic_sha=CLASSIC_ZONES_SHA):
@@ -146,9 +147,9 @@ def bgfix_state(folder, live_sha=LIVE_ZONES_SHA, classic_sha=CLASSIC_ZONES_SHA):
     return "live" if digest == live_sha else "classic" if digest == classic_sha else "other"
 
 
-def bgfix_on(folder, source_folder=None, live_sha=LIVE_ZONES_SHA, classic_sha=CLASSIC_ZONES_SHA):
-    """Replace zones/zones.mpk with the classic table (keeps zones.mpk.orig). The classic file comes from a classic OpenDAoC client folder
-    the first time, from the copy kept next to it afterwards. Only the retail file is replaced."""
+def bgfix_on(folder, source_folder=None, live_sha=LIVE_ZONES_SHA, classic_sha=CLASSIC_ZONES_SHA, bundled=None):
+    """Replace zones/zones.mpk with the classic table (keeps zones.mpk.orig). The classic file comes from the copy kept next to it, else from
+    the copy shipped with the server (bundled), else from a classic OpenDAoC client folder. Only the retail file is replaced."""
     root = Path(folder).expanduser()
     state = bgfix_state(root, live_sha, classic_sha)
     if state == "classic":
@@ -159,9 +160,11 @@ def bgfix_on(folder, source_folder=None, live_sha=LIVE_ZONES_SHA, classic_sha=CL
     saved = Path(str(target) + BGFIX_COPY)
     if saved.is_file() and sha256(saved) == classic_sha:
         source = saved
+    elif bundled and Path(bundled).is_file() and sha256(bundled) == classic_sha:
+        source = Path(bundled)
     else:
         if not source_folder:
-            raise ClientError("Enter a classic OpenDAoC client folder to take the file from.")
+            raise ClientError("The classic zone table is missing from the server's tools folder. Enter a classic OpenDAoC client folder to take the file from.")
         source = Path(source_folder).expanduser() / ZONES
         if not source.is_file() or sha256(source) != classic_sha:
             raise ClientError("That folder has no classic zones/zones.mpk (wrong file or version).")

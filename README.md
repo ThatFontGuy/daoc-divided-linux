@@ -137,7 +137,7 @@ The patch refuses anything but the pristine 1.130 files (it checks SHA-256 hashe
 
 The plain 1.130 client doesn't know this server's battleground regions, so walking into any battleground sends you to the login screen. The Client tab's
 **Switch battleground fix on** replaces just `zones/zones.mpk` (about 10 KB) with the classic zone table, keeps the original as `zones.mpk.orig`, and **Switch ... off**
-puts it back. The first time it needs a classic OpenDAoC client folder to copy the file from; afterwards it keeps its own copy. It only replaces the retail 1.130 file (hash-checked).
+puts it back. The classic table ships with the server (`tools/zones-classic.mpk`), so no other client is needed. It only replaces the retail 1.130 file (hash-checked).
 
 ### `launcher.bat`
 
@@ -208,7 +208,7 @@ DividedRealms' own updater (`tools/world_update.py`).
 - **Not separately tested:** Master Levels, Champion Levels, the bot raids and sieges, mounts and Trials of Atlantis items are included
   as DividedRealms ships them. They are not independently verified here.
 - **Battleground exit portal has no graphic:** the exit portal in each portal keep exists, but the arch draws without the portal graphic with the 1.130 client, so you have to know where it is. Cosmetic; not fixed.
-- **Battlegrounds need the Battleground fix on the client:** the plain 1.130 client maps the battlegrounds to other regions (and has no Abermenai), so the server sends you to the login screen when you enter one. The Client tab's **Battleground fix** swaps one small file (`zones/zones.mpk`) for the classic zone table; you point it at a classic OpenDAoC client folder to copy it from (we can't ship it). It covers all four battlegrounds. Some small object-data files in the battleground zone folders still differ and are not replaced yet.
+- **Battlegrounds need the Battleground fix on the client:** the plain 1.130 client maps the battlegrounds to other regions (and has no Abermenai), so the server sends you to the login screen when you enter one. The Client tab's **Battleground fix** swaps one small file (`zones/zones.mpk`) for the classic zone table; the classic table ships with the server. It covers all four battlegrounds. Some small object-data files in the battleground zone folders still differ and are not replaced yet.
 - **Startup log noise:** about 450 ERR lines at startup are upstream data issues (items referring to missing spells, and so on), not
   failures of this build.
 - **Gating:** flying mounts, account companions and the invented classes ship as upstream has them; switches to turn them off are
