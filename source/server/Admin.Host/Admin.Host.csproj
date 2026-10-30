@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <!-- Server side of the daoc-admin TUI/CLI: the admin service, the Unix socket host, the console
+         commands and the bot roster/options operations. Depends on GameServer; GameServer does not
+         depend on it. CoreServer registers it at startup (AdminHost.Register). Upstream Offline DAoC
+         has no equivalent, so merges from it never touch this folder. -->
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <OutputType>Library</OutputType>
+        <AssemblyName>Admin.Host</AssemblyName>
+        <RootNamespace>DOL.GS.Admin</RootNamespace>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <OutputPath>..\$(Configuration)\lib\</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\GameServer\GameServer.csproj" />
+        <ProjectReference Include="..\Admin.Protocol\Admin.Protocol.csproj" />
+    </ItemGroup>
+</Project>

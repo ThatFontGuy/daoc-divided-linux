@@ -1,0 +1,234 @@
+[
+  {
+    "Realm": 1,
+    "Class": 2,
+    "Races": [
+      16,
+      19
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 11,
+    "Races": [
+      16,
+      19
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 19,
+    "Races": [
+      19
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 60,
+    "Races": [
+      16,
+      19
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 7,
+    "Races": [
+      16
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 5,
+    "Races": [
+      16
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 33,
+    "Races": [
+      19
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 8,
+    "Races": [
+      16
+    ]
+  },
+  {
+    "Realm": 1,
+    "Class": 13,
+    "Races": [
+      16
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 21,
+    "Races": [
+      17,
+      20
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 22,
+    "Races": [
+      20
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 24,
+    "Races": [
+      20
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 31,
+    "Races": [
+      20
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 34,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 61,
+    "Races": [
+      20
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 27,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 29,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 59,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 26,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 23,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 25,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 30,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 2,
+    "Class": 28,
+    "Races": [
+      17
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 45,
+    "Races": [
+      18,
+      21
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 43,
+    "Races": [
+      18,
+      21
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 44,
+    "Races": [
+      18,
+      21
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 62,
+    "Races": [
+      21
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 58,
+    "Races": [
+      18
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 50,
+    "Races": [
+      18
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 46,
+    "Races": [
+      18,
+      21
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 42,
+    "Races": [
+      18
+    ]
+  },
+  {
+    "Realm": 3,
+    "Class": 56,
+    "Races": [
+      21
+    ]
+  }
+]

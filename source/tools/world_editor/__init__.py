@@ -1,0 +1,1 @@
+"""Local DAoC world editor."""

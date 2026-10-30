@@ -1,0 +1,616 @@
+{
+ "source": "https://github.com/Eve-of-Darkness/db-public",
+ "commit": "e0e6ed280f6239d2c40d4d0a57b244dafdc2056e",
+ "note": "Valkyrie spell icons and client effects from Eve of Darkness's Odin's Will, Valkyrie Mending Spec and Mending lines, matched by name within the line. Every ID was checked against the bundled 1.130 client's spells.csv; Odin's Faith/Virtue/Temperance use the client's own dedicated rows instead.",
+ "spells": {
+  "64990": {
+   "Name": "Odin's Heel",
+   "EodSpellID": 12501,
+   "Icon": 12509,
+   "ClientEffect": 12509
+  },
+  "64991": {
+   "Name": "Odin's Hoof",
+   "EodSpellID": 12502,
+   "Icon": 12501,
+   "ClientEffect": 12501
+  },
+  "64992": {
+   "Name": "Odin's Greater Hoof",
+   "EodSpellID": 12503,
+   "Icon": 12502,
+   "ClientEffect": 12502
+  },
+  "64993": {
+   "Name": "Odin's Claw",
+   "EodSpellID": 12504,
+   "Icon": 12503,
+   "ClientEffect": 12503
+  },
+  "64994": {
+   "Name": "Odin's Greater Claw",
+   "EodSpellID": 12505,
+   "Icon": 12504,
+   "ClientEffect": 12504
+  },
+  "64995": {
+   "Name": "Odin's Horn",
+   "EodSpellID": 12506,
+   "Icon": 12505,
+   "ClientEffect": 12505
+  },
+  "64996": {
+   "Name": "Odin's Greater Horn",
+   "EodSpellID": 12507,
+   "Icon": 12506,
+   "ClientEffect": 12506
+  },
+  "64997": {
+   "Name": "Odin's Ram",
+   "EodSpellID": 12508,
+   "Icon": 12507,
+   "ClientEffect": 12507
+  },
+  "64998": {
+   "Name": "Odin's Greater Ram",
+   "EodSpellID": 12509,
+   "Icon": 12508,
+   "ClientEffect": 12508
+  },
+  "65000": {
+   "Name": "Minor Mending",
+   "EodSpellID": 3001,
+   "Icon": 3001,
+   "ClientEffect": 3001
+  },
+  "65001": {
+   "Name": "Minor Improvement",
+   "EodSpellID": 3003,
+   "Icon": 3003,
+   "ClientEffect": 3003
+  },
+  "65002": {
+   "Name": "Minor Reconstitution",
+   "EodSpellID": 3004,
+   "Icon": 3004,
+   "ClientEffect": 3004
+  },
+  "65003": {
+   "Name": "Minor Amelioration",
+   "EodSpellID": 3005,
+   "Icon": 3005,
+   "ClientEffect": 3005
+  },
+  "65004": {
+   "Name": "Minor Purification",
+   "EodSpellID": 3006,
+   "Icon": 3006,
+   "ClientEffect": 3006
+  },
+  "65005": {
+   "Name": "Minor Recovery",
+   "EodSpellID": 3007,
+   "Icon": 3007,
+   "ClientEffect": 3007
+  },
+  "65006": {
+   "Name": "Minor Reparation",
+   "EodSpellID": 3008,
+   "Icon": 3008,
+   "ClientEffect": 3008
+  },
+  "65007": {
+   "Name": "Minor Restoration",
+   "EodSpellID": 3009,
+   "Icon": 3009,
+   "ClientEffect": 3009
+  },
+  "65008": {
+   "Name": "Minor Reconstruction",
+   "EodSpellID": 3010,
+   "Icon": 3010,
+   "ClientEffect": 3010
+  },
+  "65009": {
+   "Name": "Minor Emendation",
+   "EodSpellID": 3011,
+   "Icon": 3011,
+   "ClientEffect": 3011
+  },
+  "65010": {
+   "Name": "Refinement",
+   "EodSpellID": 3021,
+   "Icon": 3021,
+   "ClientEffect": 3021
+  },
+  "65011": {
+   "Name": "Improvement",
+   "EodSpellID": 3022,
+   "Icon": 3022,
+   "ClientEffect": 3022
+  },
+  "65012": {
+   "Name": "Reconstitution",
+   "EodSpellID": 3023,
+   "Icon": 3023,
+   "ClientEffect": 3023
+  },
+  "65013": {
+   "Name": "Amelioration",
+   "EodSpellID": 3024,
+   "Icon": 3024,
+   "ClientEffect": 3024
+  },
+  "65014": {
+   "Name": "Purification",
+   "EodSpellID": 3025,
+   "Icon": 3025,
+   "ClientEffect": 3025
+  },
+  "65015": {
+   "Name": "Recovery",
+   "EodSpellID": 3026,
+   "Icon": 3026,
+   "ClientEffect": 3026
+  },
+  "65016": {
+   "Name": "Reparation",
+   "EodSpellID": 3027,
+   "Icon": 3027,
+   "ClientEffect": 3027
+  },
+  "65017": {
+   "Name": "Restoration",
+   "EodSpellID": 3028,
+   "Icon": 3028,
+   "ClientEffect": 3028
+  },
+  "65018": {
+   "Name": "Reconstruction",
+   "EodSpellID": 3029,
+   "Icon": 3029,
+   "ClientEffect": 3029
+  },
+  "65019": {
+   "Name": "Emendation",
+   "EodSpellID": 3030,
+   "Icon": 3030,
+   "ClientEffect": 3030
+  },
+  "65020": {
+   "Name": "Group Reparation",
+   "EodSpellID": 3041,
+   "Icon": 3041,
+   "ClientEffect": 3041
+  },
+  "65021": {
+   "Name": "Group Purification",
+   "EodSpellID": 3042,
+   "Icon": 3042,
+   "ClientEffect": 3042
+  },
+  "65022": {
+   "Name": "Group Restoration",
+   "EodSpellID": 3043,
+   "Icon": 3043,
+   "ClientEffect": 3043
+  },
+  "65023": {
+   "Name": "Group Emendation",
+   "EodSpellID": 3044,
+   "Icon": 3044,
+   "ClientEffect": 3044
+  },
+  "65030": {
+   "Name": "Major Reconstitution",
+   "EodSpellID": 3051,
+   "Icon": 3051,
+   "ClientEffect": 3051
+  },
+  "65031": {
+   "Name": "Major Amelioration",
+   "EodSpellID": 3052,
+   "Icon": 3052,
+   "ClientEffect": 3052
+  },
+  "65032": {
+   "Name": "Major Purification",
+   "EodSpellID": 3053,
+   "Icon": 3053,
+   "ClientEffect": 3053
+  },
+  "65033": {
+   "Name": "Major Recovery",
+   "EodSpellID": 3054,
+   "Icon": 3054,
+   "ClientEffect": 3054
+  },
+  "65034": {
+   "Name": "Major Reparation",
+   "EodSpellID": 3055,
+   "Icon": 3055,
+   "ClientEffect": 3055
+  },
+  "65035": {
+   "Name": "Major Restoration",
+   "EodSpellID": 3056,
+   "Icon": 3056,
+   "ClientEffect": 3056
+  },
+  "65036": {
+   "Name": "Major Reconstruction",
+   "EodSpellID": 3057,
+   "Icon": 3057,
+   "ClientEffect": 3057
+  },
+  "65037": {
+   "Name": "Major Emendation",
+   "EodSpellID": 3058,
+   "Icon": 3058,
+   "ClientEffect": 3058
+  },
+  "65038": {
+   "Name": "Redeem from Valhalla",
+   "EodSpellID": 121001,
+   "Icon": 3077,
+   "ClientEffect": 3077
+  },
+  "65039": {
+   "Name": "Odin's Greater Antidote",
+   "EodSpellID": 121002,
+   "Icon": 4413,
+   "ClientEffect": 4413
+  },
+  "65040": {
+   "Name": "Odin's Greater Medicant",
+   "EodSpellID": 121003,
+   "Icon": 4413,
+   "ClientEffect": 4413
+  },
+  "65041": {
+   "Name": "Odin's Greater Cure",
+   "EodSpellID": 121004,
+   "Icon": 4414,
+   "ClientEffect": 4414
+  },
+  "65042": {
+   "Name": "Odin's Greater Elixir",
+   "EodSpellID": 121005,
+   "Icon": 4414,
+   "ClientEffect": 4414
+  },
+  "65043": {
+   "Name": "Odin's Antidote",
+   "EodSpellID": 121006,
+   "Icon": 4411,
+   "ClientEffect": 4411
+  },
+  "65044": {
+   "Name": "Odin's Medicant",
+   "EodSpellID": 121007,
+   "Icon": 4411,
+   "ClientEffect": 4411
+  },
+  "65045": {
+   "Name": "Odin's Cure",
+   "EodSpellID": 121008,
+   "Icon": 4412,
+   "ClientEffect": 4412
+  },
+  "65046": {
+   "Name": "Odin's Elixir",
+   "EodSpellID": 121009,
+   "Icon": 4412,
+   "ClientEffect": 4412
+  },
+  "65047": {
+   "Name": "Valkyrie's Aid",
+   "EodSpellID": 121010,
+   "Icon": 14022,
+   "ClientEffect": 14022
+  },
+  "65048": {
+   "Name": "Valkyrie's Alleviation",
+   "EodSpellID": 121011,
+   "Icon": 14022,
+   "ClientEffect": 14022
+  },
+  "65049": {
+   "Name": "Valkyrie's Redress",
+   "EodSpellID": 121012,
+   "Icon": 14023,
+   "ClientEffect": 14023
+  },
+  "65050": {
+   "Name": "Valkyrie's Remedy",
+   "EodSpellID": 121013,
+   "Icon": 14023,
+   "ClientEffect": 14023
+  },
+  "65051": {
+   "Name": "Shieldmaiden's Aid",
+   "EodSpellID": 121014,
+   "Icon": 14020,
+   "ClientEffect": 14020
+  },
+  "65052": {
+   "Name": "Shieldmaiden's Alleviation",
+   "EodSpellID": 121015,
+   "Icon": 14020,
+   "ClientEffect": 14020
+  },
+  "65053": {
+   "Name": "Shieldmaiden's Redress",
+   "EodSpellID": 121016,
+   "Icon": 14021,
+   "ClientEffect": 14021
+  },
+  "65054": {
+   "Name": "Shieldmaiden's Remedy",
+   "EodSpellID": 121017,
+   "Icon": 14021,
+   "ClientEffect": 14021
+  },
+  "65055": {
+   "Name": "Odin's Amelioration",
+   "EodSpellID": 121018,
+   "Icon": 14401,
+   "ClientEffect": 14401
+  },
+  "65056": {
+   "Name": "Odin's Purification",
+   "EodSpellID": 121019,
+   "Icon": 14402,
+   "ClientEffect": 14402
+  },
+  "65057": {
+   "Name": "Odin's Recovery",
+   "EodSpellID": 121020,
+   "Icon": 14402,
+   "ClientEffect": 14402
+  },
+  "65058": {
+   "Name": "Odin's Reparation",
+   "EodSpellID": 121021,
+   "Icon": 14403,
+   "ClientEffect": 14403
+  },
+  "65059": {
+   "Name": "Odin's Restoration",
+   "EodSpellID": 121022,
+   "Icon": 14404,
+   "ClientEffect": 14404
+  },
+  "65060": {
+   "Name": "Odin's Reconstruction",
+   "EodSpellID": 121023,
+   "Icon": 14405,
+   "ClientEffect": 14405
+  },
+  "65061": {
+   "Name": "Odin's Emendation",
+   "EodSpellID": 130940,
+   "Icon": 14405,
+   "ClientEffect": 14405
+  },
+  "65100": {
+   "Name": "Call from Valhalla",
+   "EodSpellID": 12515,
+   "Icon": 12515,
+   "ClientEffect": 12515
+  },
+  "65101": {
+   "Name": "Valhalla's Scorn",
+   "EodSpellID": 12525,
+   "Icon": 12525,
+   "ClientEffect": 12525
+  },
+  "65102": {
+   "Name": "Valhalla's Spite",
+   "EodSpellID": 12526,
+   "Icon": 12526,
+   "ClientEffect": 12526
+  },
+  "65103": {
+   "Name": "Valhalla's Contempt",
+   "EodSpellID": 12527,
+   "Icon": 12527,
+   "ClientEffect": 12527
+  },
+  "65104": {
+   "Name": "Valhalla's Disdain",
+   "EodSpellID": 12528,
+   "Icon": 12528,
+   "ClientEffect": 12528
+  },
+  "65105": {
+   "Name": "Valhalla's Rage",
+   "EodSpellID": 12529,
+   "Icon": 12529,
+   "ClientEffect": 12529
+  },
+  "65106": {
+   "Name": "Odin's Faith",
+   "EodSpellID": 12516,
+   "Icon": 14810,
+   "ClientEffect": 14810,
+   "Override": "client spells.csv has a dedicated row with this name; Eve of Darkness borrows the Skald's Barrier of Sound family"
+  },
+  "65107": {
+   "Name": "Odin's Virtue",
+   "EodSpellID": 12517,
+   "Icon": 14811,
+   "ClientEffect": 14811,
+   "Override": "client spells.csv has a dedicated row with this name; Eve of Darkness borrows the Skald's Barrier of Sound family"
+  },
+  "65108": {
+   "Name": "Odin's Temperance",
+   "EodSpellID": 12518,
+   "Icon": 14812,
+   "ClientEffect": 14812,
+   "Override": "client spells.csv has a dedicated row with this name; Eve of Darkness borrows the Skald's Barrier of Sound family"
+  },
+  "65109": {
+   "Name": "Odin's Minor Retribution",
+   "EodSpellID": 12510,
+   "Icon": 12510,
+   "ClientEffect": 12510
+  },
+  "65110": {
+   "Name": "Odin's Lesser Retribution",
+   "EodSpellID": 12511,
+   "Icon": 12511,
+   "ClientEffect": 12511
+  },
+  "65111": {
+   "Name": "Odin's Retribution",
+   "EodSpellID": 12512,
+   "Icon": 12512,
+   "ClientEffect": 12512
+  },
+  "65112": {
+   "Name": "Odin's Greater Retribution",
+   "EodSpellID": 12513,
+   "Icon": 12513,
+   "ClientEffect": 12513
+  },
+  "65113": {
+   "Name": "Odin's Major Retribution",
+   "EodSpellID": 12514,
+   "Icon": 12514,
+   "ClientEffect": 12514
+  },
+  "65114": {
+   "Name": "Odin's Minor Aura",
+   "EodSpellID": 12520,
+   "Icon": 12520,
+   "ClientEffect": 12520
+  },
+  "65115": {
+   "Name": "Odin's Lesser Aura",
+   "EodSpellID": 12521,
+   "Icon": 12521,
+   "ClientEffect": 12521
+  },
+  "65116": {
+   "Name": "Odin's Aura",
+   "EodSpellID": 12522,
+   "Icon": 12522,
+   "ClientEffect": 12522
+  },
+  "65117": {
+   "Name": "Odin's Greater Aura",
+   "EodSpellID": 12523,
+   "Icon": 12523,
+   "ClientEffect": 12523
+  },
+  "65118": {
+   "Name": "Odin's Full Aura",
+   "EodSpellID": 12524,
+   "Icon": 12524,
+   "ClientEffect": 12524
+  },
+  "65119": {
+   "Name": "Vindictive Graze",
+   "EodSpellID": 12532,
+   "Icon": 12532,
+   "ClientEffect": 12532
+  },
+  "65120": {
+   "Name": "Vindictive Nip",
+   "EodSpellID": 12530,
+   "Icon": 12530,
+   "ClientEffect": 12530
+  },
+  "65121": {
+   "Name": "Vindictive Laceration",
+   "EodSpellID": 12533,
+   "Icon": 12533,
+   "ClientEffect": 12533
+  },
+  "65122": {
+   "Name": "Vindictive Bite",
+   "EodSpellID": 12531,
+   "Icon": 12531,
+   "ClientEffect": 12531
+  },
+  "65123": {
+   "Name": "Valkyrie's Authority",
+   "EodSpellID": 12537,
+   "Icon": 12537,
+   "ClientEffect": 12537
+  },
+  "65124": {
+   "Name": "Valkyrie's Command",
+   "EodSpellID": 12535,
+   "Icon": 12535,
+   "ClientEffect": 12535
+  },
+  "65125": {
+   "Name": "Valkyrie's Supremecy",
+   "EodSpellID": 12538,
+   "Icon": 12538,
+   "ClientEffect": 12538
+  },
+  "65126": {
+   "Name": "Valkyrie's Dominance",
+   "EodSpellID": 12536,
+   "Icon": 12536,
+   "ClientEffect": 12536
+  },
+  "65127": {
+   "Name": "Odin's Restraint",
+   "EodSpellID": 12540,
+   "Icon": 12540,
+   "ClientEffect": 12540
+  },
+  "65128": {
+   "Name": "Odin's Restriction",
+   "EodSpellID": 12541,
+   "Icon": 12541,
+   "ClientEffect": 12541
+  },
+  "65129": {
+   "Name": "Odin's Grasp",
+   "EodSpellID": 12542,
+   "Icon": 12542,
+   "ClientEffect": 12542
+  },
+  "65130": {
+   "Name": "Odin's Lock",
+   "EodSpellID": 12543,
+   "Icon": 12543,
+   "ClientEffect": 12543
+  },
+  "65131": {
+   "Name": "Odin's Minor Aura (proc)",
+   "EodSpellID": 12550,
+   "Icon": 12550,
+   "ClientEffect": 12550
+  },
+  "65132": {
+   "Name": "Odin's Lesser Aura (proc)",
+   "EodSpellID": 12551,
+   "Icon": 12551,
+   "ClientEffect": 12551
+  },
+  "65133": {
+   "Name": "Odin's Aura (proc)",
+   "EodSpellID": 12552,
+   "Icon": 12552,
+   "ClientEffect": 12552
+  },
+  "65134": {
+   "Name": "Odin's Greater Aura (proc)",
+   "EodSpellID": 12553,
+   "Icon": 12553,
+   "ClientEffect": 12553
+  },
+  "65135": {
+   "Name": "Odin's Full Aura (proc)",
+   "EodSpellID": 12554,
+   "Icon": 12554,
+   "ClientEffect": 12554
+  }
+ }
+}

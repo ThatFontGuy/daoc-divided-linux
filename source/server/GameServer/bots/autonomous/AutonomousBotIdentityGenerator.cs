@@ -1,0 +1,285 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using DOL.GS.ServerProperties;
+using OfflineDaoc.Shared;
+
+namespace DOL.GS
+{
+    /// <summary>
+    /// Generates era-valid identities for autonomous Classic + Shrouded Isles bots.
+    /// This class never creates or spawns a bot; it only produces an identity when
+    /// the population controller is explicitly asked to create one.
+    /// </summary>
+    public static class AutonomousBotIdentityGenerator
+    {
+        public sealed record Identity(string Name, eRealm Realm, eGender Gender, eCharacterClass CharacterClass, eRace Race);
+
+        private sealed record ClassChoice(eCharacterClass CharacterClass, params eRace[] Races);
+
+        private static readonly IReadOnlyDictionary<eRealm, ClassChoice[]> Choices =
+            new Dictionary<eRealm, ClassChoice[]>
+            {
+                [eRealm.Albion] =
+                [
+                    new(eCharacterClass.Paladin, eRace.Avalonian, eRace.Briton, eRace.Highlander, eRace.Saracen),
+                    new(eCharacterClass.Armsman, eRace.Avalonian, eRace.Briton, eRace.Highlander, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.Scout, eRace.Briton, eRace.Highlander, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.Minstrel, eRace.Briton, eRace.Highlander, eRace.Saracen),
+                    new(eCharacterClass.Theurgist, eRace.Avalonian, eRace.Briton),
+                    new(eCharacterClass.Cleric, eRace.Avalonian, eRace.Briton, eRace.Highlander),
+                    new(eCharacterClass.Wizard, eRace.Avalonian, eRace.Briton),
+                    new(eCharacterClass.Sorcerer, eRace.Avalonian, eRace.Briton, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.Infiltrator, eRace.Briton, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.Friar, eRace.Briton),
+                    new(eCharacterClass.Mercenary, eRace.Avalonian, eRace.Briton, eRace.Highlander, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.Necromancer, eRace.Briton, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.Cabalist, eRace.Avalonian, eRace.Briton, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.Reaver, eRace.Briton, eRace.Inconnu, eRace.Saracen),
+                ],
+                [eRealm.Midgard] =
+                [
+                    new(eCharacterClass.Thane, eRace.Dwarf, eRace.Norseman, eRace.Troll),
+                    new(eCharacterClass.Warrior, eRace.Dwarf, eRace.Kobold, eRace.Norseman, eRace.Troll, eRace.Valkyn),
+                    new(eCharacterClass.Shadowblade, eRace.Kobold, eRace.Norseman, eRace.Valkyn),
+                    new(eCharacterClass.Skald, eRace.Dwarf, eRace.Kobold, eRace.Norseman, eRace.Troll),
+                    new(eCharacterClass.Hunter, eRace.Dwarf, eRace.Kobold, eRace.Norseman, eRace.Valkyn),
+                    new(eCharacterClass.Healer, eRace.Dwarf, eRace.Norseman),
+                    new(eCharacterClass.Spiritmaster, eRace.Kobold, eRace.Norseman),
+                    new(eCharacterClass.Shaman, eRace.Kobold, eRace.Troll),
+                    new(eCharacterClass.Runemaster, eRace.Dwarf, eRace.Kobold, eRace.Norseman),
+                    new(eCharacterClass.Bonedancer, eRace.Kobold, eRace.Troll, eRace.Valkyn),
+                    new(eCharacterClass.Berserker, eRace.Dwarf, eRace.Norseman, eRace.Troll, eRace.Valkyn),
+                    new(eCharacterClass.Savage, eRace.Dwarf, eRace.Kobold, eRace.Norseman, eRace.Troll, eRace.Valkyn),
+                ],
+                [eRealm.Hibernia] =
+                [
+                    new(eCharacterClass.Eldritch, eRace.Elf, eRace.Lurikeen),
+                    new(eCharacterClass.Enchanter, eRace.Elf, eRace.Lurikeen),
+                    new(eCharacterClass.Mentalist, eRace.Celt, eRace.Elf, eRace.Lurikeen),
+                    new(eCharacterClass.Blademaster, eRace.Celt, eRace.Elf, eRace.Firbolg),
+                    new(eCharacterClass.Hero, eRace.Celt, eRace.Firbolg, eRace.Lurikeen, eRace.Sylvan),
+                    new(eCharacterClass.Champion, eRace.Celt, eRace.Elf, eRace.Lurikeen),
+                    new(eCharacterClass.Warden, eRace.Celt, eRace.Firbolg, eRace.Sylvan),
+                    new(eCharacterClass.Druid, eRace.Celt, eRace.Firbolg, eRace.Sylvan),
+                    new(eCharacterClass.Bard, eRace.Celt, eRace.Firbolg),
+                    new(eCharacterClass.Nightshade, eRace.Elf, eRace.Lurikeen),
+                    new(eCharacterClass.Ranger, eRace.Celt, eRace.Elf, eRace.Lurikeen),
+                    new(eCharacterClass.Animist, eRace.Celt, eRace.Firbolg, eRace.Sylvan),
+                    new(eCharacterClass.Valewalker, eRace.Celt, eRace.Firbolg, eRace.Sylvan),
+                ],
+            };
+
+        // Expansion, live and royal classes. Each joins its realm's pool only while its own
+        // server switch is on (the modern client test world), so Classic + SI worlds are unchanged.
+        // Bots keep to the classic races each class allows.
+        private static readonly IReadOnlyDictionary<eRealm, ClassChoice[]> ModernChoices =
+            new Dictionary<eRealm, ClassChoice[]>
+            {
+                [eRealm.Albion] =
+                [
+                    new(eCharacterClass.Heretic, eRace.Avalonian, eRace.Briton, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.MaulerAlb, eRace.Briton, eRace.Inconnu),
+                    new(eCharacterClass.DeathKnight, eRace.Briton, eRace.Inconnu, eRace.Saracen),
+                    new(eCharacterClass.PendragonSovereign, eRace.Avalonian, eRace.Briton, eRace.Highlander, eRace.Inconnu, eRace.Saracen),
+                ],
+                [eRealm.Midgard] =
+                [
+                    new(eCharacterClass.Valkyrie, eRace.Dwarf, eRace.Norseman, eRace.Valkyn),
+                    new(eCharacterClass.Warlock, eRace.Kobold, eRace.Norseman, eRace.Troll),
+                    new(eCharacterClass.MaulerMid, eRace.Kobold, eRace.Norseman),
+                    new(eCharacterClass.Stormforged, eRace.Dwarf, eRace.Kobold, eRace.Norseman, eRace.Troll, eRace.Valkyn),
+                ],
+                [eRealm.Hibernia] =
+                [
+                    new(eCharacterClass.Bainshee, eRace.Celt, eRace.Elf, eRace.Lurikeen),
+                    new(eCharacterClass.Vampiir, eRace.Celt, eRace.Lurikeen),
+                    new(eCharacterClass.MaulerHib, eRace.Celt, eRace.Lurikeen),
+                    new(eCharacterClass.TuathaSovereign, eRace.Celt, eRace.Elf, eRace.Firbolg, eRace.Lurikeen, eRace.Sylvan),
+                ],
+            };
+
+        /// <summary>True for every Classic + SI class, and for a newer class while its server switch is on.</summary>
+        public static bool IsClassAvailable(eCharacterClass characterClass) => characterClass switch
+        {
+            eCharacterClass.Heretic => Properties.ENABLE_HERETIC_TEST,
+            eCharacterClass.DeathKnight => Properties.ENABLE_DEATH_KNIGHT_TEST,
+            eCharacterClass.Valkyrie => Properties.ENABLE_VALKYRIE_TEST,
+            eCharacterClass.Warlock => Properties.ENABLE_WARLOCK_TEST,
+            eCharacterClass.Bainshee => Properties.ENABLE_BAINSHEE_TEST,
+            eCharacterClass.Vampiir => Properties.ENABLE_VAMPIIR_TEST,
+            eCharacterClass.MaulerAlb or eCharacterClass.MaulerMid or eCharacterClass.MaulerHib => Properties.ENABLE_MAULER_TEST,
+            eCharacterClass.Stormforged => Properties.ENABLE_STORMFORGED,
+            eCharacterClass.PendragonSovereign => Properties.ENABLE_PENDRAGON,
+            eCharacterClass.TuathaSovereign => Properties.ENABLE_TUATHA,
+            _ => true,
+        };
+
+        private static ClassChoice[] ActiveChoices(eRealm realm)
+        {
+            if (!Choices.TryGetValue(realm, out ClassChoice[] classic))
+                return null;
+            ClassChoice[] modern = ModernChoices[realm].Where(choice => IsClassAvailable(choice.CharacterClass)).ToArray();
+            // With every switch off (Classic, Stormforged-less worlds) the original array is used, so rolls are unchanged.
+            return modern.Length == 0 ? classic : [.. classic, .. modern];
+        }
+
+        private static readonly IReadOnlyDictionary<(eRealm Realm, eGender Gender), (string[] Starts, string[] Middles, string[] Ends)> NameParts =
+            new Dictionary<(eRealm, eGender), (string[], string[], string[])>
+            {
+                [(eRealm.Albion, eGender.Male)] =
+                    (["Ald", "Ber", "Ced", "Ed", "Gar", "God", "Har", "Leof", "Os", "Ran", "Ren", "Thed", "Wil"],
+                     ["", "a", "e", "en", "er", "i", "o"],
+                     ["bert", "ric", "win", "mund", "ward", "frey", "ren", "well", "red", "helm"]),
+                [(eRealm.Albion, eGender.Female)] =
+                    (["Ada", "Ael", "Ela", "Eve", "Gis", "Isa", "Lina", "Mara", "Ros", "Ser", "Thea", "Ys"],
+                     ["", "a", "e", "el", "en", "i", "o"],
+                     ["bel", "beth", "lyn", "wen", "ette", "ine", "ora", "elle", "ith", "anne"]),
+                [(eRealm.Midgard, eGender.Male)] =
+                    (["Arn", "Bjorn", "Dag", "Egil", "Eirik", "Finn", "Gorm", "Hald", "Ivar", "Knut", "Rag", "Sig", "Tor", "Ulf"],
+                     ["", "a", "e", "ge", "i", "un"],
+                     ["ar", "bjorn", "brand", "grim", "mund", "rik", "sten", "ulf", "vald", "var"]),
+                [(eRealm.Midgard, eGender.Female)] =
+                    (["Astr", "Bry", "Dag", "Eir", "Fre", "Gud", "Hild", "Ing", "Kara", "Liv", "Rag", "Sig", "Siv", "Yr"],
+                     ["", "a", "e", "i", "un"],
+                     ["a", "dis", "frid", "gerd", "hild", "run", "rid", "veig", "borg", "ny"]),
+                [(eRealm.Hibernia, eGender.Male)] =
+                    (["Aed", "Bran", "Cael", "Ciar", "Con", "Dair", "Eog", "Ferg", "Lorc", "Nial", "Ois", "Rian", "Tad"],
+                     ["", "a", "e", "el", "in", "o"],
+                     ["an", "dan", "gan", "gus", "lan", "nan", "ren", "ric", "ron", "van"]),
+                [(eRealm.Hibernia, eGender.Female)] =
+                    (["Aine", "Bria", "Cao", "Deir", "Eil", "Fia", "Mae", "Muir", "Nia", "Orla", "Rois", "Sao", "Una"],
+                     ["", "a", "e", "el", "in", "ri"],
+                     ["a", "bhe", "dra", "la", "lin", "na", "ra", "rin", "se", "wen"]),
+            };
+
+        private static readonly IReadOnlyDictionary<eRealm, string[]> NameBridges = new Dictionary<eRealm, string[]>
+        {
+            [eRealm.Albion] = ["", "al", "en", "is", "or"],
+            [eRealm.Midgard] = ["", "ar", "en", "ild", "un"],
+            [eRealm.Hibernia] = ["", "ae", "el", "in", "or"],
+        };
+
+        public static Identity Generate(eRealm realm, eGender gender, ISet<string> reservedNames = null, Random random = null)
+        {
+            ClassChoice[] realmChoices = ActiveChoices(realm);
+            if (realmChoices == null)
+                throw new ArgumentOutOfRangeException(nameof(realm), "Autonomous bots must belong to Albion, Midgard, or Hibernia.");
+            if (gender is not eGender.Male and not eGender.Female)
+                throw new ArgumentOutOfRangeException(nameof(gender), "Autonomous bots must have a male or female identity.");
+
+            random ??= Random.Shared;
+            ClassChoice classChoice = realmChoices[random.Next(realmChoices.Length)];
+            eRace race = classChoice.Races[random.Next(classChoice.Races.Length)];
+            string name = GenerateUniqueName(realm, gender, classChoice.CharacterClass, reservedNames, random);
+            return new Identity(name, realm, gender, classChoice.CharacterClass, race);
+        }
+
+        public static Identity GenerateForClass(
+            eRealm realm,
+            eGender gender,
+            eCharacterClass characterClass,
+            ISet<string> reservedNames = null,
+            Random random = null)
+        {
+            ClassChoice[] realmChoices = ActiveChoices(realm);
+            if (realmChoices == null)
+                throw new ArgumentOutOfRangeException(nameof(realm));
+            ClassChoice choice = realmChoices.FirstOrDefault(entry => entry.CharacterClass == characterClass);
+            if (choice == null)
+                throw new ArgumentException($"{characterClass} is not an available {GlobalConstants.RealmToName(realm)} bot class.", nameof(characterClass));
+            if (gender is not eGender.Male and not eGender.Female)
+                throw new ArgumentOutOfRangeException(nameof(gender));
+
+            random ??= Random.Shared;
+            eRace race = choice.Races[random.Next(choice.Races.Length)];
+            return new Identity(
+                GenerateUniqueName(realm, gender, characterClass, reservedNames, random),
+                realm,
+                gender,
+                characterClass,
+                race);
+        }
+
+        public static IReadOnlyCollection<eCharacterClass> GetEraClasses(eRealm realm) =>
+            ActiveChoices(realm) is ClassChoice[] choices
+                ? choices.Select(choice => choice.CharacterClass).ToArray()
+                : Array.Empty<eCharacterClass>();
+
+        public static IReadOnlyCollection<eRace> GetEligibleRaces(eCharacterClass characterClass) =>
+            Choices.Values.Concat(ModernChoices.Values).SelectMany(value => value)
+                .FirstOrDefault(choice => choice.CharacterClass == characterClass)?.Races ?? Array.Empty<eRace>();
+
+        /// <summary>
+        /// A free name: three in four in the 2003 style (made-up, compound, joke, first name, class joke, stretched), one in
+        /// four a lore name (OfflineDaoc.Shared.EraBotNames has the mix and the research behind it).
+        /// </summary>
+        private static string GenerateUniqueName(eRealm realm, eGender gender, eCharacterClass characterClass, ISet<string> reservedNames, Random random)
+        {
+            EraBotNames.Style style = EraBotNames.PickStyle(random);
+            bool female = gender == eGender.Female;
+            Func<string, bool> rejected = name =>
+            {
+                try { return GameServer.Instance?.PlayerManager?.InvalidNames?[name] ?? false; }
+                catch (Exception) { return false; }
+            };
+            foreach (EraBotNames.Style tried in new[] { style, EraBotNames.Style.Invented })
+            {
+                string name = EraBotNames.Generate(tried, (int)realm, female, characterClass.ToString(), random,
+                    candidate => reservedNames != null && reservedNames.Contains(candidate), rejected,
+                    () => LoreCandidate(realm, gender, random));
+                if (name != null && (reservedNames == null || reservedNames.Add(name)))
+                    return name;
+            }
+            return GenerateLoreName(realm, gender, reservedNames, random);
+        }
+
+        /// <summary>One of the realm's old syllable names (Gisenalora, Berismund), not checked for being free.</summary>
+        private static string LoreCandidate(eRealm realm, eGender gender, Random random)
+        {
+            var parts = NameParts[(realm, gender)];
+            string[] bridges = NameBridges[realm];
+            return Normalize(parts.Starts[random.Next(parts.Starts.Length)] + parts.Middles[random.Next(parts.Middles.Length)] +
+                             bridges[random.Next(bridges.Length)] + parts.Ends[random.Next(parts.Ends.Length)]);
+        }
+
+        /// <summary>A free syllable lore name (the pre-1.1 generator), falling back to every combination.</summary>
+        private static string GenerateLoreName(eRealm realm, eGender gender, ISet<string> reservedNames, Random random)
+        {
+            var parts = NameParts[(realm, gender)];
+            string[] bridges = NameBridges[realm];
+            for (int attempt = 0; attempt < 1024; attempt++)
+            {
+                string candidate = parts.Starts[random.Next(parts.Starts.Length)] +
+                                   parts.Middles[random.Next(parts.Middles.Length)] +
+                                   bridges[random.Next(bridges.Length)] +
+                                   parts.Ends[random.Next(parts.Ends.Length)];
+                candidate = Normalize(candidate);
+                if (reservedNames == null || reservedNames.Add(candidate))
+                    return candidate;
+            }
+
+            // High population rosters must not fail merely because random rolls
+            // repeatedly hit occupied names. Exhaust the themed pool deterministically.
+            foreach (string start in parts.Starts)
+            foreach (string middle in parts.Middles)
+            foreach (string bridge in bridges)
+            foreach (string end in parts.Ends)
+            {
+                string candidate = Normalize(start + middle + bridge + end);
+                if (reservedNames == null || reservedNames.Add(candidate))
+                    return candidate;
+            }
+
+            throw new InvalidOperationException($"Unable to produce another unique {GlobalConstants.RealmToName(realm)} {gender} bot name.");
+        }
+
+        private static string Normalize(string name)
+        {
+            string collapsed = name.Replace("aa", "a", StringComparison.OrdinalIgnoreCase)
+                .Replace("ee", "e", StringComparison.OrdinalIgnoreCase)
+                .Replace("ii", "i", StringComparison.OrdinalIgnoreCase);
+            return char.ToUpperInvariant(collapsed[0]) + collapsed[1..].ToLowerInvariant();
+        }
+    }
+}

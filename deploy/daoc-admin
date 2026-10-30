@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# daoc-admin - manage the running server in this folder.
+#   ./daoc-admin              admin screen (server, bots, population, accounts, options, rules, RvR, console)
+#   ./daoc-admin help         list commands; e.g. ./daoc-admin bots list
+set -uo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DAOC_ADMIN_SOCKET="${DAOC_ADMIN_SOCKET:-$HERE/run/admin.sock}"
+export DAOC_SERVER_LOG="${DAOC_SERVER_LOG:-$HERE/logs/console.out}"
+
+# No arguments in a terminal: the Textual admin screen on the bundled Python (-I: ignore the user's
+# Python settings; no .pyc writes). Anything else is the command line (bin/DaocAdmin).
+if (( $# == 0 )) && [[ -t 0 && -t 1 && -x $HERE/python/bin/python3 ]]; then
+  export DAOC_HOME="$HERE" PYTHONDONTWRITEBYTECODE=1 TEXTUAL_ANIMATIONS=none
+  [[ -n ${COLORTERM:-} ]] || export COLORTERM=truecolor
+  "$HERE/python/bin/python3" -I "$HERE/tui/daoc_admin_tui.py"
+else
+  "$HERE/bin/DaocAdmin" "$@"
+fi
+rc=$?
+
+# 10 = "Stop server" was chosen in the GUI: wait until the server has saved and exited.
+if (( rc == 10 )); then
+  pid=$(cat "$HERE/run/server.pid" 2>/dev/null || true)
+  printf 'Stopping server (saving)'
+  for ((i = 0; i < 120; i++)); do
+    [[ $pid =~ ^[0-9]+$ ]] && kill -0 "$pid" 2>/dev/null || { rm -f "$HERE/run/server.pid"; echo; echo "Server stopped."; exit 0; }
+    printf '.'
+    sleep 1
+  done
+  echo; echo "The server is still stopping after 120 s; check logs/console.out." >&2
+  exit 1
+fi
+exit "$rc"

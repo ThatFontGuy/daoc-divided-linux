@@ -1,0 +1,37 @@
+{
+  "about": "Walk links (add_offmesh.py) through border-keep gates the modern (1.130 live geometry) meshes baked shut. Apply to the installed modern meshes, then regenerate seams.json (+ add_main_areas.py), pockets.json and roads.json. See docs/MODERN-CLIENT-WORLD-MISMATCH.md.",
+  "zones": {
+    "000": {
+      "keep": "Castle Sauvage north gate (Albion, Camelot Hills)",
+      "installed_sha256_prefix": "a1fd33ed",
+      "patched_sha256_prefix": "8f6b9239",
+      "links": [
+        "583900,485680,2187.6:583900,485580,2187.6",
+        "583944,485680,2187.6:583944,485580,2187.6",
+        "583990,485680,2187.6:583990,485580,2187.6"
+      ]
+    },
+    "003": {
+      "keep": "Snowdonia Fortress south-east gate, and the unstitched edge of the keep's ground (Albion, Black Mtns. North)",
+      "installed_sha256_prefix": "7ecd102c",
+      "patched_sha256_prefix": "062b9b0f",
+      "links": [
+        "517330,372093,8213.2:517386,372037,8213.2",
+        "517358,372122,8213.2:517415,372065,8213.2",
+        "518065,370935,8147.6:518096,370904,8130.1",
+        "518462,371358,8226.8:518498,371322,8233.5",
+        "518793,371707,8417.1:518828,371672,8449.5"
+      ]
+    },
+    "206": {
+      "keep": "Druim Cain south gate (Hibernia, Valley of Bri Leith)",
+      "installed_sha256_prefix": "0819cf02",
+      "patched_sha256_prefix": "ba67a15b",
+      "links": [
+        "421200,485120,1829.2:421200,485030,1830.2",
+        "421258,485120,1829.2:421258,485030,1830.4",
+        "421320,485120,1829.2:421320,485030,1830.5"
+      ]
+    }
+  }
+}

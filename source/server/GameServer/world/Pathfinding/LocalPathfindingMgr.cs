@@ -1,0 +1,749 @@
+﻿using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
+using System.Numerics;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
+using DOL.Logging;
+
+namespace DOL.GS
+{
+    public sealed partial class LocalPathfindingMgr : PathfindingMgrBase
+    {
+        private class NavMeshQuery : IDisposable
+        {
+            private IntPtr _query;
+
+            public NavMeshQuery(IntPtr navMesh)
+            {
+                if (!CreateNavMeshQuery(navMesh, ref _query))
+                    throw new Exception($"Can't create {nameof(NavMeshQuery)}");
+                Interlocked.Increment(ref _queriesCreated);
+                Interlocked.Increment(ref _queriesLive);
+            }
+
+            public void Dispose()
+            {
+                Free();
+                GC.SuppressFinalize(this);
+            }
+
+            // A query lost without its lease being returned (a thread killed mid-call) still gives its native memory back.
+            ~NavMeshQuery() => Free();
+
+            private void Free()
+            {
+                IntPtr query = Interlocked.Exchange(ref _query, IntPtr.Zero);
+                if (query == IntPtr.Zero) return;
+                FreeNavMeshQuery(query);
+                Interlocked.Decrement(ref _queriesLive);
+            }
+
+            public static implicit operator IntPtr(NavMeshQuery query)
+            {
+                return query._query;
+            }
+        }
+
+        private const int MAX_POLY = 256;
+
+        private static readonly Logger log = LoggerManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private static readonly Dictionary<ushort, IntPtr> _navmeshPtrs = new();
+        private static readonly Lock _navmeshPtrsLock = new();
+
+        private static readonly Dictionary<GameDoorBase, ulong[]> _doorPolyRefs = new();
+        private static readonly Lock _doorPolyRefsLock = new();
+
+        // Native Detour queries (about 0.7 MB each, MAX_NODES 16,384), pooled per zone and lent for one call.
+        // Owner, 2026-10-20: they were kept per thread and zone and never freed. Every .NET pool thread that ran a
+        // town-route check built its own set, which leaked when the thread retired, and every game-loop worker kept
+        // one for each zone it ever touched: native memory grew about 250 MB an hour in every 600-per-realm run.
+        private sealed class ZoneQueries
+        {
+            private readonly System.Collections.Concurrent.ConcurrentBag<NavMeshQuery> _idle = new();
+            private int _idleCount;
+            private volatile bool _retired;
+
+            public NavMeshQuery Rent(nint meshPtr)
+            {
+                if (_idle.TryTake(out NavMeshQuery query))
+                {
+                    Interlocked.Decrement(ref _idleCount);
+                    return query;
+                }
+                return new(meshPtr);
+            }
+
+            public void Return(NavMeshQuery query)
+            {
+                if (_retired)
+                {
+                    query.Dispose();
+                    return;
+                }
+                if (Interlocked.Increment(ref _idleCount) > MaxIdleQueriesPerZone)
+                {
+                    // More threads than usual met in this zone at once: keep the usual number, free the rest.
+                    Interlocked.Decrement(ref _idleCount);
+                    query.Dispose();
+                    return;
+                }
+                _idle.Add(query);
+                if (_retired) Drain();
+            }
+
+            /// <summary>The zone's navmesh is gone: free every idle query, and each lent one when it comes back.</summary>
+            public void Retire()
+            {
+                _retired = true;
+                Drain();
+            }
+
+            private void Drain()
+            {
+                while (_idle.TryTake(out NavMeshQuery query))
+                {
+                    Interlocked.Decrement(ref _idleCount);
+                    query.Dispose();
+                }
+            }
+        }
+
+        /// <summary>One query lent for one call; disposing it hands the query back to its zone's pool.</summary>
+        private readonly ref struct QueryLease
+        {
+            private readonly ZoneQueries _pool;
+            public readonly NavMeshQuery Query;
+
+            public QueryLease(ZoneQueries pool, NavMeshQuery query)
+            {
+                _pool = pool;
+                Query = query;
+            }
+
+            public void Dispose()
+            {
+                if (Query != null) _pool.Return(Query);
+            }
+        }
+
+        private static readonly int MaxIdleQueriesPerZone = Math.Max(4, Environment.ProcessorCount);
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<ushort, ZoneQueries> _queryPools = new();
+        private static long _queriesCreated;
+        private static long _queriesLive;
+
+        /// <summary>Native Detour queries alive now (SERVER_MEMORY).</summary>
+        public static long LiveQueries => Interlocked.Read(ref _queriesLive);
+        /// <summary>Native Detour queries made since start (SERVER_MEMORY).</summary>
+        public static long QueriesCreated => Interlocked.Read(ref _queriesCreated);
+
+        private static readonly float[] _defaultHalfExtents = GetRecastFloats(new(32f, 32f, 64f)); // 1f, 2f, 1f in recast space.
+        private static readonly EDtPolyFlags[] _doorMask = [EDtPolyFlags.Door, 0];
+
+        [LibraryImport("lib/Detour", StringMarshalling = StringMarshalling.Custom, StringMarshallingCustomType = typeof(System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller))]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static partial bool LoadNavMesh(string file, ref IntPtr meshPtr);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static partial bool FreeNavMesh(IntPtr meshPtr);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static partial bool CreateNavMeshQuery(IntPtr meshPtr, ref IntPtr queryPtr);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static partial bool FreeNavMeshQuery(IntPtr queryPtr);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus PathStraight(
+            IntPtr queryPtr,
+            ReadOnlySpan<float> start,
+            ReadOnlySpan<float> end,
+            ReadOnlySpan<float> polyPickExt,
+            ReadOnlySpan<EDtPolyFlags> queryFilter,
+            EDtStraightPathOptions pathOptions,
+            out int pointCount,
+            Span<float> pointBuffer,
+            Span<EDtPolyFlags> pointFlags);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus MoveAlongSurface(
+            IntPtr query,
+            ReadOnlySpan<float> start,
+            ReadOnlySpan<float> end,
+            ReadOnlySpan<float> polyPickExt,
+            ReadOnlySpan<EDtPolyFlags> filter,
+            Span<float> outputVector);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus FindRandomPointAroundCircle(
+            IntPtr queryPtr,
+            ReadOnlySpan<float> center,
+            float radius,
+            ReadOnlySpan<float> polyPickExt,
+            ReadOnlySpan<EDtPolyFlags> queryFilter,
+            Span<float> outputVector);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus FindClosestPoint(
+            IntPtr queryPtr,
+            ReadOnlySpan<float> center,
+            ReadOnlySpan<float> polyPickExt,
+            ReadOnlySpan<EDtPolyFlags> queryFilter,
+            Span<float> outputVector);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus FindClosestPointInBox(
+            IntPtr queryPtr,
+            ReadOnlySpan<float> boxCenter,
+            ReadOnlySpan<float> boxExtents,
+            ReadOnlySpan<float> referencePos,
+            ReadOnlySpan<EDtPolyFlags> filter,
+            Span<float> outputVector);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus HasLineOfSight(
+            IntPtr query,
+            ReadOnlySpan<float> start,
+            ReadOnlySpan<float> end,
+            ReadOnlySpan<float> polyPickExt,
+            ReadOnlySpan<EDtPolyFlags> queryFilters,
+            [MarshalAs(UnmanagedType.I1)] out bool hasLos,
+            Span<float> outputVector);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus UpdateFlags(
+            IntPtr meshPtr,
+            ReadOnlySpan<ulong> polyRefs,
+            int polyCount,
+            EDtPolyFlags flagsToRemove,
+            EDtPolyFlags flagsToAdd);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus GetPolyAt(
+            IntPtr queryPtr,
+            ReadOnlySpan<float> center,
+            ReadOnlySpan<float> polyPickExt,
+            ReadOnlySpan<EDtPolyFlags> queryFilter,
+            out ulong outputPolyRef,
+            Span<float> outputVector);
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus GetPolysInBox(
+            IntPtr queryPtr,
+            ReadOnlySpan<float> center,
+            ReadOnlySpan<float> polyPickExt,
+            ReadOnlySpan<EDtPolyFlags> queryFilter,
+            Span<ulong> outputPolyRefs,
+            out int outputPolyCount,
+            int maxPolyCount);
+
+        public override bool Init()
+        {
+            try
+            {
+                nint dummy = IntPtr.Zero;
+                LoadNavMesh("this file does not exists!", ref dummy);
+            }
+            catch (Exception e)
+            {
+                if (log.IsErrorEnabled)
+                    log.Error($"{nameof(LocalPathfindingMgr)} did not find the Detour library", e);
+
+                return false;
+            }
+
+            Parallel.ForEach(WorldMgr.Zones.Values, LoadNavMesh);
+            return true;
+        }
+
+        public static void LoadNavMesh(Zone zone)
+        {
+            ushort id = zone.ID;
+            string path = Path.GetFullPath(Path.Join("navmesh", $"zone{id:D3}.nav"));
+
+            if (!File.Exists(path))
+            {
+                // Fall back to old "pathing" folder for backwards compatibility.
+                path = Path.GetFullPath(Path.Join("pathing", $"zone{id:D3}.nav"));
+
+                if (!File.Exists(path))
+                {
+                    if (log.IsDebugEnabled)
+                        log.Debug($"Loading NavMesh failed for zone {id}! (File not found: {path})");
+
+                    return;
+                }
+            }
+
+            nint meshPtr = IntPtr.Zero;
+
+            if (!LoadNavMesh(path, ref meshPtr))
+            {
+                if (log.IsErrorEnabled)
+                    log.Error($"Loading NavMesh failed for zone {id}!");
+
+                return;
+            }
+
+            if (meshPtr == IntPtr.Zero)
+            {
+                if (log.IsErrorEnabled)
+                    log.Error($"Loading NavMesh failed for zone {id}! (Pointer was zero!)");
+
+                return;
+            }
+
+            if (log.IsInfoEnabled)
+                log.Info($"Loading NavMesh successful for zone {id}");
+
+            lock (_navmeshPtrsLock)
+            {
+                _navmeshPtrs[zone.ID] = meshPtr;
+            }
+
+            zone.IsPathfindingEnabled = true;
+            NavigationGeometryRevision.Changed(zone);
+        }
+
+        public static void UnloadNavMesh(Zone zone)
+        {
+            if (!_navmeshPtrs.TryGetValue(zone.ID, out nint ptr))
+                return;
+
+            zone.IsPathfindingEnabled = false;
+            NavigationGeometryRevision.Changed(zone);
+            if (_queryPools.TryRemove(zone.ID, out ZoneQueries queries))
+                queries.Retire();
+            FreeNavMesh(ptr);
+            _navmeshPtrs.Remove(zone.ID);
+        }
+
+        public override void Stop()
+        {
+            foreach (ushort zoneId in _queryPools.Keys)
+                if (_queryPools.TryRemove(zoneId, out ZoneQueries queries))
+                    queries.Retire();
+
+            foreach (nint ptr in _navmeshPtrs.Values)
+                FreeNavMesh(ptr);
+
+            _navmeshPtrs.Clear();
+        }
+
+        public override bool RegisterDoor(GameDoorBase door)
+        {
+            const int MAX_DOOR_POLYS = 12;
+
+            Zone zone = door.CurrentZone;
+
+            if (zone == null)
+                return false;
+
+            ulong[] polyRefs = GetNearestPolys(zone, new(door.X, door.Y, door.Z), _doorMask, MAX_DOOR_POLYS);
+
+            if (polyRefs.Length == 0)
+                return false;
+
+            lock (_doorPolyRefsLock)
+            {
+                _doorPolyRefs.Add(door, polyRefs);
+            }
+
+            UpdateDoorFlags(zone, door);
+            return true;
+        }
+
+        public override bool UpdateDoorFlags(GameDoorBase door)
+        {
+            Zone zone = door.CurrentZone;
+
+            return zone != null && UpdateDoorFlags(zone, door);
+        }
+
+        private static bool UpdateDoorFlags(Zone zone, GameDoorBase door)
+        {
+            ulong[] polyRef;
+
+            lock (_doorPolyRefsLock)
+            {
+                if (!_doorPolyRefs.TryGetValue(door, out polyRef))
+                    return false;
+            }
+
+            bool updated = TryGetMeshPtr(zone, out nint meshPtr) && UpdateDoorFlags(meshPtr, polyRef, door);
+            if (updated) NavigationGeometryRevision.Changed(zone);
+            return updated;
+        }
+
+        private static bool UpdateDoorFlags(nint meshPtr, ulong[] polyRefs, GameDoorBase door)
+        {
+            bool isBlockingDoor = door.State is eDoorState.Closed && !door.CanBeOpenedViaInteraction;
+            EDtPolyFlags flagsToRemove = isBlockingDoor ? EDtPolyFlags.Door : EDtPolyFlags.BlockingDoor;
+            EDtPolyFlags flagsToAdd = isBlockingDoor ? EDtPolyFlags.BlockingDoor : EDtPolyFlags.Door;
+            EDtStatus status = UpdateFlags(meshPtr, polyRefs, polyRefs.Length, flagsToRemove, flagsToAdd);
+
+            return (status & EDtStatus.DT_SUCCESS) != 0;
+        }
+
+        private static bool TryGetMeshPtr(Zone zone, out nint ptr)
+        {
+            ptr = default;
+            if (zone == null) return false;
+            return _navmeshPtrs.TryGetValue(zone.ID, out ptr);
+        }
+
+        private static QueryLease RentQuery(Zone zone)
+        {
+            if (!TryGetMeshPtr(zone, out nint ptr))
+                return default;
+            ZoneQueries pool = _queryPools.GetOrAdd(zone.ID, static _ => new());
+            return new(pool, pool.Rent(ptr));
+        }
+
+        public override PathfindingResult GetPathStraight(Zone zone, Vector3 start, Vector3 end, EDtPolyFlags[] filters, Span<WrappedPathfindingNode> destination)
+        {
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return new(PathfindingStatus.NoPathFound, 0);
+
+            Span<float> startFloats = stackalloc float[3];
+            FillRecastFloats(start, startFloats);
+
+            Span<float> endFloats = stackalloc float[3];
+            FillRecastFloats(end, endFloats);
+
+            EDtStraightPathOptions options = EDtStraightPathOptions.DT_STRAIGHTPATH_ALL_CROSSINGS;
+
+            float[] rentedBuffer = ArrayPool<float>.Shared.Rent(MAX_POLY * 3);
+            EDtPolyFlags[] rentedFlags = ArrayPool<EDtPolyFlags>.Shared.Rent(MAX_POLY);
+
+            try
+            {
+                Span<float> buffer = rentedBuffer.AsSpan(0, MAX_POLY * 3);
+                Span<EDtPolyFlags> flags = rentedFlags.AsSpan(0, MAX_POLY);
+
+                long profiled = NavQueryProfile.Start();
+                EDtStatus status = PathStraight(query, startFloats, endFloats, _defaultHalfExtents, filters, options, out int numNodes, buffer, flags);
+                NavQueryProfile.Stop(NavQueryProfile.Kind.PathStraight, profiled);
+
+                if ((status & EDtStatus.DT_SUCCESS) == 0)
+                    return new(PathfindingStatus.NoPathFound, 0);
+
+                if (destination.Length < numNodes)
+                    return new(PathfindingStatus.BufferTooSmall, numNodes);
+
+                // ALL_CROSSINGS emits one node per polygon edge crossed. Where several
+                // polygons share a vertex (a four-tile corner on the Iarnwood slope has
+                // five) those crossings coincide, giving the same point two or three
+                // times. A zero-length step has no direction, so line-of-sight checks
+                // toward it fail and actors stalled on the corner. Merge them.
+                for (int i = 0; i < numNodes; i++)
+                    destination[i] = new(new(buffer[i * 3 + 0] * INV_FACTOR, buffer[i * 3 + 2] * INV_FACTOR, buffer[i * 3 + 1] * INV_FACTOR), flags[i]);
+                int kept = MergeCoincidentNodes(destination, numNodes);
+
+                PathfindingStatus pathfindingStatus = (status & EDtStatus.DT_PARTIAL_RESULT) != 0 ? PathfindingStatus.PartialPathFound : PathfindingStatus.PathFound;
+                return new(pathfindingStatus, kept);
+            }
+            finally
+            {
+                ArrayPool<float>.Shared.Return(rentedBuffer);
+                ArrayPool<EDtPolyFlags>.Shared.Return(rentedFlags);
+            }
+        }
+
+        [LibraryImport("lib/Detour")]
+        [UnmanagedCallConv(CallConvs = [typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+        private static partial EDtStatus MoveAlongSurfaceGrounded(IntPtr query, ReadOnlySpan<float> start,
+            ReadOnlySpan<float> end, ReadOnlySpan<float> polyPickExt, ReadOnlySpan<EDtPolyFlags> filter, Span<float> outputVector);
+
+        public Vector3? GetMoveAlongSurfaceGrounded(Zone zone, Vector3 start, Vector3 end, EDtPolyFlags[] filters)
+        {
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null) return null;
+            Span<float> a = stackalloc float[3], b = stackalloc float[3], result = stackalloc float[3];
+            FillRecastFloats(start, a);
+            FillRecastFloats(end, b);
+            EDtStatus status = MoveAlongSurfaceGrounded(query, a, b, _defaultHalfExtents, filters, result);
+            return (status & EDtStatus.DT_SUCCESS) == 0 ? null :
+                new(result[0] * INV_FACTOR, result[2] * INV_FACTOR, result[1] * INV_FACTOR);
+        }
+
+        public override Vector3? GetMoveAlongSurface(Zone zone, Vector3 start, Vector3 end, EDtPolyFlags[] filters)
+        {
+            // Confusing name, see Detour docs for what it does.
+            // Should not be used for pathfinding, only for small adjustments to positions.
+
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return null;
+
+            Span<float> startFloats = stackalloc float[3];
+            FillRecastFloats(start, startFloats);
+
+            Span<float> endFloats = stackalloc float[3];
+            FillRecastFloats(end, endFloats);
+
+            Span<float> outVec = stackalloc float[3];
+            long profiled = NavQueryProfile.Start();
+            EDtStatus status = MoveAlongSurface(query, startFloats, endFloats, _defaultHalfExtents, filters, outVec);
+            NavQueryProfile.Stop(NavQueryProfile.Kind.OtherQuery, profiled);
+
+            return (status & EDtStatus.DT_SUCCESS) == 0 ? null : new(outVec[0] * INV_FACTOR, outVec[2] * INV_FACTOR, outVec[1] * INV_FACTOR);
+        }
+
+        public override Vector3? GetRandomPoint(Zone zone, Vector3 position, float radius, EDtPolyFlags[] filters)
+        {
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return null;
+
+            Span<float> center = stackalloc float[3];
+            FillRecastFloats(position, center);
+
+            Span<float> outVec = stackalloc float[3];
+            long profiled = NavQueryProfile.Start();
+            EDtStatus status = FindRandomPointAroundCircle(query, center, radius * CONVERSION_FACTOR, _defaultHalfExtents, filters, outVec);
+            NavQueryProfile.Stop(NavQueryProfile.Kind.OtherQuery, profiled);
+
+            return (status & EDtStatus.DT_SUCCESS) == 0 ? null : new(outVec[0] * INV_FACTOR, outVec[2] * INV_FACTOR, outVec[1] * INV_FACTOR);
+        }
+
+        public override Vector3? GetClosestPoint(Zone zone, Vector3 position, EDtPolyFlags[] filters)
+        {
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return null;
+
+            Span<float> center = stackalloc float[3];
+            FillRecastFloats(position, center);
+
+            Span<float> outVec = stackalloc float[3];
+            long profiled = NavQueryProfile.Start();
+            EDtStatus status = FindClosestPoint(query, center, _defaultHalfExtents, filters, outVec);
+            NavQueryProfile.Stop(NavQueryProfile.Kind.ClosestPoint, profiled);
+
+            return (status & EDtStatus.DT_SUCCESS) == 0 ? null : new(outVec[0] * INV_FACTOR, outVec[2] * INV_FACTOR, outVec[1] * INV_FACTOR);
+        }
+
+        public override Vector3? GetClosestPoint(Zone zone, Vector3 position, float xRange, float yRange, float zRange, EDtPolyFlags[] filters)
+        {
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return null;
+
+            Span<float> center = stackalloc float[3];
+            FillRecastFloats(position, center);
+
+            Span<float> polyPickEx = stackalloc float[3];
+            FillRecastFloats(new(xRange, yRange, zRange), polyPickEx);
+
+            Span<float> outVec = stackalloc float[3];
+            long profiled = NavQueryProfile.Start();
+            EDtStatus status = FindClosestPoint(query, center, polyPickEx, filters, outVec);
+            NavQueryProfile.Stop(NavQueryProfile.Kind.ClosestPoint, profiled);
+
+            return (status & EDtStatus.DT_SUCCESS) == 0 ? null : new(outVec[0] * INV_FACTOR, outVec[2] * INV_FACTOR, outVec[1] * INV_FACTOR);
+        }
+
+        public override Vector3? GetClosestPointInBounds(Zone zone, Vector3 origin, Vector3 minOffset, Vector3 maxOffset, EDtPolyFlags[] filters)
+        {
+            if (minOffset.X > maxOffset.X || minOffset.Y > maxOffset.Y || minOffset.Z > maxOffset.Z)
+                throw new ArgumentException($"{nameof(minOffset)} must be <= {nameof(maxOffset)} in all components");
+
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return null;
+
+            Vector3 relativeCenter = (minOffset + maxOffset) * 0.5f;
+            Vector3 worldCenter = origin + relativeCenter;
+            Vector3 extents = (maxOffset - minOffset) * 0.5f;
+
+            Span<float> centerArr = stackalloc float[3];
+            FillRecastFloats(worldCenter, centerArr);
+
+            Span<float> extentsArr = stackalloc float[3];
+            FillRecastFloats(extents, extentsArr);
+
+            Span<float> refPosArr = stackalloc float[3];
+            FillRecastFloats(origin, refPosArr);
+
+            Span<float> outVec = stackalloc float[3];
+            EDtStatus status = FindClosestPointInBox(query, centerArr, extentsArr, refPosArr, filters, outVec);
+
+            return (status & EDtStatus.DT_SUCCESS) == 0 ?  null : new(outVec[0] * INV_FACTOR, outVec[2] * INV_FACTOR, outVec[1] * INV_FACTOR);
+        }
+
+        public override Vector3? GetRoofAbove(Zone zone, Vector3 position, float maxHeight, EDtPolyFlags[] filters)
+        {
+            const float RADIUS = 3f;
+
+            return GetClosestPointInBounds(
+                zone, position,
+                new(-RADIUS, -RADIUS, 20f), // Slightly above current position to avoid getting the current floor.
+                new(RADIUS, RADIUS, maxHeight),
+                filters
+            );
+        }
+
+        public override Vector3? GetFloorBeneath(Zone zone, Vector3 position, float maxDepth, EDtPolyFlags[] filters)
+        {
+            const float RADIUS = 3f;
+
+            return GetClosestPointInBounds(
+                zone, position,
+                new(-RADIUS, -RADIUS, -maxDepth),
+                new(RADIUS, RADIUS, 20f), // Slightly above current position to allow getting the current floor.
+                filters
+            );
+        }
+
+        public override bool TrySnapToMesh(Zone zone, ref Vector3 position, float range)
+        {
+            Vector3? closestPoint = PathfindingProvider.Instance.GetClosestPoint(
+                zone,
+                position,
+                range,
+                range,
+                range,
+                PathfindingProvider.Instance.DefaultFilters);
+
+            if (!closestPoint.HasValue)
+                return false;
+
+            position = closestPoint.Value;
+            return true;
+        }
+
+        public override bool HasLineOfSight(Zone zone, Vector3 position, Vector3 target, EDtPolyFlags[] filters)
+        {
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return false;
+
+            Span<float> startFloats = stackalloc float[3];
+            FillRecastFloats(position, startFloats);
+
+            Span<float> endFloats = stackalloc float[3];
+            FillRecastFloats(target, endFloats);
+
+            Span<float> outVec = stackalloc float[3];
+            EDtStatus status = HasLineOfSight(query, startFloats, endFloats, _defaultHalfExtents, filters, out bool hasLos, outVec);
+            if ((status & EDtStatus.DT_SUCCESS) != 0 && hasLos)
+                return true;
+
+            // A ray starting exactly on a vertex shared by several polygons can start
+            // in a neighbour whose edge is a wall, and report no sight to a point that
+            // is plainly visible (seen at the Iarnwood four-tile corner). Retry once from
+            // 2 units along the same ray; the ray itself is unchanged.
+            Vector3 direction = target - position;
+            if (direction.LengthSquared() <= VERTEX_RETRY_MIN_DISTANCE * VERTEX_RETRY_MIN_DISTANCE)
+                return false;
+            FillRecastFloats(position + Vector3.Normalize(direction) * VERTEX_RETRY_OFFSET, startFloats);
+            status = HasLineOfSight(query, startFloats, endFloats, _defaultHalfExtents, filters, out hasLos, outVec);
+            return (status & EDtStatus.DT_SUCCESS) != 0 && hasLos;
+        }
+
+        public const float DUPLICATE_NODE_DISTANCE = 1f;
+
+        /// <summary>
+        /// Merges consecutive nodes less than 1 unit apart into the first (flags combined, so a
+        /// door crossing is kept). The final node is always kept. Returns the new count.
+        /// </summary>
+        public static int MergeCoincidentNodes(Span<WrappedPathfindingNode> nodes, int count)
+        {
+            int kept = 0;
+            for (int i = 0; i < count; i++)
+            {
+                WrappedPathfindingNode node = nodes[i];
+                if (kept > 0 && i < count - 1 &&
+                    Vector3.DistanceSquared(nodes[kept - 1].Position, node.Position) < DUPLICATE_NODE_DISTANCE * DUPLICATE_NODE_DISTANCE)
+                {
+                    nodes[kept - 1] = new(nodes[kept - 1].Position, nodes[kept - 1].Flags | node.Flags);
+                    continue;
+                }
+                nodes[kept++] = node;
+            }
+            return kept;
+        }
+        public const float VERTEX_RETRY_OFFSET = 2f;
+        public const float VERTEX_RETRY_MIN_DISTANCE = 4f;
+
+        private static Vector3? GetNearestPoly(Zone zone, Vector3 point, EDtPolyFlags[] filters, out ulong polyRef)
+        {
+            polyRef = 0;
+
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return null;
+
+            Span<float> center = stackalloc float[3];
+            FillRecastFloats(point, center);
+
+            Span<float> outVec = stackalloc float[3];
+            EDtStatus status = GetPolyAt(query, center, _defaultHalfExtents, filters, out polyRef, outVec);
+
+            return (status & EDtStatus.DT_SUCCESS) == 0 || polyRef == 0 ? null : new(outVec[0] * INV_FACTOR, outVec[2] * INV_FACTOR, outVec[1] * INV_FACTOR);
+        }
+
+        private static ulong[] GetNearestPolys(Zone zone, Vector3 point, EDtPolyFlags[] filters, int maxPolyCount)
+        {
+            using QueryLease lease = RentQuery(zone);
+            NavMeshQuery query = lease.Query;
+            if (query == null)
+                return [];
+
+            Span<float> center = stackalloc float[3];
+            FillRecastFloats(point, center);
+
+            Span<float> extents = stackalloc float[3];
+            FillRecastFloats(new(64f, 64f, 128f), extents);
+
+            Span<ulong> polyRefs = stackalloc ulong[maxPolyCount];
+            EDtStatus status = GetPolysInBox(query, center, extents, filters, polyRefs, out int outputPolyCount, maxPolyCount);
+
+            if ((status & EDtStatus.DT_BUFFER_TOO_SMALL) != 0)
+            {
+                if (log.IsWarnEnabled)
+                    log.Warn($"{nameof(GetNearestPolys)} found more than {maxPolyCount} polygons near point {point} in zone {zone.ID}");
+            }
+
+            return (status & EDtStatus.DT_SUCCESS) == 0 || outputPolyCount == 0 ? [] : polyRefs[..outputPolyCount].ToArray();
+        }
+
+        public override bool HasNavmesh(Zone zone)
+        {
+            return zone != null && _navmeshPtrs.ContainsKey(zone.ID);
+        }
+
+        public override bool IsAvailable => true;
+    }
+}

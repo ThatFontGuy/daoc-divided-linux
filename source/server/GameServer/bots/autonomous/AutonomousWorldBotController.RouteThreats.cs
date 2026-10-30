@@ -1,0 +1,459 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using DOL.AI.Brain;
+
+namespace DOL.GS
+{
+    public sealed partial class AutonomousWorldBotController
+    {
+        private long _nextRouteThreatScanTick;
+        // A solo bot that died recently treats a yellow on its route like an orange (AutonomousRouteThreatPolicy.Decide).
+        private long _routeCautionUntilTick;
+        public const long RouteCautionAfterDeathMilliseconds = 30 * 60_000;
+        private long _lastRouteThreatRetargetTick = long.MinValue / 2;
+        private readonly Dictionary<GameNPC, int> _routeThreatDetours = new();
+        // Monsters next to the route that cannot be walked to (a ledge above the road): they
+        // cannot reach the route either, so they are passed by instead of pulled. Run 8: route
+        // pulls on such monsters left bots standing until the 15-minute watchdog.
+        private readonly HashSet<GameNPC> _unreachableRouteThreats = new();
+        // The last route pull: the same monster found again, still out of combat, means the pull
+        // never landed. After three it is passed by like an unreachable one.
+        private GameNPC _lastRouteThreatPull;
+
+        /// <summary>Forgets a route pull whose monster has left the world (see <see cref="GameLiving.ForgetDeparted"/>).</summary>
+        public void ForgetDeparted()
+        {
+            if (GameLiving.HasDeparted(_lastRouteThreatPull))
+                _lastRouteThreatPull = null;
+            _unreachableRouteThreats.RemoveWhere(GameLiving.HasDeparted);
+        }
+        private int _routeThreatPullRepeats;
+        private long _lastRouteThreatPullTick;
+        private const int RouteThreatPullAttempts = 3;
+        // A party holding in front of a route monster it may not pull yet. Run 17 (2026-10-17): 12,472 of 13,547 level 50
+        // party route-threat decisions were the same hold repeated (114 loops in 78 parties, one for 98 minutes): only
+        // the leader looks ahead, only the party's puller may open a pull, and a leader that was not the puller held
+        // forever. Now the puller takes the pull, and a hold ends after RouteThreatHoldLimitMilliseconds.
+        private GameNPC _routeThreatHold;
+        private long _routeThreatHoldSince;
+        public const long RouteThreatHoldLimitMilliseconds = 75_000;
+
+        /// <summary>
+        /// Open-world route threat awareness (see AutonomousRouteThreatPolicy). Called right before
+        /// a travelling bot issues its walk order. True consumes this travel turn (a pull started,
+        /// the bot is holding, or the camp was given up); false lets the walk continue, with a
+        /// detour waypoint set when the bot is going around a monster.
+        /// </summary>
+        private bool GuardOpenWorldTravel(GameBot bot, Vector3 destination)
+        {
+            if (!AutonomousRouteThreatPolicy.Enabled || bot.Brain is not BotBrain brain ||
+                bot.CurrentZone == null || bot.CurrentZone.IsDungeon || bot.CurrentRegion?.IsDungeon == true ||
+                bot.IsOnStableMasterRoute || bot.IsPlayerLedGroup || brain.HasAggro || bot.InCombat || bot.IsAttacking ||
+                AutonomousObjectiveAssignments.Is(bot, eAutonomousObjectiveKind.RvR) ||
+                AutonomousRealmRaid.GetView(bot.Group) != null)
+                return false;
+            bool grouped = _groupDirective?.IsDynamic == true;
+            if (grouped && _groupDirective.Leader != bot)
+                return false;
+            long now = GameLoop.GameLoopTime;
+            if (now < _nextRouteThreatScanTick)
+                return false;
+            // Keep looking while walking a detour: the way to the sidestep is scanned too, and a
+            // new monster there is fought or makes the bot give up (no detour inside a detour).
+            bool detouring = _routeRecoveryWaypoint.HasValue;
+            Vector3 scanTarget = _routeRecoveryWaypoint ?? destination;
+            _nextRouteThreatScanTick = now + AutonomousRouteThreatPolicy.ScanMilliseconds + bot.ObjectID % 500;
+
+            IPathfindingMgr nav = PathfindingProvider.Instance;
+            Zone zone = bot.CurrentZone;
+            if (!nav.IsAvailable || !nav.HasNavmesh(zone))
+                return false;
+
+            Span<Vector3> route = stackalloc Vector3[257];
+            route[0] = new(bot.X, bot.Y, bot.Z);
+            int count = bot.movementComponent.CopyUpcomingPath(scanTarget, route[1..]) + 1;
+            if (count < 2)
+            {
+                // Before the first path exists: the straight leg toward the target.
+                route[1] = scanTarget;
+                count = 2;
+            }
+            ReadOnlySpan<Vector3> corridor = route[..count];
+
+            // A solo bot bends around monsters far above it, remembered death spots and its own repeat-death spots
+            // before the one-monster rules below (stefanrows' route bends; AutonomousPveDangerBypass). Level 50s too
+            // since 2026-10-20: no level-50 bot ever bent a route, and two died 72 and 61 times to one glimmer pack.
+            if (!grouped && !detouring && TryDangerBypass(bot, nav, zone, corridor))
+                return false;
+
+            eCharacterClass characterClass = (eCharacterClass)(bot.CharacterClass?.ID ?? 0);
+            bool ranged = BotSpellPower.IsOffensiveCaster(bot) ||
+                          characterClass is eCharacterClass.Scout or eCharacterClass.Hunter or eCharacterClass.Ranger;
+            int margin = ranged ? AutonomousRouteThreatPolicy.RangedMargin : AutonomousRouteThreatPolicy.MeleeMargin;
+
+            GameNPC[] threats = bot.GetNPCsInRadius((ushort)AutonomousRouteThreatPolicy.ScanRadius)
+                .Where(npc => IsExperienceMonster(npc) && npc.IsAlive && !npc.InCombat &&
+                              npc.Brain is StandardMobBrain mob && mob.AggroRange > 0 && mob.CanAggroTarget(bot))
+                .OrderBy(npc => bot.GetDistanceTo(npc)).Take(24).ToArray();
+            GameNPC blocker = null;
+            float first = float.MaxValue;
+            foreach (GameNPC npc in threats)
+            {
+                var mob = (StandardMobBrain)npc.Brain;
+                Vector3 position = new(npc.X, npc.Y, npc.Z);
+                if (Vector2.Distance(new(position.X, position.Y), new(destination.X, destination.Y)) <=
+                    AutonomousRouteThreatPolicy.CampSkipRadius)
+                    continue;
+                // The monster this detour is already going around.
+                if (detouring && _routeThreatDetours.ContainsKey(npc))
+                    continue;
+                if (_unreachableRouteThreats.Contains(npc))
+                    continue;
+                if (AutonomousDungeonPolicy.IntersectsCorridor(corridor, position, mob.AggroRange + margin,
+                        AutonomousRouteThreatPolicy.LookAhead, out float along) && along < first)
+                {
+                    blocker = npc;
+                    first = along;
+                }
+            }
+            if (blocker == null)
+            {
+                PruneRouteThreatDetours();
+                return false;
+            }
+
+            var blockerBrain = (StandardMobBrain)blocker.Brain;
+            Vector3 blockerPosition = new(blocker.X, blocker.Y, blocker.Z);
+            GameNPC[] packMembers = threats.Where(other =>
+                other == blocker || Math.Abs(other.Z - blocker.Z) <= 160 && other.Brain is StandardMobBrain otherBrain &&
+                other.GetDistanceTo(blocker) < Math.Max(320, blockerBrain.AggroRange + otherBrain.AggroRange + 80)).ToArray();
+            int pack = packMembers.Length;
+            ConColor con = ConLevels.GetConColor(bot.GetConLevel(blocker));
+            bool bossLike = blocker is IGameEpicNpc ||
+                            AutonomousPveTargetPolicy.IsUnreachableFlyer(blocker.Flags, blocker.Z, bot.Z) && !ranged;
+
+            Vector3? detour = detouring ? null : FindRouteThreatDetour(nav, zone, corridor, blocker,
+                blockerBrain.AggroRange, margin, destination, threats);
+            int detours = _routeThreatDetours.GetValueOrDefault(blocker);
+            bool mayRetarget = _camp != null &&
+                               now - _lastRouteThreatRetargetTick >= AutonomousRouteThreatPolicy.RetargetCooldownMilliseconds;
+            // A party is measured by its average level (a leader of 38 may walk with members of 23), a lone bot by its own.
+            int levelsAbove = blocker.EffectiveLevel - (grouped ? _groupDirective.AverageLevel : bot.Level);
+            bool mayForceRetarget = _camp != null &&
+                                    now - _lastRouteThreatRetargetTick >= AutonomousRouteThreatPolicy.ForcedRetargetCooldownMilliseconds;
+            RouteThreatAction action = AutonomousRouteThreatPolicy.Decide(con, grouped, pack, bossLike,
+                detour.HasValue, detours, mayRetarget, cautious: !grouped && now < _routeCautionUntilTick,
+                mayAbandonHopeless: _camp != null, levelsAboveReference: levelsAbove, mayForceRetarget: mayForceRetarget);
+            if (action == RouteThreatAction.Ignore)
+                return false;
+
+            Log.Info($"AUTONOMOUS_ROUTE_THREAT bot={bot.Name} id={bot.DatabaseID} class=\"{bot.ClassName}\" level={bot.Level} " +
+                     $"group={(grouped ? _groupDirective.GroupId : "solo")} action={action} target=\"{blocker.Name}\" " +
+                     $"targetLevel={blocker.Level} con={con} pack={pack} aggro={blockerBrain.AggroRange} along={first:0} " +
+                     $"detours={detours} levelsAbove={levelsAbove} zone=\"{zone.Description}\" at={blocker.X},{blocker.Y},{blocker.Z}");
+
+            switch (action)
+            {
+                case RouteThreatAction.Detour:
+                    _routeThreatDetours[blocker] = detours + 1;
+                    _routeRecoveryWaypoint = detour.Value;
+                    _routeRecoveryArrivalRadius = 60;
+                    _nextMoveOrderTick = 0;
+                    bot.ForcePathReplot();
+                    SetStatus(bot, $"Going around {blocker.Name}", GoalText(),
+                        $"Taking a way around the {(pack > 1 ? $"pack of {pack}" : "monster")} on the route instead of walking into its aggro",
+                        blocker.Name, _camp?.ZoneName ?? string.Empty);
+                    return false;
+
+                case RouteThreatAction.Retarget:
+                    _lastRouteThreatRetargetTick = now;
+                    AbandonCamp(bot, mayRetarget || !grouped
+                        ? $"Route blocked by {blocker.Name} (level {blocker.Level}, {pack} together) with no way around"
+                        : $"Route blocked by {blocker.Name} (level {blocker.Level}, {pack} together), too strong for the party and no way around");
+                    BackAwayFrom(bot, nav, zone, blocker, packMembers, margin, threats);
+                    return true;
+
+                default: // Pull
+                    if (!AutonomousNavigationSurface.TryFloor(nav, zone, blockerPosition, out Vector3 blockerFloor) ||
+                        !AutonomousZoneItinerary.HasCompleteCorridor(nav, zone, new(bot.X, bot.Y, bot.Z), blockerFloor))
+                    {
+                        _unreachableRouteThreats.Add(blocker);
+                        Log.Info($"AUTONOMOUS_ROUTE_THREAT_UNREACHABLE bot={bot.Name} id={bot.DatabaseID} target=\"{blocker.Name}\" " +
+                                 $"at={blocker.X},{blocker.Y},{blocker.Z} zone=\"{zone.Description}\"");
+                        return false;
+                    }
+                    _routeThreatPullRepeats = blocker == _lastRouteThreatPull && now - _lastRouteThreatPullTick < 45_000
+                        ? _routeThreatPullRepeats + 1 : 0;
+                    _lastRouteThreatPull = blocker;
+                    _lastRouteThreatPullTick = now;
+                    if (_routeThreatPullRepeats >= RouteThreatPullAttempts)
+                    {
+                        _unreachableRouteThreats.Add(blocker);
+                        _routeThreatPullRepeats = 0;
+                        Log.Info($"AUTONOMOUS_ROUTE_THREAT_PULL_FAILED bot={bot.Name} id={bot.DatabaseID} target=\"{blocker.Name}\" " +
+                                 $"attempts={RouteThreatPullAttempts} at={blocker.X},{blocker.Y},{blocker.Z} zone=\"{zone.Description}\"");
+                        return false;
+                    }
+                    GameBot puller = grouped ? AutonomousBotGroupCoordinator.PartyPuller(bot) ?? bot : bot;
+                    if (grouped && !AutonomousBotGroupCoordinator.CanInitiateNewPull(puller))
+                    {
+                        if (_routeThreatHold != blocker)
+                        {
+                            _routeThreatHold = blocker;
+                            _routeThreatHoldSince = now;
+                        }
+                        if (now - _routeThreatHoldSince < RouteThreatHoldLimitMilliseconds)
+                        {
+                            bot.StopMovingOnPath();
+                            bot.StopMoving();
+                            SetStatus(bot, "Holding before a route threat", GoalText(),
+                                $"Waiting for the whole party before clearing {blocker.Name} from the route",
+                                blocker.Name, _camp?.ZoneName ?? string.Empty);
+                            return true;
+                        }
+                        // The party could not get ready to pull: go around if there is a way, else walk on and fight it
+                        // if it comes (the party defends itself as on any road).
+                        _routeThreatHold = null;
+                        Log.Info($"AUTONOMOUS_ROUTE_THREAT_HOLD_EXPIRED bot={bot.Name} id={bot.DatabaseID} group={_groupDirective.GroupId} " +
+                                 $"target=\"{blocker.Name}\" puller={puller.Name} seconds={RouteThreatHoldLimitMilliseconds / 1000} " +
+                                 $"then={(detour.HasValue ? "detour" : "pass")} at={blocker.X},{blocker.Y},{blocker.Z} zone=\"{zone.Description}\"");
+                        if (detour.HasValue)
+                        {
+                            _routeThreatDetours[blocker] = detours + 1;
+                            _routeRecoveryWaypoint = detour.Value;
+                            _routeRecoveryArrivalRadius = 60;
+                            _nextMoveOrderTick = 0;
+                            bot.ForcePathReplot();
+                            return false;
+                        }
+                        _unreachableRouteThreats.Add(blocker);
+                        return false;
+                    }
+                    _routeThreatHold = null;
+                    _lastEngagedCon = con;
+                    _routeInterruptedByCombat = true;
+                    AutonomousBotGroupCoordinator.MarkCombatObserved(bot.Group);
+                    if (puller != bot && puller.Brain is BotBrain pullerBrain)
+                    {
+                        // The party's puller opens on it, as it opens camp pulls; the leader holds the party meanwhile.
+                        puller.StopMovingOnPath();
+                        puller.StopMoving();
+                        puller.TargetObject = blocker;
+                        pullerBrain.AddToAggroList(blocker, Math.Max(25, blocker.EffectiveLevel * 10));
+                        pullerBrain.FSM.SetCurrentState(eFSMStateType.AGGRO);
+                        bot.StopMovingOnPath();
+                        bot.StopMoving();
+                        SetStatus(bot, $"Clearing the route: {blocker.Name}", GoalText(),
+                            $"{puller.Name} is pulling a monster ahead on the route", blocker.Name, _camp?.ZoneName ?? string.Empty);
+                        return true;
+                    }
+                    bot.StopMovingOnPath();
+                    bot.StopMoving();
+                    bot.TargetObject = blocker;
+                    brain.AddToAggroList(blocker, Math.Max(25, blocker.EffectiveLevel * 10));
+                    brain.FSM.SetCurrentState(eFSMStateType.AGGRO);
+                    if (SavageBotCombatPolicy.MustMeleePull(characterClass))
+                        BeginSavageMeleePull(bot, blocker);
+                    SetStatus(bot, $"Clearing the route: {blocker.Name}", GoalText(),
+                        ranged
+                            ? "Opening from range on a monster ahead on the route instead of walking into its aggro"
+                            : "Taking on a monster ahead on the route before it can jump from behind",
+                        blocker.Name, _camp?.ZoneName ?? string.Empty);
+                    return true;
+            }
+        }
+
+        /// <summary>
+        /// After giving up a camp because of a monster or its pack, walks out of the whole pack's reach (by a way that
+        /// passes no other monster's aggro) instead of waiting out the replan beside it
+        /// (AutonomousRouteThreatPolicy.RetreatClearance, PackRetreat). Every attempt is logged as AUTONOMOUS_ROUTE_RETREAT.
+        /// </summary>
+        private void BackAwayFrom(GameBot bot, IPathfindingMgr nav, Zone zone, GameNPC threat, GameNPC[] pack, int margin,
+            GameNPC[] others)
+        {
+            var members = new (Vector2 Position, int AggroRange)[pack.Length];
+            for (int i = 0; i < pack.Length; i++)
+                members[i] = (new(pack[i].X, pack[i].Y), (pack[i].Brain as StandardMobBrain)?.AggroRange ?? 0);
+            (Vector2 center, float radius) = AutonomousRouteThreatPolicy.PackRetreat(members, margin);
+            Vector2 here = new(bot.X, bot.Y);
+            float distance = Vector2.Distance(here, center);
+            if (distance >= radius)
+                return;
+            Vector3 start = new(bot.X, bot.Y, bot.Z);
+            foreach (Vector2 candidate in AutonomousRouteThreatPolicy.RetreatCandidates(here, center, radius))
+            {
+                if (others.Any(npc => !pack.Contains(npc) && npc.Brain is StandardMobBrain mob &&
+                                      AutonomousRouteThreatPolicy.DistanceToSegment(here, candidate, new(npc.X, npc.Y)) <
+                                      mob.AggroRange + margin))
+                    continue;
+                if (!AutonomousNavigationSurface.TryFloor(nav, zone, new(candidate.X, candidate.Y, bot.Z), out Vector3 floor) ||
+                    !AutonomousZoneItinerary.HasCompleteCorridor(nav, zone, start, floor))
+                    continue;
+                bot.PathTo(floor, bot.MaxSpeed);
+                // The next plan starts once the bot is clear (the usual replan wait is longer than the walk).
+                float walkDistance = Vector2.Distance(here, new(floor.X, floor.Y));
+                long walk = (long)(walkDistance * 1000 / Math.Max((short)50, bot.MaxSpeed)) + 1_000;
+                _nextPlanTick = Math.Max(_nextPlanTick, GameLoop.GameLoopTime + walk);
+                SetStatus(bot, $"Backing away from {threat.Name}", "Find a reachable level-appropriate XP camp",
+                    "Getting out of its reach before choosing another camp", threat.Name);
+                Log.Info($"AUTONOMOUS_ROUTE_RETREAT bot={bot.Name} id={bot.DatabaseID} level={bot.Level} result=walking " +
+                         $"target=\"{threat.Name}\" pack={pack.Length} from={distance:0} radius={radius:0} walk={walkDistance:0} " +
+                         $"zone=\"{zone.Description}\" at={bot.X},{bot.Y},{bot.Z} to={floor.X:0},{floor.Y:0},{floor.Z:0}");
+                return;
+            }
+            Log.Info($"AUTONOMOUS_ROUTE_RETREAT bot={bot.Name} id={bot.DatabaseID} level={bot.Level} result=no_way_out " +
+                     $"target=\"{threat.Name}\" pack={pack.Length} from={distance:0} radius={radius:0} " +
+                     $"zone=\"{zone.Description}\" at={bot.X},{bot.Y},{bot.Z}");
+        }
+
+        private long _nextDangerBypassLogTick;
+
+        private bool TryDangerBypass(GameBot bot, IPathfindingMgr nav, Zone zone, ReadOnlySpan<Vector3> corridor)
+        {
+            var mobs = bot.GetNPCsInRadius((ushort)AutonomousPveDangerBypass.ScanRadius)
+                .Where(npc => IsExperienceMonster(npc) && npc.IsAlive && npc.Brain is StandardMobBrain mob &&
+                              mob.AggroRange > 0 && mob.AggroLevel > 0)
+                .Select(npc => new AutonomousPveDangerBypass.MobView(new(npc.X, npc.Y), npc.Level, npc.Name, true))
+                .ToArray();
+            DateTime utc = DateTime.UtcNow;
+            float spotScan = AutonomousPveDangerBypass.ScanRadius + AutonomousPveDangerBypass.RememberedSpotRadius;
+            var spots = AutonomousPveBossDanger.SpotsNear(bot.CurrentRegionID, bot.X, bot.Y, bot.Level, utc, spotScan);
+            foreach (var (x, y) in AutonomousRepeatDeathSpots.SpotsNear(bot.DatabaseID, bot.CurrentRegionID, bot.X, bot.Y, utc, spotScan))
+                spots.Add((x, y, bot.Level));
+            // Where several other bots of this level or lower died recently (word of mouth).
+            foreach (var (x, y) in AutonomousSharedDeathSpots.SpotsNear(bot.CurrentRegionID, bot.Level, bot.X, bot.Y, utc, spotScan))
+                spots.Add((x, y, bot.Level));
+            List<AutonomousPveDangerBypass.Danger> dangers = AutonomousPveDangerBypass.BuildDangers(bot.Level, mobs, spots);
+            if (dangers.Count == 0)
+                return false;
+            Vector3 here = corridor[0];
+            Vector3 ahead = AutonomousPveDangerBypass.PointAlong(corridor, AutonomousPveDangerBypass.LookAhead);
+            Zone aheadZone = bot.CurrentRegion.GetZone((int)ahead.X, (int)ahead.Y);
+            foreach (Vector2 candidate in AutonomousPveDangerBypass.BypassCandidates(new(here.X, here.Y), new(ahead.X, ahead.Y), dangers))
+            {
+                if (bot.CurrentRegion.GetZone((int)candidate.X, (int)candidate.Y) != zone)
+                    continue;
+                Vector3? floor = nav.GetClosestPoint(zone, new(candidate.X, candidate.Y, here.Z), 96, 96, 768, nav.DefaultFilters);
+                if (!floor.HasValue || Vector2.DistanceSquared(new(floor.Value.X, floor.Value.Y), candidate) > 150 * 150 ||
+                    !AutonomousZoneItinerary.HasCompleteCorridor(nav, zone, here, floor.Value) ||
+                    aheadZone == zone && !AutonomousZoneItinerary.HasCompleteCorridor(nav, zone, floor.Value, ahead))
+                    continue;
+                _routeRecoveryWaypoint = floor.Value;
+                _routeRecoveryArrivalRadius = 60;
+                _nextMoveOrderTick = 0;
+                bot.ForcePathReplot();
+                long now = GameLoop.GameLoopTime;
+                if (now >= _nextDangerBypassLogTick && Log.IsInfoEnabled)
+                {
+                    _nextDangerBypassLogTick = now + 60_000;
+                    var nearest = dangers.OrderBy(danger => Vector2.DistanceSquared(danger.Center, candidate)).First();
+                    Log.Info($"AUTONOMOUS_DANGER_BYPASS bot={bot.Name} id={bot.DatabaseID} level={bot.Level} danger=\"{nearest.Name}\" " +
+                             $"dangerLevel={nearest.Level} radius={(int)nearest.Radius} dangers={dangers.Count} zone=\"{zone.Description}\" " +
+                             $"at={bot.X},{bot.Y} bend={(int)candidate.X},{(int)candidate.Y}");
+                }
+                SetStatus(bot, "Going around a dangerous area", GoalText(),
+                    "Taking the long way around monsters far above this level", string.Empty, _camp?.ZoneName ?? string.Empty);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// A reachable sidestep beside the monster that stays out of every nearby monster's aggro
+        /// range; the shorter way of the two sides wins.
+        /// </summary>
+        private static Vector3? FindRouteThreatDetour(IPathfindingMgr nav, Zone zone, ReadOnlySpan<Vector3> corridor,
+            GameNPC blocker, int aggroRange, int margin, Vector3 destination, GameNPC[] threats)
+        {
+            Vector3 start = corridor[0];
+            Vector3 position = new(blocker.X, blocker.Y, blocker.Z);
+            if (!AutonomousRouteThreatPolicy.NearestOnRoute(corridor, position, AutonomousRouteThreatPolicy.LookAhead,
+                    out Vector3 routePoint, out Vector2 direction) ||
+                !AutonomousNavigationSurface.TryFloor(nav, zone, start, out Vector3 startFloor))
+                return null;
+            // Rejoin the route a sidestep's length past the monster (or at the destination if nearer).
+            float sidestep = aggroRange + margin + AutonomousRouteThreatPolicy.DetourClearance;
+            Vector3 past = new(routePoint.X + direction.X * sidestep * 1.5f, routePoint.Y + direction.Y * sidestep * 1.5f, routePoint.Z);
+            Vector3 rejoin = Vector3.Distance(routePoint, destination) < Vector3.Distance(routePoint, past) ? destination : past;
+            Vector3? best = null;
+            float bestCost = float.MaxValue;
+            foreach (int side in new[] { 1, -1 })
+            foreach (float alongFraction in AutonomousRouteThreatPolicy.DetourAlongFractions)
+            {
+                Vector3 candidate = AutonomousRouteThreatPolicy.DetourPoint(position, direction, aggroRange, margin,
+                    routePoint.Z, side, alongFraction);
+                // Quick filter: both straight legs pass outside every nearby monster's aggro.
+                if (threats.Any(npc => npc.Brain is StandardMobBrain mob &&
+                        !AutonomousRouteThreatPolicy.LegsClear(start, candidate, rejoin, new(npc.X, npc.Y, npc.Z),
+                            mob.AggroRange + margin / 2f)))
+                    continue;
+                Vector3? floor = nav.GetClosestPoint(zone, candidate, 96, 96, 320, nav.DefaultFilters);
+                if (!floor.HasValue || zone != blocker.CurrentRegion?.GetZone((int)floor.Value.X, (int)floor.Value.Y))
+                    continue;
+                bool inAggro = threats.Any(npc => npc.Brain is StandardMobBrain mob &&
+                    Math.Abs(npc.Z - floor.Value.Z) <= 200 &&
+                    Vector2.Distance(new(npc.X, npc.Y), new(floor.Value.X, floor.Value.Y)) < mob.AggroRange + margin);
+                if (inAggro || !AutonomousZoneItinerary.HasCompleteCorridor(nav, zone, startFloor, floor.Value) ||
+                    !PathClearOfAggro(nav, zone, startFloor, floor.Value, threats, margin) ||
+                    !PathClearOfAggro(nav, zone, floor.Value, rejoin, threats, margin))
+                    continue;
+                float cost = Vector3.Distance(start, floor.Value) + Vector3.Distance(floor.Value, destination);
+                if (cost < bestCost)
+                {
+                    bestCost = cost;
+                    best = floor.Value;
+                }
+            }
+            return best;
+        }
+
+        /// <summary>
+        /// The real navmesh path between two points stays outside every monster's aggro range
+        /// (half the safety margin may be used).
+        /// </summary>
+        private static bool PathClearOfAggro(IPathfindingMgr nav, Zone zone, Vector3 from, Vector3 to,
+            GameNPC[] threats, int margin)
+        {
+            Span<WrappedPathfindingNode> nodes = stackalloc WrappedPathfindingNode[256];
+            PathfindingResult result = nav.GetPathStraight(zone, from, to, nav.DefaultFilters, nodes);
+            if (result.NodeCount == 0)
+                return false;
+            int count = Math.Min(result.NodeCount, nodes.Length);
+            Span<Vector3> path = stackalloc Vector3[count + 1];
+            path[0] = from;
+            float length = 0;
+            for (int i = 0; i < count; i++)
+            {
+                path[i + 1] = nodes[i].Position;
+                length += Vector3.Distance(path[i], path[i + 1]);
+            }
+            foreach (GameNPC npc in threats)
+            {
+                if (npc.Brain is not StandardMobBrain mob)
+                    continue;
+                if (AutonomousDungeonPolicy.IntersectsCorridor(path, new(npc.X, npc.Y, npc.Z),
+                        mob.AggroRange + margin / 2f, length + 1, out _))
+                    return false;
+            }
+            return true;
+        }
+
+        private void PruneRouteThreatDetours()
+        {
+            if (_unreachableRouteThreats.Count > 0)
+            {
+                _unreachableRouteThreats.RemoveWhere(npc => !npc.IsAlive || npc.ObjectState != GameObject.eObjectState.Active);
+                if (_unreachableRouteThreats.Count > 32) _unreachableRouteThreats.Clear();
+            }
+            if (_routeThreatDetours.Count == 0)
+                return;
+            foreach (GameNPC npc in _routeThreatDetours.Keys.Where(npc => !npc.IsAlive ||
+                         npc.ObjectState != GameObject.eObjectState.Active).ToArray())
+                _routeThreatDetours.Remove(npc);
+            if (_routeThreatDetours.Count > 32)
+                _routeThreatDetours.Clear();
+        }
+    }
+}

@@ -1,0 +1,38 @@
+OFFLINE DAOC 0.33 "CLAUDE TAKEOVER" - VERIFICATION
+
+Source and builds
+- Server (Release build): 2,226 automated tests passed, 0 failed.
+- Launcher: 103 automated tests passed, 0 failed.
+
+Package checks (build_release_033.py)
+- The runtime was copied from the 0.33 development install. Every copied file
+  is hashed, and logs, backups, accounts and run-state files are excluded.
+- The world database passes SQLite quick_check. It has no accounts, characters,
+  bots, inventories, houses or auctions. Keeps and relics are at their
+  original realms. GM is off, XP is 1x, and the bot target is 0.
+- The 0.33 edition database has enable_sluaghbinder = False, with the
+  Sluaghbinder trainer, wisp and class skill rows removed. Its client file
+  game.dll matches the normal v0.32 hash.
+
+End-to-end smoke test (smoke_release_033.py), both editions
+- The launcher created the install's own account.txt.
+- The server started using only the bundled .NET runtime.
+- A login through connect.exe (as ENTER REALM does) made the server create a
+  fresh 'offline' account at player level.
+- The server shut down cleanly.
+
+Progress transfer tests (real saves, copies only)
+- Codex "new class test" save (6,000 bots) into 0.33b: exact counts for every
+  table, including 127 Sluaghbinder bots.
+- The same save into 0.33: refused until the player confirms. After
+  confirmation, the 127 Sluaghbinder bots and their 3,304 items stayed behind
+  and everything else transferred.
+- A 0.4 private save (6 characters, 6,000 bots) into 0.33b: exact counts.
+- The clean public 0.32 world into 0.33b: no account, and the new install keeps its own.
+- A save with no account.txt: the account was kept, with a new password stored
+  in the server's own format.
+
+Not claimed
+These are automated and package checks. Long live bot runs of the newest bot
+changes, and Darkness Falls raids, are not verified. Darkness Falls raid AI is
+not implemented.

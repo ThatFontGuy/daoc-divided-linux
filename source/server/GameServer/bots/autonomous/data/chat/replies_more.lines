@@ -1,0 +1,339 @@
+# More replies for 0.36-se.4, from the chat simulation re-run (2026-10-18): openers asked "anyone on?",
+# "how is everyone?", "mind if i hunt here?" or "x or y?", and got a refusal or "no idea". Also more
+# replies for the player intents with the smallest pools. New writing (see docs/bot-voices).
+
+@kind reply
+@answers ask_anyone
+@who *
+here
+im on
+me, kind of
+maybe, what time?
+depends, what level?
+might be up for it later
+im around, whats up?
+could be, tell me more
+@who Socialite
+me me me
+@who NoLifer
+always
+
+@kind reply
+@answers ask_howareyou
+@intent greeting
+@who *
+not bad, and you?
+good, slow night though
+cant complain, xp is coming
+tired but still going
+not much happening, you?
+same old, killing things
+@needs just_leveled
+good, just dinged actually
+@needs
+alive, mostly
+@who Socialite
+great now that people are on!
+@who Leveler
+fine, would be better with a camp
+
+@kind reply
+@answers ask_permission
+@who *
+go for it, plenty of mobs
+sure, plenty of room
+np, go ahead
+fine by me
+sure, just dont take the named
+all yours
+yep, we are leaving soon anyway
+sure, holler if you get adds
+
+@kind reply
+@answers ask_choice
+@who *
+depends what you like
+the first one
+second one imo
+both are fine honestly
+go with your gut
+whichever is more fun
+the first, no contest
+flip a coin lol
+tried both, liked the second
+
+@kind reply
+@intent travel
+@who *
+long run, take a horse
+the stable master saves you half the walk
+follow the road, cant miss it
+its a bit of a trek
+past the bridge and keep going
+check your map, its marked
+get a horse in {capital}
+bring speed if you have it
+
+@kind reply
+@intent rvr
+@who *
+frontier is busy tonight
+been quiet out there lately
+the zerg moved on i think
+who holds {keep} now?
+stealthers everywhere, careful
+i might head out later
+need more healers out there
+@needs keep_news
+saw {enemy} near {keep} earlier
+@needs
+
+@kind reply
+@intent dungeon
+@who *
+bring a group, the pulls stack
+watch the pathing in there
+good xp if you can hold the camp
+been ages since i went in there
+dont split up in there
+take a healer, trust me
+the named in there hits hard
+{dungeon} is decent for your level
+
+@kind reply
+@intent grinding
+@who *
+blues and yellows, keep it steady
+camp something that cons yellow
+{camp} was good for me
+try {zone}, worked for me
+xp is better in a group
+anything that doesnt add
+stay near the guards if solo
+slow and steady, rest a lot
+
+@kind reply
+@intent farewell
+@who *
+night, have a good one
+cya around
+take it easy
+later, take care
+safe travels, see ya
+gn, good hunting tomorrow
+
+@kind reply
+@intent ignoreoutofworld
+@who *
+heh, no idea
+not following that stuff lately
+eh, rather be killing things
+ask me after this pull
+lol whatever you say
+dunno, been here all day
+
+# "anyone know if Caer Sursbrooke is ours?", "anyone know who camps x?": a question about the world.
+# Live test of se.4 (2026-10-18): these drew "ask again in a bit". New writing.
+@kind reply
+@answers ask_know
+@who *
+not sure, havent been that way
+last i saw, yes
+was earlier, not sure now
+someone was there an hour ago
+havent seen anyone
+i think so? dont quote me
+dunno, ask in a bit
+no idea, check the map
+pretty sure, yeah
+heard the same, no idea if its true
+dont think so
+@who Explorer
+was there earlier, looked fine
+@who NoLifer
+yes, been watching it all night
+
+# "anyone on?", "whos around": who is here. Live test of se.4 (2026-10-18): /gu "anyone on?" drew "good question,
+# someone else might know". New writing.
+@kind reply
+@answers ask_on
+@who *
+here o/
+yep, on
+o/ hi
+just got on
+still here
+around, kinda
+half here lol
+here, at the bind
+me
+present
+on and grinding
+here, whats up?
+@who NoLifer
+always on
+@who Socialite
+here!! whats going on
+
+# Guild and group questions about levels and plans ("what level is everyone at now?", "how close are you to a
+# level?", "what are we doing this weekend?"). Before, they drew advice ("practice on blues first"). New writing.
+@kind reply
+@answers ask_level
+@who *
+{level} here
+@needs just_leveled
+just hit {level}
+@needs
+{level} and grinding
+@levels 1-49
+{level}, slowly
+@needs xp_mid
+{level}, halfway to the next
+@needs
+still {level}, dont ask
+@levels 50-50
+50, finally
+capped, just rps now
+@kind reply
+@answers ask_xp
+@levels 1-49
+@who *
+@needs xp_mid
+about halfway
+@needs
+@needs !xp_low
+{bubbles} bubbles
+@needs
+one more pull i hope
+not even close lol
+@needs just_leveled
+just dinged, so far
+@needs
+almost, few more kills
+@needs xp_mid
+{bubbles} bubbles, ugh
+@needs
+@levels 50-50
+im 50, no more bubbles
+capped, its all realm points now
+@kind reply
+@answers ask_plans
+@who *
+rvr if enough of us show
+leveling probably
+keep raid sunday?
+whatever gets the most people on
+dunno, bring ideas
+dungeon run maybe
+i am in for anything
+
+# "where to next?", "so where are we heading?": the group's next hunt. Live test of se.4 (2026-10-18): it drew
+# directions ("follow the road"). New writing.
+@kind reply
+@answers ask_next
+@who *
+your call
+you lead, i follow
+somewhere with more xp
+{camp} maybe?
+back to {camp}?
+anywhere but here lol
+stay a bit longer?
+wherever has blues for us
+@levels 1-45
+{dungeon} could be good for us
+@levels 1-50
+@who Explorer
+somewhere new, i am bored of this place
+@who Leveler
+wherever the xp is best, dont care where
+
+# "tell me your best death story", "best thing that happened to you this week? go": a story. Live test of se.4
+# (2026-10-18): it drew "pretty sure yes but dont quote me". New writing.
+@kind reply
+@answers ask_story
+@who *
+too many to pick one lol
+pulled a whole room once, never again
+a guard killed me once, still not sure why
+fell off a cliff running from a grey con
+drowned in a pond, a tiny one
+a named spawned on top of us at the bind
+@who Daredevil
+tried to solo an orange, it went about how youd think
+@who Socialite
+best thing this week? this group honestly
+
+# "what are you up to?", "whats everyone doing?": what the bot is doing right now. Live test of 0.37-se.1
+# (2026-10-18): /gu "welcome all! what are you up to?" drew "lol what". New writing.
+@kind reply
+@answers ask_doing
+@who *
+not much, you?
+just messing around
+@needs outdoors
+the usual, killing stuff
+@needs at_camp
+camping {camp}
+xp in {camp}, its decent
+farming {monsters} in {camp}
+@needs traveling
+heading to {destination}
+on my way to {destination}, long run
+@needs in_capital
+in town, sorting my bags
+standing around in {zone} lol
+@needs bag_full
+selling, bags are full
+@needs in_group, outdoors
+grouping, xp is good
+@needs in_rvr
+rvr, its busy out here
+@needs just_died
+running back after a death lol
+@needs just_leveled
+just dinged {level}!
+@needs
+@who Socialite
+talking to all of you :)
+@who Leveler
+@needs outdoors
+grinding, what else
+
+# "where is everyone?", "where are you all?": where the bot is. Played 2026-10-18 (0.37-se.1): /gu "where is everyone"
+# read as a travel question and drew nothing. New writing.
+@kind reply
+@answers ask_whereall
+@who *
+@needs
+{zone}
+{zone}, you?
+out in {zone}
+@needs outdoors
+{zone}, killing stuff
+@needs in_group, outdoors
+{zone} with a group
+@needs in_rvr
+frontier, {zone}
+rvr in {zone}, come help
+@needs in_capital
+in town, {zone}
+@needs at_camp
+at {camp}, decent xp
+@needs traveling
+headed to {destination}
+@needs in_dungeon
+down in {zone}
+@needs just_died
+running back from the bind lol
+@needs
+
+# The talking update audit: only a pet class has a pet
+@kind reply
+@topic general
+@who *
+@realm *
+@class Cabalist,Theurgist,Necromancer,Spiritmaster,Bonedancer,Hunter,Druid,Enchanter,Animist,Sorcerer
+@levels 1-50
+@answers ask_story
+my pet ran off and brought the whole camp back

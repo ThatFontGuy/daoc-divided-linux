@@ -1,0 +1,1402 @@
+[
+  [
+    "1",
+    "Ducking Blow",
+    "None",
+    "None",
+    "None",
+    "Medium",
+    "Very Low",
+    "None"
+  ],
+  [
+    "2",
+    "Jab",
+    "None",
+    "Low Bonus",
+    "Low Bonus",
+    "High",
+    "High",
+    "None"
+  ],
+  [
+    "4",
+    "Uppercut",
+    "Jab",
+    "Medium Bonus",
+    "None",
+    "Medium",
+    "High",
+    "Hindered, 40% Snare, 10s duration"
+  ],
+  [
+    "6",
+    "Jaw Breaker",
+    "Uppercut",
+    "Low Bonus",
+    "Low Bonus",
+    "Medium",
+    "Low",
+    "5% Attack Speed Decrease, 15s duration"
+  ],
+  [
+    "8",
+    "Owl Strike",
+    "None",
+    "Medium Bonus",
+    "Low Penalty",
+    "Medium",
+    "Medium",
+    "Taunt"
+  ],
+  [
+    "10",
+    "Heart Stopper",
+    "In front of target",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "Low",
+    "25 damage, 50% returned to Mauler as power"
+  ],
+  [
+    "12",
+    "Body Blow",
+    "None",
+    "Medium Bonus",
+    "High Bonus",
+    "Medium",
+    "None",
+    "Detaunt"
+  ],
+  [
+    "15",
+    "Haymaker",
+    "To side of target",
+    "Low Bonus",
+    "Low Bonus",
+    "Medium",
+    "High",
+    "Stunned, 5s duration"
+  ],
+  [
+    "18",
+    "Wind Taker",
+    "Behind target",
+    "Medium Bonus",
+    "None",
+    "Low",
+    "Medium",
+    "Hindered, 40% Snare, 10s duration"
+  ],
+  [
+    "21",
+    "Rib Cracker",
+    "Heart Stopper",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "High",
+    "Rib Cracker: 25 damage"
+  ],
+  [
+    "25",
+    "Eagle Strike",
+    "Owl Strike",
+    "High Bonus",
+    "Low Penalty",
+    "Medium",
+    "Medium",
+    "Hindered, 30% Snare, 10s duration"
+  ],
+  [
+    "29",
+    "Gut Shot",
+    "Haymaker",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "Medium",
+    "Gut Shot: 75 damage"
+  ],
+  [
+    "34",
+    "Dislocation",
+    "You evade",
+    "Medium Bonus",
+    "None",
+    "High",
+    "High",
+    "Stunned, 5s duration"
+  ],
+  [
+    "39",
+    "Cross",
+    "Haymaker",
+    "Medium Bonus",
+    "Low Bonus",
+    "High",
+    "High",
+    "Hindered, 40% Snare, 10s duration, 350 radius"
+  ],
+  [
+    "44",
+    "Counter Blow",
+    "Dislocation",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "High",
+    "25% Attack Speed Decrease, 30s duration"
+  ],
+  [
+    "50",
+    "Phoenix Strike",
+    "Owl Strike",
+    "High Bonus",
+    "Low Bonus",
+    "Medium",
+    "High",
+    "125 damage"
+  ],
+  [
+    "1",
+    "Wild Swing",
+    "None",
+    "None",
+    "None",
+    "Medium",
+    "Very Low",
+    "None"
+  ],
+  [
+    "2",
+    "Splintered Strike",
+    "None",
+    "Low Bonus",
+    "Low Bonus",
+    "Medium",
+    "High",
+    "None"
+  ],
+  [
+    "4",
+    "Focused Breach",
+    "Splintered Strike",
+    "Medium Bonus",
+    "None",
+    "High",
+    "High",
+    "5% ABS Debuff, 30s duration"
+  ],
+  [
+    "6",
+    "Rescue",
+    "None",
+    "High Bonus",
+    "Low Bonus",
+    "Medium",
+    "High",
+    "Taunt"
+  ],
+  [
+    "8",
+    "Percussion",
+    "To side of target",
+    "Medium Bonus",
+    "Low Penalty",
+    "Medium",
+    "High",
+    "Stunned, 5s duration"
+  ],
+  [
+    "10",
+    "Cinder Strike",
+    "In front of target",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "Low",
+    "25 damage, 50% returned to Mauler as power"
+  ],
+  [
+    "12",
+    "Subterfuge",
+    "None",
+    "Medium Bonus",
+    "High Bonus",
+    "Medium",
+    "None",
+    "Detaunt"
+  ],
+  [
+    "15",
+    "Jolting Staff",
+    "Rescue",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "Medium",
+    "25 Constitution Debuff, 30s duration"
+  ],
+  [
+    "18",
+    "Smelting Blow",
+    "Percussion",
+    "High Bonus",
+    "None",
+    "Low",
+    "Medium",
+    "50% Ablative, 50 health, 1 minute duration"
+  ],
+  [
+    "21",
+    "Winding Blow",
+    "Splintered Strike",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "Medium",
+    "18% Parry Buff, 15s duration"
+  ],
+  [
+    "25",
+    "Shocking Staff",
+    "Rescue",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "Medium",
+    "25 Strength/ Constitution Debuff, 15s duration"
+  ],
+  [
+    "29",
+    "Ember Clip",
+    "You evade",
+    "Medium Bonus",
+    "Low Bonus",
+    "Medium",
+    "Medium",
+    "Stunned, 5s duration"
+  ],
+  [
+    "34",
+    "Burning Cloud",
+    "Behind target",
+    "Low Bonus",
+    "None",
+    "High",
+    "High",
+    "25% Attack Speed Buff, 30s duration"
+  ],
+  [
+    "39",
+    "Scorching Staff",
+    "Ember Clip",
+    "High Bonus",
+    "Low Penalty",
+    "High",
+    "High",
+    "Damage Add Buff, 7.6 DPS, 30s duration"
+  ],
+  [
+    "44",
+    "Forging Blow",
+    "Percussion",
+    "High Bonus",
+    "None",
+    "Medium",
+    "High",
+    "35% Mesmerization Dampening Group Buff, 15s duration"
+  ],
+  [
+    "50",
+    "Tempered Strike",
+    "Ember Clip",
+    "High Bonus",
+    "Medium Bonus",
+    "Medium",
+    "High",
+    "50% Ablative, 100 health, 30s duration"
+  ],
+  [
+    "5",
+    "Minor Discipline of Laresh",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "3% abs",
+    "2"
+  ],
+  [
+    "10",
+    "Lesser Discipline of Laresh",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "6% abs",
+    "3"
+  ],
+  [
+    "15",
+    "Discipline of Laresh",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "9% abs",
+    "5"
+  ],
+  [
+    "20",
+    "Major Discipline of Laresh",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "11% abs",
+    "6"
+  ],
+  [
+    "25",
+    "Greater Discipline of Laresh",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "13% abs",
+    "7"
+  ],
+  [
+    "30",
+    "Superior Discipline of Laresh",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "14% abs",
+    "9"
+  ],
+  [
+    "34",
+    "Perfect Discipline of Laresh",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "15% abs",
+    "11"
+  ],
+  [
+    "5",
+    "Minor Stamina of the Uruz",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+14 Con",
+    "1"
+  ],
+  [
+    "11",
+    "Lesser Stamina of the Uruz",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+18 Con",
+    "3"
+  ],
+  [
+    "15",
+    "Stamina of the Uruz",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+22 Con",
+    "5"
+  ],
+  [
+    "24",
+    "Endurance of the Uruz",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+29 Con",
+    "8"
+  ],
+  [
+    "33",
+    "Fortitude of the Uruz",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+36 Con",
+    "13"
+  ],
+  [
+    "43",
+    "Vitality of the Uruz",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+44 Con",
+    "16"
+  ],
+  [
+    "6",
+    "Minor Strength of the Forge",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+21 Str/Con",
+    "1"
+  ],
+  [
+    "12",
+    "Lesser Strength of the Forge",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+28 Str/Con",
+    "3"
+  ],
+  [
+    "19",
+    "Strength of the Forge",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+37 Str/Con",
+    "6"
+  ],
+  [
+    "29",
+    "Major Strength of the Forge",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+49 Str/Con",
+    "9"
+  ],
+  [
+    "40",
+    "Greater Strength of the Forge",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+63 Str/Con",
+    "15"
+  ],
+  [
+    "48",
+    "Superior Strength of the Forge",
+    "Self",
+    "3s/15 minutes/0s",
+    "",
+    "+72 Str/Con",
+    "18"
+  ],
+  [
+    "26",
+    "Tenacious Defender",
+    "Self",
+    "0s/10s/pulse/16s",
+    "",
+    "Bladeturn",
+    "16 & 4 per pulse"
+  ],
+  [
+    "36",
+    "Undaunted Defender",
+    "Self",
+    "0s/8s/pulse/16s",
+    "",
+    "Bladeturn",
+    "23 & 5 per pulse"
+  ],
+  [
+    "45",
+    "Stalwart Defender",
+    "Self",
+    "0s/6s/pulse/16s",
+    "",
+    "Bladeturn",
+    "29 & 7 per pulse"
+  ],
+  [
+    "6",
+    "Minor Gift of Foresight",
+    "Self",
+    "3s/1 min/15s",
+    "",
+    "6% Evade",
+    "6"
+  ],
+  [
+    "12",
+    "Lesser Gift of Foresight",
+    "Self",
+    "3s/1 min/15s",
+    "",
+    "12% Evade",
+    "16"
+  ],
+  [
+    "17",
+    "Gift of Foresight",
+    "Self",
+    "3s/1 min/15s",
+    "",
+    "18% Evade",
+    "24"
+  ],
+  [
+    "24",
+    "Major gift of Foresight",
+    "Self",
+    "3s/1 min/15s",
+    "",
+    "24% Evade",
+    "36"
+  ],
+  [
+    "31",
+    "Greater Gift of Foresight",
+    "Self",
+    "3s/1 min/15s",
+    "",
+    "32% Evade",
+    "48"
+  ],
+  [
+    "40",
+    "Superior Gift of Foresight",
+    "Self",
+    "3s/1 min/15s",
+    "",
+    "40% Evade",
+    "60"
+  ],
+  [
+    "50",
+    "Perfect Gift of Foresight",
+    "Self",
+    "3s/1 min/15s",
+    "",
+    "50% Evade",
+    "76"
+  ],
+  [
+    "28",
+    "Gift of Nethuni",
+    "Group",
+    "3.0s/15 seconds, 3s pulse/30s",
+    "2000 range",
+    "40 health",
+    "35"
+  ],
+  [
+    "38",
+    "Grace of Nethuni",
+    "Group",
+    "3.0s/15 seconds, 3s pulse/30s",
+    "2000 range",
+    "50 health",
+    "45"
+  ],
+  [
+    "48",
+    "Blessing of Nethuni",
+    "Group",
+    "3.0s/15 seconds, 3s pulse/30s",
+    "2000 range",
+    "60 health",
+    "55"
+  ],
+  [
+    "24",
+    "Nethuni\u2019s Refreshing Waters",
+    "Group",
+    "3.0s/15 seconds, 3s pulse/30s",
+    "2000 range",
+    "40 health/pulse",
+    "35"
+  ],
+  [
+    "34",
+    "Nethuni\u2019s Recuperating Waters",
+    "Group",
+    "3.0s/15 seconds, 3s pulse/30s",
+    "2000 range",
+    "50 health/pulse",
+    "45"
+  ],
+  [
+    "44",
+    "Nethuni\u2019s Renewing Waters",
+    "Group",
+    "3.0s/15 seconds, 3s pulse/30s",
+    "2000 range",
+    "60 health/pulse",
+    "55"
+  ],
+  [
+    "29",
+    "Eyes of the Watchman",
+    "Group",
+    "0s/10s/pulse/10s",
+    "2000 range",
+    "25% Nearsight Dampening",
+    "14 & 4 per pulse"
+  ],
+  [
+    "39",
+    "Eyes of the Sentinel",
+    "Group",
+    "0s/10s/pulse/10s",
+    "2000 range",
+    "50% Nearsight Dampening",
+    "16 & 5 per pulse"
+  ],
+  [
+    "49",
+    "Eyes of the Scout",
+    "Group",
+    "0s/10s/pulse/10s",
+    "2000 range",
+    "75% Nearsight Dampening",
+    "22 & 7 per pulse"
+  ],
+  [
+    "30",
+    "Unceasing Burden",
+    "Enemy",
+    "3s/Maintained/5s",
+    "700 range",
+    "80% snare (Matter)",
+    "12 & 1 per pulse"
+  ],
+  [
+    "47",
+    "Endless Burden",
+    "Enemy",
+    "3s/Maintained/5s",
+    "700 range",
+    "90% Snare (Matter)",
+    "20 & 1 per pulse"
+  ],
+  [
+    "7",
+    "Minor Burden",
+    "Enemy",
+    "0s/14s/300s",
+    "350 radius",
+    "Rooted (Matter)",
+    "4"
+  ],
+  [
+    "17",
+    "Lesser Burden",
+    "Enemy",
+    "0s/28 seconds/300s",
+    "350 radius",
+    "Rooted (Matter)",
+    "8"
+  ],
+  [
+    "27",
+    "Modest Burden",
+    "Enemy",
+    "0s/42 seconds/300s",
+    "350 radius",
+    "Rooted (Matter)",
+    "13"
+  ],
+  [
+    "37",
+    "Greater Burden",
+    "Enemy",
+    "0s/56 seconds/300s",
+    "350 radius",
+    "Rooted (Matter)",
+    "18"
+  ],
+  [
+    "47",
+    "Overwhelming Burden",
+    "Enemy",
+    "0s/1 minute, 10 seconds/300s",
+    "350 radius",
+    "Rooted (Matter)",
+    "24"
+  ],
+  [
+    "8",
+    "Rigid Armor",
+    "Enemy",
+    "2.0s/30 seconds/600s",
+    "350 range, 90 degree angle",
+    "Rooted (Matter)",
+    "11"
+  ],
+  [
+    "18",
+    "Tightening Armor",
+    "Enemy",
+    "2.0s/43 seconds/600s",
+    "350 range, 90 degree angle",
+    "Rooted (Matter)",
+    "22"
+  ],
+  [
+    "28",
+    "Inflexible Armor",
+    "Enemy",
+    "2.0s/56 seconds/600s",
+    "350 range, 90 degree angle",
+    "Rooted (Matter)",
+    "33"
+  ],
+  [
+    "38",
+    "Unbending Armor",
+    "Enemy",
+    "2.0s/1 minute, 9 seconds/600s",
+    "350 range, 90 degree angle",
+    "Rooted (Matter)",
+    "44"
+  ],
+  [
+    "48",
+    "Unyielding Armor",
+    "Enemy",
+    "2.0s/1 minute, 22 seconds/600s",
+    "350 range, 90 degree angle",
+    "Rooted (Matter)",
+    "55"
+  ],
+  [
+    "15",
+    "Tegashrig\u2019s Accommodation",
+    "Friend",
+    "0s/30s/15s",
+    "2000 range",
+    "5% damage absorbed and returned as power",
+    "5"
+  ],
+  [
+    "25",
+    "Tegashrig\u2019s Mediation",
+    "Friend",
+    "0s/30 seconds/15s",
+    "2000 range",
+    "10% damage absorbed and returned as power",
+    "15"
+  ],
+  [
+    "35",
+    "Tegashrig\u2019s Negotiation",
+    "Friend",
+    "0s/30 seconds/15s",
+    "2000 range",
+    "15% damage absorbed and returned as power",
+    "25"
+  ],
+  [
+    "45",
+    "Tegashrig\u2019s Arbitration",
+    "Friend",
+    "0s/30 seconds/15s",
+    "2000 range",
+    "20% damage absorbed and returned as power",
+    "35"
+  ],
+  [
+    "2",
+    "Unavoidable Hindrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "10% snare (Matter)",
+    "1 & 1 per pulse"
+  ],
+  [
+    "5",
+    "Ineluctable Hindrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "15% snare (Matter)",
+    "2 & 2 per pulse"
+  ],
+  [
+    "10",
+    "Ineludible Hindrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "20% snare (Matter)",
+    "4 & 4 per pulse"
+  ],
+  [
+    "14",
+    "Inevitable Hindrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "25% snare (Matter)",
+    "6 & 5 per pulse"
+  ],
+  [
+    "21",
+    "Inescapable Hindrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "30% snare (Matter)",
+    "8 & 8 per pulse"
+  ],
+  [
+    "26",
+    "Unavoidable Encumbrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "35% snare (Matter)",
+    "10 & 9 per pulse"
+  ],
+  [
+    "33",
+    "Ineludible Encumbrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "40% snare (Matter)",
+    "14 & 12 per pulse"
+  ],
+  [
+    "40",
+    "Inevitable Encumbrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "45% snare (Matter)",
+    "16 & 14 per pulse"
+  ],
+  [
+    "50",
+    "Inescapable Encumbrance",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "350 radius",
+    "50% snare (Matter)",
+    "22 & 17 per pulse"
+  ],
+  [
+    "5",
+    "Demand of Quality",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "10% cast time increase",
+    "2 & 2 per pulse"
+  ],
+  [
+    "10",
+    "Demand of Integrity",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "15% cast time increase",
+    "4 & 4 per pulse"
+  ],
+  [
+    "14",
+    "Demand of Precision",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "20% cast time increase",
+    "6 & 5 per pulse"
+  ],
+  [
+    "21",
+    "Demand of Purity",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "30% cast time increase",
+    "8 & 8 per pulse"
+  ],
+  [
+    "26",
+    "Demand of Superiority",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "45% cast time increase",
+    "10 & 9 per pulse"
+  ],
+  [
+    "33",
+    "Demand of Supremacy",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "60% cast time increase",
+    "14 & 12 per pulse"
+  ],
+  [
+    "40",
+    "Demand of Transcendence",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "85% cast time increased",
+    "16 & 14 per pulse"
+  ],
+  [
+    "50",
+    "Demand of Perfection",
+    "Enemy",
+    "0s/5s/pulse/8s",
+    "250 radius",
+    "100% cast time increase",
+    "22 & 17 per pulse"
+  ],
+  [
+    "23",
+    "Teragani\u2019s Ire",
+    "Enemy",
+    "2s/15s/15s",
+    "350 range, 90 degree angle",
+    "5% (Resist Matter)",
+    "11"
+  ],
+  [
+    "36",
+    "Teragani\u2019s Fury",
+    "Enemy",
+    "2s/15s/15s",
+    "350 range, 90 degree angle",
+    "10% (Resist Matter)",
+    "16"
+  ],
+  [
+    "44",
+    "Teragani\u2019s Rage",
+    "Enemy",
+    "2s/15s/15s",
+    "350 range, 90 degree angle",
+    "15% (Resist Matter)",
+    "22"
+  ],
+  [
+    "20",
+    "Perfection of Method",
+    "Self",
+    "3s/30s/60s",
+    "",
+    "Bonus: 8.0 DPS",
+    "6"
+  ],
+  [
+    "30",
+    "Perfection of Style",
+    "Self",
+    "3s/30s/60s",
+    "",
+    "Bonus: 10.0 DPS",
+    "11"
+  ],
+  [
+    "40",
+    "Perfection of Form",
+    "Self",
+    "3s/30s/60s",
+    "",
+    "Bonus: 13.0 DPS",
+    "16"
+  ],
+  [
+    "50",
+    "Way of Perfection",
+    "Self",
+    "3s/30s/60s",
+    "",
+    "Bonus: 15.0 DPS",
+    "21"
+  ],
+  [
+    "1",
+    "Dulling Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "15 Endurance drained and returned (Body)",
+    "2%"
+  ],
+  [
+    "5",
+    "Taxing Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "30 Endurance drained and returned (Body)",
+    "6%"
+  ],
+  [
+    "8",
+    "Toiling Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "35 Endurance drained and returned (Body)",
+    "7%"
+  ],
+  [
+    "13",
+    "Tiring Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "40 Endurance drained and returned (Body)",
+    "8%"
+  ],
+  [
+    "17",
+    "Fatiguing Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "45 Endurance drained and returned (Body)",
+    "9%"
+  ],
+  [
+    "22",
+    "Weakening Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "50 Endurance drained and returned (Body)",
+    "10%"
+  ],
+  [
+    "28",
+    "Grueling Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "55 Endurance drained and returned (Body)",
+    "12%"
+  ],
+  [
+    "32",
+    "Enervating Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "65 Endurance drained and returned (Body)",
+    "14%"
+  ],
+  [
+    "37",
+    "Burdening Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "75 Endurance drained and returned (Body)",
+    "%"
+  ],
+  [
+    "43",
+    "Draining Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "85 Endurance drained and returned (Body)",
+    "18%"
+  ],
+  [
+    "48",
+    "Exhausting Grasp of Februstos",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "100 Endurance drained and returned (Body)",
+    "20%"
+  ],
+  [
+    "11",
+    "Nurizane\u2019s Blinding Wind",
+    "Enemy",
+    "3s/30s/30s",
+    "500 range",
+    "10% (Body)",
+    "11"
+  ],
+  [
+    "21",
+    "Nurizane\u2019s Blinding Gale",
+    "Enemy",
+    "3s/30s/30s",
+    "500 range",
+    "30% (Body)",
+    "14"
+  ],
+  [
+    "32",
+    "Nurizane\u2019s Blinding Cyclone",
+    "Enemy",
+    "3s/30s/30s",
+    "500 range",
+    "50% (Body)",
+    "17"
+  ],
+  [
+    "1",
+    "Test of Nerve",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "5 damage, 50% returned as power (Body)",
+    "2"
+  ],
+  [
+    "3",
+    "Test of Mind",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "13 damage, 50% returned as power (Body)",
+    "3"
+  ],
+  [
+    "7",
+    "Test of Spirit",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "29 damage, 50% returned as power (Body)",
+    "5"
+  ],
+  [
+    "12",
+    "Test of Mettle",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "45 damage, 50% returned as power (Body)",
+    "8"
+  ],
+  [
+    "18",
+    "Test of Strength",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "68 damage, 50% returned as power (Body)",
+    "11"
+  ],
+  [
+    "25",
+    "Test of Power",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "92 damage, 50% returned as power (Body)",
+    "15"
+  ],
+  [
+    "34",
+    "Test of Courage",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "124 damage, 50% returned as power (Body)",
+    "21"
+  ],
+  [
+    "44",
+    "Test of Honor",
+    "Enemy",
+    "3s/0/15s",
+    "500 range",
+    "159 damage, 50% returned as power (Body)",
+    "28"
+  ],
+  [
+    "3",
+    "Daring Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "12 (Crush)",
+    "2"
+  ],
+  [
+    "9",
+    "Hostile Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "36 (Crush)",
+    "4"
+  ],
+  [
+    "14",
+    "Encoraching Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "60 (Crush)",
+    "7"
+  ],
+  [
+    "19",
+    "Advancing Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "80 (Crush)",
+    "9"
+  ],
+  [
+    "24",
+    "Intrusive Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "100 (Crush)",
+    "12"
+  ],
+  [
+    "29",
+    "Intruding Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "120 (Crush)",
+    "14"
+  ],
+  [
+    "34",
+    "Pugnacious Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "135 (Crush)",
+    "17"
+  ],
+  [
+    "40",
+    "Destructive Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "0 (Crush)",
+    "20"
+  ],
+  [
+    "49",
+    "Assailing Blow",
+    "Enemy",
+    "3s/0/8s",
+    "250 range",
+    "200 (Crush)",
+    "24"
+  ],
+  [
+    "10",
+    "Veil of Uncertainty",
+    "Enemy",
+    "2s/20s/30s",
+    "500 range",
+    "10% Attack Speed Debuff (Body)",
+    "10"
+  ],
+  [
+    "18",
+    "Veil of Apprehension",
+    "Enemy",
+    "2s/20s/30s",
+    "500 range",
+    "18% Attack Speed Debuff (Body)",
+    "20"
+  ],
+  [
+    "27",
+    "Veil of Doubt",
+    "Enemy",
+    "2s/20s/30s",
+    "500 range",
+    "27% Attack Speed Debuff (Body)",
+    "30"
+  ],
+  [
+    "36",
+    "Veil of Hesitation",
+    "Enemy",
+    "2s/20s/30s",
+    "500 range",
+    "36% Attack Speed Debuff (Body)",
+    "40"
+  ],
+  [
+    "45",
+    "Veil of Indecision",
+    "Enemy",
+    "2s/20s/30s",
+    "500 range",
+    "45% Attack Speed Debuff (Body)",
+    "50"
+  ],
+  [
+    "25",
+    "Demand Respect",
+    "Enemy",
+    "3s/2s/15s",
+    "500 range",
+    "Silenced (Body)",
+    "6"
+  ],
+  [
+    "35",
+    "Demand Reverence",
+    "Enemy",
+    "3s/4s/15s",
+    "500 range",
+    "Silenced (Body)",
+    "11"
+  ],
+  [
+    "45",
+    "Demand Awe",
+    "Enemy",
+    "3s/6s/15s",
+    "500 range",
+    "Silenced (Body)",
+    "16"
+  ],
+  [
+    "30",
+    "Perizor\u2019s Disarming Strike",
+    "Enemy",
+    "3s/2s/15s",
+    "500 range",
+    "Disarmed (Body)",
+    "6"
+  ],
+  [
+    "40",
+    "Perizor\u2019s Disarming Bash",
+    "Enemy",
+    "3s/4s/15s",
+    "500 range",
+    "Disarmed (Body)",
+    "11"
+  ],
+  [
+    "50",
+    "Perizor\u2019s Disarming Blow",
+    "Enemy",
+    "3s/6s/15s",
+    "500 range",
+    "Disarmed (Body)",
+    "16"
+  ]
+]

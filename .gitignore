@@ -1,0 +1,47 @@
+# Local saves / credentials: the runtime and clean data ship as release assets.
+/runtime/
+**/account.txt
+**/.env
+**/.env.*
+**/*.sqlite3
+**/*.sqlite3.db
+**/*.db-wal
+**/*.db-shm
+**/*.db-journal
+**/*.pfx
+**/*.pem
+**/*.key
+**/user.dat
+# Generated output and local caches; do not ignore required route/resource files.
+**/bin/
+**/obj/
+# MSBuild/NuGet restore output (BaseIntermediateOutputPath points here).
+/source/server/build/
+**/TestResults/
+**/__pycache__/
+**/*.pyc
+**/*.log
+**/*.dmp
+**/*.trx
+**/*.nettrace
+**/developer-state/
+**/.vs/
+/.downloads/
+/playable/
+/artifacts/
+/tools/dotnet/
+/tools/nuget-feed/
+/tools/zig/
+/tools/NavmeshBuilder/
+/OFFLINE DAOC ASSET TOOL/
+# Release-only Sluaghbinder payloads are generated locally and uploaded as a
+# separate optional asset; they are not part of the editable source checkout.
+/tools/sluaghbinder/payload-v0.31b/
+/tools/sluaghbinder/patcher/
+
+# daoc-divided-linux build output and caches
+/dist/
+/.cache/
+
+# private working notes
+DEVNOTES.md

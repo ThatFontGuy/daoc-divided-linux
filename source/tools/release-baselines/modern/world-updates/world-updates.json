@@ -1,0 +1,41 @@
+{
+ "Format": 1,
+ "Steps": [
+  {
+   "Version": "0.38-dev2",
+   "From": "0.38-dev",
+   "File": "world-0.38-dev2.json",
+   "Sha256": "7B88D4E2A89A7706326DC5BB4F2A5ABA10EDFFC10721493BBD18C43BDBB438E3"
+  },
+  {
+   "Version": "0.38-dev3",
+   "From": "0.38-dev2",
+   "File": "world-0.38-dev3.json",
+   "Sha256": "73FBBDA96FECAE0C6B1132B35528BD5E78C28795DD4E10E0433830D498DAEFBF"
+  },
+  {
+   "Version": "0.38-dev4",
+   "From": "0.38-dev3",
+   "File": "world-0.38-dev4.json",
+   "Sha256": "F442A18A9C9B78274A8641DEEF5EDD8FB0F88B324341E5CFF8D6C27226730D44"
+  },
+  {
+   "Version": "0.38-dev5",
+   "From": "0.38-dev4",
+   "File": "world-0.38-dev5.json",
+   "Sha256": "DF033AB88C9094533873E46EFBFB3FBE4067934F2AF65EC018CCA72E6CF28ABB"
+  },
+  {
+   "Version": "0.38-dev6",
+   "From": "0.38-dev5",
+   "File": "world-0.38-dev6.json",
+   "Sha256": "1248DF938B564FA3435B3042042EA575F905A55E48DC9CFE35A0A8CA7593A645"
+  },
+  {
+   "Version": "0.38-dev7",
+   "From": "0.38-dev6",
+   "File": "world-0.38-dev7.json",
+   "Sha256": "6B998C10D86225AA457B520265D875C54232C934BED6489306D2C5E8D275B618"
+  }
+ ]
+}

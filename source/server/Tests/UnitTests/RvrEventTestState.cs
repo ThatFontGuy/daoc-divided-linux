@@ -1,0 +1,25 @@
+using System.Reflection;
+
+namespace DOL.GS.Tests;
+
+internal static class RvrEventTestState
+{
+    // Production callers supply partial candidate lists. Tests must explicitly
+    // isolate process-wide event state, not rely on missing rows cancelling
+    // every event created by the previous fixture.
+    internal static void Clear()
+    {
+        // These fixtures document the continuous (unstaged) assault; UT_StagedSiegeOct6 covers staging.
+        AutonomousRvrEventLayer.StagedAssault = false;
+        AutonomousRvrEventLayer.SiegeScheduling = false;
+        foreach (string name in new[] { "Events", "CarrierEvents", "CarrierTargets", "Cooldowns", "ReleasedForces", "SelectedKeeps", "SelectedRelics", "DefenseAlarms", "DefenseWarnings", "KeepCombatPressure" })
+        {
+            object value = typeof(AutonomousRvrEventLayer).GetField(name, BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+            value.GetType().GetMethod("Clear").Invoke(value, null);
+        }
+        typeof(AutonomousRvrEventLayer).GetField("_nextStragglerSweep", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, 0L);
+        typeof(AutonomousRvrEventLayer).GetField("_nextDefensePulse", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, 0L);
+        // Each fixture gets its own first live Expire pass (the throttle now lets the first one through).
+        typeof(AutonomousRvrEventLayer).GetField("_lastExpireTick", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, long.MinValue);
+    }
+}
