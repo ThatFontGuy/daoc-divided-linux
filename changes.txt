@@ -15,3 +15,7 @@ CHANGES (short tldr, newest first)
 - Battleground bracket bots (new): bots/bracket/*, admin `bracket` commands, TUI tab, Options keys bracket_bots_*; 3 small hooks in DividedRealms files (listed in DEVNOTES).
 - Client tab: Battleground fix toggle (classic zones.mpk, .orig backup). Found: battlegrounds need the classic zones.mpk in the client (the plain 1.130 client kicks you at entry). The battleground exit portal exists but has no graphic; an unneeded Portal Keeper NPC file was added and switched off (see DEVNOTES).
 - Live test OK: stock 1.130 client + real classes (Vampiir, Bainshee, Heretic, Valkyrie, Warlock, Mauler) + bots on the Linux build.
+- Bracket bots now get a full gear kit (weapons, shield, armor, jewelry) once at first login instead of buying gear; bots never lose item condition, so no repairs. Built, not yet tried in game.
+- Load governor: stops bot logins (and logs a few bots out) when the game loop falls under 90% of its tick rate or free memory is low; settings load_governor_* in the server properties. Unit tested and checked on the test server (hold and logout).
+- "No players, no bots": ordinary bots log out 120 s after the last player leaves the world and stay out until a player enters (option bots_only_with_players, on by default; bots_only_with_players_grace_seconds). Unit tested; checked on the test server with no player; logout/return with a real player not yet seen.
+- Admin screen: Client tab buttons now resize with their label ("Switch to original" was cut to "Switch to").

@@ -2587,6 +2587,7 @@ namespace DOL.GS
                 bool starterWeaponAdded = EnsureAutonomousStarterWeapon();
                 starterWeaponAdded |= BotRangedCombat.EnsureStarter(this);
                 starterWeaponAdded |= BotStarterInstruments.Ensure(this);
+                starterWeaponAdded |= EquipBracketKit(); // daoc-divided-linux: battleground bracket bots get gear once
                 RefreshItemBonuses();
                 if (starterWeaponAdded || !buildLocked)
                     AutonomousBotStatusPersistence.Queue(this, starterWeaponAdded);
@@ -4118,6 +4119,36 @@ namespace DOL.GS
                     EquipmentLevelCap = 0;
                 }
             }
+        }
+
+        // daoc-divided-linux: a bracket bot (see BracketBotService) is geared once, at its first login, in its saved inventory.
+        // Same generators as EquipBot, but the persistent inventory is kept. A filled torso slot means it already has its kit.
+        // Bots never lose item condition (only GamePlayer does in OnStrikeTarget), so they need no repairs.
+        private bool EquipBracketKit()
+        {
+            if (!BracketBotService.IsManaged(DatabaseID) || Inventory.GetItem(eInventorySlot.TorsoArmor) != null)
+                return false;
+
+            byte level = Level;
+            EquipmentLevelFloor = Math.Max(1, level - 10);
+            EquipmentLevelCap = level;
+            try
+            {
+                bool mayUseOffhand = BotSpec?.SpecType is eSpecType.DualWield or eSpecType.DualWieldAndShield or eSpecType.LeftAxe ||
+                                     BestShieldLevel > 0;
+                SetWeapons(mayUseOffhand);
+                if (mayUseOffhand)
+                    SetShield();
+                SetRanged();
+                SetArmor();
+                SetJewelry();
+            }
+            finally
+            {
+                EquipmentLevelFloor = 0;
+                EquipmentLevelCap = 0;
+            }
+            return Inventory.GetItem(eInventorySlot.TorsoArmor) != null;
         }
 
         // One-time promotion for helpers already present when their owner

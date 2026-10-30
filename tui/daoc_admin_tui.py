@@ -494,6 +494,13 @@ class DaocAdmin(App):
                 client_tools.save_settings(HOME, settings)
         return folder
 
+    @staticmethod
+    def set_button_label(button, label):
+        # A Button keeps its old width when the label changes, which cut "Switch to original" down to "Switch to".
+        button.label = label
+        button.styles.width = len(label) + 4
+        button.refresh(layout=True)
+
     def show_client(self):
         folder = self.query_one("#client-path", Input).value.strip()
         box = self.query_one("#client-info", Static)
@@ -506,7 +513,7 @@ class DaocAdmin(App):
             box.update(str(exc))
             return None
         toggle = self.query_one("#client-toggle", Button)
-        toggle.label = "Switch to original" if info["game"] == "patched" or info["layout"] == "patched" else "Switch to patched"
+        self.set_button_label(toggle, "Switch to original" if info["game"] == "patched" or info["layout"] == "patched" else "Switch to patched")
         toggle.disabled = not (info["can_patch"] or info["backups"])
         bg = client_tools.bgfix_state(folder)
         self.query_one("#bgfix-info", Static).update({
@@ -514,7 +521,7 @@ class DaocAdmin(App):
             "classic": "Battleground fix: ON (classic zone table; all four battlegrounds work)",
             "other": "Battleground fix: zones/zones.mpk is not a known file; it will not be changed",
             "missing": "Battleground fix: zones/zones.mpk not found"}[bg])
-        self.query_one("#bgfix-toggle", Button).label = "Switch battleground fix off" if bg == "classic" else "Switch battleground fix on"
+        self.set_button_label(self.query_one("#bgfix-toggle", Button), "Switch battleground fix off" if bg == "classic" else "Switch battleground fix on")
         self.query_one("#bgfix-toggle", Button).disabled = bg not in ("live", "classic")
         box.update(f"game.dll: {info['game']}   character_creation.xml: {info['layout']}   backups: {'yes' if info['backups'] else 'no'}\n{info['message']}")
         return info

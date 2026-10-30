@@ -33,7 +33,7 @@ public static class AutonomousBotSchedule
 
     public static bool BreaksOn => Properties.BOT_LIVING_BREAKS;
 
-    public static bool Active => CurrentMode != Mode.Off || BreaksOn;
+    public static bool Active => CurrentMode != Mode.Off || BreaksOn || BotPresence.Enabled; // daoc-divided-linux: BotPresence
 
     public static Mode Parse(string value) => (value ?? string.Empty).Trim().ToLowerInvariant() switch
     {
@@ -205,6 +205,8 @@ public static class AutonomousBotSchedule
             return false;
         if (RageQuitting(record.BotId, nowUtc))
             return false;
+        if (BotPresence.NoPlayers) // daoc-divided-linux: no player in the world, no bots
+            return false;
         Mode mode = CurrentMode;
         if (mode == Mode.Off && !BreaksOn)
             return true;
@@ -233,7 +235,7 @@ public static class AutonomousBotSchedule
     {
         Mode mode = CurrentMode;
         bool breaks = BreaksOn;
-        if (mode == Mode.Off && !breaks)
+        if (mode == Mode.Off && !breaks && !BotPresence.Enabled) // daoc-divided-linux: BotPresence
         {
             if (!BreakUntil.IsEmpty)
                 BreakUntil.Clear();

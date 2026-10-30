@@ -150,7 +150,7 @@ namespace DOL.GS
                 Gender = (int)identity.Gender,
                 Level = level,
                 Experience = GamePlayer.GetExperienceAmountForLevel(level - 1),
-                MoneyCopper = 500_000L, // 50 gold: the bots buy their own gear from merchants
+                MoneyCopper = 500_000L, // 50 gold pocket money; the gear comes from GameBot.EquipBracketKit at first login
                 IsAlive = true,
                 Health = 1,
                 Activity = "Bracket bot waiting for a player in " + bracket.Name,

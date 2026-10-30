@@ -127,6 +127,8 @@ public static class AutonomousPopulationController
             _populationSatisfied = missing <= 0;
             if (missing <= 0)
                 return;
+            if (LoadGovernor.HoldLogins) // daoc-divided-linux: the server is overloaded, no more bots for now
+                return;
 
             var realmLoad = new Dictionary<eRealm, int>(AutonomousBotRegistry.CountByRealm());
             foreach (OfflineWorldBotRecord pending in roster.Where(record => PendingSpawns.ContainsKey(record.BotId)))
