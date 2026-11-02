@@ -42,10 +42,15 @@ everything) and you start it with one command (step 2). The script does the setu
 - **Without distrobox:** it builds on your system. It needs `cmake`, `g++`, `make`, `curl`, `python3` and `xz` (it tells you the
   install command for your distro if one is missing). If you have no .NET 10 SDK it installs a **private one inside this folder**
   (`.cache/dotnet`). Its caches stay in `.cache/` too, apart from a 205-byte default `~/.nuget/NuGet/NuGet.Config` that the .NET tools may create. Build artifacts never end up in your home.
+- **`./build.sh --cross`:** for a host that can't do either of the above at all - macOS (can't produce linux-x64 binaries
+  natively), or a Linux box with no root to install `cmake`/`g++` (not everyone's server host gives them `sudo`). Needs only
+  `curl`, `python3` and `xz` - no system compiler, no root, ever. `cmake`, `ninja` and a `zig`-based cross-compiler come from pip
+  wheels, cached in `.cache/` like everything else. The result is identical to a native build; copy it to your actual Linux box
+  and run it there (building and playing on the exact same host is still simplest when you can).
 
-Force one or the other with `./build.sh --box` or `./build.sh --local`. You need about 8 GB of free disk space and internet for
-the first build. It downloads the world database, navmeshes and a few data files from the DividedRealms release (about 2.2 GB,
-cached in `.cache/`, so later builds reuse it), plus a Python for the admin screen.
+Force a specific mode with `./build.sh --box`, `./build.sh --local` or `./build.sh --cross`. You need about 8 GB of free disk
+space and internet for the first build. It downloads the world database, navmeshes and a few data files from the DividedRealms
+release (about 2.2 GB, cached in `.cache/`, so later builds reuse it), plus a Python for the admin screen.
 
 Output:
 

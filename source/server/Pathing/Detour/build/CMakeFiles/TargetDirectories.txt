@@ -1,7 +1,0 @@
-/home/deck/Dev/vscode/linuxdaoc/daoc-divided-linux/source/server/Pathing/Detour/build/CMakeFiles/Detour.dir
-/home/deck/Dev/vscode/linuxdaoc/daoc-divided-linux/source/server/Pathing/Detour/build/CMakeFiles/edit_cache.dir
-/home/deck/Dev/vscode/linuxdaoc/daoc-divided-linux/source/server/Pathing/Detour/build/CMakeFiles/rebuild_cache.dir
-/home/deck/Dev/vscode/linuxdaoc/daoc-divided-linux/source/server/Pathing/Detour/build/CMakeFiles/list_install_components.dir
-/home/deck/Dev/vscode/linuxdaoc/daoc-divided-linux/source/server/Pathing/Detour/build/CMakeFiles/install.dir
-/home/deck/Dev/vscode/linuxdaoc/daoc-divided-linux/source/server/Pathing/Detour/build/CMakeFiles/install/local.dir
-/home/deck/Dev/vscode/linuxdaoc/daoc-divided-linux/source/server/Pathing/Detour/build/CMakeFiles/install/strip.dir

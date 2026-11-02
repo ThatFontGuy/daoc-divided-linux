@@ -17,6 +17,10 @@
 **/obj/
 # MSBuild/NuGet restore output (BaseIntermediateOutputPath points here).
 /source/server/build/
+# cmake build output for the native pathing library (tools/build-release.sh regenerates this
+# fresh every build; a prior commit of it accidentally slipped past the pattern above, which
+# only covers the differently-pathed /source/server/build/).
+/source/server/Pathing/Detour/build/
 **/TestResults/
 **/__pycache__/
 **/*.pyc

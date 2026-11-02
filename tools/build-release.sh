@@ -7,21 +7,32 @@
 # it bundles the .NET runtime and a Python for the admin screen, and links the pathing library's C++ runtime
 # statically. World DB, navmeshes and the quest data files are DividedRealms' own, read out of its release zip by
 # tools/fetch-divided-release.py (cached in .cache/). No client files are included.
+#
+# CROSS_BUILD=1 (set by `build.sh --cross`) builds on a host with no system cmake/g++ and no root to install
+# them - macOS, or a Linux box with no sudo access (confirmed real need: the box this project's own server runs
+# on). Needs only curl, python3 and the .NET 10 SDK (installed the same way --local already does); cmake, ninja
+# and a zig-based cross-compiler come from pip wheels (tools/fetch-cross-toolchain.sh), and the bundled Python's
+# dependencies are resolved without executing the target's own linux-x64 binary (tools/fetch-python-cross.sh).
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC="$REPO/source/server"
 DOTNET="${DOTNET:-$(command -v dotnet || echo "$HOME/.dotnet/dotnet")}"
 VERSION="${VERSION:-$(git -C "$REPO" describe --tags --always 2>/dev/null || echo dev)}"
-RELEASE_TAG="${RELEASE_TAG:-v0.38-dev7-modern-test}"   # DividedRealms release the world data comes from
+RELEASE_TAG="${RELEASE_TAG:-v0.38-dev8-modern-test}"   # DividedRealms release the world data comes from
 OUT="$REPO/dist/daoc-divided"
+CROSS_BUILD="${CROSS_BUILD:-0}"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
 
 missing=()
 [[ -x $DOTNET ]] && "$DOTNET" --list-sdks 2>/dev/null | grep -q '^10\.' || missing+=(".NET 10 SDK")
-for c in cmake g++ curl python3; do command -v $c >/dev/null || missing+=("$c"); done
+if [[ $CROSS_BUILD == 1 ]]; then
+  for c in curl python3; do command -v $c >/dev/null || missing+=("$c"); done
+else
+  for c in cmake g++ curl python3; do command -v $c >/dev/null || missing+=("$c"); done
+fi
 if ((${#missing[@]})); then
-  echo "build-release: missing: ${missing[*]} (run tools/setup-build-box.sh on the host)" >&2
+  echo "build-release: missing: ${missing[*]} (run tools/setup-build-box.sh on the host, or build.sh --cross)" >&2
   exit 1
 fi
 
@@ -51,14 +62,26 @@ echo "== Publishing daoc-admin (command line)"
   -o "$OUT/bin" -nologo -v quiet -clp:ErrorsOnly
 
 echo "== Building native pathing library"
-cmake -S "$SRC/Pathing/Detour" -B "$SRC/Pathing/Detour/build" -DCMAKE_BUILD_TYPE=Release >/dev/null
-cmake --build "$SRC/Pathing/Detour/build" >/dev/null
+rm -rf "$SRC/Pathing/Detour/build"
+if [[ $CROSS_BUILD == 1 ]]; then
+  IFS='|' read -r CMAKE_BIN NINJA_BIN TOOLCHAIN < <(
+    "$REPO/tools/fetch-cross-toolchain.sh" "$REPO/.cache/cross-toolchain" | tail -1)
+else
+  CMAKE_BIN=cmake
+fi
+CMAKE_EXTRA_ARGS=()
+[[ $CROSS_BUILD == 1 ]] && CMAKE_EXTRA_ARGS=(-G Ninja -DCMAKE_MAKE_PROGRAM="$NINJA_BIN" -DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN")
+"$CMAKE_BIN" -S "$SRC/Pathing/Detour" -B "$SRC/Pathing/Detour/build" -DCMAKE_BUILD_TYPE=Release "${CMAKE_EXTRA_ARGS[@]}" >/dev/null
+"$CMAKE_BIN" --build "$SRC/Pathing/Detour/build" >/dev/null
 mkdir -p "$OUT/bin/lib"
 # LibraryImport("lib/Detour") has a folder in its name, so .NET on Linux probes lib/Detour.so.
 cp -L "$SRC/Pathing/Detour/build/libDetour.so" "$OUT/bin/lib/Detour.so"
 
 # A post-build step copies translations into source/server/Release/ only; publish needs them too.
-(cd "$SRC/GameServer/language" && find . -name '*.txt' -exec install -D -m 644 {} "$OUT/bin/languages/{}" \;)
+(cd "$SRC/GameServer/language" && find . -name '*.txt' -print0 | while IFS= read -r -d '' f; do
+  mkdir -p "$OUT/bin/languages/$(dirname "$f")"
+  cp -p "$f" "$OUT/bin/languages/$f"
+done)
 
 # Quest/marker data DividedRealms ships next to the server program (the server runs without them, with markers off).
 cp "$DATA"/server-data/*.json "$OUT/bin/"
@@ -82,7 +105,11 @@ cp "$REPO/deploy/README-release.md" "$OUT/README.md"
 echo "$VERSION (DividedRealms $RELEASE_TAG)" > "$OUT/VERSION"
 
 echo "== Admin screen (bundled Python + Textual)"
-"$REPO/tools/fetch-python.sh" "$OUT/python"
+if [[ $CROSS_BUILD == 1 ]]; then
+  "$REPO/tools/fetch-python-cross.sh" "$OUT/python" "$REPO"
+else
+  "$REPO/tools/fetch-python.sh" "$OUT/python"
+fi
 mkdir -p "$OUT/tui"
 cp "$REPO/tui/daoc_admin_tui.py" "$REPO/tui/client_tools.py" "$OUT/tui/"
 mkdir -p "$OUT/tui/classslots" "$OUT/tools"
