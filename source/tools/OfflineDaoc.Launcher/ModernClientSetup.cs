@@ -177,7 +177,11 @@ public static class ModernClientSetup
             if (patched.TryGetValue(relative, out var file))
                 File.WriteAllBytes(target, Apply(File.ReadAllBytes(path), file));
             else
-                File.Copy(path, target);
+                // overwrite: true - some filesystems (e.g. a cross-OS shared/network folder) can
+                // report the same destination path twice (case-folding, duplicate directory
+                // entries), which would otherwise throw here even though the destination was
+                // just freshly created a few lines above.
+                File.Copy(path, target, overwrite: true);
             done += new FileInfo(path).Length;
         }
         foreach (var file in patch.Files)
