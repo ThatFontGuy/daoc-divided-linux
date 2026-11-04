@@ -4455,6 +4455,14 @@ namespace DOL.GS
                 EquipmentLevelFloor = 0;
                 EquipmentLevelCap = 0;
             }
+            // Generated items default to AllowAdd=false (see EnsureAutonomousStarterWeapon). In a persistent inventory that makes
+            // every save fail with "not allowed to be added to Database" (thousands of log lines a minute) and the gear reload blank.
+            if (Inventory is BotInventory { IsPersistent: true })
+            {
+                foreach (DbInventoryItem item in Inventory.AllItems)
+                    if (item?.IUWrapper != null)
+                        item.IUWrapper.AllowAdd = true;
+            }
             return Inventory.GetItem(eInventorySlot.TorsoArmor) != null;
         }
 
