@@ -2758,10 +2758,12 @@ namespace DOL.GS
                     Inventory.LoadFromDatabase(InternalID);
                 else
                     Inventory.LoadInventory(InternalID, preparedInventory);
-                bool starterWeaponAdded = EnsureAutonomousStarterWeapon();
+                // daoc-divided-linux: battleground bracket bots get their gear kit once. It goes first, so the starter steps below
+                // see the filled weapon slots and skip (the other way round the kit's weapons hit occupied slots and were lost).
+                bool starterWeaponAdded = EquipBracketKit();
+                starterWeaponAdded |= EnsureAutonomousStarterWeapon();
                 starterWeaponAdded |= BotRangedCombat.EnsureStarter(this);
                 starterWeaponAdded |= BotStarterInstruments.Ensure(this);
-                starterWeaponAdded |= EquipBracketKit(); // daoc-divided-linux: battleground bracket bots get gear once
                 RefreshItemBonuses();
                 if (starterWeaponAdded || !buildLocked)
                     AutonomousBotStatusPersistence.Queue(this, starterWeaponAdded);

@@ -4,6 +4,7 @@ CHANGES (short tldr, newest first)
 - Merged upstream DividedRealms 084a433 (DR-dev-0.1a, the Fishing Update; 255 commits) on branch merge-dr-dev-0.1a. Without the Passport Desk, TestClient, Windows launcher changes. Server builds, 5692 tests pass (was 4887). Not yet run in game.
 - World updates dev8..DR-dev-0.1a (5 steps) apply to a copy of the dev7 world. build-release.sh now takes world-updates from source/tools/release-baselines instead of the release zip (the new zip is 1.2 GB with a different name; fetch-divided-release.py still fetches the dev7 world).
 - tools/fetch-divided-release.py finds the release zip and its top folder through the GitHub API (the dev7 zip is gone, and DR-dev-0.1 renamed it); build-release.sh now defaults to RELEASE_TAG=DR-dev-0.1a. Built dist/daoc-divided (988 MB tarball) from the merge; the old one is in dist/daoc-divided.backup-dev7. Not started yet.
+- Bracket bot gear kit fix: it ran after the starter-weapon steps, so its weapons hit occupied slots ("Destination slot is not empty (10)") and were lost. The kit now runs first. Found in the first in-game test of the merge; the bug predates the merge. Bots already created before the fix keep their starter weapon and need deleting and recreating.
 - Dropped our bot death-pose change (ShowDeathPose, IPacketLib SendPlayerRevive(GameLiving)); upstream fixes the same thing with ShowDeadToViewers/ShowStandingToViewers. Check in game that bot corpses lie down.
 - Still to check in game: bracket bot gear (armor condition now counts for bots), no-players-no-bots, load governor.
 
