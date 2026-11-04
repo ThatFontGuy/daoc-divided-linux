@@ -39,3 +39,7 @@ Find them with `grep -rn "daoc-divided-linux:" source`. Everything else we added
 Passport hooks removed from upstream files (re-check after each sync; `sync-upstream.sh` greps for them):
 `GameServer.cs` (`PassportDesk.Start`), `BaseServer.cs` (UPnP port line), `LotMarker.cs`, `CharacterCreateRequestHandler.cs`,
 `WorldInitRequestHandler.cs`, `Account.cs` (`PassportLock` checks).
+
+Also removed (Windows download and install scripts for old Offline DAoC releases, no use in a Linux build): the root
+`GET-OFFLINE-DAOC-*.cmd`, `Get-OfflineDAoC.ps1`, `older-versions/`, `package-files*/`, `READ ME FIRST.txt`,
+`RELEASE VERIFICATION.txt`, `START WORLD EDITOR.cmd` and `DEVELOPMENT - START HERE.md`. They are in `tools/upstream-exclude.txt`.
