@@ -6,9 +6,9 @@ This reads only those members, using HTTP range requests, and skips files alread
 Result in <cache>/<tag>/: world.sqlite, navmesh/, server-data/ (classic-quests.json etc.), world-updates/.
 Only the Python standard library is used.
 """
-import io, os, sys, urllib.request, zipfile
+import io, json, os, sys, urllib.request, zipfile
 
-REPO = 'https://github.com/rambodolphin13/DividedRealms/releases/download'
+REPO_SLUG = 'rambodolphin13/DividedRealms'
 
 
 class RangeFile(io.RawIOBase):
@@ -47,10 +47,15 @@ def main():
     tag = sys.argv[1]
     cache = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else '.cache/divided')
     out = os.path.join(cache, tag)
-    version = tag.split('-modern-test')[0].lstrip('v')
-    url = f'{REPO}/{tag}/DividedRealms-{version}-modern-test.zip'
+    # The release zip's name and top folder changed with DR-dev-0.1 ("...-modern-test.zip" before), so ask GitHub for it.
+    api = f'https://api.github.com/repos/{REPO_SLUG}/releases/tags/{tag}'
+    with urllib.request.urlopen(urllib.request.Request(api, headers={'User-Agent': 'daoc-divided-linux'})) as r:
+        assets = json.load(r)['assets']
+    asset = next(a for a in assets if a['name'].endswith('.zip'))
+    url = asset['browser_download_url']
     z = zipfile.ZipFile(io.BufferedReader(RangeFile(url), 1 << 20))
-    root = f'DividedRealms-{version}-modern-test/runtime/'
+    top = z.namelist()[0].split('/')[0]
+    root = f'{top}/runtime/'
     want = {
         root + 'data/world-clean.sqlite3.db': 'world.sqlite',
     }
@@ -60,7 +65,7 @@ def main():
                 want[i.filename] = dest + i.filename[len(prefix):]
     for name in ('classic-quests.json', 'classic-quest-guides.json', 'classic-otd.json'):
         want[root + 'server/' + name] = 'server-data/' + name
-    want[f'DividedRealms-{version}-modern-test/tools/connect-local1130.exe'] = 'tools/connect-local1130.exe'
+    want[f'{top}/tools/connect-local1130.exe'] = 'tools/connect-local1130.exe'
     info = {i.filename: i for i in z.infolist()}
     done = 0
     for src, rel in sorted(want.items()):

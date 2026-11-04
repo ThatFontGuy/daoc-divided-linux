@@ -13,7 +13,7 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC="$REPO/source/server"
 DOTNET="${DOTNET:-$(command -v dotnet || echo "$HOME/.dotnet/dotnet")}"
 VERSION="${VERSION:-$(git -C "$REPO" describe --tags --always 2>/dev/null || echo dev)}"
-RELEASE_TAG="${RELEASE_TAG:-v0.38-dev7-modern-test}"   # DividedRealms release the world data comes from
+RELEASE_TAG="${RELEASE_TAG:-DR-dev-0.1a}"   # DividedRealms release the world data comes from
 OUT="$REPO/dist/daoc-divided"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
 
@@ -66,7 +66,7 @@ cp "$DATA"/server-data/*.json "$OUT/bin/"
 echo "== World"
 mkdir -p "$OUT/defaults"
 cp "$DATA/world.sqlite" "$OUT/defaults/world.sqlite"
-mkdir -p "$OUT/world-updates" && cp "$REPO"/source/tools/release-baselines/modern/world-updates/* "$OUT/world-updates/"   # the steps in git match the server code; the zip only supplies the dev7 world to update from
+mkdir -p "$OUT/world-updates" && cp "$REPO"/source/tools/release-baselines/modern/world-updates/* "$OUT/world-updates/"   # the steps in git match the server code; the zip supplies the world and navmeshes
 
 # The server reads config/ next to its program and navmesh/ from its working directory (bin/).
 rm -rf "$OUT/bin/config"
