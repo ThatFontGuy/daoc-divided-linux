@@ -1017,7 +1017,22 @@ namespace DOL.GS
                 AutonomousBotVoices.OnBotDeath(this);
                 AutonomousLivingServer.OnBotDied(this, killer);
             }
+            ShowDeathPose(true);
             StartDeathRecoveryTimer();
+        }
+
+        // daoc-divided-linux: a retained bot corpse never played the client's fall animation (the PlayerDeath packet is
+        // ignored for NPC object ids). The client plays it when it is told to remove an NPC with no health, so remove the
+        // corpse from viewers' clients on death and send it again when it revives or releases.
+        private void ShowDeathPose(bool dead)
+        {
+            if (dead)
+            {
+                foreach (GamePlayer viewer in GetPlayersInRadius(WorldMgr.VISIBILITY_DISTANCE))
+                    viewer.Out.SendObjectRemove(this);
+            }
+            else if (ObjectState is eObjectState.Active)
+                ClientService.UpdateNpcForPlayers(this, false);
         }
 
         private void StartDeathRecoveryTimer()
@@ -1132,6 +1147,7 @@ namespace DOL.GS
                 Health = Math.Max(1, MaxHealth);
                 Mana = Math.Max(0, MaxMana);
                 Endurance = Math.Max(0, MaxEndurance);
+                ShowDeathPose(false);
                 IsReturningAfterRelease = false;
                 _stableReturnPlan = null;
                 EnterPlayerLedGroup(Owner);
@@ -1187,6 +1203,7 @@ namespace DOL.GS
             Health = Math.Max(1, MaxHealth / 3);
             Mana = Math.Max(0, MaxMana / 3);
             Endurance = Math.Max(0, MaxEndurance / 3);
+            ShowDeathPose(false);
             IsReturningAfterRelease = returnToParty;
             if (returnToParty) AutonomousRealmRaid.RejoinAfterRelease(this);
             _nextReturnRoleplayTick = GameLoop.GameLoopTime + Util.Random(45_000, 90_000);
@@ -1222,6 +1239,7 @@ namespace DOL.GS
 
         public void OnResurrectedBy(GameLiving caster)
         {
+            ShowDeathPose(false);
             AutonomousRealmRaid.ClearCorpseWait(this);
             _deathRecoveryTimer?.Stop();
             _deathRecoveryTimer = null;
