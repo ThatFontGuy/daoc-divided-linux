@@ -109,5 +109,7 @@ cp -r "$DATA"/navmesh/. "$OUT/navmesh/"
 
 tarball="$REPO/dist/daoc-divided-$VERSION-linux-x64.tar.gz"
 tar -C "$REPO/dist" "${KEEP[@]/#/--exclude=daoc-divided/}" -czf "$tarball" daoc-divided
+# Keep only the newest tarball: each build is ~1 GB and they pile up in dist/.
+find "$REPO/dist" -maxdepth 1 -name 'daoc-divided-*-linux-x64.tar.gz' ! -path "$tarball" -delete
 echo "== Done: $OUT"
 echo "         $tarball ($(du -h "$tarball" | cut -f1))"
