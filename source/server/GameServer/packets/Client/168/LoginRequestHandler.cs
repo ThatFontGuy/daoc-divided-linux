@@ -287,6 +287,16 @@ namespace DOL.GS.PacketHandler.Client.v168
 							return;
 						}
 
+						if (!HostPassword.AllowsNewAccount(GameServer.Instance.Configuration.HostPasswordHash, password, ipAddress))
+						{
+							if (Log.IsInfoEnabled)
+								Log.Info($"New account refused, not the host password: {username}:{ipAddress}");
+
+							client.Out.SendLoginDenied(eLoginError.IncorrectPassword);
+							success = false;
+							return;
+						}
+
 						if (string.IsNullOrEmpty(password))
 						{
 							client.Out.SendLoginDenied(eLoginError.InvalidAccount);

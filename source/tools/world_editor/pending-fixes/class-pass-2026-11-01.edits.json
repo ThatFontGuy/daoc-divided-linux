@@ -1,0 +1,4049 @@
+[
+ {
+  "table": "SpecXAbility",
+  "key": 409,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 273
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 408
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 411,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 274
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 410
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 275,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 272,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 271,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 319,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 3303,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 218,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 246
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 407,
+  "set": {
+   "SpecLevel": 1,
+   "AbilityLevel": 3
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 247
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 401,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 112
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 400
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 402,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 113
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 314,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 263
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 264,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 266
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 217,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 227
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 233,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 220
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 234,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 259
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 211,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 422,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 308,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 416,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 418,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 417
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 288,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 404,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 141
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 403
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 405,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 413,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 280
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 412
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 415,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 281
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 414
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 282,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 186,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 419,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 302,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 303,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 406,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 143
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 144,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 221,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 210
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 213
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 174,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 57,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 58,
+  "set": {
+   "AbilityLevel": 2
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 60,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 59,
+  "set": {
+   "SpecLevel": 1,
+   "AbilityLevel": 3
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 591
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 3564,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 3477
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 3563
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 317,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 252
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 316,
+  "set": {
+   "SpecLevel": 1,
+   "AbilityLevel": 3
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 73,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 72,
+  "set": {
+   "SpecLevel": 1
+  }
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 71
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 3
+  },
+  "key": 5460
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 4
+  },
+  "key": 5461
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 5
+  },
+  "key": 5462
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 5
+  },
+  "key": 5463
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 5
+  },
+  "key": 5464
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 5
+  },
+  "key": 5465
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 6
+  },
+  "key": 5466
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 6
+  },
+  "key": 5467
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 7
+  },
+  "key": 5468
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 7
+  },
+  "key": 5469
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 7
+  },
+  "key": 5470
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 7
+  },
+  "key": 5471
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 8
+  },
+  "key": 5472
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 8
+  },
+  "key": 5473
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 8
+  },
+  "key": 5474
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 8
+  },
+  "key": 5475
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 9
+  },
+  "key": 5476
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 10
+  },
+  "key": 5477
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 10
+  },
+  "key": 5478
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 12
+  },
+  "key": 5479
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 12
+  },
+  "key": 5480
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 12
+  },
+  "key": 5481
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 12
+  },
+  "key": 5482
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 13
+  },
+  "key": 5483
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 13
+  },
+  "key": 5484
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 13
+  },
+  "key": 5485
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 13
+  },
+  "key": 5486
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 33
+  },
+  "key": 5487
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 33
+  },
+  "key": 5488
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 60
+  },
+  "key": 5489
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 60
+  },
+  "key": 5490
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 60
+  },
+  "key": 5491
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 60
+  },
+  "key": 5492
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Slashing",
+   "AbilityLevel": 0,
+   "ClassId": 66
+  },
+  "key": 5493
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Crushing",
+   "AbilityLevel": 0,
+   "ClassId": 66
+  },
+  "key": 5494
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Thrusting",
+   "AbilityLevel": 0,
+   "ClassId": 66
+  },
+  "key": 5495
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 66
+  },
+  "key": 5496
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 23
+  },
+  "key": 5497
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 25
+  },
+  "key": 5498
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 25
+  },
+  "key": 5499
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 25
+  },
+  "key": 5500
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Swords",
+   "AbilityLevel": 0,
+   "ClassId": 26
+  },
+  "key": 5501
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 26
+  },
+  "key": 5502
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Swords",
+   "AbilityLevel": 0,
+   "ClassId": 27
+  },
+  "key": 5503
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 27
+  },
+  "key": 5504
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 27
+  },
+  "key": 5505
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 27
+  },
+  "key": 5506
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Swords",
+   "AbilityLevel": 0,
+   "ClassId": 28
+  },
+  "key": 5507
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 28
+  },
+  "key": 5508
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Swords",
+   "AbilityLevel": 0,
+   "ClassId": 29
+  },
+  "key": 5509
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 29
+  },
+  "key": 5510
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 29
+  },
+  "key": 5511
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 29
+  },
+  "key": 5512
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Swords",
+   "AbilityLevel": 0,
+   "ClassId": 30
+  },
+  "key": 5513
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 30
+  },
+  "key": 5514
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 30
+  },
+  "key": 5515
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 30
+  },
+  "key": 5516
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 34
+  },
+  "key": 5517
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 34
+  },
+  "key": 5518
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Swords",
+   "AbilityLevel": 0,
+   "ClassId": 59
+  },
+  "key": 5519
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 59
+  },
+  "key": 5520
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 59
+  },
+  "key": 5521
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 59
+  },
+  "key": 5522
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Swords",
+   "AbilityLevel": 0,
+   "ClassId": 61
+  },
+  "key": 5523
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Axes",
+   "AbilityLevel": 0,
+   "ClassId": 61
+  },
+  "key": 5524
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Hammers",
+   "AbilityLevel": 0,
+   "ClassId": 61
+  },
+  "key": 5525
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 61
+  },
+  "key": 5526
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 39
+  },
+  "key": 5527
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 39
+  },
+  "key": 5528
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 39
+  },
+  "key": 5529
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 39
+  },
+  "key": 5530
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 40
+  },
+  "key": 5531
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 40
+  },
+  "key": 5532
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 40
+  },
+  "key": 5533
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 40
+  },
+  "key": 5534
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 41
+  },
+  "key": 5535
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 41
+  },
+  "key": 5536
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 41
+  },
+  "key": 5537
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 41
+  },
+  "key": 5538
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 42
+  },
+  "key": 5539
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 42
+  },
+  "key": 5540
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 42
+  },
+  "key": 5541
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 42
+  },
+  "key": 5542
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 46
+  },
+  "key": 5543
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 47
+  },
+  "key": 5544
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 48
+  },
+  "key": 5545
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 49
+  },
+  "key": 5546
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 50
+  },
+  "key": 5547
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 55
+  },
+  "key": 5548
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 55
+  },
+  "key": 5549
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 55
+  },
+  "key": 5550
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 55
+  },
+  "key": 5551
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 56
+  },
+  "key": 5552
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 56
+  },
+  "key": 5553
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 56
+  },
+  "key": 5554
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 56
+  },
+  "key": 5555
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 58
+  },
+  "key": 5556
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 58
+  },
+  "key": 5557
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 58
+  },
+  "key": 5558
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Staves",
+   "AbilityLevel": 0,
+   "ClassId": 58
+  },
+  "key": 5559
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blades",
+   "AbilityLevel": 0,
+   "ClassId": 62
+  },
+  "key": 5560
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Blunt",
+   "AbilityLevel": 0,
+   "ClassId": 62
+  },
+  "key": 5561
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Weaponry: Piercing",
+   "AbilityLevel": 0,
+   "ClassId": 62
+  },
+  "key": 5562
+ },
+ {
+  "table": "SpecXAbility",
+  "insert": {
+   "Spec": "CharacterCareer",
+   "SpecLevel": 1,
+   "AbilityKey": "Shield",
+   "AbilityLevel": 1,
+   "ClassId": 62
+  },
+  "key": 5563
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 29,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 113,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 114,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 234,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 247,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 318,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 342,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 351,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 364,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 258,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 333,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 334,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 335,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 354,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "key": 344,
+  "set": {
+   "LevelAcquired": 1
+  }
+ },
+ {
+  "table": "ClassXSpecialization",
+  "insert": {
+   "ClassID": 46,
+   "SpecKeyName": "Shields",
+   "LevelAcquired": -6
+  },
+  "key": 878
+ },
+ {
+  "table": "SpecXAbility",
+  "key": 3574,
+  "set": {
+   "AbilityKey": "QuickCast"
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3300,
+  "set": {
+   "ID": 3300
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3301,
+  "set": {
+   "ID": 3301,
+   "OpeningRequirementValue": 3300
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3302,
+  "set": {
+   "ID": 3302
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3303,
+  "set": {
+   "ID": 3303
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3304,
+  "set": {
+   "ID": 3304
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3305,
+  "set": {
+   "ID": 3305,
+   "OpeningRequirementValue": 3302
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3306,
+  "set": {
+   "ID": 3306
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3307,
+  "set": {
+   "ID": 3307,
+   "OpeningRequirementValue": 3304
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3308,
+  "set": {
+   "ID": 3308
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3309,
+  "set": {
+   "ID": 3309
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3310,
+  "set": {
+   "ID": 3310
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3311,
+  "set": {
+   "ID": 3311
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3312,
+  "set": {
+   "ID": 3312
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3313,
+  "set": {
+   "ID": 3313,
+   "OpeningRequirementValue": 3306
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3314,
+  "set": {
+   "ID": 3314,
+   "OpeningRequirementValue": 3311
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3315,
+  "set": {
+   "ID": 3315,
+   "OpeningRequirementValue": 3312
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3316,
+  "set": {
+   "ID": 3316
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3317,
+  "set": {
+   "ID": 3317
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3318,
+  "set": {
+   "ID": 3318
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3319,
+  "set": {
+   "ID": 3319
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3320,
+  "set": {
+   "ID": 3320
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3321,
+  "set": {
+   "ID": 3321
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3322,
+  "set": {
+   "ID": 3322
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3323,
+  "set": {
+   "ID": 3323,
+   "OpeningRequirementValue": 3322
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3324,
+  "set": {
+   "ID": 3324
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3325,
+  "set": {
+   "ID": 3325
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3326,
+  "set": {
+   "ID": 3326
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3327,
+  "set": {
+   "ID": 3327
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3328,
+  "set": {
+   "ID": 3328
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3329,
+  "set": {
+   "ID": 3329
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3330,
+  "set": {
+   "ID": 3330,
+   "OpeningRequirementValue": 3324
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3331,
+  "set": {
+   "ID": 3331,
+   "OpeningRequirementValue": 3328
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3332,
+  "set": {
+   "ID": 3332
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3333,
+  "set": {
+   "ID": 3333
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3334,
+  "set": {
+   "ID": 3334
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3335,
+  "set": {
+   "ID": 3335
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3336,
+  "set": {
+   "ID": 3336
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3337,
+  "set": {
+   "ID": 3337
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3338,
+  "set": {
+   "ID": 3338
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3339,
+  "set": {
+   "ID": 3339
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3340,
+  "set": {
+   "ID": 3340
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3341,
+  "set": {
+   "ID": 3341
+  }
+ },
+ {
+  "table": "Style",
+  "key": 3342,
+  "set": {
+   "ID": 3342
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6600,
+  "set": {
+   "ID": 6600
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6601,
+  "set": {
+   "ID": 6601,
+   "OpeningRequirementValue": 6600
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6602,
+  "set": {
+   "ID": 6602
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6603,
+  "set": {
+   "ID": 6603
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6604,
+  "set": {
+   "ID": 6604
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6605,
+  "set": {
+   "ID": 6605,
+   "OpeningRequirementValue": 6603
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6606,
+  "set": {
+   "ID": 6606
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6607,
+  "set": {
+   "ID": 6607
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6608,
+  "set": {
+   "ID": 6608,
+   "OpeningRequirementValue": 6604
+  }
+ },
+ {
+  "table": "Style",
+  "key": 6609,
+  "set": {
+   "ID": 6609,
+   "OpeningRequirementValue": 6607
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5801-69131",
+  "set": {
+   "StyleID": 419
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5802-69132",
+  "set": {
+   "StyleID": 420
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5803-69133",
+  "set": {
+   "StyleID": 421
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5804-69134",
+  "set": {
+   "StyleID": 422
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5806-69135",
+  "set": {
+   "StyleID": 425
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5809-69136",
+  "set": {
+   "StyleID": 427
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5810-69137",
+  "set": {
+   "StyleID": 428
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5811-69138",
+  "set": {
+   "StyleID": 429
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5812-69139",
+  "set": {
+   "StyleID": 430
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5813-69140",
+  "set": {
+   "StyleID": 431
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5815-69141",
+  "set": {
+   "StyleID": 434
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5816-69142",
+  "set": {
+   "StyleID": 433
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5818-69143",
+  "set": {
+   "StyleID": 436
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "local-vampiir-test-v1-style-5821-69144",
+  "set": {
+   "StyleID": 439
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 65106
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 65107
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 65108
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77250
+  },
+  "set": {
+   "Power": 4
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77252
+  },
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77254
+  },
+  "set": {
+   "Power": 4
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77256
+  },
+  "set": {
+   "Power": 18
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77258
+  },
+  "set": {
+   "Power": 24
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77309
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77310
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77316
+  },
+  "set": {
+   "Power": 32
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77317
+  },
+  "set": {
+   "Power": 41
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77318
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77319
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77320
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77321
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77322
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77323
+  },
+  "set": {
+   "Power": -30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77324
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77325
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77326
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77327
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77328
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77463
+  },
+  "set": {
+   "Power": 4
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77464
+  },
+  "set": {
+   "Power": 9
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77465
+  },
+  "set": {
+   "Power": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77466
+  },
+  "set": {
+   "Power": 21
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77467
+  },
+  "set": {
+   "Power": 28
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77468
+  },
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77469
+  },
+  "set": {
+   "Power": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77470
+  },
+  "set": {
+   "Power": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77471
+  },
+  "set": {
+   "Power": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77505
+  },
+  "set": {
+   "Power": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77506
+  },
+  "set": {
+   "Power": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77507
+  },
+  "set": {
+   "Power": 35
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77508
+  },
+  "set": {
+   "Power": 50
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77509
+  },
+  "set": {
+   "Power": 62
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77510
+  },
+  "set": {
+   "Power": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77511
+  },
+  "set": {
+   "Power": 21
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77512
+  },
+  "set": {
+   "Power": 29
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77513
+  },
+  "set": {
+   "Power": 38
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77514
+  },
+  "set": {
+   "Power": 47
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77515
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77516
+  },
+  "set": {
+   "Power": 32
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77517
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77518
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77519
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77520
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77521
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77522
+  },
+  "set": {
+   "Power": -30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77524
+  },
+  "set": {
+   "Power": -30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77526
+  },
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77527
+  },
+  "set": {
+   "Power": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77528
+  },
+  "set": {
+   "Power": 18
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77529
+  },
+  "set": {
+   "Power": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77530
+  },
+  "set": {
+   "Power": 28
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77531
+  },
+  "set": {
+   "Power": 31
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77532
+  },
+  "set": {
+   "Power": 57
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77533
+  },
+  "set": {
+   "Power": 77
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77534
+  },
+  "set": {
+   "Power": 6
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77535
+  },
+  "set": {
+   "Power": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77536
+  },
+  "set": {
+   "Power": 17
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77537
+  },
+  "set": {
+   "Power": 22
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77538
+  },
+  "set": {
+   "Power": 29
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77539
+  },
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77540
+  },
+  "set": {
+   "Power": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77541
+  },
+  "set": {
+   "Power": 18
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77542
+  },
+  "set": {
+   "Power": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77543
+  },
+  "set": {
+   "Power": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77544
+  },
+  "set": {
+   "Power": 31
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77545
+  },
+  "set": {
+   "Power": -6
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77550
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77552
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77554
+  },
+  "set": {
+   "Power": 2
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77555
+  },
+  "set": {
+   "Power": 6
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77556
+  },
+  "set": {
+   "Power": 9
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77557
+  },
+  "set": {
+   "Power": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77558
+  },
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77559
+  },
+  "set": {
+   "Power": 20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77560
+  },
+  "set": {
+   "Power": 27
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77561
+  },
+  "set": {
+   "Power": 33
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77562
+  },
+  "set": {
+   "Power": 19
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77563
+  },
+  "set": {
+   "Power": 26
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77567
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77568
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77569
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77570
+  },
+  "set": {
+   "Power": 19
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77571
+  },
+  "set": {
+   "Power": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77572
+  },
+  "set": {
+   "Power": 33
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77574
+  },
+  "set": {
+   "Power": 9
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77576
+  },
+  "set": {
+   "Power": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77578
+  },
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77580
+  },
+  "set": {
+   "Power": 19
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77582
+  },
+  "set": {
+   "Power": 24
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77584
+  },
+  "set": {
+   "Power": 32
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77586
+  },
+  "set": {
+   "Power": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77587
+  },
+  "set": {
+   "Power": 16
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77588
+  },
+  "set": {
+   "Power": 22
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77589
+  },
+  "set": {
+   "Power": 28
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77590
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77592
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77594
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77596
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77598
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77600
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77602
+  },
+  "set": {
+   "Power": 19
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77603
+  },
+  "set": {
+   "Power": 32
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77604
+  },
+  "set": {
+   "Power": 41
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77605
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77606
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77607
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77608
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77609
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77611
+  },
+  "set": {
+   "Power": 57
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77612
+  },
+  "set": {
+   "Power": 77
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77613
+  },
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77614
+  },
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77615
+  },
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77616
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77617
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77618
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77619
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77620
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77621
+  },
+  "set": {
+   "Power": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77622
+  },
+  "set": {
+   "Power": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77624
+  },
+  "set": {
+   "Power": 57
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77625
+  },
+  "set": {
+   "Power": 77
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77626
+  },
+  "set": {
+   "Power": 9
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77627
+  },
+  "set": {
+   "Power": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77628
+  },
+  "set": {
+   "Power": 18
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77629
+  },
+  "set": {
+   "Power": 22
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77630
+  },
+  "set": {
+   "Power": 32
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77631
+  },
+  "set": {
+   "Power": 6
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77632
+  },
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77633
+  },
+  "set": {
+   "Power": 26
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77634
+  },
+  "set": {
+   "Power": 35
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77635
+  },
+  "set": {
+   "Power": 35
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77636
+  },
+  "set": {
+   "Power": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77637
+  },
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77638
+  },
+  "set": {
+   "Power": 20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77639
+  },
+  "set": {
+   "Power": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77640
+  },
+  "set": {
+   "Power": 9
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77641
+  },
+  "set": {
+   "Power": 16
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77642
+  },
+  "set": {
+   "Power": 63
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77643
+  },
+  "set": {
+   "Power": 82
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77644
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77645
+  },
+  "set": {
+   "Power": -30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77646
+  },
+  "set": {
+   "Power": 9
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77647
+  },
+  "set": {
+   "Power": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77648
+  },
+  "set": {
+   "Power": 19
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77649
+  },
+  "set": {
+   "Power": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77653
+  },
+  "set": {
+   "Power": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77654
+  },
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77655
+  },
+  "set": {
+   "Power": 20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77656
+  },
+  "set": {
+   "Power": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77657
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77658
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77659
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77660
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77661
+  },
+  "set": {
+   "Power": -6
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77664
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77665
+  },
+  "set": {
+   "Power": 24
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77666
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77667
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77668
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77669
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77670
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77671
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77672
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77684
+  },
+  "set": {
+   "Power": 19
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77685
+  },
+  "set": {
+   "Power": 32
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77686
+  },
+  "set": {
+   "Power": 41
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77687
+  },
+  "set": {
+   "Power": -15
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77688
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77689
+  },
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77691
+  },
+  "set": {
+   "Power": 24
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77692
+  },
+  "set": {
+   "Power": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77693
+  },
+  "set": {
+   "Power": 60
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77694
+  },
+  "set": {
+   "Power": 80
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77695
+  },
+  "set": {
+   "Power": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77696
+  },
+  "set": {
+   "Power": 18
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77699
+  },
+  "set": {
+   "Power": -8
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77700
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77701
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77702
+  },
+  "set": {
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77703
+  },
+  "set": {
+   "Power": -20
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77704
+  },
+  "set": {
+   "Power": -30
+  }
+ },
+ {
+  "table": "Spell",
+  "where": {
+   "SpellID": 77709
+  },
+  "set": {
+   "Power": 31
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1002",
+  "set": {
+   "Value": 150
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1467",
+  "set": {
+   "Value": 150
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5020",
+  "set": {
+   "Value": 150
+  }
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 424672,
+   "YPos": 445035,
+   "ZPos": 5952,
+   "Heading": 3929,
+   "Region": 181,
+   "MinVersion": 0,
+   "RealmID": 3,
+   "RaceID": 15,
+   "ClassID": 50,
+   "ClientRegionID": 0
+  },
+  "key": 683
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 803377,
+   "YPos": 726984,
+   "ZPos": 4680,
+   "Heading": 1257,
+   "Region": 100,
+   "MinVersion": 0,
+   "RealmID": 2,
+   "RaceID": 7,
+   "ClassID": 23,
+   "ClientRegionID": 0
+  },
+  "key": 684
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 424672,
+   "YPos": 445035,
+   "ZPos": 5952,
+   "Heading": 3929,
+   "Region": 181,
+   "MinVersion": 0,
+   "RealmID": 3,
+   "RaceID": 15,
+   "ClassID": 45,
+   "ClientRegionID": 0
+  },
+  "key": 685
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 346334,
+   "YPos": 490660,
+   "ZPos": 5318,
+   "Heading": 3049,
+   "Region": 200,
+   "MinVersion": 0,
+   "RealmID": 3,
+   "RaceID": 12,
+   "ClassID": 43,
+   "ClientRegionID": 0
+  },
+  "key": 686
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 296475,
+   "YPos": 641484,
+   "ZPos": 4848,
+   "Heading": 2468,
+   "Region": 200,
+   "MinVersion": 0,
+   "RealmID": 3,
+   "RaceID": 9,
+   "ClassID": 49,
+   "ClientRegionID": 0
+  },
+  "key": 687
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 347567,
+   "YPos": 491289,
+   "ZPos": 5235,
+   "Heading": 2978,
+   "Region": 200,
+   "MinVersion": 0,
+   "RealmID": 3,
+   "RaceID": 11,
+   "ClassID": 55,
+   "ClientRegionID": 0
+  },
+  "key": 688
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 535324,
+   "YPos": 549084,
+   "ZPos": 4800,
+   "Heading": 3094,
+   "Region": 51,
+   "MinVersion": 0,
+   "RealmID": 1,
+   "RaceID": 13,
+   "ClassID": 7,
+   "ClientRegionID": 0
+  },
+  "key": 689
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 508413,
+   "YPos": 476161,
+   "ZPos": 2304,
+   "Heading": 3087,
+   "Region": 1,
+   "MinVersion": 0,
+   "RealmID": 1,
+   "RaceID": 3,
+   "ClassID": 9,
+   "ClientRegionID": 0
+  },
+  "key": 690
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 472986,
+   "YPos": 628190,
+   "ZPos": 2048,
+   "Heading": 405,
+   "Region": 1,
+   "MinVersion": 0,
+   "RealmID": 1,
+   "RaceID": 2,
+   "ClassID": 10,
+   "ClientRegionID": 0
+  },
+  "key": 691
+ },
+ {
+  "table": "StartupLocation",
+  "insert": {
+   "XPos": 508413,
+   "YPos": 476161,
+   "ZPos": 2304,
+   "Heading": 3087,
+   "Region": 1,
+   "MinVersion": 0,
+   "RealmID": 1,
+   "RaceID": 3,
+   "ClassID": 10,
+   "ClientRegionID": 0
+  },
+  "key": 692
+ }
+]

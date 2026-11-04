@@ -467,7 +467,9 @@ namespace DOL.GS.PacketHandler.Client.v168
             }
 
             // Is class disabled ?
-            List<string> disabledClasses = Util.SplitCSV(Properties.DISABLED_CLASSES);
+            // Ranges such as "58-62" are expanded (owner 2026-10-30: they never matched, so the Catacombs classes and the
+            // races 16-21 could still be made on the original client while the new client already hid them).
+            List<string> disabledClasses = Util.SplitCSV(Properties.DISABLED_CLASSES ?? string.Empty, true);
             var occurences =
                 (from j in disabledClasses
                     where j == ch.Class.ToString()
@@ -484,7 +486,7 @@ namespace DOL.GS.PacketHandler.Client.v168
 
             // check if race disabled
             // Stormforged is open to every Midgard race; its own EligibleRaces list still applies.
-            List<string> disabledRaces = Util.SplitCSV(Properties.DISABLED_RACES);
+            List<string> disabledRaces = Util.SplitCSV(Properties.DISABLED_RACES ?? string.Empty, true);
             occurences =
                 (from j in disabledRaces
                     where j == ch.Race.ToString()

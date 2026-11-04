@@ -1,0 +1,110 @@
+[
+  {
+    "table": "ZonePoint",
+    "insert": {
+      "ZonePoint_ID": "DF MIDBOSS EXIT ALB",
+      "Id": 71,
+      "Realm": 1,
+      "SourceRegion": 249,
+      "SourceX": 16127,
+      "SourceY": 16077,
+      "SourceZ": 17772,
+      "TargetRegion": 1,
+      "TargetX": 599195,
+      "TargetY": 536170,
+      "TargetZ": 2960,
+      "TargetHeading": 259,
+      "ClassType": ""
+    }
+  },
+  {
+    "table": "ZonePoint",
+    "insert": {
+      "ZonePoint_ID": "DF MIDBOSS EXIT MID",
+      "Id": 71,
+      "Realm": 2,
+      "SourceRegion": 249,
+      "SourceX": 16127,
+      "SourceY": 16077,
+      "SourceZ": 17772,
+      "TargetRegion": 100,
+      "TargetX": 760782,
+      "TargetY": 700723,
+      "TargetZ": 6292,
+      "TargetHeading": 7727,
+      "ClassType": ""
+    }
+  },
+  {
+    "table": "ZonePoint",
+    "insert": {
+      "ZonePoint_ID": "DF MIDBOSS EXIT HIB",
+      "Id": 71,
+      "Realm": 3,
+      "SourceRegion": 249,
+      "SourceX": 16127,
+      "SourceY": 16077,
+      "SourceZ": 17772,
+      "TargetRegion": 200,
+      "TargetX": 324957,
+      "TargetY": 433427,
+      "TargetZ": 6317,
+      "TargetHeading": 180,
+      "ClassType": ""
+    }
+  },
+  {
+    "table": "ZonePoint",
+    "insert": {
+      "ZonePoint_ID": "DF LORD EXIT ALB",
+      "Id": 77,
+      "Realm": 1,
+      "SourceRegion": 249,
+      "SourceX": 40446,
+      "SourceY": 44337,
+      "SourceZ": 15469,
+      "TargetRegion": 1,
+      "TargetX": 599195,
+      "TargetY": 536170,
+      "TargetZ": 2960,
+      "TargetHeading": 259,
+      "ClassType": ""
+    }
+  },
+  {
+    "table": "ZonePoint",
+    "insert": {
+      "ZonePoint_ID": "DF LORD EXIT MID",
+      "Id": 77,
+      "Realm": 2,
+      "SourceRegion": 249,
+      "SourceX": 40446,
+      "SourceY": 44337,
+      "SourceZ": 15469,
+      "TargetRegion": 100,
+      "TargetX": 760782,
+      "TargetY": 700723,
+      "TargetZ": 6292,
+      "TargetHeading": 7727,
+      "ClassType": ""
+    }
+  },
+  {
+    "table": "ZonePoint",
+    "insert": {
+      "ZonePoint_ID": "DF LORD EXIT HIB",
+      "Id": 77,
+      "Realm": 3,
+      "SourceRegion": 249,
+      "SourceX": 40446,
+      "SourceY": 44337,
+      "SourceZ": 15469,
+      "TargetRegion": 200,
+      "TargetX": 324957,
+      "TargetY": 433427,
+      "TargetZ": 6317,
+      "TargetHeading": 180,
+      "ClassType": ""
+    }
+  }
+]

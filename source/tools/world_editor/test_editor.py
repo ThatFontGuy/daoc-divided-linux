@@ -341,7 +341,7 @@ class EditorTests(unittest.TestCase):
         self.ed.rollback(result['id'])
         self.assertIsNone(self.ed.merchant_list('List')['currency'])
 
-    def test_custom_look_install_and_uninstall(self):
+    def look_client(self):
         try:
             python = self.ed.render_python()
         except ValueError:
@@ -360,10 +360,14 @@ class EditorTests(unittest.TestCase):
         import archive
         (self.client/'gamedata.mpk').write_bytes(archive.write(b'gamedata.mpk',[archive.Entry('monsters.csv',monsters),
             archive.Entry('monnifs.csv',monnifs),archive.Entry('skins.csv',skins)]))
-        original = (self.client/'gamedata.mpk').read_bytes()
         png = 'data:image/png;base64,' + subprocess.run([python,'-c','import io,base64;from PIL import Image;b=io.BytesIO();'
             'Image.new("RGB",(4,4),(0,150,0)).save(b,format="PNG");print(base64.b64encode(b.getvalue()).decode())'],
             check=True,capture_output=True,text=True).stdout.strip()
+        return archive, png
+
+    def test_custom_look_install_and_uninstall(self):
+        archive, png = self.look_client()
+        original = (self.client/'gamedata.mpk').read_bytes()
         self.assertEqual([m['id'] for m in self.ed.models()],[5,9])
         self.assertIn('png',self.ed.assets('template','--model','5')['3'])
         with self.assertRaises(ValueError):
@@ -380,6 +384,86 @@ class EditorTests(unittest.TestCase):
         self.ed.uninstall_look(look['id'])
         self.assertEqual((self.client/'gamedata.mpk').read_bytes(),original)
         self.assertFalse((self.client/'figures/skins/skin099.mpk').exists())
+        self.assertEqual(self.ed.looks(),[])
+
+    def test_custom_looks_uninstall_in_any_order(self):
+        archive, png = self.look_client()
+        original = (self.client/'gamedata.mpk').read_bytes()
+        first = self.ed.install_look({'model':5,'name':'First','images':{'3':png}})
+        second = self.ed.install_look({'model':9,'name':'Second','images':{'3':png}})
+        looks = {look['name']:look['id'] for look in self.ed.looks()}
+        self.ed.uninstall_look(looks['First'])
+        text = {e.name:e.data.decode('latin1') for e in archive.read((self.client/'gamedata.mpk').read_bytes())[1]}
+        self.assertNotIn(f'{first["model"]},First,',text['monsters.csv'])
+        self.assertIn(f'{second["model"]},Second,',text['monsters.csv'])
+        names = [e.name for e in archive.read((self.client/'figures/skins/skin099.mpk').read_bytes())[1]]
+        self.assertEqual(names,['cust_second_body.dds'])
+        self.ed.uninstall_look(looks['Second'])
+        self.assertEqual((self.client/'gamedata.mpk').read_bytes(),original)
+        self.assertFalse((self.client/'figures/skins/skin099.mpk').exists())
+
+    def test_custom_look_uninstall_refuses_a_look_built_on_it(self):
+        archive, png = self.look_client()
+        import base64
+        nif = 'data:application/octet-stream;base64,'+base64.b64encode(b'NetImmerse File Format, test').decode()
+        first = self.ed.install_look({'model':5,'name':'Base Look','images':{'3':png},'nif':nif})
+        self.ed.install_look({'model':first['model'],'name':'Built On','images':{'3':png}})
+        looks = {look['name']:look['id'] for look in self.ed.looks()}
+        before = (self.client/'gamedata.mpk').read_bytes()
+        with self.assertRaisesRegex(ValueError,'still uses the NIF'):
+            self.ed.uninstall_look(looks['Base Look'])
+        self.assertEqual((self.client/'gamedata.mpk').read_bytes(),before)
+        self.ed.uninstall_look(looks['Built On'])
+        self.ed.uninstall_look(looks['Base Look'])
+        self.assertFalse((self.client/'figures/cust_base_look.nif').exists())
+
+    def test_client_table_sizes_come_from_game_dll(self):
+        try:
+            python = self.ed.render_python()
+        except ValueError:
+            self.skipTest('No Python with Pillow for the custom-look worker')
+        import subprocess
+        getter = bytes.fromhex('85c07c13')+b'\x3d'+(5500).to_bytes(4,'little')+bytes.fromhex('7d0c69c0c4000000')
+        getter += bytes.fromhex('85c07c13')+b'\x3d'+(32768).to_bytes(4,'little')+bytes.fromhex('7d0c69c0d0010000')
+        (self.client/'game.dll').write_bytes(b'\0'*16+getter)
+        script = ('import sys;sys.path.insert(0,sys.argv[1]);import asset_worker as w;'
+                  'print(w.table_caps(sys.argv[2]))')
+        out = subprocess.run([python,'-c',script,str(Path(__file__).parent),str(self.client)],check=True,capture_output=True,text=True).stdout
+        self.assertEqual(out.strip(),"{'models': 32768, 'objects': 5500}")
+
+    def fixture_client(self):
+        archive, _ = self.look_client()
+        rows = (b'Fixtures\r\nID,NIF #,Textual Name,X,Y,Z,A,Scale,Collide,Radius,Animate,Ground,Flip,Cave,Unique Id\r\n'
+                b'1,4,Keep,1000,2000,500,90,100,0,400,0,0,0,0,11\r\n2,5,Pine,3000,4000,0,0,100,0,50,0,1,0,0,12\r\n')
+        folder = self.client/'zones/zone031'
+        folder.mkdir(parents=True,exist_ok=True)
+        (folder/'csv031.mpk').write_bytes(archive.write(b'csv031.mpk',[archive.Entry('fixtures.csv',rows),archive.Entry('nifs.csv',b'x')]))
+        (folder/'dat031.mpk').write_bytes(archive.write(b'dat031.mpk',[archive.Entry('fixtures.csv',b'stale')]))
+        return archive,folder/'csv031.mpk'
+
+    def test_client_buildings_move_and_undo(self):
+        archive,path = self.fixture_client()
+        original = path.read_bytes()
+        rows = {r['id']:r for r in self.ed.fixtures(31)['rows']}
+        self.assertEqual((rows['1']['x'],rows['1']['a'],rows['1']['ground'],rows['2']['ground']),(1000,90,False,True))
+        with self.assertRaisesRegex(ValueError,'changed'):
+            self.ed.edit_fixtures({'zone':31,'edits':[{'id':'1','expect':{'x':5},'set':{'x':1100}}]})
+        with self.assertRaisesRegex(ValueError,'ignores its Z'):
+            self.ed.edit_fixtures({'zone':31,'edits':[{'id':'2','set':{'z':900}}]})
+        with self.assertRaisesRegex(ValueError,'must be'):
+            self.ed.edit_fixtures({'zone':31,'edits':[{'id':'1','set':{'a':400}}]})
+        self.assertEqual(path.read_bytes(),original)
+        first = self.ed.edit_fixtures({'zone':31,'edits':[{'id':'1','expect':{'x':1000},'set':{'x':1100,'a':180}}]})
+        self.ed.edit_fixtures({'zone':31,'edits':[{'id':'2','set':{'y':4100}}]})
+        text = dict((e.name,e.data) for e in archive.read(path.read_bytes())[1])
+        self.assertIn(b'\r\n1,4,Keep,1100,2000,500,180,100,',text['fixtures.csv'])
+        self.assertIn(b'\r\n2,5,Pine,3000,4100,0,',text['fixtures.csv'])
+        self.assertEqual(text['nifs.csv'],b'x')
+        self.assertEqual(archive.read((path.parent/'dat031.mpk').read_bytes())[1][0].data,b'stale')
+        self.assertIn(first['backup'],[look['id'] for look in self.ed.looks()])
+        for look in self.ed.looks():
+            self.ed.uninstall_look(look['id'])
+        self.assertEqual(path.read_bytes(),original)
         self.assertEqual(self.ed.looks(),[])
 
     def test_custom_look_uninstall_refuses_changed_client(self):

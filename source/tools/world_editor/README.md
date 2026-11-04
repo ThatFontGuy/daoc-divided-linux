@@ -162,7 +162,7 @@ When the live client gets new item art, `asset_worker.py import-items` copies th
 python asset_worker.py import-items --client "GAME/runtime/client-opendaoc/app" --source "D:/Electronic Arts/Dark Age of Camelot" --objects 4924,4925,4926 --backups "Source/artifacts/world-editor/<profile>/look-backups"
 ```
 
-(Use the Pillow Python, as for custom looks.) The 25th-anniversary cloaks (objects 4924–4926, live patch 26 Oct 2026) were imported into Classic and Stormforged this way; their skins became private IDs 5788–5790 there. The modern test client received the live `gamedata.mpk` and `pskin060.mpk` directly.
+(Use the Pillow Python, as for custom looks.) Object IDs must stay below the size of the client's table, 5000 on classic clients and 5500 on 1.130, which the tool reads from `game.dll`; it refuses higher IDs and reports how many are left. The 25th-anniversary cloaks (objects 4924–4926, live patch 26 Oct 2026) were imported into Classic and Stormforged this way; their skins became private IDs 5788–5790 there. The modern test client received the live `gamedata.mpk` and `pskin060.mpk` directly.
 
 ## Merchants
 
@@ -187,7 +187,7 @@ The classic client can only draw its own NetImmerse `.nif` meshes rigged to DAoC
 
 The install follows the client modding rules in `docs/CLIENT-MODDING-GUIDE.txt`:
 
-- new `monsters.csv` and `skins.csv` rows go in an unused model-ID gap below 2494 (not used by any Mob or NpcTemplate)
+- new `monsters.csv` and `skins.csv` rows go in an unused model-ID gap below 2494 (not used by any Mob or NpcTemplate). Once those run out, a client whose table was moved by `classslots/model_table.py` uses IDs from 2500 up. Table sizes are read from the client's own `game.dll`
 - textures are DXT1 with mips, resized to the stock size, in `figures/skins/skin099.mpk`
 - catalog lines are inserted in ID order with no blank lines, and every existing line is checked unchanged
 - dark/detail overlay columns for replaced parts are cleared, so stock patterns don't paint over the new skin (not yet verified in game for player-race bodies)
@@ -195,7 +195,7 @@ The install follows the client modding rules in `docs/CLIENT-MODDING-GUIDE.txt`:
 
 **Advanced NIF:** a `.nif` you upload is copied to `figures/cust_<name>.nif` with a new `monnifs.csv` row. The private NIF IDs 989–999 have only a few free slots left. The mesh must use the base model's skeleton and bone names, because it borrows that model's animation set. Meshes taken from other games must be re-rigged to the DAoC skeleton in a 3D tool first; this editor doesn't convert or rig them.
 
-Installs back up `gamedata.mpk` and `skin099.mpk` under `artifacts/world-editor/<profile>/look-backups/`. **Uninstall** restores them, but only if neither file changed since. Uninstall newer looks first, and change the `Model` of any NPC still using the removed ID. Custom looks are for this install only. Release packages are built from clean clients, and art you didn't make or license must never go into a public package.
+Installs back up `gamedata.mpk` and `skin099.mpk` under `artifacts/world-editor/<profile>/look-backups/` and record exactly which rows and textures they added. **Uninstall** takes out only those, so looks can be removed in any order. It refuses while another look still uses a skin or NIF of the one being removed. Looks installed before this change keep the old rule: uninstall newer looks first. Change the `Model` of any NPC still using the removed ID. Custom looks are for this install only. Release packages are built from clean clients, and art you didn't make or license must never go into a public package.
 
 ## Game data
 
@@ -221,7 +221,11 @@ The list shows the text files under the game's `runtime/server` folder (`.json`,
 
 The **Zone** tab edits server zone name, water level, lava/diving flags, realm, and XP/RP/BP/coin bonuses. It displays the server's region, origin and extent and checks these against the client catalog. Dragging is disabled if those layout values differ. Name differences and collision/placement differences are separate from this bounds check.
 
-This version does not sculpt terrain, move client building fixtures, edit C# scripts, or regenerate navigation meshes. NPC template settings and encounter scripts may override individual NPC fields or positions at server start. Verify those NPCs in game after editing.
+**Client buildings** moves, turns and scales the buildings and scenery the client places in an outdoor zone, in its own `fixtures.csv`. Use **List buildings**, pick one, change its numbers and **Save to client** (game and server closed), then **Reload textured view**. X and Y are zone-local, the bearing is in degrees and turns clockwise on the map, and a building that sits on the terrain has no Z because the client ignores it. With the door option on, server doors within the distance you set (800 units by default) make the same move as pending edits, and you still save those with **Review & save**. Every change is listed under **Custom looks** with **Uninstall**. If the same building was changed twice, undo the newer change first.
+
+Three limits apply. The change is in this client only: it doesn't go into a release or a patch, and exported world patches record a different client world afterwards. Navmeshes don't change, so bots and NPCs keep walking where the building used to be. Cities and dungeons have no `fixtures.csv`, so they can't be edited here.
+
+This version does not sculpt terrain, add or delete client buildings, edit C# scripts, or regenerate navigation meshes. NPC template settings and encounter scripts may override individual NPC fields or positions at server start. Verify those NPCs in game after editing.
 
 ## Patches and client/server matching
 

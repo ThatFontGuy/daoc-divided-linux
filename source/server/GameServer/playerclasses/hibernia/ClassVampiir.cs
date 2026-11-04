@@ -36,7 +36,7 @@ namespace DOL.GS.PlayerClass
             //Special handling is need in the power pool calculator
             //m_manaStat = eStat.STR;
             m_wsbase = 440;
-            m_baseHP = 878;
+            m_baseHP = 880;
         }
 
         public override eClassType ClassType

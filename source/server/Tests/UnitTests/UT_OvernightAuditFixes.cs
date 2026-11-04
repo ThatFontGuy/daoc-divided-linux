@@ -121,9 +121,9 @@ public sealed class UT_OvernightAuditFixes
     }
 
     [Test]
-    public void SoloDarknessFallsNeedsLevelTwentyFiveAndBlueOrEasier()
+    public void SoloDarknessFallsNeedsLevelTwentyAndBlueOrEasier()
     {
-        Assert.That(AutonomousDarknessFallsPolicy.SoloMinimumLevel, Is.EqualTo(25));
+        Assert.That(AutonomousDarknessFallsPolicy.SoloMinimumLevel, Is.EqualTo(20));
         Assert.That(ConColor.BLUE <= AutonomousDarknessFallsPolicy.SoloMaximumCon, Is.True);
         Assert.That(ConColor.GREEN <= AutonomousDarknessFallsPolicy.SoloMaximumCon, Is.True);
         Assert.That(ConColor.YELLOW <= AutonomousDarknessFallsPolicy.SoloMaximumCon, Is.False);

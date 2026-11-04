@@ -115,6 +115,7 @@ class ExpansionDataTests(unittest.TestCase):
         self.assertEqual(rows[('Molten Barricade', ES)][1]['Value'], 400, '1.125')
         self.assertEqual(rows[('Buffer of Warmth', ES)][1]['Value'], 10, '1.125')
         self.assertEqual(rows[("Arawn's Inferno", RS)][1]['Range'], 1650, '1.125')
+        self.assertEqual(rows[("Arawn's Singe", RS)][1]['ClientEffect'], 14045, 'client has no effect 14044')
         self.assertEqual(rows[('Torrential Blaze', RS)][1]['Range'], 1600)
         cocoon = rows[('Destructive Cocoon', RS)][1]
         self.assertEqual((cocoon['Type'], cocoon['Value'], cocoon['Duration'], cocoon['_params']),

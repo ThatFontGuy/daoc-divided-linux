@@ -331,6 +331,11 @@ namespace DOL.GS.Spells
     [SpellHandler(eSpellType.CCResist)]
     public class CCResistSpellHandler : MasterlevelHandling
     {
+        public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+        {
+            return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+        }
+
         public override void OnEffectStart(GameSpellEffect effect)
         {
         	base.OnEffectStart(effect);

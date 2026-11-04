@@ -1,7 +1,22 @@
 # Character passport: take a toon to a friend's world and back
 
-Status: design, 2026-10-27. Build step 1 (Join Friend and Host for Friends) is in the launcher, see
-[PLAY-WITH-FRIENDS.md](PLAY-WITH-FRIENDS.md); the passport itself is not built yet. The earlier feasibility study,
+Status: all five steps built, 2026-11-01. See [PLAY-WITH-FRIENDS.md](PLAY-WITH-FRIENDS.md) for how a player uses it. Tested
+with automated tests, on copies of played saves and on a private running server over this PC's own network; never yet
+between two PCs or with the real game client.
+
+Where this page and the code differ after the build: the Desk's port is the login port + 10, so an invite code needs no
+second number, and it goes through the same firewall rule and UPnP mapping as the game. It opens only while hosting. It works on any address, not only Tailscale. Calls are `POST /passport/arrive`, `GET /passport/visitors`, `POST
+/passport/depart`, `POST /passport/depart/confirm`, with HTTP Basic over plain HTTP, the same exposure as the game's own
+login packet. The Desk changes the live database directly and takes no backups; the guest's launcher backs up the home
+save and keeps the newest 6. `depart/confirm` is best effort: once the return passport is on the guest's disk the
+character goes home, and a locked copy left at the host is replaced by the next visit. A request with no answer never
+unlocks a character, because the host may have taken it.
+
+Earlier status: steps 1 to 3 built, 2026-11-01. Join Friend and hosting are in the launcher, see
+[PLAY-WITH-FRIENDS.md](PLAY-WITH-FRIENDS.md). The passport library, its command line tool, the home lock and recall are
+built and tested on save copies and a private server copy. The Passport Desk and the launcher buttons (steps 4 and 5) are
+not built, so a passport moves by hand for now. The Desk text below still names Tailscale; it has to be fitted to invite
+codes when step 4 is built. The earlier feasibility study,
 [PORTABLE-CHARACTER-COOP-RESEARCH.md](PORTABLE-CHARACTER-COOP-RESEARCH.md), reaches the same model.
 
 ## Goal
@@ -41,9 +56,12 @@ All ids below are the character's `DOLCharacters_ID` (a GUID) unless noted.
 | `CharacterXOneTimeDrop`, `FactionAggroLevel` | `CharacterID` | Yes |
 | `PlayerXEffect` | `ChardID` | Yes |
 | `TimeXLevel` | `Character_ID` | Yes |
-| `Inventory` | `OwnerID` = character id | Yes: worn, backpack and the character's own bank vault |
+| `offline_artifact_progress` | `CharacterID` | Yes |
+| `Inventory` | `OwnerID` = character id | Yes: worn, backpack and the character's own bank vault (`SlotPosition` under 1000 and `OwnerLot` 0) |
+| `Inventory` | `OwnerID` = character id, `SlotPosition` 1000 or more, or `OwnerLot` set | **Stays**: house vaults, consignment stock and Realm Exchange listings belong to that world |
+| `DOLCharactersXCustomParam` | `RealmExchange.Proceeds.*` keys | **Stays**: sale money is paid out in the world that made the sale |
 | `ItemUnique` | `Id_nb` = `Inventory.UTemplate_Id` | Yes, every row the inventory references |
-| `ItemTemplate` | `Id_nb` = `Inventory.ITemplate_Id` | The row is copied into the passport. The receiver uses its own row when it has one with that id; otherwise it adds the carried row as an `ItemUnique` and points the item at it |
+| `ItemTemplate` | `Id_nb` = `Inventory.ITemplate_Id` | The row is copied into the passport. The receiver uses its own row when it has one with that id; otherwise it adds the carried row as an `ItemUnique` named `passport#<template>#<guid>`, one per item because the server deletes a unique with its item, and points the item at it. A world that has the template turns such an item back |
 | `AccountXMoney` | `AccountId` + `Realm` | Not copied. Money moves as a **purse** (below) |
 | `AccountXCrafting` | `AccountId` + `Realm` | Not copied. Crafting skill is merged as the higher value per skill (below) |
 | `Inventory` with `OwnerID` = `<account>_<realm>` | account vault | **Stays home** |
@@ -58,20 +76,21 @@ of their own instead of a plain copy.
 
 ## Passport file
 
-`<Name>-<trip_id>.odpassport`, a zip:
+`<Name>-<trip_id>-<direction>.odpassport`, a zip:
 
 ```
 manifest.json
   format: 1
   trip_id, character_id, name, realm, class, level
   direction: "outbound" (home → host) or "return" (host → home)
-  from_world: { build: "0.37-stormforged", fingerprint, server_name }
-  purse: { realm, copper }         # total in copper
-  crafting: { realm, skills }      # SerializedCraftingSkills, CraftingPrimarySkill
+  from_world                       # the install's folder name
+  purse_copper
+  crafting_skills, crafting_primary_skill
   created_utc
   payload_sha256
 rows/<Table>.json                  # [{column: value}, ...] per table above
-templates/ItemTemplate.json        # template rows the inventory uses
+items/ItemTemplate.json            # template rows the inventory uses
+items/ItemUnique.json              # unique rows the inventory uses
 ```
 
 JSON rows plus column intersection let a passport move between slightly different builds, as
@@ -87,7 +106,8 @@ host who edits a passport can give a toon anything, the same as a GM.
 
 The home server must be stopped. This runs in the guest's launcher on the home save.
 
-1. Back up `runtime\data\opendaoc.sqlite3.db` to `runtime\passport-backups\<time>-<name>-out\`.
+1. Back up `runtime\data\opendaoc.sqlite3.db` to `runtime\passport-backups\<time>-<name>-out\`. The server counts as
+   running while it holds `CoreServer.dll` or `lib\GameServer.dll` open.
 2. Check the character isn't already away and doesn't have an unfinished return.
 3. Ask for the purse: how much of the realm wallet to take (default: all of it).
 4. In one transaction:
@@ -103,11 +123,13 @@ The home rows stay in place, frozen. Nothing is deleted at home until the charac
 
 The server refuses a character with `passport.away` set:
 
-- `WorldInitRequestHandler` (the `loadPlayer` path): don't load the player. Tell them
-  "<Name> is visiting <host>. Use Come Home in the launcher." and send them back to the character screen.
+- `WorldInitRequestHandler` (the `loadPlayer` path): don't load the player. The client is logged out, as after a failed
+  world entry, and the server log names the character and where it is. The launcher has to show that a character is away
+  before the player gets this far, because the client gets no message.
 - `CharacterCreateRequestHandler.HandleDeleteCharacterRequest`: refuse to delete, like the existing
   "has a house" check.
-- Rename, character transfer and any GM or bot tooling that writes the character: refuse.
+- `/account deletecharacter` and `/account movecharacter`: refuse. `/player rename` needs the character in the world, so the
+  world-entry lock covers it.
 - Progress import and World Workshop copy the flag along and say the character is away.
 
 ### 3. Arrive at the host (Passport Desk)
@@ -147,7 +169,8 @@ The guest then logs in through Join Friend and plays normally. The visitor is an
 character on the host; the host can group, trade and guild with it.
 
 Visitors can't own houses on the host: buying one is refused while a `passport_visits` row is `visiting`.
-That keeps the return clean.
+That keeps the return clean. Until the Desk adds that refusal, `depart` refuses a visitor who owns a house, has items for
+sale or in a house, or has Realm Exchange money waiting.
 
 ### 4. Leave the host (check out)
 
@@ -193,7 +216,7 @@ The home server must be stopped. This runs in the guest's launcher.
 ### 6. If the friend is gone: recall
 
 When the host can't be reached, or the guest gives up, **Recall** in the launcher:
-- restores the character from the departure snapshot: its rows as they were when it left, plus the purse;
+- unlocks the frozen character, which still has its rows as they were when it left, and returns the purse;
 - clears the lock and sets `passport.cancelled = <trip_id>`, so a late return of that trip is refused;
 - warns clearly that everything earned on that trip is lost.
 
@@ -240,9 +263,9 @@ The main launcher's character list shows "away at <host>" for locked characters.
 | New | Purpose |
 |---|---|
 | `source/tools/OfflineDaoc.Passport/` | Shared library: passport format, `Export`, `Import`, `Remove`, item-template mapping, purse and crafting merge. Plain ADO.NET over SQLite with a table policy file, like ImportEngine |
-| `source/tools/OfflineDaoc.Passport.Cli/` | `inspect`, `export`, `import`, `recall` for testing and manual use |
+| `source/tools/OfflineDaoc.Passport.Cli/` | `inspect`, `leave`, `arrive`, `depart`, `confirm`, `home`, `recall` for testing and manual use |
 | `GameServer/passport/PassportDesk.cs` | Kestrel listener and the four endpoints; calls the shared library on the server's database inside a server-side lock |
-| `GameServer/passport/PassportLock.cs` | `IsAway(character)`, used by the world-init, delete and rename hooks |
+| `GameServer/gameutils/PassportLock.cs` | `IsAway(character)`, used by the world-init, delete and move hooks |
 | `passport_visits` table | Host-side trip records |
 | Launcher: `JoinFriendForm.cs`, `JoinFriendProfile.cs` (ported), `PassportPanel.cs`, `HostForFriends.cs` | Guest and host UI |
 
@@ -256,8 +279,10 @@ an account's characters at login, so it reads them fresh.
    Host for Friends. Built, with automated tests; done when two PCs play together in one world over Tailscale (not yet checked).
 2. **Passport library and CLI.** Export and import with both servers stopped, moving the file by hand.
    Done when a round trip of a Stormforged character with gear, quests, money and crafting comes
-   back row-for-row identical except for what was earned. This alone already meets the goal, manually.
-3. **Home lock.** World-init, delete and rename hooks, plus recall.
+   back row-for-row identical except for what was earned. This alone already meets the goal, manually. Built; a level 50
+   Stormforged character made the trip between copies of played saves, and played on a private server copy on the way.
+3. **Home lock.** World-init, delete and move hooks, plus recall. Built; an away character was refused and a recalled one
+   played on a private server copy.
 4. **Passport Desk.** Server endpoints and `passport_visits`; arrive and depart while the host keeps playing.
 5. **Launcher flow.** Bring a character, Come home, pending retry, "away" display.
 

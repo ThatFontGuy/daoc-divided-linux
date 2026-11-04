@@ -166,6 +166,9 @@ namespace DOL.GS
             Notify(GameObjectEvent.Delete, this);
             RemoveFromWorld(0);
             ObjectState = eObjectState.Deleted;
+            // As GameObject.Delete does: without these a deleted item kept its handlers and radius cache (OpenDAoC e04fb3af8).
+            ClearObjectsInRadiusCache();
+            GameEventMgr.RemoveAllHandlersForObject(this);
         }
 
         public override void DeleteFromDatabase()

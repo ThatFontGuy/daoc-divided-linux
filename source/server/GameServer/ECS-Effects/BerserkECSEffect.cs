@@ -11,6 +11,11 @@ namespace DOL.GS
             EffectType = eEffect.Berserk;
         }
 
+        // Vendo Man and Mini Vendo Man Form, in both client tables. The low ids 3 and 12 are only the classic table's
+        // copies: on 1.130 they are "empty" and a coconut ogre, so a Berserker played the frenzy and never morphed.
+        public const ushort VendoModel = 582;
+        public const ushort DwarfVendoModel = 2032;
+
         protected ushort m_startModel = 0;
 
         public override ushort Icon { get { return 479; } }
@@ -44,8 +49,7 @@ namespace DOL.GS
             if (Owner is GamePlayer or GameBot)
             {
                 Owner.Emote(eEmote.MidgardFrenzy);
-                // Classic client model: dwarven Vendo differs from other races.
-                Owner.Model = race == (int)eRace.Dwarf ? (ushort)12 : (ushort)3;
+                Owner.Model = race == (int)eRace.Dwarf ? DwarfVendoModel : VendoModel;
             }
         }
         

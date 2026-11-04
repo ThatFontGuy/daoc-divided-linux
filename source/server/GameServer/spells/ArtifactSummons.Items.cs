@@ -1,0 +1,88 @@
+using System.Collections.Generic;
+
+namespace DOL.GS.Spells
+{
+    /// <summary>Generated from the artifact pass: the items each artifact summon creates.</summary>
+    public static partial class ArtifactSummons
+    {
+        private static readonly Dictionary<eCharacterClass, string[]> SunByClass = new()
+        {
+            [eCharacterClass.Armsman] = ["Sun_Slash", "Sun_Thrust", "Sun_Crush", "Sun_Polearm", "Sun_TwoHanded"],
+            [eCharacterClass.Bard] = ["Sun_SlashH", "Sun_CrushH"],
+            [eCharacterClass.Berserker] = ["Sun_LeftAxe", "Sun_SlashM", "Sun_CrushM", "Sun_Axe", "Sun_TwoHandedM", "Sun_2HCrushM", "Sun_2HAxe"],
+            [eCharacterClass.Blademaster] = ["Sun_SlashH", "Sun_CrushH", "Sun_ThrustH"],
+            [eCharacterClass.Champion] = ["Sun_SlashH", "Sun_CrushH", "Sun_ThrustH", "Sun_TwoHandedH"],
+            [eCharacterClass.Friar] = ["Sun_Staff"],
+            [eCharacterClass.Heretic] = ["Sun_Crush", "Sun_Flex"],
+            [eCharacterClass.Hero] = ["Sun_SlashH", "Sun_CrushH", "Sun_ThrustH", "Sun_SpearH", "Sun_TwoHandedH"],
+            [eCharacterClass.Hunter] = ["Sun_SlashM", "Sun_SpearM", "Sun_BowM", "Sun_TwoHandedM"],
+            [eCharacterClass.Infiltrator] = ["Sun_Slash", "Sun_Thrust"],
+            [eCharacterClass.MaulerAlb] = ["Sun_MStaff", "Sun_MFist"],
+            [eCharacterClass.MaulerHib] = ["Sun_MStaff", "Sun_MFist"],
+            [eCharacterClass.MaulerMid] = ["Sun_MStaff", "Sun_MFist"],
+            [eCharacterClass.Mercenary] = ["Sun_Slash", "Sun_Thrust", "Sun_Crush"],
+            [eCharacterClass.Minstrel] = ["Sun_Slash", "Sun_Thrust"],
+            [eCharacterClass.Nightshade] = ["Sun_ThrustH", "Sun_SlashH"],
+            [eCharacterClass.Paladin] = ["Sun_Slash", "Sun_Thrust", "Sun_Crush", "Sun_TwoHanded"],
+            [eCharacterClass.Ranger] = ["Sun_SlashH", "Sun_ThrustH", "Sun_BowH"],
+            [eCharacterClass.Reaver] = ["Sun_Slash", "Sun_Thrust", "Sun_Crush", "Sun_Flex"],
+            [eCharacterClass.Savage] = ["Sun_Claw", "Sun_Axe", "Sun_SlashM", "Sun_CrushM", "Sun_2HAxe", "Sun_TwoHandedM", "Sun_2HCrushM"],
+            [eCharacterClass.Scout] = ["Sun_Slash", "Sun_Thrust", "Sun_Bow"],
+            [eCharacterClass.Shadowblade] = ["Sun_SlashM", "Sun_Axe", "Sun_LeftAxe", "Sun_TwoHandedM", "Sun_2HAxe"],
+            [eCharacterClass.Skald] = ["Sun_Axe", "Sun_SlashM", "Sun_CrushM", "Sun_2HAxe", "Sun_TwoHandedM", "Sun_2HCrushM"],
+            [eCharacterClass.Thane] = ["Sun_SlashM", "Sun_CrushM", "Sun_Axe", "Sun_TwoHandedM", "Sun_2HCrushM", "Sun_2HAxe"],
+            [eCharacterClass.Valewalker] = ["Sun_Scythe"],
+            [eCharacterClass.Valkyrie] = ["Sun_SpearM", "Sun_SlashM", "Sun_TwoHandedM"],
+            [eCharacterClass.Vampiir] = ["Sun_ThrustH"],
+            [eCharacterClass.Warden] = ["Sun_SlashH", "Sun_CrushH"],
+            [eCharacterClass.Warrior] = ["Sun_Axe", "Sun_CrushM", "Sun_SlashM", "Sun_2HAxe", "Sun_2HCrushM", "Sun_TwoHandedM"],
+        };
+
+        private static readonly string[] AllSummoned =
+        [
+            "Artef_Javelin",
+            "Blade_Shadow",
+            "Stone_Staff_Binding",
+            "Stone_Staff_Power",
+            "Blade_ShadowH",
+            "Blade_ShadowM",
+            "Eerie_Dark_Stone",
+            "Eerie_Light_Stone",
+            "Golden_Trident_of_Flame",
+            "Golden_Trident_of_FlameH",
+            "Golden_Trident_of_FlameM",
+            "Moon_Mace",
+            "Moon_MaceH",
+            "Moon_MaceM",
+            "Moon_Staff",
+            "Phoebus_Summoned_Harp",
+            "Sun_2HAxe",
+            "Sun_2HCrushM",
+            "Sun_Axe",
+            "Sun_Bow",
+            "Sun_BowH",
+            "Sun_BowM",
+            "Sun_Claw",
+            "Sun_Crush",
+            "Sun_CrushH",
+            "Sun_CrushM",
+            "Sun_Flex",
+            "Sun_LeftAxe",
+            "Sun_MFist",
+            "Sun_MStaff",
+            "Sun_Polearm",
+            "Sun_Scythe",
+            "Sun_Slash",
+            "Sun_SlashH",
+            "Sun_SlashM",
+            "Sun_SpearH",
+            "Sun_SpearM",
+            "Sun_Staff",
+            "Sun_Thrust",
+            "Sun_ThrustH",
+            "Sun_TwoHanded",
+            "Sun_TwoHandedH",
+            "Sun_TwoHandedM",
+        ];
+    }
+}

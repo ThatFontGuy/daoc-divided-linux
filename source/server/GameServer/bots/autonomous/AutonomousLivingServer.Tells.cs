@@ -11,8 +11,8 @@ namespace DOL.GS;
 /// private message: a friend saying hello or thanks for an old group, a friend passing on realm news, a guildmate's small
 /// talk, a friend offering a low-level player a hand, or a solo bot of about the same level in the same zone asking to duo.
 /// Each tell is the start of a thread (AutonomousChatThreads): the player's answer gets a fitting reply, and "sure" to a duo
-/// offer gets "ok, invite me" (the player invites; a bot cannot invite a player). Needs bot voices and bot memory (an answer
-/// to the player's /lfg needs voices only).
+/// offer gets "ok, invite me". A bot's own invitation is in AutonomousLivingServer.GroupInvites. Needs bot voices and bot
+/// memory (an answer to the player's /lfg needs voices only).
 /// </summary>
 public static partial class AutonomousLivingServer
 {
@@ -148,6 +148,9 @@ public static partial class AutonomousLivingServer
     public static void OnPlayerLfg(GamePlayer player, string message)
     {
         AutonomousBeggars.OnPlayerAsked(player, message, "lfg");
+        // A bot close enough to come over invites the player; the tells below are for when none is.
+        if (TryInviteLookingPlayer(player))
+            return;
         if (!TellsOn || player?.Client == null || player.Group != null)
             return;
         long now = GameLoop.GameLoopTime;

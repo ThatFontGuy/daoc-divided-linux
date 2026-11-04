@@ -76,5 +76,12 @@ namespace DOL.GS
         /// </summary>
         public static bool IsBotExcludedNpc(GameNPC npc) =>
             npc != null && (IsBotExcludedSpawn(npc.InternalID) || Quests.ClassicQuests.IsQuestMonster(npc));
+
+        /// <summary>
+        /// The same for one hunting bot: a quest monster opens only to a bot whose own quest step wants it
+        /// (<see cref="AutonomousBotQuests.MayHunt"/>). The audited spawns stay shut to every bot.
+        /// </summary>
+        public static bool IsBotExcludedNpc(GameNPC npc, GameBot bot) =>
+            IsBotExcludedNpc(npc) && !(!IsBotExcludedSpawn(npc.InternalID) && AutonomousBotQuests.MayHunt(bot, npc));
     }
 }

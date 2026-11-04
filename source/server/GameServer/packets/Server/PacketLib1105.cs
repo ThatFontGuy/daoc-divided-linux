@@ -24,6 +24,43 @@ namespace DOL.GS.PacketHandler
 		}
 
 		/// <summary>
+		/// Most bytes of names in one trainer name index packet, well under the 2,048 byte packet limit
+		/// </summary>
+		public const int TRAINER_NAMES_BYTE_BUDGET = 1900;
+
+		/// <summary>
+		/// Splits a spec's names into the ranges to send, one per name index packet
+		/// </summary>
+		/// <param name="names">the names, in sending order</param>
+		/// <param name="byteBudget">most bytes of pascal strings in a packet (a name costs 1 + its length)</param>
+		/// <returns>(Start, Count) ranges covering every name; one empty range if there are no names</returns>
+		public static List<(int Start, int Count)> SplitTrainerNames(IReadOnlyList<string> names, int byteBudget)
+		{
+			List<(int Start, int Count)> ranges = new List<(int Start, int Count)>();
+			int start = 0;
+			int used = 0;
+
+			for (int i = 0; i < names.Count; i++)
+			{
+				int cost = 1 + (names[i]?.Length ?? 0);
+
+				// i > start: a name too long for the budget still gets a packet, it is never dropped.
+				// The count is one byte, so very short names can run out of that first.
+				if (i > start && (used + cost > byteBudget || i - start == byte.MaxValue))
+				{
+					ranges.Add((start, i - start));
+					start = i;
+					used = 0;
+				}
+
+				used += cost;
+			}
+
+			ranges.Add((start, names.Count - start));
+			return ranges;
+		}
+
+		/// <summary>
 		/// SendTrainerWindow method
 		/// </summary>
 		public override void SendTrainerWindow()
@@ -121,23 +158,30 @@ namespace DOL.GS.PacketHandler
 			int index = 0;
 			for (int skindex = 0; skindex < skillDictCache.Count; skindex++)
 			{
-				using (var pakindex = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.TrainerWindow)))
+				List<string> names = skillDictCache[skindex].Item2.Select(e => e.Item3.Name).ToList();
+
+				// Split a spec over several packets: Hunter Archery's 141 names made one of 2,106 bytes, and over 2,048 is discarded.
+				foreach ((int start, int count) in SplitTrainerNames(names, TRAINER_NAMES_BYTE_BUDGET))
 				{
-					pakindex.WriteByte((byte)skillDictCache[skindex].Item2.Count); //size
-					pakindex.WriteByte((byte)player.SkillSpecialtyPoints);
-					pakindex.WriteByte(4); // name index code
-					pakindex.WriteByte(0);
-					pakindex.WriteByte((byte)index); // start index
-
-					foreach (Skill sk in skillDictCache[skindex].Item2.Select(e => e.Item3))
+					using (var pakindex = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.TrainerWindow)))
 					{
-						// send name
-						pakindex.WritePascalString(sk.Name);
-						index++;
-					}
+						pakindex.WriteByte((byte)count); //size
+						pakindex.WriteByte((byte)player.SkillSpecialtyPoints);
+						pakindex.WriteByte(4); // name index code
+						pakindex.WriteByte(0);
+						pakindex.WriteByte((byte)(index + start)); // start index
 
-					SendTCP(pakindex);
+						for (int i = start; i < start + count; i++)
+						{
+							// send name
+							pakindex.WritePascalString(names[i]);
+						}
+
+						SendTCP(pakindex);
+					}
 				}
+
+				index += names.Count;
 			}
 
 			// Send Skill Secondly

@@ -125,35 +125,16 @@ namespace DOL.UnitTests
         }
 
         [Test]
-        public void UnlimitedPoisonCoatsUseNoBackpackSlotsAndNeverRefillDuringCombat()
+        public void AssassinBotsTakeTheStrongestDamageCoatingInReach()
         {
-            var spell = new Spell(new DbSpell { SpellID = 30019, Name = "poison", Type = "DamageOverTime", Target = "Enemy" }, 20);
-            var supply = new DbItemTemplate { Level = 20, PoisonCharges = 1, PoisonSpellID = 30019 };
-            BotPoisonSupply.Load(new[] { supply }, new[] { spell });
-            var bot = (Assassin)RuntimeHelpers.GetUninitializedObject(typeof(Assassin));
-            bot.Level = 50;
-            bot.Inventory = new BotInventory();
-            var blade = GameInventoryItem.Create(new DbItemTemplate { Name = "earned sword", Object_Type = (int)eObjectType.Sword,
-                Item_Type = Slot.RIGHTHAND, DPS_AF = 150, SPD_ABS = 35, Quality = 99, MaxCondition = 50000, Condition = 50000 });
-            bot.Inventory.AddItem(eInventorySlot.RightHandWeapon, blade);
-            for (int i = (int)eInventorySlot.FirstBackpack; i <= (int)eInventorySlot.LastBackpack; i++)
-                bot.Inventory.AddItem((eInventorySlot)i, GameInventoryItem.Create(new DbItemTemplate { Name = "earned loot", MaxCount = 1 }));
-            int count = bot.Inventory.AllItems.Count;
-            for (int i = 0; i < 1000; i++)
-            {
-                Assert.That(BotPoisonSupply.Maintain(bot), Is.True);
-                Assert.That(blade.PoisonSpellID, Is.EqualTo(30019));
-                Assert.That(blade.PoisonCharges, Is.EqualTo(1));
-                Assert.That(BotPoisonSupply.Maintain(bot), Is.False);
-                blade.PoisonCharges = 0; blade.PoisonSpellID = 0;
-                bot.Fighting = true;
-                Assert.That(BotPoisonSupply.Maintain(bot), Is.False);
-                bot.Fighting = false;
-            }
-            Assert.That(bot.Inventory.AllItems.Count, Is.EqualTo(count));
-            Assert.That(bot.Inventory.GetItem(eInventorySlot.RightHandWeapon), Is.SameAs(blade));
-            Assert.That(blade.Quality, Is.EqualTo(99));
-            BotPoisonSupply.Load(Array.Empty<DbItemTemplate>(), Array.Empty<Spell>());
+            Spell Coat(int id, int level, int child) => new(new DbSpell { SpellID = id, Name = "coat", Type = "PoisonCoating", Target = "Self", Value = child }, level);
+            var dot = new Spell(new DbSpell { SpellID = 1, Name = "dot", Type = "DamageOverTime", Target = "Enemy" }, 1);
+            var snare = new Spell(new DbSpell { SpellID = 2, Name = "snare", Type = "PoisonSnare", Target = "Enemy" }, 1);
+            Spell Child(int id) => id == 1 ? dot : snare;
+            Spell[] line = { Coat(10, 5, 1), Coat(11, 20, 1), Coat(12, 21, 2), Coat(13, 40, 1) };
+
+            Assert.That(BotPoisonSupply.BestCoat(line, 30, Child).ID, Is.EqualTo(11));
+            Assert.That(BotPoisonSupply.BestCoat(line, 4, Child), Is.Null);
         }
 
         [Test]

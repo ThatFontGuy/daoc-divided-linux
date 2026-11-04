@@ -1,0 +1,1893 @@
+{
+ "format": "offline-daoc-world-editor-2",
+ "created": "2026-11-01T15:40:29.931012+00:00",
+ "clientWorld": "e7a9b42ab562d78adb1f6f4247ef14aaaaae1803a3a5639b545e69a8b78bb342",
+ "changes": [
+  {
+   "table": "Spell",
+   "key": "local-valk-ow-faith-30",
+   "op": "update",
+   "before": {
+    "Value": 60.0,
+    "Damage": 30.0,
+    "Duration": 6,
+    "RecastDelay": 8,
+    "Pulse": 1,
+    "Frequency": 60
+   },
+   "after": {
+    "Value": 100.0,
+    "Damage": 100.0,
+    "Duration": 30,
+    "RecastDelay": 30,
+    "Pulse": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "local-valk-ow-link-faith-30",
+   "op": "update",
+   "before": {
+    "Level": 30
+   },
+   "after": {
+    "Level": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-valk-ow-faith-40",
+   "op": "update",
+   "before": {
+    "Value": 90.0,
+    "Damage": 30.0,
+    "Duration": 6,
+    "RecastDelay": 8,
+    "Pulse": 1,
+    "Frequency": 60
+   },
+   "after": {
+    "Value": 175.0,
+    "Damage": 100.0,
+    "Duration": 30,
+    "RecastDelay": 30,
+    "Pulse": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "local-valk-ow-link-faith-40",
+   "op": "update",
+   "before": {
+    "Level": 40
+   },
+   "after": {
+    "Level": 33
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-valk-ow-faith-50",
+   "op": "update",
+   "before": {
+    "Value": 120.0,
+    "Damage": 30.0,
+    "Duration": 6,
+    "RecastDelay": 8,
+    "Pulse": 1,
+    "Frequency": 60
+   },
+   "after": {
+    "Value": 300.0,
+    "Damage": 100.0,
+    "Duration": 30,
+    "RecastDelay": 30,
+    "Pulse": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "local-valk-ow-link-faith-50",
+   "op": "update",
+   "before": {
+    "Level": 50
+   },
+   "after": {
+    "Level": 43
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "a741a528-2dfa-4080-a6bf-05845d7d0f9e",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 65196,
+    "ClientEffect": 14810,
+    "Icon": 14810,
+    "Name": "Odin's Hope",
+    "Description": "Valkyrie Odin's Will; Class Library values, borrowed visual assets.",
+    "Target": "Group",
+    "Range": 1500,
+    "Power": -10,
+    "CastTime": 0.0,
+    "Damage": 100.0,
+    "DamageType": 0,
+    "Type": "MagicAblativeArmor",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 30,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 50.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "You start healing faster.",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 65103,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "local-valk-odins-will-v4",
+    "TooltipId": 27116,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "a741a528-2dfa-4080-a6bf-05845d7d0f9e"
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "b8ce73f7-5d8c-4251-bb89-213001aa00f2",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "LineName": "Odin's Will",
+    "SpellID": 65196,
+    "Level": 13,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "b8ce73f7-5d8c-4251-bb89-213001aa00f2"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-bainshee-test-v1-68035",
+   "op": "update",
+   "before": {
+    "Value": 60.0,
+    "Damage": 30.0,
+    "CastTime": 3.0,
+    "Duration": 6,
+    "RecastDelay": 8,
+    "Power": 15,
+    "Pulse": 8,
+    "Frequency": 80
+   },
+   "after": {
+    "Value": 300.0,
+    "Damage": 100.0,
+    "CastTime": 2.8,
+    "Duration": 30,
+    "RecastDelay": 60,
+    "Power": -10,
+    "Pulse": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-bainshee-test-v1-68036",
+   "op": "update",
+   "before": {
+    "Value": 90.0,
+    "Damage": 30.0,
+    "CastTime": 3.0,
+    "Duration": 6,
+    "RecastDelay": 8,
+    "Power": 20,
+    "Pulse": 8,
+    "Frequency": 80
+   },
+   "after": {
+    "Value": 375.0,
+    "Damage": 100.0,
+    "CastTime": 2.8,
+    "Duration": 30,
+    "RecastDelay": 60,
+    "Power": -15,
+    "Pulse": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-bainshee-test-v1-68037",
+   "op": "update",
+   "before": {
+    "Value": 120.0,
+    "Damage": 30.0,
+    "CastTime": 3.0,
+    "Duration": 6,
+    "RecastDelay": 8,
+    "Power": 25,
+    "Pulse": 8,
+    "Frequency": 80
+   },
+   "after": {
+    "Value": 500.0,
+    "Damage": 100.0,
+    "CastTime": 2.8,
+    "Duration": 30,
+    "RecastDelay": 60,
+    "Power": -20,
+    "Pulse": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11237",
+   "op": "update",
+   "before": {
+    "Type": "DefensiveProc",
+    "Value": 11248.0,
+    "Damage": 0.0,
+    "Duration": 1200,
+    "RecastDelay": 0,
+    "Power": 8,
+    "Frequency": 10
+   },
+   "after": {
+    "Type": "AblativeArmor",
+    "Value": 25.0,
+    "Damage": 100.0,
+    "Duration": 30,
+    "RecastDelay": 30,
+    "Power": -20,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11239",
+   "op": "update",
+   "before": {
+    "Type": "DefensiveProc",
+    "Value": 11250.0,
+    "Damage": 0.0,
+    "Duration": 1200,
+    "RecastDelay": 0,
+    "Power": 16,
+    "Frequency": 10
+   },
+   "after": {
+    "Type": "AblativeArmor",
+    "Value": 50.0,
+    "Damage": 100.0,
+    "Duration": 30,
+    "RecastDelay": 30,
+    "Power": -20,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11240",
+   "op": "update",
+   "before": {
+    "Type": "DefensiveProc",
+    "Value": 11251.0,
+    "Damage": 0.0,
+    "Duration": 1200,
+    "RecastDelay": 0,
+    "Power": 21,
+    "Frequency": 10
+   },
+   "after": {
+    "Type": "AblativeArmor",
+    "Value": 100.0,
+    "Damage": 100.0,
+    "Duration": 30,
+    "RecastDelay": 30,
+    "Power": -20,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11242",
+   "op": "update",
+   "before": {
+    "Type": "DefensiveProc",
+    "Value": 11253.0,
+    "Damage": 0.0,
+    "Duration": 1200,
+    "RecastDelay": 0,
+    "Power": 33,
+    "Frequency": 10
+   },
+   "after": {
+    "Type": "AblativeArmor",
+    "Value": 150.0,
+    "Damage": 100.0,
+    "Duration": 30,
+    "RecastDelay": 30,
+    "Power": -10,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Valewalker Arb Path Spec_50",
+   "op": "update",
+   "before": {
+    "Level": 50
+   },
+   "after": {
+    "Level": 43
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11209",
+   "op": "update",
+   "before": {
+    "Type": "DamageOverTime",
+    "Damage": 2.0,
+    "Duration": 12,
+    "Frequency": 20
+   },
+   "after": {
+    "Type": "DirectDamage",
+    "Damage": 22.0,
+    "Duration": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11211",
+   "op": "update",
+   "before": {
+    "Type": "DamageOverTime",
+    "Damage": 7.0,
+    "Duration": 12,
+    "Frequency": 20
+   },
+   "after": {
+    "Type": "DirectDamage",
+    "Damage": 40.9,
+    "Duration": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Valewalker Arb Path Spec_12",
+   "op": "update",
+   "before": {
+    "Level": 12
+   },
+   "after": {
+    "Level": 6
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11212",
+   "op": "update",
+   "before": {
+    "Type": "DamageOverTime",
+    "Damage": 10.0,
+    "Duration": 12,
+    "Frequency": 20
+   },
+   "after": {
+    "Type": "DirectDamage",
+    "Damage": 58.9,
+    "Duration": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Valewalker Arb Path Spec_18",
+   "op": "update",
+   "before": {
+    "Level": 18
+   },
+   "after": {
+    "Level": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11214",
+   "op": "update",
+   "before": {
+    "Type": "DamageOverTime",
+    "Damage": 14.0,
+    "Duration": 12,
+    "Frequency": 20
+   },
+   "after": {
+    "Type": "DirectDamage",
+    "Damage": 86.9,
+    "Duration": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Valewalker Arb Path Spec_29",
+   "op": "update",
+   "before": {
+    "Level": 29
+   },
+   "after": {
+    "Level": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11215",
+   "op": "update",
+   "before": {
+    "Type": "DamageOverTime",
+    "Damage": 17.0,
+    "Duration": 12,
+    "Frequency": 20
+   },
+   "after": {
+    "Type": "DirectDamage",
+    "Damage": 115.9,
+    "Duration": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11217",
+   "op": "update",
+   "before": {
+    "Type": "DamageOverTime",
+    "Damage": 23.0,
+    "Duration": 12,
+    "Frequency": 20
+   },
+   "after": {
+    "Type": "DirectDamage",
+    "Damage": 160.9,
+    "Duration": 0,
+    "Frequency": 0
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Valewalker Arb Path Spec_49",
+   "op": "update",
+   "before": {
+    "Level": 49
+   },
+   "after": {
+    "Level": 42
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3293",
+   "op": "update",
+   "before": {
+    "Type": "MatterResistBuff",
+    "Duration": 1200
+   },
+   "after": {
+    "Type": "HeatColdMatterBuff",
+    "Duration": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3226",
+   "op": "update",
+   "before": {
+    "Type": "BodyResistBuff",
+    "Duration": 1200
+   },
+   "after": {
+    "Type": "BodySpiritEnergyBuff",
+    "Duration": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3227",
+   "op": "update",
+   "before": {
+    "Type": "BodyResistBuff",
+    "Duration": 1200
+   },
+   "after": {
+    "Type": "BodySpiritEnergyBuff",
+    "Duration": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3228",
+   "op": "update",
+   "before": {
+    "Type": "BodyResistBuff",
+    "Duration": 1200
+   },
+   "after": {
+    "Type": "BodySpiritEnergyBuff",
+    "Duration": 30
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Healer Augmentation Spec_24",
+   "op": "delete",
+   "before": {
+    "LineName": "Healer Augmentation Spec",
+    "SpellID": 3229,
+    "Level": 24,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Healer Augmentation Spec_24"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Healer Augmentation Spec_27",
+   "op": "delete",
+   "before": {
+    "LineName": "Healer Augmentation Spec",
+    "SpellID": 3232,
+    "Level": 27,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Healer Augmentation Spec_27"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Healer Augmentation Spec_36",
+   "op": "delete",
+   "before": {
+    "LineName": "Healer Augmentation Spec",
+    "SpellID": 3230,
+    "Level": 36,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Healer Augmentation Spec_36"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Healer Augmentation Spec_37",
+   "op": "delete",
+   "before": {
+    "LineName": "Healer Augmentation Spec",
+    "SpellID": 3233,
+    "Level": 37,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Healer Augmentation Spec_37"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Healer Augmentation Spec_47",
+   "op": "delete",
+   "before": {
+    "LineName": "Healer Augmentation Spec",
+    "SpellID": 3231,
+    "Level": 47,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Healer Augmentation Spec_47"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Healer Augmentation Spec_48",
+   "op": "delete",
+   "before": {
+    "LineName": "Healer Augmentation Spec",
+    "SpellID": 3234,
+    "Level": 48,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Healer Augmentation Spec_48"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Shaman Augmentation Spec_23",
+   "op": "delete",
+   "before": {
+    "LineName": "Shaman Augmentation Spec",
+    "SpellID": 3285,
+    "Level": 23,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Shaman Augmentation Spec_23"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Shaman Augmentation Spec_24",
+   "op": "delete",
+   "before": {
+    "LineName": "Shaman Augmentation Spec",
+    "SpellID": 3288,
+    "Level": 24,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Shaman Augmentation Spec_24"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Shaman Augmentation Spec_30",
+   "op": "delete",
+   "before": {
+    "LineName": "Shaman Augmentation Spec",
+    "SpellID": 3286,
+    "Level": 30,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Shaman Augmentation Spec_30"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Shaman Augmentation Spec_35",
+   "op": "delete",
+   "before": {
+    "LineName": "Shaman Augmentation Spec",
+    "SpellID": 3289,
+    "Level": 35,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Shaman Augmentation Spec_35"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Shaman Augmentation Spec_43",
+   "op": "delete",
+   "before": {
+    "LineName": "Shaman Augmentation Spec",
+    "SpellID": 3287,
+    "Level": 43,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Shaman Augmentation Spec_43"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Shaman Augmentation Spec_45",
+   "op": "delete",
+   "before": {
+    "LineName": "Shaman Augmentation Spec",
+    "SpellID": 3290,
+    "Level": 45,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Shaman Augmentation Spec_45"
+   },
+   "after": {}
+  },
+  {
+   "table": "Spell",
+   "key": "2561",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2562",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2563",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2564",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2565",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2566",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2567",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2568",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2569",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2570",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0,
+    "DamageType": 11
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8,
+    "DamageType": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "351",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "352",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "353",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "354",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "355",
+   "op": "update",
+   "before": {
+    "Type": "DirectDamage",
+    "Value": 0.0,
+    "Duration": 0
+   },
+   "after": {
+    "Type": "DirectDamageWithDebuff",
+    "Value": 10.0,
+    "Duration": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2581",
+   "op": "update",
+   "before": {
+    "Duration": 60,
+    "RecastDelay": 20
+   },
+   "after": {
+    "Duration": 8,
+    "RecastDelay": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2582",
+   "op": "update",
+   "before": {
+    "Duration": 60,
+    "RecastDelay": 20
+   },
+   "after": {
+    "Duration": 8,
+    "RecastDelay": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2583",
+   "op": "update",
+   "before": {
+    "Duration": 60,
+    "RecastDelay": 20
+   },
+   "after": {
+    "Duration": 8,
+    "RecastDelay": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2584",
+   "op": "update",
+   "before": {
+    "Duration": 60,
+    "RecastDelay": 20
+   },
+   "after": {
+    "Duration": 8,
+    "RecastDelay": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2585",
+   "op": "update",
+   "before": {
+    "Duration": 60,
+    "RecastDelay": 20
+   },
+   "after": {
+    "Duration": 8,
+    "RecastDelay": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2586",
+   "op": "update",
+   "before": {
+    "Duration": 60,
+    "RecastDelay": 20
+   },
+   "after": {
+    "Duration": 8,
+    "RecastDelay": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2587",
+   "op": "update",
+   "before": {
+    "Duration": 60,
+    "RecastDelay": 20
+   },
+   "after": {
+    "Duration": 8,
+    "RecastDelay": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3361",
+   "op": "update",
+   "before": {
+    "Value": 1.0
+   },
+   "after": {
+    "Value": 2.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3362",
+   "op": "update",
+   "before": {
+    "Value": 2.0
+   },
+   "after": {
+    "Value": 4.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3363",
+   "op": "update",
+   "before": {
+    "Value": 3.0
+   },
+   "after": {
+    "Value": 6.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3364",
+   "op": "update",
+   "before": {
+    "Value": 4.0
+   },
+   "after": {
+    "Value": 8.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3365",
+   "op": "update",
+   "before": {
+    "Value": 5.0
+   },
+   "after": {
+    "Value": 10.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "ca58cb04-d15b-46e2-9c12-a7ced49d46f3",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 75553,
+    "ClientEffect": 3029,
+    "Icon": 3029,
+    "Name": "Purifying Reconstruction",
+    "Description": "Purifying Reconstruction (live 1.130a Subterranean).",
+    "Target": "Realm",
+    "Range": 1875,
+    "Power": 30,
+    "CastTime": 2.5,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "Heal",
+    "Duration": 0,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 302.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "You are affected by Purifying Reconstruction.",
+    "Message2": "{0} is affected by Purifying Reconstruction.",
+    "Message3": "Purifying Reconstruction ends.",
+    "Message4": "Purifying Reconstruction ends on {0}.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 75149,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "local-class-live-v1",
+    "TooltipId": 29575,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "ca58cb04-d15b-46e2-9c12-a7ced49d46f3"
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "12471285-3f2c-41a5-b631-e8e0a67c7daa",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "LineName": "Subterranean Spec",
+    "SpellID": 75553,
+    "Level": 46,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "12471285-3f2c-41a5-b631-e8e0a67c7daa"
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "local-linked-live-v1-77287",
+   "op": "update",
+   "before": {
+    "Level": 45
+   },
+   "after": {
+    "Level": 40
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "cdfca6b0-d004-485f-9b40-66a85fcc8aa8",
+   "op": "update",
+   "before": {
+    "Level": 33
+   },
+   "after": {
+    "Level": 1
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "4838f94d-9d3b-4534-9119-68f1ce46dca2",
+   "op": "update",
+   "before": {
+    "Level": 45
+   },
+   "after": {
+    "Level": 5
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "a1878fbf-6da1-4d7f-a2a6-2a07e506ed32",
+   "op": "update",
+   "before": {
+    "Level": 45
+   },
+   "after": {
+    "Level": 21
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "01ade6ea-9653-40ed-92bc-4fa75774dcf7",
+   "op": "update",
+   "before": {
+    "Level": 45
+   },
+   "after": {
+    "Level": 35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77275",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -40
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77276",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77277",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77278",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77279",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77280",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -60
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "10056",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "10054",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77281",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -40
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "10006",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77287",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -40
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "10156",
+   "op": "update",
+   "before": {
+    "Power": -20
+   },
+   "after": {
+    "Power": -35
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Beastcraft_1",
+   "op": "update",
+   "before": {
+    "Level": 1
+   },
+   "after": {
+    "Level": 2
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3590",
+   "op": "update",
+   "before": {
+    "RecastDelay": 120
+   },
+   "after": {
+    "RecastDelay": 105
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3592",
+   "op": "update",
+   "before": {
+    "RecastDelay": 90
+   },
+   "after": {
+    "RecastDelay": 60
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Druid Nature Spec_1",
+   "op": "update",
+   "before": {
+    "LineName": "Druid Nature Spec"
+   },
+   "after": {
+    "LineName": "Druid Nature Magic"
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Druid Nature Spec_7",
+   "op": "update",
+   "before": {
+    "LineName": "Druid Nature Spec"
+   },
+   "after": {
+    "LineName": "Druid Nature Magic"
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Druid Nature Spec_12",
+   "op": "update",
+   "before": {
+    "LineName": "Druid Nature Spec"
+   },
+   "after": {
+    "LineName": "Druid Nature Magic"
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Druid Nature Spec_20",
+   "op": "update",
+   "before": {
+    "LineName": "Druid Nature Spec"
+   },
+   "after": {
+    "LineName": "Druid Nature Magic"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-vampiir-test-v1-69035",
+   "op": "update",
+   "before": {
+    "RecastDelay": 10
+   },
+   "after": {
+    "RecastDelay": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-vampiir-test-v1-69036",
+   "op": "update",
+   "before": {
+    "RecastDelay": 10
+   },
+   "after": {
+    "RecastDelay": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-vampiir-test-v1-69037",
+   "op": "update",
+   "before": {
+    "RecastDelay": 10
+   },
+   "after": {
+    "RecastDelay": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-vampiir-test-v1-69038",
+   "op": "update",
+   "before": {
+    "RecastDelay": 10
+   },
+   "after": {
+    "RecastDelay": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76186",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76187",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76188",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76189",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76190",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76191",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76192",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76193",
+   "op": "update",
+   "before": {
+    "Target": "Enemy",
+    "Radius": 0
+   },
+   "after": {
+    "Target": "Cone",
+    "Radius": 90
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Spirit Dimming_48",
+   "op": "update",
+   "before": {
+    "Level": 48
+   },
+   "after": {
+    "Level": 46
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Suppression_6",
+   "op": "update",
+   "before": {
+    "Level": 6
+   },
+   "after": {
+    "Level": 8
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Summoning_35",
+   "op": "update",
+   "before": {
+    "Level": 35
+   },
+   "after": {
+    "Level": 33
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Spirit Enhancement_22",
+   "op": "update",
+   "before": {
+    "Level": 22
+   },
+   "after": {
+    "Level": 19
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Spirit Enhancement_30",
+   "op": "update",
+   "before": {
+    "Level": 30
+   },
+   "after": {
+    "Level": 29
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Spirit Enhancement_40",
+   "op": "update",
+   "before": {
+    "Level": 40
+   },
+   "after": {
+    "Level": 39
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Spirit Enhancement_50",
+   "op": "update",
+   "before": {
+    "Level": 50
+   },
+   "after": {
+    "Level": 49
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Runes of Suppression_1",
+   "op": "update",
+   "before": {
+    "Level": 1
+   },
+   "after": {
+    "Level": 2
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Runes of Suppression_2",
+   "op": "update",
+   "before": {
+    "Level": 2
+   },
+   "after": {
+    "Level": 1
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Runes of Destruction_45",
+   "op": "update",
+   "before": {
+    "Level": 45
+   },
+   "after": {
+    "Level": 48
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Runes of Destruction_36",
+   "op": "update",
+   "before": {
+    "Level": 36
+   },
+   "after": {
+    "Level": 35
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Runes of Destruction_48",
+   "op": "update",
+   "before": {
+    "Level": 48
+   },
+   "after": {
+    "Level": 45
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Runes of Destruction_46",
+   "op": "update",
+   "before": {
+    "Level": 46
+   },
+   "after": {
+    "Level": 44
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Runes of Destruction_44",
+   "op": "update",
+   "before": {
+    "Level": 44
+   },
+   "after": {
+    "Level": 43
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "local-warlock-test-v1-66014",
+   "op": "update",
+   "before": {
+    "Level": 39
+   },
+   "after": {
+    "Level": 38
+   }
+  },
+  {
+   "table": "LineXSpell",
+   "key": "local-warlock-test-v1-66322",
+   "op": "update",
+   "before": {
+    "Level": 45
+   },
+   "after": {
+    "Level": 44
+   }
+  },
+  {
+   "table": "Style",
+   "key": 147,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 106,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 2,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 63,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 106,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 2,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 976,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 295,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 0,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 907,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 295,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 0,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 377,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 360,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 1,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 467,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 150,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 1,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 1783,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 2014,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 0,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 1182,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 391,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 2,
+    "AttackResultRequirement": 0
+   }
+  },
+  {
+   "table": "Style",
+   "key": 1057,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 265,
+    "AttackResultRequirement": 7
+   },
+   "after": {
+    "OpeningRequirementType": 1,
+    "OpeningRequirementValue": 0,
+    "AttackResultRequirement": 5
+   }
+  },
+  {
+   "table": "Style",
+   "key": 981,
+   "op": "update",
+   "before": {
+    "OpeningRequirementType": 2,
+    "OpeningRequirementValue": 0,
+    "AttackResultRequirement": 0
+   },
+   "after": {
+    "OpeningRequirementType": 0,
+    "OpeningRequirementValue": 299,
+    "AttackResultRequirement": 7
+   }
+  }
+ ],
+ "note": "Server-sent NPC/object positions need no client binary patch. Geometry edits require matching client assets and rebuilt navigation."
+}

@@ -267,9 +267,9 @@ public class UT_SavageBotCombat
         var scorePurchase = typeof(AutonomousBotEconomy).GetMethod("ScorePurchase",
             BindingFlags.Static | BindingFlags.NonPublic)!;
         var strongerPurchase = (AutonomousBotEconomy.PurchaseCandidate)scorePurchase.Invoke(
-            null, new object[] { bot, stronger, false })!;
+            null, new object[] { bot, stronger })!;
         var highBonusPurchase = (AutonomousBotEconomy.PurchaseCandidate)scorePurchase.Invoke(
-            null, new object[] { bot, highBonus, false })!;
+            null, new object[] { bot, highBonus })!;
 
         Assert.That(strongerPurchase, Is.Not.Null);
         Assert.That(highBonusPurchase, Is.Not.Null);

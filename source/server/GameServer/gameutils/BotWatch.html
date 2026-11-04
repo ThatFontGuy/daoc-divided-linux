@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bot Watch</title>
+<style>
+:root {
+  --bg: #f4f2ee; --panel: #ffffff; --ink: #1f1d1a; --muted: #6b665e; --line: #d9d4cb;
+  --zone: #ebe7df; --zone-line: #c9c2b5; --zone-ink: #8a8378; --accent: #7a5c1e;
+  --alb: #c0392b; --mid: #2e6fd1; --hib: #2f9a4a; --none: #8a8378; --fight: #e67e22; --dead: #555;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15161a; --panel: #1e2026; --ink: #e8e6e1; --muted: #9a968e; --line: #33363e;
+    --zone: #20232a; --zone-line: #3a3e48; --zone-ink: #7d7a73; --accent: #d9b25c;
+    --alb: #ff6b5b; --mid: #5c9bff; --hib: #4fd072; --none: #9a968e; --fight: #ffa24c; --dead: #888;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15161a; --panel: #1e2026; --ink: #e8e6e1; --muted: #9a968e; --line: #33363e;
+  --zone: #20232a; --zone-line: #3a3e48; --zone-ink: #7d7a73; --accent: #d9b25c;
+  --alb: #ff6b5b; --mid: #5c9bff; --hib: #4fd072; --none: #9a968e; --fight: #ffa24c; --dead: #888;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 13px/1.4 system-ui, "Segoe UI", sans-serif; display: grid;
+  grid-template-columns: 240px 1fr 300px; grid-template-rows: 44px 1fr; grid-template-areas: "top top top" "regions map side"; }
+header { grid-area: top; display: flex; align-items: center; gap: 12px; padding: 0 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+header h1 { font-size: 15px; margin: 0; letter-spacing: .02em; }
+header .status { color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+header label { display: flex; gap: 4px; align-items: center; color: var(--muted); }
+header input[type=search] { background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; width: 160px; }
+button { background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; font: inherit; }
+button:hover { border-color: var(--accent); }
+#regions { grid-area: regions; overflow: auto; border-right: 1px solid var(--line); background: var(--panel); }
+#regions .r { display: flex; justify-content: space-between; gap: 8px; padding: 6px 12px; cursor: pointer; border-bottom: 1px solid var(--line); }
+#regions .r:hover { background: var(--bg); }
+#regions .r.on { background: var(--bg); box-shadow: inset 3px 0 var(--accent); }
+#regions .r .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#regions .r .c { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#regions .r .c b { color: var(--ink); font-weight: 600; }
+#regions .more { padding: 8px 12px; }
+#mapwrap { grid-area: map; position: relative; overflow: hidden; }
+canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+canvas.drag { cursor: grabbing; }
+#tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; display: none; white-space: nowrap; }
+#legend { position: absolute; left: 12px; bottom: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; color: var(--muted); display: flex; gap: 4px 10px; flex-wrap: wrap; font-size: 12px; max-width: calc(100% - 24px); }
+#legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; background: var(--c); }
+#side { grid-area: side; overflow: auto; border-left: 1px solid var(--line); background: var(--panel); padding: 12px 14px; }
+#side h2 { font-size: 14px; margin: 0 0 2px; }
+#side h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 16px 0 6px; }
+#side dl { display: grid; grid-template-columns: 80px 1fr; gap: 3px 8px; margin: 8px 0 0; }
+#side dt { color: var(--muted); }
+#side dd { margin: 0; overflow-wrap: anywhere; }
+#side .hint { color: var(--muted); }
+.u { display: flex; justify-content: space-between; gap: 6px; padding: 3px 0; cursor: pointer; }
+.u:hover { color: var(--accent); }
+.u .k { color: var(--muted); white-space: nowrap; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 3px; }
+.bar i { display: block; height: 100%; background: var(--hib); }
+@media (max-width: 900px) {
+  body { grid-template-columns: 1fr; grid-template-rows: 44px 160px 60vh auto; grid-template-areas: "top" "regions" "map" "side"; }
+  header label.opt { display: none; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Bot Watch</h1>
+  <input type="search" id="find" placeholder="Find a name" aria-label="Find a name">
+  <label class="opt"><input type="checkbox" id="lines" checked> Group lines</label>
+  <label class="opt"><input type="checkbox" id="labels"> Names</label>
+  <label class="opt"><input type="checkbox" id="empty"> Empty regions</label>
+  <button id="fit" title="Show the whole region">Fit</button>
+  <span class="status" id="status">Connecting…</span>
+</header>
+<nav id="regions"></nav>
+<div id="mapwrap">
+  <canvas id="map"></canvas>
+  <div id="tip"></div>
+  <div id="legend">
+    <span style="--c:var(--alb)">Albion</span><span style="--c:var(--mid)">Midgard</span><span style="--c:var(--hib)">Hibernia</span>
+    <span style="--c:var(--fight)">In combat</span><i>◯ player · ◇ companion · × dead</i>
+  </div>
+</div>
+<aside id="side"><p class="hint">Pick a region, then click a dot. Drag to pan, scroll to zoom.</p></aside>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const canvas = $("map"), ctx = canvas.getContext("2d");
+const REALMS = { 1: "Albion", 2: "Midgard", 3: "Hibernia" };
+let regions = [], view = null, regionId = null, selected = null, cam = null, hover = null, failures = 0;
+const store = {
+  get(k) { try { return localStorage.getItem("botwatch." + k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem("botwatch." + k, v); } catch { } }
+};
+
+function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function realmColor(r) { return css(r === 1 ? "--alb" : r === 2 ? "--mid" : r === 3 ? "--hib" : "--none"); }
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]); }
+
+async function getJson(url) {
+  const r = await fetch(url, { cache: "no-store" });
+  if (!r.ok) throw new Error(r.status + " " + url);
+  return r.json();
+}
+
+// ---- regions list ----
+async function loadRegions() {
+  regions = await getJson("/api/regions");
+  drawRegions();
+}
+
+function drawRegions() {
+  const showEmpty = $("empty").checked;
+  const rows = regions.filter(r => showEmpty || r.Bots + r.Players > 0 || r.Id === regionId);
+  $("regions").innerHTML = rows.map(r =>
+    `<div class="r${r.Id === regionId ? " on" : ""}" data-id="${r.Id}" title="Region ${r.Id}">
+       <span class="n">${esc(r.Name || "Region " + r.Id)}</span>
+       <span class="c"><b>${r.Bots}</b>${r.Players ? " · " + r.Players + " pl" : ""}</span></div>`).join("")
+    || `<p class="more hint">Nobody is online.</p>`;
+}
+
+$("regions").addEventListener("click", e => {
+  const row = e.target.closest(".r");
+  if (row) pickRegion(+row.dataset.id);
+});
+
+function pickRegion(id) {
+  if (id !== regionId) { cam = null; selected = null; }
+  regionId = id;
+  store.set("region", id);
+  drawRegions();
+  refresh();
+}
+
+// ---- region view ----
+async function refresh() {
+  try {
+    await loadRegions();
+    if (regionId == null && regions.length && regions[0].Bots + regions[0].Players > 0) {
+      const saved = +store.get("region");
+      regionId = regions.some(r => r.Id === saved) && store.get("region") !== null ? saved : regions[0].Id;
+      drawRegions();
+    }
+    if (regionId != null) {
+      view = await getJson("/api/region/" + regionId);
+      if (!cam) fit();
+    }
+    failures = 0;
+    const bots = regions.reduce((n, r) => n + r.Bots, 0), players = regions.reduce((n, r) => n + r.Players, 0);
+    $("status").textContent = `${bots} bot${bots === 1 ? "" : "s"} · ${players} player${players === 1 ? "" : "s"} · ${new Date().toLocaleTimeString()}`;
+  } catch (e) {
+    failures++;
+    $("status").textContent = failures > 2 ? "Server not answering" : "Retrying…";
+  }
+  draw();
+  drawSide();
+}
+
+function bounds() {
+  if (!view || !view.Zones.length) return null;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const z of view.Zones) { x0 = Math.min(x0, z.X); y0 = Math.min(y0, z.Y); x1 = Math.max(x1, z.X + z.Width); y1 = Math.max(y1, z.Y + z.Height); }
+  return { x0, y0, x1, y1 };
+}
+
+function fit() {
+  const b = bounds(), w = canvas.clientWidth, h = canvas.clientHeight;
+  if (!b || !w || !h) return;
+  const scale = Math.min(w / (b.x1 - b.x0), h / (b.y1 - b.y0)) * 0.94;
+  cam = { scale, x: (b.x0 + b.x1) / 2, y: (b.y0 + b.y1) / 2 };
+}
+
+const toScreen = (x, y) => [(x - cam.x) * cam.scale + canvas.clientWidth / 2, (y - cam.y) * cam.scale + canvas.clientHeight / 2];
+const toWorld = (sx, sy) => [(sx - canvas.clientWidth / 2) / cam.scale + cam.x, (sy - canvas.clientHeight / 2) / cam.scale + cam.y];
+
+function visibleUnits() {
+  if (!view) return [];
+  const q = $("find").value.trim().toLowerCase();
+  return q ? view.Units.filter(u => u.Name.toLowerCase().includes(q)) : view.Units;
+}
+
+function draw() {
+  const dpr = window.devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+  if (canvas.width !== w * dpr || canvas.height !== h * dpr) { canvas.width = w * dpr; canvas.height = h * dpr; }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  if (!view || !cam) return;
+
+  // zones
+  ctx.font = "11px system-ui, sans-serif";
+  for (const z of view.Zones) {
+    const [sx, sy] = toScreen(z.X, z.Y), sw = z.Width * cam.scale, sh = z.Height * cam.scale;
+    ctx.fillStyle = css("--zone"); ctx.fillRect(sx, sy, sw, sh);
+    ctx.strokeStyle = css("--zone-line"); ctx.lineWidth = 1; ctx.strokeRect(sx + .5, sy + .5, sw, sh);
+    if (sw > 60) { ctx.fillStyle = css("--zone-ink"); ctx.fillText(z.Name, sx + 6, sy + 14, sw - 12); }
+  }
+
+  const units = visibleUnits();
+
+  // group lines: each member to the leader (or the first member when the leader is elsewhere)
+  if ($("lines").checked) {
+    const groups = new Map();
+    for (const u of units) if (u.Group) (groups.get(u.Group) || groups.set(u.Group, []).get(u.Group)).push(u);
+    ctx.lineWidth = 1.2;
+    for (const members of groups.values()) {
+      if (members.length < 2) continue;
+      const lead = members.find(m => m.Leader) || members[0];
+      const [lx, ly] = toScreen(lead.X, lead.Y);
+      ctx.strokeStyle = realmColor(lead.Realm); ctx.globalAlpha = .45;
+      ctx.beginPath();
+      for (const m of members) { if (m === lead) continue; const [mx, my] = toScreen(m.X, m.Y); ctx.moveTo(lx, ly); ctx.lineTo(mx, my); }
+      ctx.stroke(); ctx.globalAlpha = 1;
+    }
+  }
+
+  // units
+  const r = Math.max(2.5, Math.min(6, cam.scale * 300));
+  for (const u of units) {
+    const [x, y] = toScreen(u.X, u.Y);
+    if (x < -20 || y < -20 || x > w + 20 || y > h + 20) continue;
+    const color = realmColor(u.Realm);
+    if (u.InCombat && u.Alive) { ctx.fillStyle = css("--fight"); ctx.globalAlpha = .35; ctx.beginPath(); ctx.arc(x, y, r + 4, 0, 7); ctx.fill(); ctx.globalAlpha = 1; }
+    ctx.fillStyle = color; ctx.strokeStyle = color;
+    if (!u.Alive) {
+      ctx.strokeStyle = css("--dead"); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x - r, y - r); ctx.lineTo(x + r, y + r); ctx.moveTo(x + r, y - r); ctx.lineTo(x - r, y + r); ctx.stroke();
+    } else if (u.Kind === "companion") {
+      ctx.beginPath(); ctx.moveTo(x, y - r - 1); ctx.lineTo(x + r + 1, y); ctx.lineTo(x, y + r + 1); ctx.lineTo(x - r - 1, y); ctx.closePath(); ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.arc(x, y, u.Kind === "player" ? r + 1.5 : r, 0, 7); ctx.fill();
+      if (u.Kind === "player") { ctx.strokeStyle = css("--ink"); ctx.lineWidth = 2; ctx.stroke(); }
+    }
+    // heading: DAoC 0 = south, 4096 per turn, clockwise seen from above
+    if (u.Alive && r >= 4) {
+      const a = u.Heading / 4096 * Math.PI * 2;
+      ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - Math.sin(a) * (r + 5), y + Math.cos(a) * (r + 5)); ctx.stroke();
+    }
+    if (selected && u.Id === selected.Id && u.Kind === selected.Kind) {
+      ctx.strokeStyle = css("--accent"); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, r + 7, 0, 7); ctx.stroke();
+    }
+    if ($("labels").checked || u.Kind === "player") {
+      ctx.fillStyle = css("--ink"); ctx.fillText(u.Name, x + r + 4, y + 4);
+    }
+  }
+}
+
+function unitAt(sx, sy) {
+  let best = null, bestD = 10 * 10;
+  for (const u of visibleUnits()) {
+    const [x, y] = toScreen(u.X, u.Y), d = (x - sx) ** 2 + (y - sy) ** 2;
+    if (d < bestD) { best = u; bestD = d; }
+  }
+  return best;
+}
+
+// ---- side panel ----
+function line(label, value) { return value === "" || value == null ? "" : `<dt>${label}</dt><dd>${esc(value)}</dd>`; }
+
+function drawSide() {
+  const side = $("side");
+  if (!view) return;
+  const cur = selected && view.Units.find(u => u.Id === selected.Id && u.Kind === selected.Kind);
+  if (!cur) {
+    const kinds = { bot: 0, player: 0, companion: 0 }, realms = { 1: 0, 2: 0, 3: 0 };
+    let fighting = 0, dead = 0;
+    for (const u of view.Units) { kinds[u.Kind]++; realms[u.Realm] = (realms[u.Realm] || 0) + 1; if (u.InCombat) fighting++; if (!u.Alive) dead++; }
+    const groups = new Set(view.Units.filter(u => u.Group).map(u => u.Group)).size;
+    const players = view.Units.filter(u => u.Kind === "player");
+    side.innerHTML = `<h2>${esc(view.Name)}</h2><span class="hint">Region ${view.Id} · ${view.Zones.length} zones</span>
+      <dl>${line("Gamebots", kinds.bot)}${line("Companions", kinds.companion || "")}${line("Players", kinds.player || "")}
+      ${line("Albion", realms[1] || "")}${line("Midgard", realms[2] || "")}${line("Hibernia", realms[3] || "")}
+      ${line("Groups", groups)}${line("Fighting", fighting)}${line("Dead", dead || "")}</dl>
+      ${players.length ? `<h3>Players</h3>${players.map(unitLink).join("")}` : ""}
+      <p class="hint" style="margin-top:16px">Click a dot for details.</p>`;
+    return;
+  }
+  selected = cur;
+  const mates = cur.Group ? view.Units.filter(u => u.Group === cur.Group && u !== cur) : [];
+  side.innerHTML = `<h2>${esc(cur.Name)}</h2>
+    <span class="hint">${esc(cur.Kind)} · level ${cur.Level} ${esc(cur.Class)} · ${REALMS[cur.Realm] || "no realm"}</span>
+    <div class="bar" title="Health ${cur.Health}%"><i style="width:${cur.Health}%"></i></div>
+    <dl>${line("State", !cur.Alive ? "Dead" : cur.InCombat ? "In combat" : "Out of combat")}
+      ${line("Zone", cur.Zone)}${line("Target", cur.Target)}${line("Activity", cur.Activity)}${line("Goal", cur.Goal)}
+      ${line("Camp", cur.Camp)}${line("Travel", cur.Travel)}${line("Position", `${cur.X}, ${cur.Y}`)}${line("Id", cur.Id)}</dl>
+    ${mates.length ? `<h3>Group${cur.Leader ? " (leads)" : ""}</h3>${mates.map(unitLink).join("")}` : ""}
+    <p style="margin-top:16px"><button id="center">Center</button> <button id="clear">Back to region</button></p>`;
+  $("center").onclick = () => { cam.x = cur.X; cam.y = cur.Y; cam.scale = Math.max(cam.scale, .05); draw(); };
+  $("clear").onclick = () => { selected = null; draw(); drawSide(); };
+}
+
+function unitLink(u) {
+  return `<div class="u" data-id="${u.Id}" data-kind="${u.Kind}"><span style="color:${realmColor(u.Realm)}">${esc(u.Name)}${u.Leader ? " ★" : ""}</span>
+    <span class="k">${u.Level} ${esc(u.Class)} · ${u.Alive ? u.Health + "%" : "dead"}</span></div>`;
+}
+
+$("side").addEventListener("click", e => {
+  const row = e.target.closest(".u");
+  if (!row || !view) return;
+  selected = view.Units.find(u => u.Id === +row.dataset.id && u.Kind === row.dataset.kind) || null;
+  draw(); drawSide();
+});
+
+// ---- input ----
+let drag = null;
+canvas.addEventListener("pointerdown", e => { drag = { x: e.offsetX, y: e.offsetY, moved: false }; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener("pointermove", e => {
+  if (drag && cam) {
+    const dx = e.offsetX - drag.x, dy = e.offsetY - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
+    if (drag.moved) { canvas.classList.add("drag"); cam.x -= dx / cam.scale; cam.y -= dy / cam.scale; drag.x = e.offsetX; drag.y = e.offsetY; draw(); }
+    return;
+  }
+  if (!cam) return;
+  hover = unitAt(e.offsetX, e.offsetY);
+  const tip = $("tip");
+  if (hover) {
+    tip.style.display = "block"; tip.style.left = e.offsetX + 14 + "px"; tip.style.top = e.offsetY + 10 + "px";
+    tip.innerHTML = `<b>${esc(hover.Name)}</b> ${hover.Level} ${esc(hover.Class)}${hover.Activity ? " · " + esc(hover.Activity) : ""}`;
+  } else tip.style.display = "none";
+});
+canvas.addEventListener("pointerup", e => {
+  canvas.classList.remove("drag");
+  if (drag && !drag.moved && cam) { selected = unitAt(e.offsetX, e.offsetY); draw(); drawSide(); }
+  drag = null;
+});
+canvas.addEventListener("pointerleave", () => { $("tip").style.display = "none"; });
+canvas.addEventListener("wheel", e => {
+  if (!cam) return;
+  e.preventDefault();
+  const [wx, wy] = toWorld(e.offsetX, e.offsetY), f = Math.exp(-e.deltaY * .0015);
+  cam.scale = Math.min(2, Math.max(1e-4, cam.scale * f));
+  const [nx, ny] = toWorld(e.offsetX, e.offsetY);
+  cam.x += wx - nx; cam.y += wy - ny;
+  draw();
+}, { passive: false });
+
+$("fit").onclick = () => { fit(); draw(); };
+for (const id of ["lines", "labels"]) {
+  const saved = store.get(id); if (saved !== null) $(id).checked = saved === "1";
+  $(id).onchange = () => { store.set(id, $(id).checked ? "1" : "0"); draw(); };
+}
+$("empty").onchange = drawRegions;
+$("find").oninput = draw;
+window.addEventListener("resize", draw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+
+refresh();
+setInterval(refresh, 1000);
+</script>
+</body>
+</html>

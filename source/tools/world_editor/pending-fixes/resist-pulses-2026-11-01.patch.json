@@ -1,0 +1,476 @@
+{
+ "format": "offline-daoc-world-editor-2",
+ "created": "2026-11-01T16:08:32.533396+00:00",
+ "clientWorld": "e7a9b42ab562d78adb1f6f4247ef14aaaaae1803a3a5639b545e69a8b78bb342",
+ "changes": [
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 25",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5381,
+    "Level": 25,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 25"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 44",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5382,
+    "Level": 44,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 44"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 29",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5389,
+    "Level": 29,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 29"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 48",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5390,
+    "Level": 48,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 48"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 30",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5391,
+    "Level": 30,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 30"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 49",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5392,
+    "Level": 49,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 49"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 27",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5385,
+    "Level": 27,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 27"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 46",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5386,
+    "Level": 46,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 46"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 28",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5387,
+    "Level": 28,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 28"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 47",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5388,
+    "Level": 47,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 47"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 26",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5383,
+    "Level": 26,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 26"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Bard Res Song 45",
+   "op": "delete",
+   "before": {
+    "LineName": "Bard Music Spec",
+    "SpellID": 5384,
+    "Level": 45,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Bard Res Song 45"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 25",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3651,
+    "Level": 25,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 25"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 44",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3652,
+    "Level": 44,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 44"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 29",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3659,
+    "Level": 29,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 29"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 48",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3690,
+    "Level": 48,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 48"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 27",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3655,
+    "Level": 27,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 27"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 46",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3656,
+    "Level": 46,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 46"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 28",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3657,
+    "Level": 28,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 28"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 47",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3658,
+    "Level": 47,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 47"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 30",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3661,
+    "Level": 30,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 30"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 49",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3662,
+    "Level": 49,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 49"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 26",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3653,
+    "Level": 26,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 26"
+   },
+   "after": {}
+  },
+  {
+   "table": "LineXSpell",
+   "key": "Skald Res Song 45",
+   "op": "delete",
+   "before": {
+    "LineName": "Battlesongs",
+    "SpellID": 3654,
+    "Level": 45,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "LineXSpell_ID": "Skald Res Song 45"
+   },
+   "after": {}
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77602",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77603",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77604",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 100
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77684",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77685",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77686",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 100
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3226",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 100
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3227",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 100
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3228",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 100
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3293",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77316",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77317",
+   "op": "update",
+   "before": {
+    "Pulse": 0,
+    "Frequency": 0
+   },
+   "after": {
+    "Pulse": 1,
+    "Frequency": 30
+   }
+  }
+ ],
+ "note": "Server-sent NPC/object positions need no client binary patch. Geometry edits require matching client assets and rebuilt navigation."
+}

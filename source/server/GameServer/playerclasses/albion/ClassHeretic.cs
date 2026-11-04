@@ -44,7 +44,7 @@ namespace DOL.GS.PlayerClass
 
 		// 1.125 added the Saracen pairing.
 		public override List<PlayerRace> EligibleRaces => ServerProperties.Properties.ENABLE_HERETIC_TEST
-			? new List<PlayerRace> { PlayerRace.Korazh, PlayerRace.Avalonian, PlayerRace.Briton, PlayerRace.Inconnu, PlayerRace.Saracen }
+			? new List<PlayerRace> { PlayerRace.Korazh, PlayerRace.Avalonian, PlayerRace.Briton, PlayerRace.Highlander, PlayerRace.Inconnu, PlayerRace.Saracen }
 			: new List<PlayerRace>();
 	}
 }

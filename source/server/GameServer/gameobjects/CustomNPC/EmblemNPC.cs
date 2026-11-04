@@ -27,6 +27,7 @@ namespace DOL.GS
 	public class EmblemNPC : GameNPC
 	{
 		public const long EMBLEM_COST = 50000;
+		public const int MIN_EMBLEM_LEVEL = 10;
 		private const string EMBLEMIZE_ITEM_WEAK = "emblemise item";
 
 		/// <summary>
@@ -78,18 +79,18 @@ namespace DOL.GS
 					t.Out.SendMessage("Your guild has no emblem.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
 					return false;
 				}
-				if (t.Level < 20) //if level of player < 20 so can not put emblem
+				if (t.Level < MIN_EMBLEM_LEVEL) // below the minimum level an emblem needs a tradeskill (owner 2026-10-28: level 10 instead of 20)
 				{
 					if (t.CraftingPrimarySkill == eCraftingSkill.NoCrafting)
 					{
-						t.Out.SendMessage("You have to be at least level 20 or have 400 in a tradeskill to be able to wear an emblem.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+						t.Out.SendMessage("You have to be at least level 10 or have 400 in a tradeskill to be able to wear an emblem.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
 						return false;
 					}
 					else
 					{
 						if (t.GetCraftingSkillValue(t.CraftingPrimarySkill) < 400)
 						{
-							t.Out.SendMessage("You have to be at least level 20 or have 400 in a tradeskill to be able to wear an emblem.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+							t.Out.SendMessage("You have to be at least level 10 or have 400 in a tradeskill to be able to wear an emblem.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
 							return false;
 						}
 					}
@@ -135,6 +136,9 @@ namespace DOL.GS
 			}
 
 			item.Emblem = player.Guild.Emblem;
+			// Saved at once: a character that is reloaded from the database (a teleport, a relog) before the periodic save
+			// would lose the emblem it has just paid for (owner 2026-10-28).
+			GameServer.Database.SaveObject(item);
 			player.Out.SendInventoryItemsUpdate(new DbInventoryItem[] {item});
 			if (item.SlotPosition < (int) eInventorySlot.FirstBackpack)
 				player.UpdateEquipmentAppearance();

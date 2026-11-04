@@ -1,4 +1,5 @@
 using System;
+using DOL.AI.Brain;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace DOL.GS
         private sealed record CampMonster(string InternalId, string Name, int X, int Y, int Z,
             int EffectiveLevel, ushort CurrentRegionID, Zone CurrentZone,
             AutonomousDungeonGoalCatalog.Point DungeonPoint);
+
+        // Aggressive Shrouded Isles monsters, named ones included, for the home shore check in the catalog builder.
+        private static volatile (ushort RegionId, int X, int Y, int Level)[] _shroudedIslesAggressors = [];
 
         private static BackgroundSnapshotBuilder<CampMonster[], CampCatalogCell[]> _campBuilder;
         private static CampCatalogCell[] _campDraft;
@@ -118,14 +122,19 @@ namespace DOL.GS
         private static CampMonster[] CaptureCampMonsters()
         {
             var monsters = new List<CampMonster>();
+            var aggressors = new List<(ushort RegionId, int X, int Y, int Level)>();
             foreach (Region region in WorldMgr.GetAllRegions())
             {
-                if (region == null || !AutonomousCapnBryGoalCatalog.IsClassicOrShroudedIslesExpansion(region.Expansion)) continue;
+                if (region == null || !AutonomousCapnBryGoalCatalog.IsClassicOrShroudedIslesExpansion(region.Expansion) &&
+                    !AutonomousAtlantisPolicy.IsAtlantisRegion(region.ID)) continue;
                 foreach (GameObject actor in region.Objects)
                 {
                     if (actor is not GameNPC npc || npc.ObjectState != GameObject.eObjectState.Active ||
-                        !npc.IsAlive || npc.CurrentZone == null || !IsExperienceMonster(npc) ||
-                        npc.Name != npc.Name.ToLowerInvariant() ||
+                        !npc.IsAlive || npc.CurrentZone == null || !IsExperienceMonster(npc)) continue;
+                    if (AutonomousOrdinaryPveRealmPolicy.IsShroudedIsles(region.ID) &&
+                        npc.Brain is StandardMobBrain { AggroLevel: > 0, AggroRange: > 0 })
+                        aggressors.Add((region.ID, npc.X, npc.Y, npc.EffectiveLevel));
+                    if (npc.Name != npc.Name.ToLowerInvariant() ||
                         AutonomousAuditedCampPolicy.IsBotExcludedNpc(npc)) continue;
                     AutonomousDungeonGoalCatalog.Point point = null;
                     if (npc.CurrentZone.IsDungeon) AutonomousDungeonGoalCatalog.TryGet(npc, out point);
@@ -133,6 +142,7 @@ namespace DOL.GS
                         npc.CurrentRegionID, npc.CurrentZone, point));
                 }
             }
+            _shroudedIslesAggressors = aggressors.ToArray();
             return monsters.ToArray();
         }
 

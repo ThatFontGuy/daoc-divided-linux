@@ -36,3 +36,10 @@ The original DAoC client, art, sound, maps and other third-party assets are not
 represented as authored by this project, and no original game-client source tree
 was located alongside the customization code. Being noncommercial does not itself
 change third-party rights. The GPL server license is not a license for those assets.
+- 1.130 opcode reference (docs/reference/daoc-opcodes-1.130.json): the eod-client project's published
+  table, eveofdarkness.org/opcodes, by joej, CC BY 4.0 (posts) and GPL-3.0-or-later (client and protocol
+  code). Not affiliated with the original Eve of Darkness project.
+- Client format reference (docs/reference/camelot-studio-formats.md): docs/formats.md from Camelot Studio
+  (github.com/camelot-forge/camelot-studio, commit 6a7732d), MIT. Its licence is in
+  docs/reference/camelot-studio-LICENSE.txt. model_table.py and the World Workshop building and uninstall
+  designs follow its ideas; that code is our own, and the 1.130 addresses were found in the client here.

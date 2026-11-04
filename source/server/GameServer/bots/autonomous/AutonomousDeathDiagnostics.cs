@@ -36,13 +36,14 @@ namespace DOL.GS
                 AutonomousRepeatDeathSpots.Record(bot.DatabaseID, bot.CurrentRegionID, bot.X, bot.Y, DateTime.UtcNow);
                 AutonomousSharedDeathSpots.Record(bot.DatabaseID, bot.Level, bot.CurrentRegionID, bot.X, bot.Y, DateTime.UtcNow);
             }
-            if (!Log.IsInfoEnabled)
+            if (!Log.IsInfoEnabled || !BotDiagnostics.Enabled)
                 return;
             try
             {
                 GameLiving living = killer as GameLiving;
                 int attackers = bot.attackComponent?.AttackerTracker?.Attackers?.Count() ?? 0;
                 string con = living != null ? ConLevels.GetConColor(bot.GetConLevel(living)).ToString() : "-";
+                string goal = AutonomousObjectiveAssignments.GoalFor(AutonomousObjectiveAssignments.KindFor(bot), bot.PersistentRecord?.CurrentGoal);
                 bool arrived = bot.GoalDiagnosticAttempt?.ArrivedUtc != null;
                 int armor = bot.Inventory?.EquippedItems?.Count(item => item != null && item.Object_Type >= (int)eObjectType._FirstArmor &&
                     item.Object_Type <= (int)eObjectType._LastArmor) ?? -1;
@@ -50,7 +51,9 @@ namespace DOL.GS
                          $"realm={GlobalConstants.RealmToName(bot.Realm)} group={(bot.Group?.MemberCount ?? 1)} " +
                          $"killer=\"{killer?.Name}\" killerKind={KillerKind(killer)} killerLevel={living?.Level ?? 0} con={con} " +
                          $"attackers={attackers} armorPieces={armor} maxHealth={bot.MaxHealth} arrivedAtCamp={arrived} " +
-                         $"activity=\"{activityBefore}\" goal=\"{bot.PersistentRecord?.CurrentGoal}\" " +
+                         $"activity=\"{activityBefore}\" before=\"{bot.ActivityBeforeFight}\" " +
+                         $"beforeAgo={(bot.ActivityBeforeFightTick == 0 ? -1 : (GameLoop.GameLoopTime - bot.ActivityBeforeFightTick) / 1000)} " +
+                         $"goal=\"{goal}\" " +
                          $"region={bot.CurrentRegionID} zone=\"{bot.CurrentZone?.Description}\" at={bot.X},{bot.Y},{bot.Z}");
             }
             catch (Exception exception)

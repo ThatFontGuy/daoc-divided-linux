@@ -733,6 +733,9 @@ namespace DOL.GS.PacketHandler.Client.v168
             return (ushort) (player.Steed is null ? 0 : player.Steed.RiderSlot(player));
         }
 
+        // The state is a three bit field: riding, dead, flying and climbing all include the swimming bit.
+        public static bool IsSwimmingState(StateFlags stateFlags) => (stateFlags & StateFlags.CLIMBING) is StateFlags.SWIMMING;
+
         public static bool ProcessStateFlags(GamePlayer player, StateFlags stateFlags)
         {
             player.IsStrafing = (stateFlags & StateFlags.STRAFING_ANY) != 0;
@@ -778,6 +781,7 @@ namespace DOL.GS.PacketHandler.Client.v168
 
             if (PlayerTaxiSynchronization.IsPlayerTaxi(player) && (stateFlags & StateFlags.RIDING) == 0)
                 PlayerTaxiSynchronization.Correct(player, false);
+            player.IsSwimming = IsSwimmingState(stateFlags);
             player.StateFlags = stateFlags;
             return true;
         }

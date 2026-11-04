@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using DOL.Database;
 using DOL.GS.ServerProperties;
 using NUnit.Framework;
 using Schedule = DOL.GS.AutonomousBotSchedule;
@@ -338,6 +341,25 @@ namespace DOL.GS.Tests
             Assert.That(picked[true].Where(text => text.Contains("rez")), Is.Not.Empty);
             Assert.That(picked[false].Concat(picked[true]).Where(text => text.Contains("tonight")), Is.Empty,
                 "memory has no date, so no gossip claims tonight");
+        }
+
+        [Test]
+        public void TestAccountsNeverClaimServerFirsts()
+        {
+            DOL.Logging.LoggerManager.InitializeWithExplicitLibrary(null, DOL.Logging.LogLibrary.None);
+            using var server = new DOL.UnitTests.EpicTestServerScope();
+            static GamePlayer Player(bool tester)
+            {
+                var client = (GameClient)RuntimeHelpers.GetUninitializedObject(typeof(GameClient));
+                typeof(GameClient).GetField("<Account>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(client, new DbAccount { IsTester = tester });
+                var player = (GamePlayer)RuntimeHelpers.GetUninitializedObject(typeof(GamePlayer));
+                typeof(GamePlayer).GetField("m_client", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(player, client);
+                return player;
+            }
+
+            Assert.That(AutonomousLivingServer.MayClaimFirst(Player(false)), Is.True);
+            Assert.That(AutonomousLivingServer.MayClaimFirst(Player(true)), Is.False);
+            Assert.That(AutonomousLivingServer.TryClaimFirst("First test account to reach a test", Player(true), "a test"), Is.False);
         }
 
         [Test]

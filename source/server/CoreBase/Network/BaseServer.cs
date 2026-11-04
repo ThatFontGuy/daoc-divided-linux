@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -19,6 +21,9 @@ namespace DOL.Network
         [ThreadStatic]
         private static Encoder _encoder;
 
+        /// <summary>A hosted world's Passport Desk listens this far above the login port, so an invite code needs no second number.</summary>
+        public const int PASSPORT_DESK_PORT_OFFSET = 10;
+
         private const int UDP_RECEIVE_BUFFER_SIZE = 8192;
         private const int UDP_RECEIVE_BUFFER_CHUNK_SIZE = 64; // This should be increased if someday clients send UDP packets larger than this.
 
@@ -26,6 +31,7 @@ namespace DOL.Network
         private Socket _udpSocket;
         private SessionIdAllocator _sessionIdAllocator = new();
         private UpnpNat _upnp; // Set while this server's router port mappings are in place.
+        private List<(int Port, ProtocolType Protocol)> _upnpPorts = []; // The mappings this server made, to remove at stop.
 
         public BaseServerConfig Configuration { get; }
         public bool IsRunning => _listen != null; // Not a great way to check if the server is running.
@@ -33,6 +39,30 @@ namespace DOL.Network
         protected BaseServer(BaseServerConfig config)
         {
             Configuration = config ?? throw new ArgumentNullException(nameof(config));
+        }
+
+        /// <summary>
+        /// Asks for each port on its own. A router refuses a port it already has a rule for, and that must not cost the
+        /// ports after it. Returns the ports it opened.
+        /// </summary>
+        public static List<(int Port, ProtocolType Protocol)> ForwardEach(IEnumerable<(int Port, ProtocolType Protocol)> ports, Action<int, ProtocolType> forward, Action<int, ProtocolType, Exception> refused)
+        {
+            List<(int, ProtocolType)> opened = [];
+
+            foreach ((int port, ProtocolType protocol) in ports)
+            {
+                try
+                {
+                    forward(port, protocol);
+                    opened.Add((port, protocol));
+                }
+                catch (WebException e)
+                {
+                    refused(port, protocol, e);
+                }
+            }
+
+            return opened;
         }
 
         public static Encoder GetEncoder()
@@ -76,12 +106,22 @@ namespace DOL.Network
 
                     // Listening on every interface (Host for Friends): map to this PC's address on the router's network.
                     IPAddress localAddress = Configuration.IP.Equals(IPAddress.Any) ? nat.LocalAddress : Configuration.IP;
-                    nat.ForwardPort(Configuration.UDPPort, Configuration.UDPPort, ProtocolType.Udp, $"Divided Realms UDP {Configuration.UDPPort}", localAddress);
-                    nat.ForwardPort(Configuration.Port, Configuration.Port, ProtocolType.Tcp, $"Divided Realms TCP {Configuration.Port}", localAddress);
+                    (int, ProtocolType)[] ports =
+                    [
+                        (Configuration.UDPPort, ProtocolType.Udp),
+                        (Configuration.Port, ProtocolType.Tcp),
+                    ];
+                    _upnpPorts = ForwardEach(ports, (port, protocol) =>
+                        nat.ForwardPort(port, port, protocol, $"Divided Realms {protocol.ToString().ToUpperInvariant()} {port}", localAddress),
+                        (port, protocol, e) =>
+                        {
+                            if (log.IsWarnEnabled)
+                                log.Warn($"[UPNP] The router refused {protocol} {port}. It may already have a rule of its own for that port; check its port forwarding page. ({e.Message})");
+                        });
                     _upnp = nat;
 
                     if (log.IsInfoEnabled)
-                        log.Info($"[UPNP] Router forwards TCP {Configuration.Port} and UDP {Configuration.UDPPort} to {localAddress}");
+                        log.Info($"[UPNP] Router forwards {string.Join(", ", _upnpPorts.Select(p => $"{p.Protocol} {p.Port}"))} to {localAddress}");
 
                     if (Configuration.DetectRegionIP)
                     {
@@ -346,8 +386,8 @@ namespace DOL.Network
                 // Close the router ports this server opened.
                 try
                 {
-                    _upnp.DeleteForwardingRule(Configuration.Port, ProtocolType.Tcp);
-                    _upnp.DeleteForwardingRule(Configuration.UDPPort, ProtocolType.Udp);
+                    foreach ((int port, ProtocolType protocol) in _upnpPorts)
+                        _upnp.DeleteForwardingRule(port, protocol);
                 }
                 catch (Exception e)
                 {

@@ -120,7 +120,7 @@ namespace DOL.GameServerConsole
 		public void SendTradeWindow() { }
 		public void SendCloseTradeWindow() { }
 		public void SendPlayerDied(GameLiving killedPlayer, GameObject killer) { }
-		public void SendPlayerRevive(GameLiving revivedPlayer) { }
+		public void SendPlayerRevive(GamePlayer revivedPlayer) { }
 		public void SendUpdatePlayer() { }
 		public void SendUpdatePlayerSkills(bool updateInternalCache) { }
 		public void SendUpdateWeaponAndArmorStats() { }

@@ -602,7 +602,7 @@ namespace DOL.GS
 			}
 			else
 			{
-				text = MoneyItemName + "s";
+				text = GameMerchant.CurrencyPlural(MoneyItemName);
 			}
 
 			player.Out.SendMessage(LanguageMgr.GetTranslation(player.Client.Account.Language, "GameMerchant.GetExamineMessages.BuyItemsFor", this.Name, text), eChatType.CT_Say, eChatLoc.CL_ChatWindow);

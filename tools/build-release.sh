@@ -66,7 +66,7 @@ cp "$DATA"/server-data/*.json "$OUT/bin/"
 echo "== World"
 mkdir -p "$OUT/defaults"
 cp "$DATA/world.sqlite" "$OUT/defaults/world.sqlite"
-mkdir -p "$OUT/world-updates" && cp "$DATA"/world-updates/* "$OUT/world-updates/" 2>/dev/null || true
+mkdir -p "$OUT/world-updates" && cp "$REPO"/source/tools/release-baselines/modern/world-updates/* "$OUT/world-updates/"   # the steps in git match the server code; the zip only supplies the dev7 world to update from
 
 # The server reads config/ next to its program and navmesh/ from its working directory (bin/).
 rm -rf "$OUT/bin/config"

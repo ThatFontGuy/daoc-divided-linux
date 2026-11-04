@@ -299,11 +299,10 @@ namespace DOL.GS.ServerRules
             if (player.ObjectState != GameObject.eObjectState.Active) return;
             if (player.Client.IsPlaying == false) return;
 
-            player.Out.SendMessage("Your temporary invulnerability timer has expired.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+            player.Out.SendMessage("Your temporary PvP invulnerability timer has expired.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
 
             return;
         }
-
 
         public abstract bool IsSameRealm(GameLiving source, GameLiving target, bool quiet);
         public abstract bool IsAllowedCharsInAllRealms(GameClient client);
@@ -339,38 +338,44 @@ namespace DOL.GS.ServerRules
             if (!defender.IsAlive || !attacker.IsAlive)
                 return false;
 
+            // a companion or pet stowed during its player's horse ride neither attacks nor can be attacked (owner 2026-10-31)
+            if (defender is GameNPC { StowedForRide: true } || attacker is GameNPC { StowedForRide: true })
+                return false;
+
             GamePlayer playerAttacker = attacker as GamePlayer;
             GamePlayer playerDefender = defender as GamePlayer;
 
-            // if Pet, let's define the controller once
-            if (defender is GameNPC)
-                if ((defender as GameNPC).Brain is IControlledBrain)
-                    playerDefender = ((defender as GameNPC).Brain as IControlledBrain).GetPlayerOwner();
+            if (defender is GameNPC defenderNpc && defenderNpc.Brain is IControlledBrain defenderBrain)
+                playerDefender = defenderBrain.GetPlayerOwner();
 
-            if (attacker is GameNPC)
-                if ((attacker as GameNPC).Brain is IControlledBrain)
-                    playerAttacker = ((attacker as GameNPC).Brain as IControlledBrain).GetPlayerOwner();
+            if (attacker is GameNPC attackerNpc && attackerNpc.Brain is IControlledBrain attackerBrain)
+                playerAttacker = attackerBrain.GetPlayerOwner();
 
-            if (playerDefender != null && (playerDefender.Client.ClientState == GameClient.eClientState.WorldEnter || playerDefender.IsInvulnerableToAttack))
+            // Loading screen protection. Invulnerable to everything.
+            if (playerDefender != null && playerDefender.Client?.ClientState is GameClient.eClientState.WorldEnter)
             {
                 if (!quiet)
-                    MessageToLiving(attacker, defender.Name + " is entering the game and is temporarily immune to PvP attacks!");
+                    MessageToLiving(attacker, $"{defender.Name} is entering the game and cannot be attacked!");
+
                 return false;
             }
 
+            // PvP timer protection.
             if (playerAttacker != null && playerDefender != null)
             {
-                // Attacker immunity
                 if (playerAttacker.IsInvulnerableToAttack)
                 {
-                    if (quiet == false) MessageToLiving(attacker, "You can't attack players until your PvP invulnerability timer wears off!");
+                    if (!quiet)
+                        MessageToLiving(attacker, "You can't attack players until your PvP invulnerability timer wears off!");
+
                     return false;
                 }
 
-                // Defender immunity
                 if (playerDefender.IsInvulnerableToAttack)
                 {
-                    if (quiet == false) MessageToLiving(attacker, defender.Name + " is temporarily immune to PvP attacks!");
+                    if (!quiet)
+                        MessageToLiving(attacker, $"{defender.Name} is temporarily immune to PvP attacks!");
+
                     return false;
                 }
             }
@@ -1090,6 +1095,16 @@ namespace DOL.GS.ServerRules
             // Support bots earn the same kill credit without duplicating XP awards.
             var expeditionOwner = AutonomousRealmRaid.LootOwner(killedNpc,
                 botCountAndDamage.ToDictionary(pair => pair.Key, pair => pair.Value.Damage)) as RealmRaidLootOwner;
+            if (expeditionOwner != null && AutonomousRealmRaid.IsHighEndRaidEncounter(killedNpc))
+            {
+                // the real players in a high-end raid encounter get their quarter of its loot (owner 2026-10-31): whoever
+                // fought it, or stands with the expedition's realm by the boss. Only these bosses: every other kill keeps
+                // the normal loot rules (autoloot off unless the player turns it on)
+                eRealm raidRealm = expeditionOwner.Members.FirstOrDefault()?.Realm ?? eRealm.None;
+                expeditionOwner.Players = playerCountAndDamage.Keys
+                    .Concat(killedNpc.GetPlayersInRadius(WorldMgr.VISIBILITY_DISTANCE).Where(p => p.Realm == raidRealm))
+                    .Distinct().ToArray();
+            }
             var expeditionMembers = expeditionOwner?.Members.ToHashSet();
             foreach (var pair in botCountAndDamage)
             {
@@ -1136,6 +1151,10 @@ namespace DOL.GS.ServerRules
                 }
 
                 DropLoot(killedNpc, killer, itemOwners);
+
+                // after the share, so a player it already gave an item is not paid twice
+                if (DragonLairPlacement.DragonRealm(killedNpc) != eRealm.None)
+                    DragonPlayerReward.Grant(killedNpc, playerCountAndDamage.Keys, expeditionOwner?.PlayersGivenItems ?? []);
             }
 
             static void SendNotWorthRewardMessage(GameNPC killedNpc, GameNPC.RewardEligibility rewardEligibility)
@@ -2206,7 +2225,7 @@ namespace DOL.GS.ServerRules
             }
         }
 
-        private static long CalculateOutpostExperienceBonus(GamePlayer playerToAward, long baseXpReward)
+        public static long CalculateOutpostExperienceBonus(GamePlayer playerToAward, long baseXpReward)
         {
             //outpost XP
             //1.54 http://www.camelotherald.com/more/567.shtml

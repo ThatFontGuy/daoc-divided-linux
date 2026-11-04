@@ -1,0 +1,21 @@
+{
+  "about": "Links (add_offmesh.py) for Hibernian dungeons the modern (1.130 live geometry) meshes left in pieces. Koalinth Caverns: the upper and lower levels meet at one 32-unit step. Fomor: 9 of 74 climbs end on false floor inside solid pillars; each link joins the real floors at that climb's foot and top. Treibh Caillte is left out: its floors join only through RockyGolem teleporters. Apply to the installed modern meshes, then regenerate the dungeon proofs with UT_DungeonProofGenerator. These zones have no seams, roads or pockets entries.",
+  "zones": {
+    "223": {
+      "links": ["32071,31860,16723:32117,31860,16691"]
+    },
+    "180": {
+      "links": [
+        "29972,28763,16768:30029,28663,17042:jump",
+        "30924,28075,16795:30983,27981,17044:jump",
+        "28813,30969,15811:28734,30938,16743:jump",
+        "34822,33119,15815:34985,33164,16768:jump",
+        "31561,36850,16003:31559,36787,16256:jump",
+        "31425,36422,16003:31561,36450,16510:jump",
+        "31981,36636,16259:31993,36555,16504:jump",
+        "31654,36416,16512:31655,36340,16765:jump",
+        "36268,26562,16007:36359,26531,16692:jump"
+      ]
+    }
+  }
+}

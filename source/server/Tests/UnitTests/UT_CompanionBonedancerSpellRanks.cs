@@ -43,9 +43,13 @@ public class UT_CompanionBonedancerSpellRanks
     [TestCase(true, false, true, 15, 15, 15)]
     [TestCase(true, false, true, 17, 1, 1)]
     [TestCase(true, false, true, 14, 14, 14)]
-    [TestCase(false, true, true, 17, 17, 13)]
-    [TestCase(true, true, true, 17, 17, 13)]
-    [TestCase(true, false, false, 17, 17, 13)]
+    // Owner 2026-11-02: the real-spec rule covers every bot with a point-funded build, not just the /spawn Bonedancer.
+    // A companion or an autonomous bot now reads its trained rank, so a level 50 Minstrel with Instruments 50 knows the
+    // 204% speed song; only a plain mob keeps the three-quarter estimate (last case).
+    [TestCase(false, true, true, 17, 17, 17)]
+    [TestCase(true, true, true, 17, 17, 17)]
+    [TestCase(true, false, false, 17, 17, 17)]
+    [TestCase(false, false, true, 17, 17, 13)]
     public void ActualSpellCatalogUsesTrainedRankOnlyForCompanionBonedancer(
         bool helper, bool world, bool bone, int characterLevel, int trained, int expected)
     {

@@ -751,7 +751,7 @@ namespace DOL.GS
 
             protected override int OnTick(ECSGameTimer timer)
             {
-                if (!_owner.IsAlive || _owner.ObjectState is not eObjectState.Active)
+                if (!_owner.IsAlive || _owner.ObjectState is not eObjectState.Active || _owner.Client.ClientState is not GameClient.eClientState.Playing)
                     return _onQuitTimerEnd();
 
                 if (_owner.CraftTimer != null && _owner.CraftTimer.IsAlive)
@@ -777,17 +777,17 @@ namespace DOL.GS
 
                 int currentRemainingDuration = REMAINING_DURATIONS[_remainingDurationsIndex];
                 _owner.Out.SendMessage(LanguageMgr.GetTranslation(_owner.Client.Account.Language, "GamePlayer.Quit.YouWillQuit1", currentRemainingDuration), eChatType.CT_Important, eChatLoc.CL_SystemWindow);
-                return CalculateNextInterval();
+                return CalculateNextInterval(currentRemainingDuration);
+            }
 
-                int CalculateNextInterval()
-                {
-                    _remainingDurationsIndex++;
+            private int CalculateNextInterval(int currentRemainingDuration)
+            {
+                _remainingDurationsIndex++;
 
-                    if (_remainingDurationsIndex < REMAINING_DURATIONS.Length)
-                        currentRemainingDuration -= REMAINING_DURATIONS[_remainingDurationsIndex];
+                if (_remainingDurationsIndex < REMAINING_DURATIONS.Length)
+                    currentRemainingDuration -= REMAINING_DURATIONS[_remainingDurationsIndex];
 
-                    return currentRemainingDuration * 1000;
-                }
+                return currentRemainingDuration * 1000;
             }
 
             private long GetLastCombatTick()
@@ -2349,6 +2349,39 @@ namespace DOL.GS
             m_powerRegenerationTimer.Start(GetPowerRegenerationInterval());
         }
 
+        /// <summary>When the regeneration timers were last checked (see <see cref="EnsureRegeneration"/>).</summary>
+        public long NextRegenerationCheck;
+
+        /// <summary>
+        /// Owner 2026-11-03: a player sat out of combat with the endurance bar at zero and it stayed there until a new login. A
+        /// regeneration timer is only started when the value drops, and StartXRegeneration does nothing for a character that is
+        /// dead or not yet active, so one missed call leaves a bar below its maximum with no timer. Every ten seconds a living,
+        /// active player whose health, power or endurance is below the maximum and whose timer is not running gets it back.
+        /// </summary>
+        public void EnsureRegeneration()
+        {
+            if (!IsAlive || ObjectState is not eObjectState.Active)
+                return;
+
+            if (Endurance < MaxEndurance && !m_enduRegenerationTimer.IsAlive)
+            {
+                StartEnduranceRegeneration();
+                log.Warn($"REGENERATION_RESTARTED who=\"{Name}\" kind=endurance value={Endurance}/{MaxEndurance}");
+            }
+
+            if (MaxMana > 0 && Mana < MaxMana && !m_powerRegenerationTimer.IsAlive)
+            {
+                StartPowerRegeneration();
+                log.Warn($"REGENERATION_RESTARTED who=\"{Name}\" kind=power value={Mana}/{MaxMana}");
+            }
+
+            if (Health < MaxHealth && !m_healthRegenerationTimer.IsAlive)
+            {
+                StartHealthRegeneration();
+                log.Warn($"REGENERATION_RESTARTED who=\"{Name}\" kind=health value={Health}/{MaxHealth}");
+            }
+        }
+
         public override void StartEnduranceRegeneration()
         {
             if (m_health == 0 || ObjectState is not eObjectState.Active || m_enduRegenerationTimer.IsAlive)
@@ -3710,6 +3743,7 @@ namespace DOL.GS
                 Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.GainRealmPoints.YouGet", amount.ToString()), eChatType.CT_Important, eChatLoc.CL_SystemWindow);
 
             ChampionRules.GainRealmPoints(this, amount);
+            ArtifactLevels.AddXp(this, amount * ArtifactLevels.XpPerRealmPoint);
 
             while (RealmPoints >= CalculateRPsFromRealmLevel(RealmLevel + 1) && RealmLevel < ( REALMPOINTS_FOR_LEVEL.Length - 1 ) )
             {
@@ -4433,6 +4467,7 @@ namespace DOL.GS
             }
 
             Experience += expTotal;
+            ArtifactLevels.AddXp(this, (long) (expTotal / Math.Max(0.01, arguments.AllowMultiply ? LevelRangeXpRates.PlayerRate(Level, CurrentRegion.IsRvR || CurrentZone.IsRvR) : 1)));
 
             if (expTotal >= 0)
             {
@@ -5652,9 +5687,7 @@ namespace DOL.GS
             armorFactor = Math.Min(armorFactor, armorFactorCap);
             armorFactor += GetModified(eProperty.ArmorFactor) / 5.0; // Don't call base here.
 
-            /*GameSpellEffect effect = SpellHandler.FindEffectOnTarget(this, typeof(VampiirArmorDebuff));
-            if (effect != null && slot == (effect.SpellHandler as VampiirArmorDebuff).Slot)
-                armorFactor -= (int) (effect.SpellHandler as VampiirArmorDebuff).Spell.Value;*/
+            armorFactor -= VampiirArmorDebuff.AfPenalty(this, slot);
 
             armorFactor *= HealthArmorChantSpellHandler.Scale(this); // Champion / Thane armor chants.
             return Math.Max(0, armorFactor);
@@ -5675,7 +5708,7 @@ namespace DOL.GS
 
             // Debuffs can't lower absorb below 0%: https://darkageofcamelot.com/article/friday-grab-bag-08302019
             // ABS debuffs can either be multiplicative (if appended with a minus sign) or flat. In 1.65, all debuffs are believed to be multiplicative.
-            double absorb = item.SPD_ABS * 0.01 * (1 + GetModified(eProperty.ArmorAbsorption) * 0.01);
+            double absorb = Math.Max(0, item.SPD_ABS - VampiirArmorDebuff.AbsorbPenalty(this, slot)) * 0.01 * (1 + GetModified(eProperty.ArmorAbsorption) * 0.01);
             return Math.Clamp(absorb, 0, 1);
         }
 
@@ -6361,6 +6394,10 @@ namespace DOL.GS
         /// </summary>
         public const string LAST_CHARGED_ITEM_USE_TICK = "LastChargedItemUsedTick";
         public const string ITEM_USE_DELAY = "ItemUseDelay";
+        public const long ChargedItemLockoutMs = 10000;
+
+        /// <summary>Each of an item's two abilities keeps its own CanUseEvery timer (use type 1 and 2).</summary>
+        public static string ItemReuseKey(string itemId, int useType) => $"ITEMREUSEDELAY{itemId}_{useType}";
         public const string NEXT_POTION_AVAIL_TIME = "LastPotionItemUsedTick";
         public const string NEXT_SPELL_AVAIL_TIME_BECAUSE_USE_POTION = "SpellAvailableTime";
 
@@ -6673,6 +6710,16 @@ namespace DOL.GS
                         return;
                 }
 
+                // Camp kits, cooked food and waterlogged chests from fishing.
+                if (Fishing.FishingCooking.TryUse(this, useItem))
+                    return;
+
+                if (GameBoat.IsBoatItem(useItem.Id_nb))
+                {
+                    GameBoat.Summon(this, useItem);
+                    return;
+                }
+
                 if (useItem.Item_Type is >= ((int) eInventorySlot.LeftFrontSaddleBag) and <= ((int) eInventorySlot.RightRearSaddleBag))
                 {
                     UseSaddleBag(useItem);
@@ -6917,7 +6964,12 @@ namespace DOL.GS
                                                             TempProperties.SetProperty(NEXT_SPELL_AVAIL_TIME_BECAUSE_USE_POTION, 6 * 1000 + CurrentRegion.Time);
                                                     }
 
-                                                    if (spellHandler.StartSpell(this, useItem))
+                                                    // A thrown or fired item (the Javelin of Flame) goes at the target, not the user.
+                                                    GameLiving aim = spell.IsHarmful ? TargetObject as GameLiving : this;
+
+                                                    if (aim == null)
+                                                        Out.SendMessage("You need a target for that!", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+                                                    else if (spellHandler.StartSpell(aim, useItem))
                                                     {
                                                         if (useItem.Count > 1)
                                                         {
@@ -6962,7 +7014,7 @@ namespace DOL.GS
                                 long lastChargedItemUseTick = TempProperties.GetProperty<long>(LAST_CHARGED_ITEM_USE_TICK);
                                 long changeTime = CurrentRegion.Time - lastChargedItemUseTick;
                                 long delay = TempProperties.GetProperty<long>(ITEM_USE_DELAY);
-                                long itemDelay = TempProperties.GetProperty<long>("ITEMREUSEDELAY" + useItem.Id_nb);
+                                long itemDelay = TempProperties.GetProperty<long>(ItemReuseKey(useItem.Id_nb, type));
                                 long itemReuse = (long)useItem.CanUseEvery * 1000;
 
                                 if (itemDelay == 0)
@@ -7174,8 +7226,8 @@ namespace DOL.GS
                         if (castOk)
                         {
                             TempProperties.SetProperty(LAST_CHARGED_ITEM_USE_TICK, CurrentRegion.Time);
-                            TempProperties.SetProperty(ITEM_USE_DELAY, (long)(60000 * 2));
-                            TempProperties.SetProperty("ITEMREUSEDELAY" + useItem.Id_nb, CurrentRegion.Time);
+                            TempProperties.SetProperty(ITEM_USE_DELAY, ChargedItemLockoutMs);
+                            TempProperties.SetProperty(ItemReuseKey(useItem.Id_nb, type), CurrentRegion.Time);
                         }
                     }
                 }
@@ -7301,85 +7353,9 @@ namespace DOL.GS
         /// <returns>true if applied</returns>
         public bool ApplyPoison(DbInventoryItem poisonPotion, DbInventoryItem toItem)
         {
-            if (poisonPotion == null || toItem == null) return false;
-            int envenomSpec = GetModifiedSpecLevel(Specs.Envenom);
-            if (envenomSpec < 1)
-            {
-                Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.ApplyPoison.CantUsePoisons"), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-                return false;
-            }
-            if (!GlobalConstants.IsWeapon(toItem.Object_Type))
-            {
-                Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.ApplyPoison.PoisonsAppliedWeapons"), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-                return false;
-            }
-            if (!HasAbilityToUseItem(toItem.Template) || !CanPoisonWeapon(toItem.Object_Type))
-            {
-                Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.ApplyPoison.CantPoisonWeapon"), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-                return false;
-            }
-            if (envenomSpec < poisonPotion.Level || Level < poisonPotion.Level)
-            {
-                Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.ApplyPoison.CantUsePoison"), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-                return false;
-            }
-            if (InCombat)
-            {
-                Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.ApplyPoison.CantApplyRecentCombat"), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-                return false;
-            }
-            if (EffectListService.GetEffectOnTarget(this, eEffect.Mez) != null)
-            {
-                Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.ApplyPoison.CantApplyRecentCombat"), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-                return false;
-            }
-
-            //if (toItem.PoisonCharges > 0)
-            //{
-            //	Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GameObjects.GamePlayer.ApplyPoison.CantReapplyPoison"), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-            //	return false;
-            //}
-
-            //if (toItem.PoisonSpellID != 0)
-            //{
-            //	bool canApply = false;
-            //	SpellLine poisonLine = SkillBase.GetSpellLine(GlobalSpellsLines.Mundane_Poisons);
-            //	if (poisonLine != null)
-            //	{
-            //		List<Spell> spells = SkillBase.GetSpellList(poisonLine.KeyName);
-            //		foreach (Spell spl in spells)
-            //		{
-            //			if (spl.ID == toItem.PoisonSpellID)
-            //			{
-            //				canApply = true;
-            //				break;
-            //			}
-            //		}
-            //	}
-            //	if (canApply == false)
-            //	{
-            //		Out.SendMessage(string.Format("You can't poison your {0}!", toItem.GetName(0, false)), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-            //		return false;
-            //	}
-            //}
-
-            // Apply poison effect to weapon
-            if (poisonPotion.PoisonSpellID != 0)
-            {
-                toItem.PoisonCharges = poisonPotion.PoisonCharges;
-                toItem.PoisonMaxCharges = poisonPotion.PoisonMaxCharges;
-                toItem.PoisonSpellID = poisonPotion.PoisonSpellID;
-            }
-            else
-            {
-                toItem.PoisonCharges = poisonPotion.Template.PoisonCharges;
-                toItem.PoisonMaxCharges = poisonPotion.Template.PoisonMaxCharges;
-                toItem.PoisonSpellID = poisonPotion.Template.PoisonSpellID;
-            }
-            Inventory.RemoveCountFromStack(poisonPotion, 1);
-            InventoryLogging.LogInventoryAction(this, "(poison)", eInventoryActionType.Other, poisonPotion.Template);
-            Out.SendMessage(string.Format("You apply {0} to {1}.", poisonPotion.GetName(0, false), toItem.GetName(0, false)), eChatType.CT_System, eChatLoc.CL_SystemWindow);
-            return true;
+            // Item poisons left the game in 1.121: assassins coat their weapons from the Envenom line.
+            Out.SendMessage("Item poisons no longer work. Use your Envenom coatings.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+            return false;
         }
 
         #endregion
@@ -8021,9 +7997,12 @@ namespace DOL.GS
 
         /// <summary>A same-region MoveTo farther than this (x + y distance) refreshes the world view afterwards.</summary>
         public const int WorldRefreshJumpDistance = 1000;
-        /// <summary>When the refreshes run after a teleport or region change (ms): once the client has usually finished
-        /// loading, and once more for a slow load.</summary>
-        public static readonly int[] WorldRefreshDelays = [1500, 5000];
+        /// <summary>
+        /// When the refresh runs after a teleport or region change (ms). Owner 2026-10-29: two full refreshes made every
+        /// NPC in sight flicker twice on every teleport; now one refresh resends only what was first sent while the
+        /// client was loading (what it may have dropped), so NPCs already shown never flicker.
+        /// </summary>
+        public static readonly int[] WorldRefreshDelays = [2500];
         private ECSGameTimer _worldRefreshTimer;
 
         /// <summary>
@@ -8038,10 +8017,11 @@ namespace DOL.GS
         {
             _worldRefreshTimer?.Stop();
             int step = 0;
+            long since = GameLoop.GameLoopTime;
             _worldRefreshTimer = new ECSGameTimer(this, timer =>
             {
                 if (ObjectState == eObjectState.Active && Client?.ClientState is GameClient.eClientState.Playing)
-                    PlayerObjectCache.ClearLocked();
+                    PlayerObjectCache.ForgetSentSince(since);
                 step++;
                 if (step < WorldRefreshDelays.Length)
                     return WorldRefreshDelays[step] - WorldRefreshDelays[step - 1];
@@ -8401,7 +8381,7 @@ namespace DOL.GS
                 m_swimming = value;
                 Notify(GamePlayerEvent.SwimmingStatus, this);
                 //Handle Lava Damage
-                if (m_swimming && CurrentZone.IsLava == true)
+                if (m_swimming && CurrentZone?.IsLava == true)
                 {
                     if (m_lavaBurningTimer == null)
                     {
@@ -8411,7 +8391,7 @@ namespace DOL.GS
                         m_lavaBurningTimer.Start(1);
                     }
                 }
-                if (!m_swimming && CurrentZone.IsLava == true && m_lavaBurningTimer != null)
+                if (!m_swimming && m_lavaBurningTimer != null)
                 {
                     m_lavaBurningTimer.Stop();
                     m_lavaBurningTimer = null;
@@ -8564,8 +8544,11 @@ namespace DOL.GS
 
         protected int LavaBurnTimerCallback(ECSGameTimer callingTimer)
         {
-            if (!IsAlive || ObjectState != eObjectState.Active || !IsSwimming)
+            if (!IsAlive || ObjectState != eObjectState.Active || !IsSwimming || CurrentZone?.IsLava != true)
+            {
+                m_lavaBurningTimer = null;
                 return 0;
+            }
 
             Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.LavaBurnTimerCallback.YourInLava"), eChatType.CT_Damaged, eChatLoc.CL_SystemWindow);
             Out.SendMessage(LanguageMgr.GetTranslation(Client.Account.Language, "GamePlayer.LavaBurnTimerCallback.Take34%Damage"), eChatType.CT_Damaged, eChatLoc.CL_SystemWindow);
@@ -9091,12 +9074,6 @@ namespace DOL.GS
             if (item.ExtraBonus != 0)
                 ItemBonus[(eProperty) item.ExtraBonusType] += item.ExtraBonus;
 
-            if ((ePrivLevel) Client.Account.PrivLevel == ePrivLevel.Player && Client.Player != null && Client.Player.ObjectState == eObjectState.Active)
-            {
-                if (item.SpellID > 0 || item.SpellID1 > 0)
-                    TempProperties.SetProperty("ITEMREUSEDELAY" + item.Id_nb, CurrentRegion.Time);
-            }
-
             _statsSenderOnEquipmentChange ??= new(this, OnStatsSendCompletionAfterEquipmentChange);
         }
 
@@ -9257,6 +9234,12 @@ namespace DOL.GS
         }
 
         private StatsSenderOnEquipmentChange _statsSenderOnEquipmentChange;
+
+        /// <summary>Sends the worn-item stats again after something other than equipping changed them.</summary>
+        public void RefreshEquipmentStats()
+        {
+            _statsSenderOnEquipmentChange ??= new(this, OnStatsSendCompletionAfterEquipmentChange);
+        }
 
         private int OnStatsSendCompletionAfterEquipmentChange()
         {
@@ -9630,6 +9613,20 @@ namespace DOL.GS
 
             if (floorObject.ObjectState is not eObjectState.Active)
                 return;
+
+            // From True165 eefaa8d62: a dead player picks up nothing (loot, relics or anything else).
+            if (!IsAlive)
+            {
+                Out.SendMessage("You can't do that while you're dead!", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+                return;
+            }
+
+            // A relic is taken with the same rules whether right-clicked or picked up with the Get key (2026-10-30).
+            if (floorObject is GameRelic relic)
+            {
+                relic.Interact(this);
+                return;
+            }
 
             if (floorObject is GameStaticItemTimed staticItem &&
                 !staticItem.IsOwner(this) &&
@@ -11394,8 +11391,20 @@ namespace DOL.GS
             if (QuestList.Keys.Any(q => q.IsDoingQuest() && QuestJournal.Same(q, quest)))
                 return false;
 
-            if (!AvailableQuestIndexes.TryDequeue(out byte index))
-                index = (byte) QuestList.Count;
+            // Owner 2026-10-30: a freed slot is given only while no quest holds it. SendQuestListUpdate moves a quest
+            // waiting past the 25th slot (an older save with more than 25 active quests) into a freed slot but leaves
+            // that slot queued here, so the next quest taken shared its index and the two showed as one.
+            byte index;
+
+            do
+            {
+                if (!AvailableQuestIndexes.TryDequeue(out index))
+                {
+                    index = QuestJournal.FreeIndex(QuestList.Values);
+                    break;
+                }
+            }
+            while (QuestList.Values.Contains(index));
 
             QuestList.TryAdd(quest, index);
             quest.OnQuestAssigned(this);
@@ -13313,14 +13322,14 @@ namespace DOL.GS
         {
             10, // ML0 == ML1
             10, // ML1
-            11,
-            11,
-            11,
-            11,
-            11,
-            11,
-            11,
-            11,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
             5, // ML10
         };
 
@@ -13721,6 +13730,46 @@ namespace DOL.GS
         public readonly Lock ItemUpdateCacheLock = new();
         public readonly Lock DoorUpdateCacheLock = new();
         public readonly Lock HouseUpdateCacheLock = new();
+
+        /// <summary>
+        /// Forgets only what was first sent at or after <paramref name="since"/> (a teleport), so the next world update
+        /// sends it again; everything the client already had stays as it is.
+        /// </summary>
+        public void ForgetSentSince(long since)
+        {
+            lock (NpcUpdateCacheLock)
+            {
+                foreach (var pair in NpcUpdateCache.Where(pair => pair.Value.CreatedTime >= since).ToArray())
+                {
+                    NpcUpdateCache.Remove(pair.Key);
+                    NpcInRangeCache.Remove(pair.Key);
+                }
+            }
+            lock (ItemUpdateCacheLock)
+            {
+                foreach (var pair in ItemUpdateCache.Where(pair => pair.Value.LastUpdateTime >= since).ToArray())
+                {
+                    ItemUpdateCache.Remove(pair.Key);
+                    ItemInRangeCache.Remove(pair.Key);
+                }
+            }
+            lock (DoorUpdateCacheLock)
+            {
+                foreach (var pair in DoorUpdateCache.Where(pair => pair.Value >= since).ToArray())
+                {
+                    DoorUpdateCache.Remove(pair.Key);
+                    DoorInRangeCache.Remove(pair.Key);
+                }
+            }
+            lock (HouseUpdateCacheLock)
+            {
+                foreach (var pair in HouseUpdateCache.Where(pair => pair.Value >= since).ToArray())
+                {
+                    HouseUpdateCache.Remove(pair.Key);
+                    HouseInRangeCache.Remove(pair.Key);
+                }
+            }
+        }
 
         /// <summary><see cref="Clear"/> under the cache locks, for a refresh while the world update may be running.</summary>
         public void ClearLocked()

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using DOL.Database;
@@ -48,6 +49,55 @@ namespace DOL.UnitTests
         {
             var gift = new Spell(new DbSpell { SpellID = 67410, Type = "MaulerGift", Target = "Enemy", Range = 1500 }, 5);
             Assert.That(ModernMauler.GiftReady(new Actor(), gift), Is.False);
+        }
+
+        private static Tuple<SpellLine, int> Line(string key, int classHint) => new(new SpellLine(key, key, "Aura Manipulation", false), classHint);
+
+        // 2026-11-01 overnight run: none of the 164 Mauler bots knew an aura, so their gifts were skipped 6 million times,
+        // and they also lacked Strength of the Forge and every Discipline of Laresh rank above 12%.
+        [TestCase(60, "Mauler Albion Gifts")] [TestCase(61, "Mauler Midgard Gifts")] [TestCase(62, "Mauler Hibernia Gifts")]
+        public void RealmGiftLinesAreAddedToAuraManipulation(int classId, string gifts)
+        {
+            var lines = new[] { Line("Aura Manipulation", 0), Line("Mauler Albion Gifts", 60), Line("Mauler Midgard Gifts", 61), Line("Mauler Hibernia Gifts", 62) };
+            Assert.That(Specialization.SpecLinesForClass(lines, classId).Select(line => line.Item1.KeyName), Is.EqualTo(new[] { "Aura Manipulation", gifts }));
+        }
+
+        [Test]
+        public void OtherClassLinesStillReplaceTheNeutralLine()
+        {
+            var lines = new[] { Line("Mundane Poisons", 0), Line("Infiltrator Envenom", 9), Line("Shadowblade Envenom", 23) };
+            Assert.That(Specialization.SpecLinesForClass(lines, 9).Select(line => line.Item1.KeyName), Is.EqualTo(new[] { "Infiltrator Envenom" }));
+            Assert.That(Specialization.SpecLinesForClass(lines, 1).Select(line => line.Item1.KeyName), Is.EqualTo(new[] { "Mundane Poisons" }));
+        }
+
+        private static Spell Kit(string type, int timerGroup = 0, double value = 0, bool focus = false) =>
+            new(new DbSpell { SpellID = 67900, Type = type, Target = "Enemy", Value = value, SharedTimerGroup = timerGroup, IsFocus = focus }, 50);
+
+        // 39% of Mauler bot casts did damage in the overnight run. Taps and snares cost swings and did nothing for the fight.
+        [TestCase("SpeedDecrease", true, 100, false)] [TestCase("SpeedDecrease", false, 100, true)]
+        [TestCase("MaulerEnduranceTap", true, 100, false)] [TestCase("MaulerEnduranceTap", true, 29, true)] [TestCase("MaulerEnduranceTap", true, 30, false)]
+        [TestCase("DirectDamage", true, 100, true)] [TestCase("PowerDrain", true, 100, true)] [TestCase("CombatSpeedDebuff", true, 100, true)]
+        public void BotsSwingInsteadOfCastingWhatDoesNotHelp(string type, bool inReach, int endurance, bool expected) =>
+            Assert.That(MaulerBotCombatPolicy.AllowsCast(Kit(type), inReach, endurance), Is.EqualTo(expected));
+
+        [TestCase(false)] [TestCase(true)]
+        public void BotsNeverHoldAFocusSnareOrRootWithPerizor(bool inReach)
+        {
+            Assert.That(MaulerBotCombatPolicy.AllowsCast(Kit("SpeedDecrease", focus: true), inReach, 100), Is.False);
+            Assert.That(MaulerBotCombatPolicy.AllowsCast(Kit("MaulerGift", 67320), inReach, 100), Is.False);
+            Assert.That(MaulerBotCombatPolicy.AllowsCast(Kit("MaulerGift", 0), inReach, 100), Is.True, "realm gift");
+        }
+
+        [Test]
+        public void TheNethuniGiftIsABotCombatHealAndOtherGiftsAreNot()
+        {
+            Assert.That(BotClassKitPolicy.Handles(Kit("MaulerGift", 67300)), Is.True);
+            Assert.That(BotClassKitPolicy.IsCombatSupport(Kit("MaulerGift", 67300)), Is.True);
+            foreach (int family in new[] { 0, 67310, 67320, 67330 })
+            {
+                Assert.That(BotClassKitPolicy.Handles(Kit("MaulerGift", family)), Is.False);
+                Assert.That(BotClassKitPolicy.IsCombatSupport(Kit("MaulerGift", family)), Is.False);
+            }
         }
 
         [TestCase(150, 40, 40)] [TestCase(50, 100, 50)] [TestCase(50, 0, 0)] [TestCase(-1, 100, 0)]

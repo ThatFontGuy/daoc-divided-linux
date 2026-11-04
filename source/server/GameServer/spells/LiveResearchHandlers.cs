@@ -32,7 +32,22 @@ namespace DOL.GS.Spells
     {
         public override string ShortDescription => $"Heals cast on the target are {Spell.Value}% more effective.";
 
-        public static int Percent(GameLiving living) => StrongestEffect.Value(living, eEffect.HealingReceivedBuff);
+        public static int Percent(GameLiving living)
+        {
+            // Warden Forest Executioner is the same effect with a negative Value: heals on the target are that much weaker.
+            int weakest = 0;
+
+            if (living?.effectListComponent != null)
+            {
+                foreach (ECSGameSpellEffect effect in living.effectListComponent.GetSpellEffects(eEffect.HealingReceivedBuff))
+                {
+                    if (effect.IsActive)
+                        weakest = Math.Min(weakest, (int) effect.SpellHandler.Spell.Value);
+                }
+            }
+
+            return StrongestEffect.Value(living, eEffect.HealingReceivedBuff) + weakest;
+        }
     }
 
     /// <summary>

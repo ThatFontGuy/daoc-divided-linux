@@ -20,7 +20,11 @@ namespace DOL.GS;
         private static readonly Logger Log = LoggerManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
         private const string OwnerPrefix = "offlinebot:";
         private const int MinimumEquipmentUpgrade = 8;
-        private const int MaxBotRealmExchangeListings = 1;
+        // Owner 2026-10-29: 3 posts per bot (was 1; Codex's 10 made a launcher refresh take minutes before the launcher split
+        // bot snapshots from the exchange). Players stay unlimited.
+        public const int MaxBotRealmExchangeListings = 3;
+        /// <summary>Extra posts for a crafter's own work, on top of <see cref="MaxBotRealmExchangeListings"/>.</summary>
+        public const int OwnWorkExtraListings = 3;
         private const int ServiceDecisionSafetyRefreshMilliseconds = 5 * 60_000;
         private sealed class ServiceDecisionState
         {
@@ -143,23 +147,23 @@ namespace DOL.GS;
         if (bot?.Inventory == null || bot.DatabaseID <= 0)
             return null;
 
-        bool hasCraft = !string.IsNullOrWhiteSpace(bot.PersistentRecord?.SerializedCraftingSkills);
         // Appraise matching goods before limiting results. Cheap unusable bot
         // wares must not hide a useful player listing beyond the first 48 rows.
         return FindAffordableExchangeItems(bot, int.MaxValue)
-            .Select(item => ScorePurchase(bot, item, hasCraft))
+            .Select(item => ScorePurchase(bot, item))
             .Where(candidate => candidate != null && candidate.Utility > 0)
             .OrderByDescending(candidate => candidate.Utility)
             .ThenBy(candidate => candidate.Item.SellPrice)
             .FirstOrDefault();
     }
 
-        private static PurchaseCandidate ScorePurchase(GameBot bot, DbInventoryItem item, bool hasCraft)
+        private static PurchaseCandidate ScorePurchase(GameBot bot, DbInventoryItem item)
         {
             if (item == null || item.Template == null || item.LevelRequirement > bot.Level ||
                 !BotWeaponStats.HasFunctionalMeleeStats(item) ||
                 (BotWeaponStats.IsMeleeWeapon((eObjectType)item.Object_Type) &&
                  !BotWeaponStats.IsConfiguredMeleeWeapon(bot, item.Template)) ||
+                ((eObjectType)item.Object_Type == eObjectType.Shield && !BotWeaponStats.ShieldFitsBuild(bot)) ||
                 !GameServer.ServerRules.CheckAbilityToUseItem(bot, item.Template))
                 return null;
 
@@ -186,10 +190,9 @@ namespace DOL.GS;
                 return new PurchaseCandidate(item, 1_000 + improvement + playerPreference, equipSlot, true, isPlayerListing);
         }
 
-        // Stackable world goods are the server's practical crafting-material
-        // signal. Only trained crafters buy them, and they remain real backpack
-        // inventory until an actual recipe consumes them.
-        if (hasCraft && item.IsStackable && item.Count > 0)
+        // Only trained crafters buy materials, only those of their own crafts, and
+        // they remain real backpack inventory until an actual recipe consumes them.
+        if (item.Count > 0 && AutonomousBotCrafting.IsMaterialFor(bot, item))
             return new PurchaseCandidate(item, 300 + Math.Min(150, item.Count * 3) + playerPreference, eInventorySlot.Invalid, false, isPlayerListing);
 
         return null;
@@ -216,13 +219,15 @@ namespace DOL.GS;
         public static bool TryGetEquipmentUpgrade(GameBot bot, DbInventoryItem item, out eInventorySlot equipSlot)
         {
             equipSlot = eInventorySlot.Invalid;
-            if (bot?.Inventory == null || item?.Template == null ||
+            // A piece made for another bot's order is the buyer's, never its maker's upgrade.
+            if (bot?.Inventory == null || item?.Template == null || AutonomousBotCraftOrders.IsHeldForOrder(item) ||
                 (eObjectType)item.Object_Type == eObjectType.GenericItem || item.LevelRequirement > bot.Level ||
                 !BotWeaponStats.HasFunctionalMeleeStats(item) ||
                 (BotWeaponStats.IsMeleeWeapon((eObjectType)item.Object_Type) &&
                  (!BotWeaponStats.IsConfiguredMeleeWeapon(bot, item.Template) ||
                   !BotWeaponStats.HasConfiguredWeaponProficiency(bot, item.Template))) ||
                 (BotRangedCombat.IsRangedWeaponType((eObjectType)item.Object_Type) && !BotRangedCombat.IsUsableWeapon(item)) ||
+                ((eObjectType)item.Object_Type == eObjectType.Shield && !BotWeaponStats.ShieldFitsBuild(bot)) ||
                 (!BotWeaponStats.IsMeleeWeapon((eObjectType)item.Object_Type) &&
                  !GameServer.ServerRules.CheckAbilityToUseItem(bot, item.Template)))
                 return false;
@@ -309,7 +314,7 @@ namespace DOL.GS;
         private static void LogEquipmentUpgrade(GameBot bot, DbInventoryItem item,
             DbInventoryItem replaced, eInventorySlot slot, string source)
         {
-            if (!AutonomousDiagnosticsProperties.EquipmentUpgrades || bot?.IsAutonomousWorldBot != true ||
+            if (!(AutonomousDiagnosticsProperties.EquipmentUpgrades && BotDiagnostics.Enabled) || bot?.IsAutonomousWorldBot != true ||
                 bot.IsTemporaryGroupHelper) return;
             // The move has already succeeded. This is one outcome record, not
             // a scan or a second inventory transaction.
@@ -359,7 +364,7 @@ namespace DOL.GS;
             // Choose the single listing from the complete backpack before any
             // vendor sale changes that candidate pool. Once the listing slot is
             // occupied, finish clearing every disposable item before shopping.
-            if (HasListingSpace(bot) && FindValuableListingCandidate(bot) != null)
+            if (FindValuableListingCandidate(bot) != null)
                 return eWorldServiceKind.RealmExchange;
 
             if (FindVendorTrashCandidate(bot) != null)
@@ -375,9 +380,11 @@ namespace DOL.GS;
             // The vendor phase has now made room. If the bot arrived with its
             // one listing slot already occupied, it naturally skipped the first
             // branch and reaches this realm-local upgrade appraisal directly.
-            return !IsBackpackFull(bot) && FindBestUsefulExchangePurchase(bot) != null
-                ? eWorldServiceKind.RealmExchange
-                : null;
+            if (!IsBackpackFull(bot) && FindBestUsefulExchangePurchase(bot) != null)
+                return eWorldServiceKind.RealmExchange;
+
+            // In Darkness Falls, seals the bot has looted buy its realm's seal gear, or seal items to sell (owner 2026-10-30).
+            return !IsBackpackFull(bot) && HasSealPurchase(bot) ? eWorldServiceKind.SealMerchant : null;
         }
 
         public const int NearlyFullFreeSlots = 6;
@@ -418,7 +425,7 @@ namespace DOL.GS;
             if (!arrivedAtMerchant || bot?.IsAutonomousWorldBot != true || bot.IsTemporaryGroupHelper ||
                 bot.IsPlayerLedGroup || bot.Inventory == null || bot.DatabaseID <= 0 ||
                 !IsBackpackFull(bot) || FindVendorTrashCandidate(bot) != null ||
-                HasListingSpace(bot) && FindValuableListingCandidate(bot) != null)
+                FindValuableListingCandidate(bot) != null)
                 return false;
 
             DbInventoryItem[] backpack = bot.Inventory.AllItems
@@ -432,7 +439,8 @@ namespace DOL.GS;
 
             HashSet<DbInventoryItem> operationalLoadout = FindOperationalLoadoutItems(bot);
             foreach (DbInventoryItem item in backpack.Where(item =>
-                         !operationalLoadout.Contains(item) && !TryGetEquipmentUpgrade(bot, item, out _)))
+                         !operationalLoadout.Contains(item) && !AutonomousBotCraftOrders.IsHeldForOrder(item) &&
+                         !TryGetEquipmentUpgrade(bot, item, out _)))
             {
                 if (bot.Inventory.RemoveItem(item))
                     removed++;
@@ -546,16 +554,26 @@ namespace DOL.GS;
             (!IsBackpackFull(bot) && !AutonomousObjectiveAssignments.IsBetweenPveTasks(bot)))
             return null;
 
+            // Only what fits under the cap now: the bot's own work has its own few extra posts.
+            bool space = HasListingSpace(bot);
+            bool ownWorkSpace = space || HasOwnWorkListingSpace(bot);
+            if (!ownWorkSpace)
+                return null;
             HashSet<DbInventoryItem> operationalLoadout = FindOperationalLoadoutItems(bot);
             return bot.Inventory.AllItems
             .Where(item => item != null && item.IsTradable && !string.IsNullOrWhiteSpace(item.Name) &&
                            item.OwnerLot == 0 && item.SlotPosition >= (int)eInventorySlot.FirstBackpack &&
                            item.SlotPosition <= (int)eInventorySlot.LastBackpack &&
                            !operationalLoadout.Contains(item) &&
+                           !AutonomousBotQuests.IsHeldForQuest(bot, item) &&
+                           !AutonomousBotCraftOrders.IsHeldForOrder(item) &&
+                           (space || AutonomousBotCrafting.IsOwnWork(bot, item)) &&
                            !TryGetEquipmentUpgrade(bot, item, out _))
             .Select(item => new ListingCandidate(item, RecommendListingPrice(item)))
-            .Where(candidate => candidate.PriceCopper >= Math.Max(50, candidate.Item.Level * candidate.Item.Level * 4))
-            .OrderByDescending(candidate => candidate.PriceCopper)
+            .Where(candidate => WorthListing(candidate.Item, candidate.PriceCopper))
+            // A craft trip ends by posting what it made, not the dearest loot in the bag.
+            .OrderByDescending(candidate => AutonomousObjectiveAssignments.WantsBetweenTaskCraft(bot) && AutonomousBotCrafting.IsOwnWork(bot, candidate.Item))
+            .ThenByDescending(candidate => candidate.PriceCopper)
             .FirstOrDefault();
         }
 
@@ -564,21 +582,20 @@ namespace DOL.GS;
             if (bot?.Inventory == null)
                 return null;
 
-            bool trainedCrafter = !string.IsNullOrWhiteSpace(bot.PersistentRecord?.SerializedCraftingSkills);
             bool canList = HasListingSpace(bot);
             HashSet<DbInventoryItem> operationalLoadout = FindOperationalLoadoutItems(bot);
             return bot.Inventory.AllItems
                 .Where(item => item != null && item.IsDropable && item.OwnerLot == 0 &&
                                item.SlotPosition >= (int)eInventorySlot.FirstBackpack &&
                                item.SlotPosition <= (int)eInventorySlot.LastBackpack)
-                .Where(item => !IsProtectedFromVendor(bot, item, trainedCrafter, canList, operationalLoadout))
+                .Where(item => !IsProtectedFromVendor(bot, item, canList, operationalLoadout))
                 .Where(item => CalculateStandardVendorSaleCopper(item) > 0)
                 .OrderBy(item => EquipmentValue(item))
                 .ThenBy(item => item.Price)
                 .FirstOrDefault();
         }
 
-        private static bool IsProtectedFromVendor(GameBot bot, DbInventoryItem item, bool trainedCrafter,
+        private static bool IsProtectedFromVendor(GameBot bot, DbInventoryItem item,
             bool canList, HashSet<DbInventoryItem> operationalLoadout)
         {
             if (item is GameInventoryRelic || BotSiegeRuntime.IsSupply(item.Id_nb) ||
@@ -586,13 +603,24 @@ namespace DOL.GS;
                 return true;
             if (TryGetEquipmentUpgrade(bot, item, out _))
                 return true;
-            if (trainedCrafter && item.IsStackable && item.Count > 0)
+            if (item.Count > 0 && AutonomousBotCrafting.IsMaterialFor(bot, item))
+                return true;
+            if (AutonomousBotQuests.IsHeldForQuest(bot, item))
+                return true;
+            if (AutonomousBotCraftOrders.IsHeldForOrder(item))
+                return true;
+            // The bot's own work waits for a free Realm Exchange post; only a nearly full bag sends it to a vendor.
+            if (AutonomousBotCrafting.IsOwnWork(bot, item) && !IsBackpackNearlyFull(bot))
                 return true;
             // If the bot's single listing slot is occupied, unwanted gear can
             // still be sold normally. Never vendor an equippable upgrade.
-            return canList && item.IsTradable &&
-                RecommendListingPrice(item) >= Math.Max(50, item.Level * item.Level * 4);
+            return canList && item.IsTradable && WorthListing(item, RecommendListingPrice(item));
         }
+
+        /// <summary>Worth a Realm Exchange post: dear enough for its level, or the bot's own work, which it sells there
+        /// whatever a low-level piece fetches.</summary>
+        public static bool WorthListing(DbInventoryItem item, int priceCopper) =>
+            item.IsCrafted && !item.IsStackable || priceCopper >= Math.Max(50, item.Level * item.Level * 4);
 
         /// <summary>
         /// Performs the same appraisal and range checks as a real merchant, removes the exact
@@ -610,8 +638,7 @@ namespace DOL.GS;
                 !merchant.IsWithinRadius(bot, GS.ServerProperties.Properties.WORLD_PICKUP_DISTANCE))
                 return false;
 
-            bool trainedCrafter = !string.IsNullOrWhiteSpace(bot.PersistentRecord?.SerializedCraftingSkills);
-            if (IsProtectedFromVendor(bot, item, trainedCrafter, HasListingSpace(bot),
+            if (IsProtectedFromVendor(bot, item, HasListingSpace(bot),
                     FindOperationalLoadoutItems(bot)))
                 return false;
 
@@ -663,17 +690,30 @@ namespace DOL.GS;
         /// The item is first inserted into the finite backpack, charged from saved copper, and
         /// immediately equipped through the same owned-upgrade path used by dropped equipment.
         /// </summary>
+        /// <summary>
+        /// A merchant whose prices are in coin. Seal, glass, aurulite and other item-currency merchants, and the bounty
+        /// point merchants, price in their own currency, but the vendor upgrade paid their price in copper: a bot next
+        /// to a Darkness Falls seals merchant bought seal gear for 15 to 51 copper (owner 2026-10-30).
+        /// </summary>
+        public static bool SellsForCoin(GameMerchant merchant) =>
+            merchant != null && merchant is not GameItemCurrencyMerchant && merchant is not GameBountyMerchant;
+
         public static bool TryBuyUsefulVendorUpgrade(GameBot bot, GameMerchant merchant, out DbInventoryItem purchased, out long copper)
         {
             purchased = null;
             copper = 0;
             if (bot?.IsAutonomousWorldBot != true || bot.IsTemporaryGroupHelper || bot.Inventory == null ||
+                !SellsForCoin(merchant) ||
                 merchant?.TradeItems == null || !merchant.IsWithinRadius(bot, GS.ServerProperties.Properties.WORLD_PICKUP_DISTANCE) ||
                 bot.Inventory.FindFirstEmptySlot(eInventorySlot.FirstBackpack, eInventorySlot.LastBackpack) == eInventorySlot.Invalid)
                 return false;
 
+            // Only what the bot can pay for: the best upgrade overall was chosen first and, when it cost more than the
+            // bot had, nothing was bought although cheaper upgrades were on the same list (run 1c, 2026-10-30).
+            long coin = GetMoney(bot.DatabaseID);
             DbInventoryItem[] upgrades = merchant.TradeItems.GetAllItems().Values
                 .OfType<DbItemTemplate>()
+                .Where(template => template.Price > 0 && template.Price <= coin)
                 .Select(GameInventoryItem.Create)
                 .Where(item => item != null && TryGetEquipmentUpgrade(bot, item, out _))
                 .OrderByDescending(EquipmentValue)
@@ -711,6 +751,141 @@ namespace DOL.GS;
             RunTelemetry.Trade(bot, "buy", merchant, purchased, copper);
             return true;
         }
+
+    /// <summary>
+    /// Seal gear (owner 2026-10-30): a bot grinding Darkness Falls spends the seals it has looted at its own realm's seal
+    /// merchants there, as a player would. Each merchant prices its stock in its own seal (Emerald, Sapphire or Diamond).
+    /// An affordable upgrade is bought and worn. With no upgrade left to save that seal for, the seals buy the most
+    /// valuable item they can, which the bot then sells or posts on the Realm Exchange like any other loot; while a
+    /// dearer upgrade exists, it keeps saving for it.
+    /// </summary>
+    public readonly record struct SealPurchase(DbItemTemplate Template, bool Upgrade);
+
+    public static int SealCount(GameBot bot, string sealId) =>
+        bot?.Inventory == null || string.IsNullOrEmpty(sealId) ? 0 :
+            bot.Inventory.CountItemTemplate(sealId, eInventorySlot.FirstBackpack, eInventorySlot.LastBackpack);
+
+    private static IEnumerable<GameDarknessFallsSealsMerchant> OwnSealMerchants(GameBot bot, string sealId) =>
+        (bot?.CurrentRegion?.Merchants ?? []).OfType<GameDarknessFallsSealsMerchant>()
+            .Where(merchant => merchant.ObjectState == GameObject.eObjectState.Active && merchant.MoneyKey == sealId &&
+                               GameDarknessFallsSealsMerchant.CanTrade(merchant.Realm, bot.Realm));
+
+    public static SealPurchase? FindSealPurchase(GameBot bot, GameDarknessFallsSealsMerchant merchant)
+    {
+        if (bot?.Inventory == null || merchant?.TradeItems == null ||
+            !GameDarknessFallsSealsMerchant.CanTrade(merchant.Realm, bot.Realm))
+            return null;
+        int seals = SealCount(bot, merchant.MoneyKey);
+        if (seals <= 0)
+            return null;
+
+        DbItemTemplate upgrade = null, resale = null;
+        int upgradeValue = int.MinValue, resaleValue = int.MinValue;
+        foreach (DbItemTemplate template in merchant.TradeItems.GetAllItems().Values.OfType<DbItemTemplate>())
+        {
+            if (template.Price <= 0 || template.Price > seals)
+                continue;
+            DbInventoryItem item = GameInventoryItem.Create(template);
+            if (item == null)
+                continue;
+            if (TryGetEquipmentUpgrade(bot, item, out _))
+            {
+                int value = EquipmentValue(item);
+                if (value > upgradeValue)
+                {
+                    upgrade = template;
+                    upgradeValue = value;
+                }
+            }
+            else if (item.IsTradable)
+            {
+                int value = RecommendListingPrice(item);
+                if (value > resaleValue)
+                {
+                    resale = template;
+                    resaleValue = value;
+                }
+            }
+        }
+        if (upgrade != null)
+            return new SealPurchase(upgrade, true);
+        if (resale == null || IsBackpackNearlyFull(bot) || SavingSealsForUpgrade(bot, merchant.MoneyKey, seals))
+            return null;
+        return new SealPurchase(resale, false);
+    }
+
+    /// <summary>Some merchant of this seal sells an upgrade the bot can't afford yet.</summary>
+    private static bool SavingSealsForUpgrade(GameBot bot, string sealId, int seals)
+    {
+        foreach (GameDarknessFallsSealsMerchant merchant in OwnSealMerchants(bot, sealId))
+            foreach (DbItemTemplate template in merchant.TradeItems?.GetAllItems().Values.OfType<DbItemTemplate>() ?? [])
+                if (template.Price > seals && GameInventoryItem.Create(template) is DbInventoryItem item &&
+                    TryGetEquipmentUpgrade(bot, item, out _))
+                    return true;
+        return false;
+    }
+
+    /// <summary>The bot is in Darkness Falls and one of its realm's seal merchants there has something to spend seals on.</summary>
+    public static bool HasSealPurchase(GameBot bot)
+    {
+        if (bot?.Inventory == null || bot.CurrentRegionID != AutonomousDarknessFallsPolicy.RegionId || bot.CurrentRegion == null)
+            return false;
+        foreach (GameMerchant merchant in bot.CurrentRegion.Merchants)
+            if (merchant is GameDarknessFallsSealsMerchant seals && seals.ObjectState == GameObject.eObjectState.Active &&
+                FindSealPurchase(bot, seals) != null)
+                return true;
+        return false;
+    }
+
+    /// <summary>Buys the seal item chosen above at this merchant and pays in seals; an upgrade is worn at once.</summary>
+    public static bool TryBuySealItem(GameBot bot, GameDarknessFallsSealsMerchant merchant, out DbInventoryItem purchased,
+        out int paid, out bool upgrade)
+    {
+        purchased = null;
+        paid = 0;
+        upgrade = false;
+        if (bot?.IsAutonomousWorldBot != true || bot.IsTemporaryGroupHelper || bot.Inventory == null ||
+            merchant == null || !merchant.IsWithinRadius(bot, GS.ServerProperties.Properties.WORLD_PICKUP_DISTANCE))
+            return false;
+        SealPurchase? choice = FindSealPurchase(bot, merchant);
+        eInventorySlot backpackSlot = bot.Inventory.FindFirstEmptySlot(eInventorySlot.FirstBackpack, eInventorySlot.LastBackpack);
+        if (choice == null || backpackSlot == eInventorySlot.Invalid)
+            return false;
+        DbItemTemplate template = choice.Value.Template;
+        upgrade = choice.Value.Upgrade;
+
+        lock (bot.Inventory.Lock)
+        {
+            int price = (int)template.Price;
+            if (SealCount(bot, merchant.MoneyKey) < price)
+                return false;
+            DbInventoryItem item = GameInventoryItem.Create(template);
+            if (item == null || !bot.Inventory.AddItem(backpackSlot, item))
+                return false;
+            int removed = 0;
+            foreach (DbInventoryItem stack in bot.Inventory.GetItemRange(eInventorySlot.FirstBackpack, eInventorySlot.LastBackpack).ToList())
+            {
+                if (stack == null || stack.Id_nb != merchant.MoneyKey)
+                    continue;
+                int take = Math.Min(stack.Count, price - removed);
+                if (take > 0 && bot.Inventory.RemoveCountFromStack(stack, take))
+                    removed += take;
+                if (removed >= price)
+                    break;
+            }
+            purchased = item;
+            paid = removed;
+        }
+
+        Log.Info($"AUTONOMOUS_SEAL_PURCHASE bot={bot.Name} id={bot.DatabaseID} item=\"{purchased.Name}\" " +
+                 $"seals={paid} seal={merchant.MoneyKey} use={(upgrade ? "upgrade" : "resale")} merchant=\"{merchant.Name}\"");
+        if (upgrade)
+            TryEquipOwnedUpgrade(bot, purchased, "seal merchant");
+        MarkInventoryChanged(bot);
+        bot.MarkAutonomousStateDirty();
+        AutonomousBotStatusPersistence.Queue(bot, true);
+        return true;
+    }
 
     public static int RollListingPrice(DbInventoryItem item) => RecommendListingPrice(item, -0.35 + Random.Shared.NextDouble() * 0.85);
 
@@ -761,7 +936,7 @@ namespace DOL.GS;
             }
         }
 
-        int slot = FindFreeListingSlot(ownerId);
+        int slot = FindFreeListingSlot(ownerId, AutonomousBotCrafting.IsOwnWork(bot, item));
         int originalSlot = item.SlotPosition;
         if (slot < 0 || !bot.Inventory.RemoveItemWithoutDbDeletion(item))
             return false;
@@ -793,17 +968,27 @@ namespace DOL.GS;
         stored.SlotPosition >= (int)eInventorySlot.FirstBackpack && stored.SlotPosition <= (int)eInventorySlot.LastBackpack &&
         item.ITemplate_Id == stored.ITemplate_Id && item.UTemplate_Id == stored.UTemplate_Id && item.Count == stored.Count;
 
-    public static int FindFreeListingSlot(string ownerId)
+    /// <summary>
+    /// A free post under the bot's cap. The bot's own crafted work may use <see cref="OwnWorkExtraListings"/> more:
+    /// at the cap of three, crafters held their work in the bag instead of posting it (run of 2026-11-01).
+    /// </summary>
+    public static int FindFreeListingSlot(string ownerId, bool ownWork = false)
     {
         var used = MarketCache.SearchItems(new ItemQuery { Owner = ownerId })
             .Where(item => RealmExchangeBroker.IsExchangeOwnerLot(item.OwnerLot)).Select(item => item.SlotPosition).ToHashSet();
-        if (used.Count >= MaxBotRealmExchangeListings) return -1;
+        if (used.Count >= MaxBotRealmExchangeListings + (ownWork ? OwnWorkExtraListings : 0)) return -1;
         for (int slot = (int)eInventorySlot.Consignment_First; slot <= (int)eInventorySlot.Consignment_Last; slot++)
             if (!used.Contains(slot)) return slot;
         return -1;
     }
 
     private static bool HasListingSpace(GameBot bot) => FindFreeListingSlot(GetOwnerId(bot.DatabaseID)) >= 0;
+
+    private static bool HasOwnWorkListingSpace(GameBot bot) => FindFreeListingSlot(GetOwnerId(bot.DatabaseID), true) >= 0;
+
+    /// <summary>Whether this item can be posted now, under the cap that applies to it.</summary>
+    public static bool CanListNow(GameBot bot, DbInventoryItem item) =>
+        bot != null && FindFreeListingSlot(GetOwnerId(bot.DatabaseID), AutonomousBotCrafting.IsOwnWork(bot, item)) >= 0;
 
     public static bool TryBuy(GameBot bot, DbInventoryItem item)
     {
@@ -846,7 +1031,7 @@ namespace DOL.GS;
             item.OwnerID = GetOwnerId(bot.DatabaseID);
             payment.Apply();
             var sale = new RealmExchangeSaleLedger.Sale((int)bot.Realm, item.Name, item.Count, price,
-                sellerId, payment.SellerName, GetOwnerId(bot.DatabaseID), bot.Name, DateTime.UtcNow);
+                sellerId, payment.SellerName, GetOwnerId(bot.DatabaseID), bot.Name, DateTime.UtcNow, item.IsCrafted);
             if (!RealmExchangeSaleLedger.CommitSale(GameServer.Database, sale, item, bot.PersistentRecord, payment.Row))
             {
                 payment.Restore();

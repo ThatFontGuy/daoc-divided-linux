@@ -8,7 +8,32 @@ of its feature groups (bots remember you, grats, rezzes, alarms, nemeses, schedu
 language). From Beta 1.0 the whole add-on is the **Living Server** and that group is **Server life**.
 Older entries below keep the names they were written with.
 
-## Beta 1.1 (in development)
+## Beta 1.1.1 (in development)
+
+Fixes for reports after Beta 1.1 shipped.
+
+- **Bots stop following you when you leave or disband their group** (issue #33, reported by nindybrew-svg).
+  - **The bug:** with two or more invited gamebots in the group, `/disband` took you out but left them marked as
+    following you. They trailed you without fighting for you, and refused new invites ("already following another
+    player-led group") until you logged out. A single bot was already released correctly.
+  - **Whose code:** the cause is in shadowofze's group code (`Group.RemoveMember`), unchanged in his 0.38 branch.
+    It isn't a 1.1 regression, but 1.1's pathing to a far-off player made the stuck bots follow more reliably.
+  - **Now:** when a player leaves, the gamebots that followed them follow another player still in the group, or,
+    with none left, leave the group and go back to their own play. `/spawn` companions are left as before.
+  - **Checked:** three new tests (released, handed to a remaining player, companions untouched); 4,096 server tests
+    pass. Not yet seen in game.
+- **Base classes get their weapon styles before level 5** (reported on r/daoc by Zarthol).
+  - **The bug:** the style table lists styles only for the classes chosen at level 5, so a Fighter, Viking, Guardian
+    or other base class had no styles at all until then. A Fighter with Slash 2 had nothing where a classic one had
+    Slash's first style.
+  - **Whose code:** shadowofze's data and style lookup, the same in 0.36c and 0.37b. Bots aren't affected: they start
+    in their chosen class.
+  - **Now:** a base class gets the styles its classes have in the weapon line it trains, each once (from the game's
+    data: Fighter Ruby Slash, Thistle and Daze at 2; Viking Splitter, Thor's Anvil and Whirling Blade; Guardian
+    Shining Blade, Contusions and Dragonfly). Chosen classes keep their own lists unchanged.
+  - **Checked:** two new tests; the full server suite passes. Not yet seen in game.
+
+## Beta 1.1 (released 2026-10-29)
 
 Beta 1.1 is several pieces of work together: the talking update and the living world (beggars, deeds, storylines,
 spammers, roleplayers, rumours, holiday chatter, Leeroy), 2003-style bot names, a first half hour paced for signature

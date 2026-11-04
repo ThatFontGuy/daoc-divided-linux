@@ -689,7 +689,7 @@ namespace DOL.GS.PacketHandler
         void SendTradeWindow();
         void SendCloseTradeWindow();
         void SendPlayerDied(GameLiving killedPlayer, GameObject killer);
-        void SendPlayerRevive(GameLiving revivedPlayer);
+        void SendPlayerRevive(GamePlayer revivedPlayer);
         void SendUpdatePlayer();
         void SendUpdatePlayerSkills(bool updateInternalCache);
         void SendUpdateWeaponAndArmorStats();

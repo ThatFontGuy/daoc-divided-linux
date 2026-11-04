@@ -70,7 +70,7 @@ namespace DOL.GS
 			return null;
 		}
 
-		protected static bool CanReceiveRealmDrop(GameLiving owner, DbItemTemplate drop)
+		protected internal static bool CanReceiveRealmDrop(GameLiving owner, DbItemTemplate drop)
 		{
 			if (owner == null || drop == null)
 				return false;

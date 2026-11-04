@@ -92,6 +92,7 @@ namespace DOL.GS
                 case eSpellType.AblativeArmor:
                 case eSpellType.MagicAblativeArmor:
                 case eSpellType.BothAblativeArmor:
+                case eSpellType.GroupAblativeHalfOnCaster:
                     return eEffect.AblativeArmor;
                 case eSpellType.MeleeDamageBuff:
                     return eEffect.MeleeDamageBuff;

@@ -590,6 +590,35 @@ public class UT_AutonomousDarknessFallsPolicy
             out _, out _), Is.False, "The vertical descent must stay over its landing, not cross the wall.");
     }
 
+    private sealed class DropMesh : PathfindingMgrBase
+    {
+        public Vector3? Near, Below;
+        public override Vector3? GetClosestPoint(Zone zone, Vector3 position, EDtPolyFlags[] filters) => Near;
+        public override Vector3? GetClosestPointInBounds(Zone zone, Vector3 origin, Vector3 minOffset, Vector3 maxOffset, EDtPolyFlags[] filters) =>
+            maxOffset.Z <= 0 ? Below : null;
+    }
+
+    [Test]
+    public void BotHangingInADrop_SettlesOnTheFloorBelowOnly()
+    {
+        Vector3 hanging = new(33525, 27951, 22797), landing = new(33525, 27951, 22709);
+        Zone darknessFalls = new(null, AutonomousDarknessFallsPolicy.RegionId, "DF", 0, 0, 65536, 65536,
+            AutonomousDarknessFallsPolicy.RegionId, false, 0, false, 0, 0, 0, 0, 0);
+        Zone elsewhere = new(null, 2, "Town", 0, 0, 65536, 65536, 2, false, 0, false, 0, 0, 0, 0, 0);
+        Assert.Multiple(() =>
+        {
+            Assert.That(AutonomousDarknessFallsNavigation.TryFindFloorBelowDrop(new DropMesh { Below = landing },
+                darknessFalls, hanging, out Vector3 floor), Is.True);
+            Assert.That(floor, Is.EqualTo(landing));
+            Assert.That(AutonomousDarknessFallsNavigation.TryFindFloorBelowDrop(new DropMesh { Near = hanging, Below = landing },
+                darknessFalls, hanging, out _), Is.False, "A bot in reach of the mesh can path; only its destination failed.");
+            Assert.That(AutonomousDarknessFallsNavigation.TryFindFloorBelowDrop(new DropMesh(),
+                darknessFalls, hanging, out _), Is.False, "No floor below: nothing to settle on.");
+            Assert.That(AutonomousDarknessFallsNavigation.TryFindFloorBelowDrop(new DropMesh { Below = landing },
+                elsewhere, hanging, out _), Is.False, "Other regions are unchanged.");
+        });
+    }
+
     [Test]
     public void AllNineEntranceFallLipReplots_RequireExactForwardManifestEdges()
     {

@@ -253,6 +253,16 @@ namespace DOL.GS
                         new(blocker.X, blocker.Y, blocker.Z),
                         new(other.X, other.Y, other.Z), nav.DefaultFilters);
             });
+            bool grouped = (_groupDirective?.BotMemberCount ?? 1) > 1 || bot.Group?.MemberCount > 1;
+            if (AutonomousDungeonPolicy.SoloTurnsBackFrom(grouped, _camp != null && !IsQuestCamp(_camp), rejoiningLeader,
+                    string.Equals(_camp?.MonsterName, blocker.Name, StringComparison.OrdinalIgnoreCase), con, nearbyAdds))
+            {
+                Log.Info($"AUTONOMOUS_DUNGEON_TURN_BACK bot={bot.Name} id={bot.DatabaseID} level={bot.Level} target=\"{blocker.Name}\" " +
+                         $"targetLevel={blocker.Level} con={con} adds={nearbyAdds} camp=\"{_camp?.Id}\" zone=\"{bot.CurrentZone?.Description}\" " +
+                         $"at={blocker.X},{blocker.Y},{blocker.Z}");
+                RejectDungeonRoute(bot, $"Route blocked by {blocker.Name} (level {blocker.Level}, {nearbyAdds + 1} together) in the dungeon corridor");
+                return true;
+            }
             if (AutonomousDefensivePull.TryBeginFlyingHandoff(bot, blocker, corridorBlocker: true)) return true;
             if (!SavageBotCombatPolicy.MustMeleePull((eCharacterClass)bot.CharacterClass.ID) &&
                 AutonomousDefensivePull.TryBegin(bot, blocker)) return true;

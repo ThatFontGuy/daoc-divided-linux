@@ -20,21 +20,28 @@ namespace DOL.GS.PropertyCalc
 
         public override int CalcValue(GameLiving living, eProperty property)
         {
-            if (living is GamePlayer player)
+            // Owner 2026-11-01: a bot caster's staff has to count exactly like a player's. This used to answer 0 for
+            // anything that was not a GamePlayer, so every GameBot carried a focus value of zero whatever staff it held
+            // and BotSpellPower.Cost charged it the focus-free 120% of the base power cost on every cast.
+            if (living == null)
+                return 0;
+
+            ICharacterClass characterClass = living is GamePlayer player
+                ? player.CharacterClass
+                : (living as IGamePlayer)?.CharacterClass;
+            if (characterClass == null)
+                return 0;
+
+            int itemBonus = living.ItemBonus[property];
+            int focusLevel = living.BaseBuffBonusCategory[property];
+
+            if (SkillBase.CheckPropertyType(property, ePropertyType.Focus) && characterClass.IsFocusCaster)
             {
-                int itemBonus = player.ItemBonus[property];
-                int focusLevel = player.BaseBuffBonusCategory[property];
-
-                if (SkillBase.CheckPropertyType(property, ePropertyType.Focus) && player.CharacterClass.IsFocusCaster)
-                {
-                    focusLevel += player.BaseBuffBonusCategory[eProperty.AllFocusLevels];
-                    itemBonus = Math.Max(itemBonus, player.ItemBonus[eProperty.AllFocusLevels]);
-                }
-
-                return focusLevel + Math.Min(50, itemBonus);
+                focusLevel += living.BaseBuffBonusCategory[eProperty.AllFocusLevels];
+                itemBonus = Math.Max(itemBonus, living.ItemBonus[eProperty.AllFocusLevels]);
             }
 
-            return 0;
+            return focusLevel + Math.Min(50, itemBonus);
         }
     }
 }

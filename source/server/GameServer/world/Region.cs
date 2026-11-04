@@ -241,6 +241,8 @@ namespace DOL.GS
                 }
             }
 
+            // Compared raw on purpose: the Regions table counts from 0, so "3;4;5;6" leaves Trials of Atlantis (2) loaded,
+            // which the modern world needs. Upstream 0.38 moved this onto the client scale, which turns Atlantis off.
             list = Util.SplitCSV(ServerProperties.Properties.DISABLED_EXPANSIONS, true);
             foreach (string expansion in list)
             {

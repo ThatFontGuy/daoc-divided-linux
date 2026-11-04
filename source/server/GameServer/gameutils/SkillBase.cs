@@ -13,6 +13,17 @@ using DOL.Logging;
 
 namespace DOL.GS
 {
+	/// <summary>
+	/// Every resist check on a mob of an unknown race warned: 3,000+ lines in one night (2026-10-31), nearly all race 400
+	/// from NpcTemplate 60161717, the gruppchef of Trollheim, which the Race table has no row for.
+	/// </summary>
+	public static class UnknownRaceWarnings
+	{
+		private static readonly ConcurrentDictionary<int, byte> m_warned = new();
+
+		public static bool First(int race) => m_warned.TryAdd(race, 0);
+	}
+
 	public class SkillBase
 	{
 		/// <summary>
@@ -2912,6 +2923,9 @@ namespace DOL.GS
 		{
 			Spell spell = null;
 
+			if (spellID == 0)
+				return null;
+
 			if (line != null)
 			{
 				List<Spell> spells = GetSpellList(line.KeyName);
@@ -2966,8 +2980,8 @@ namespace DOL.GS
 				else if (log.IsWarnEnabled)
 					log.Warn($"No resists defined for type: {type}");
 			}
-			else if (log.IsWarnEnabled)
-				log.Warn($"No resists defined for race: {race}");
+			else if (UnknownRaceWarnings.First(race) && log.IsWarnEnabled)
+				log.Warn($"No resists defined for race: {race} (logged once)");
 
 			return resistValue;
 		}

@@ -16,10 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-using System;
 using System.Collections.Generic;
-using DOL.Database;
-using DOL.Events;
 using DOL.GS.Effects;
 using DOL.GS.PacketHandler;
 
@@ -31,10 +28,18 @@ namespace DOL.GS.Spells
 		private static eArmorSlot[] slots = new eArmorSlot[] { eArmorSlot.HEAD, eArmorSlot.TORSO, eArmorSlot.LEGS,  };
 		private eArmorSlot m_slot = eArmorSlot.NOTSET;
 		public eArmorSlot Slot { get { return m_slot; } }
-		private int old_item_af = 0;
-		private int old_item_abs = 0;
-		private DbInventoryItem item = null;
-		protected GamePlayer player=null;
+
+		// The debuff lives on the player, not on the armor: nothing here can reach a saved item.
+		private static string AfKey(eArmorSlot slot) => "VampiirArmorDebuffAF" + (int)slot;
+		private static string AbsorbKey(eArmorSlot slot) => "VampiirArmorDebuffABS" + (int)slot;
+
+		public static int AfPenalty(GamePlayer player, eArmorSlot slot) => player.TempProperties.GetProperty<int>(AfKey(slot));
+		public static int AbsorbPenalty(GamePlayer player, eArmorSlot slot) => player.TempProperties.GetProperty<int>(AbsorbKey(slot));
+
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+		}
 
 		public override void FinishSpellCast(GameLiving target)
 		{
@@ -45,7 +50,7 @@ namespace DOL.GS.Spells
 		public override void OnEffectStart(GameSpellEffect effect)
 		{
 			effect.Owner.StartInterruptTimer(effect.Owner.SpellInterruptDuration, AttackData.eAttackType.Spell, Caster);
-			player = effect.Owner as GamePlayer;
+			GamePlayer player = effect.Owner as GamePlayer;
 			if (player == null) return;
 			int slot=Util.Random(0, 2);
 			m_slot = slots[slot];
@@ -54,69 +59,28 @@ namespace DOL.GS.Spells
 			foreach (GamePlayer visPlayer in player.GetPlayersInRadius((ushort)WorldMgr.VISIBILITY_DISTANCE))
 				visPlayer.Out.SendSpellEffectAnimation(player, player, (ushort)(13180+slot), 0, false, 0x01);
 
-			item = player.Inventory.GetItem((eInventorySlot)m_slot);
-			
-			if(item!=null)
-			{
-				old_item_af=item.DPS_AF;
-				old_item_abs=item.SPD_ABS;
-				item.DPS_AF -= (int)Spell.Value;
-				item.SPD_ABS -= (int)Spell.ResurrectMana;
-				if(item.DPS_AF<0) item.DPS_AF=0;
-				if(item.SPD_ABS<0) item.SPD_ABS=0;
-			
-				player.Client.Out.SendInventoryItemsUpdate(new DbInventoryItem[] { item });
-				player.Out.SendCharStatsUpdate();
-				player.UpdatePlayerStatus();
-				player.Out.SendUpdatePlayer();
-				player.Out.SendUpdateWeaponAndArmorStats();
-				player.Out.SendCharResistsUpdate();
-				
-				GameEventMgr.AddHandler(player,GamePlayerEvent.Linkdeath, new DOLEventHandler(EventAction));
-				GameEventMgr.AddHandler(player,GamePlayerEvent.Quit, new DOLEventHandler(EventAction));
-				GameEventMgr.AddHandler(player,GamePlayerEvent.RegionChanged, new DOLEventHandler(EventAction));
-				GameEventMgr.AddHandler(player,GameLivingEvent.Dying, new DOLEventHandler(EventAction));
-			}
-
+			ChangePenalty(player, (int)Spell.Value, (int)Spell.ResurrectMana);
 			base.OnEffectStart(effect);
 		}
-		
-		public void EventAction(DOLEvent e, object sender, EventArgs arguments)
-		{
-            if(player== null) return;
-			RemoveEffect();
-		}
-		
+
 		public override int OnEffectExpires(GameSpellEffect effect, bool noMessages)
 		{
-			RemoveEffect();
+			if (m_slot != eArmorSlot.NOTSET && effect.Owner is GamePlayer player)
+				ChangePenalty(player, -(int)Spell.Value, -(int)Spell.ResurrectMana);
 			return base.OnEffectExpires(effect,noMessages);
 		}
-		
-		public void RemoveEffect()
+
+		private void ChangePenalty(GamePlayer player, int af, int absorb)
 		{
-			if(player==null) return;
-            GameSpellEffect effect=FindEffectOnTarget(player,this);
-            if (effect!=null) effect.Cancel(false);
-			if(item==null) return;
-			
-			item.DPS_AF=old_item_af;
-			item.SPD_ABS=old_item_abs;
-			
-			player.Client.Out.SendInventoryItemsUpdate(new DbInventoryItem[] { item });
+			player.TempProperties.SetProperty(AfKey(m_slot), AfPenalty(player, m_slot) + af);
+			player.TempProperties.SetProperty(AbsorbKey(m_slot), AbsorbPenalty(player, m_slot) + absorb);
 			player.Out.SendCharStatsUpdate();
 			player.UpdatePlayerStatus();
 			player.Out.SendUpdatePlayer();
 			player.Out.SendUpdateWeaponAndArmorStats();
 			player.Out.SendCharResistsUpdate();
-			
-			GameEventMgr.RemoveHandler(player,GamePlayerEvent.Linkdeath, new DOLEventHandler(EventAction));
-			GameEventMgr.RemoveHandler(player,GamePlayerEvent.Quit, new DOLEventHandler(EventAction));
-			GameEventMgr.RemoveHandler(player,GamePlayerEvent.RegionChanged, new DOLEventHandler(EventAction));
-			GameEventMgr.RemoveHandler(player,GameLivingEvent.Dying, new DOLEventHandler(EventAction));
-
 		}
-		
+
 		public override IList<string> DelveInfo 
 		{
 			get 

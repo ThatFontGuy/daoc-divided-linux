@@ -10,7 +10,7 @@ public class UT_DarknessFallsExitPolicy
     [Test]
     public void EachExitId_UsesCharactersOwnRealmRow_EvenWhenAlbionIsFirst()
     {
-        foreach (ushort id in new ushort[] { 70, 72, 73, 74, 75, 76 })
+        foreach (ushort id in new ushort[] { 70, 71, 72, 73, 74, 75, 76, 77 })
         {
             DbZonePoint[] rows =
             [

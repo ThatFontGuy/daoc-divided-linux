@@ -56,7 +56,7 @@ namespace DOL.GS
             FallContinuation fall = _fallContinuation;
             if (fall == null) return false;
             Vector3 expected = fall.Stage == FallStage.WalkOffLip ? fall.Air : fall.Landing;
-            if (Owner is not GameBot { IsAutonomousWorldBot: true } bot ||
+            if (Owner is not GameBot bot ||
                 bot.CurrentRegionID != fall.Region || bot.Group != fall.Group ||
                 bot.PersistentRecord?.ObjectiveAssignmentId != fall.Assignment || !bot.IsAlive ||
                 bot.IsOnStableMasterRoute || Vector3.DistanceSquared(_ownerPosition, expected) > 16 * 16)
@@ -80,6 +80,20 @@ namespace DOL.GS
             }
             return IsFlagSet(MovementState.WalkTo);
         }
+
+        /// <summary>
+        /// A bot partway down a certified fall lands before it obeys anything new: halfway down a drop no mesh is in reach, so
+        /// a re-plan there finds no path, and a bot stopped there stays. The newest order is kept for after the landing.
+        /// </summary>
+        private bool HoldForCertifiedFall(Vector3 destination, short speed)
+        {
+            if (!IsInCertifiedFall) return false;
+            _fallContinuation = _fallContinuation with { Final = destination, Speed = speed };
+            return true;
+        }
+
+        private bool IsInCertifiedFall => _fallContinuation != null && IsFlagSet(MovementState.WalkTo) &&
+            Owner.CurrentRegionID == _fallContinuation.Region;
 
         public void PathAcrossValidatedSeam(Vector3 inside, Vector3 outside, Vector3? final, short speed)
         {
@@ -135,6 +149,7 @@ namespace DOL.GS
         public new GameNPC Owner { get; }
         public int CopyUpcomingPath(Vector3 target, Span<Vector3> destination) =>
             _pathfinder.CopyUpcomingPath(target, destination);
+        public int CopyActivePath(Span<Vector3> destination) => _pathfinder.CopyActivePath(destination);
         public ref Vector3 Velocity => ref _velocity;
         public ref Vector3 Destination => ref _destination;
         public GameLiving FollowTarget { get; private set; }
@@ -274,12 +289,9 @@ namespace DOL.GS
 
         public void PathTo(Vector3 destination, short speed)
         {
-            // The controller may reissue the same travel order every tick.
-            // Do not restart a certified fall between its lip and landing.
-            if (_fallContinuation is { } fall &&
-                Owner is GameBot { IsAutonomousWorldBot: true } &&
-                Owner.CurrentRegionID == fall.Region &&
-                Vector3.DistanceSquared(destination, fall.Final) <= 64 * 64)
+            // The controller may reissue a travel order every tick, and a follower's
+            // order moves with its leader. Neither restarts a fall between lip and landing.
+            if (HoldForCertifiedFall(destination, speed))
                 return;
             _seamContinuation = null;
             _fallContinuation = null;
@@ -330,7 +342,8 @@ namespace DOL.GS
                 return;
 
             _seamContinuation = null;
-            _fallContinuation = null;
+            if (!IsInCertifiedFall)
+                _fallContinuation = null;
 
             if (target != FollowTarget)
                 _nextFollowTick = 0;
@@ -444,7 +457,7 @@ namespace DOL.GS
 
             int maxRoamingRadius = Owner.RoamingRange;
 
-            if (Owner.CurrentZone.IsPathfindingEnabled)
+            if (Owner.CurrentZone.IsPathfindingEnabled && !Pathfinder.IsBelowAtlantisSea(Owner.CurrentZone.ID, (int) Owner.SpawnPoint.Z))
             {
                 EDtPolyFlags[] filters = PathfindingProvider.Instance.DefaultFilters;
                 Vector3? target = PathfindingProvider.Instance.GetRandomPoint(Owner.CurrentZone, new(Owner.SpawnPoint.X, Owner.SpawnPoint.Y, Owner.SpawnPoint.Z), maxRoamingRadius, filters);
@@ -691,6 +704,9 @@ namespace DOL.GS
                 UpdateMovement(0);
                 return;
             }
+            if (HoldForCertifiedFall(destination, speed))
+                return;
+
             Zone zone = Owner.CurrentZone;
 
             if (!_pathfinder.ShouldPath(zone, destination))
@@ -705,7 +721,7 @@ namespace DOL.GS
             if (_pathfinder.TryGetNextNode(zone, _ownerPosition, destination, out Vector3? _nextNode))
             {
                 ClearAutonomousPathFailure();
-                if (Owner is GameBot { IsAutonomousWorldBot: true } bot &&
+                if (Owner is GameBot bot &&
                     zone.ID == AutonomousDarknessFallsPolicy.RegionId &&
                     _pathfinder.PathfindingStatus == PathfindingStatus.PathFound &&
                     AutonomousDarknessFallsNavigation.TryGetCertifiedFall(_ownerPosition,
@@ -730,6 +746,16 @@ namespace DOL.GS
 
             switch (_pathfinder.PathfindingStatus)
             {
+                case PathfindingStatus.NoPathFound when allowFloorRepair && Owner is GameBot &&
+                    AutonomousDarknessFallsNavigation.TryFindFloorBelowDrop(PathfindingProvider.Instance, zone, _ownerPosition, out Vector3 dropFloor):
+                {
+                    // Stopped in mid-drop (a stun, a cast, or a world where the certificate is closed): finish falling.
+                    _ownerPosition = dropFloor;
+                    UpdateMovement(0);
+                    _pathfinder.ForceReplot = true;
+                    PathToInternal(destination, speed, false);
+                    break;
+                }
                 case PathfindingStatus.NoPathFound when allowFloorRepair &&
                     Owner is GameBot { IsAutonomousWorldBot: true, IsOnStableMasterRoute: false, InCombat: false }:
                 {
@@ -899,6 +925,9 @@ namespace DOL.GS
 
         private int FollowTick()
         {
+            if (IsInCertifiedFall)
+                return Properties.GAMENPC_FOLLOWCHECK_TIME;
+
             // A bot's mobile song is a cast, but must not freeze its follow
             // route. Ordinary NPC casts and ranged attacks keep their stop rule.
             if (Owner.IsCasting && !BotSongTwistPolicy.HasMobileSongCast(Owner) ||

@@ -13,6 +13,7 @@ import json
 import os
 import re
 import secrets
+import shutil
 import sqlite3
 import struct
 import subprocess
@@ -725,6 +726,25 @@ class Editor:
             ensure_closed([self.runtime / 'server', self.client])
             result = self.assets('uninstall', '--backup', str(folder))
             self._models = None
+            self._fingerprint = None
+            return result
+
+    def fixtures(self, zid):
+        return self.assets('fixtures', '--zone', str(int(zid)))
+
+    def edit_fixtures(self, data):
+        """Change the placed buildings in the client's own fixtures.csv. Undone from the Custom looks list."""
+        with self.lock:
+            ensure_closed([self.runtime / 'server', self.client])
+            folder = self.state / 'look-uploads' / uuid.uuid4().hex
+            folder.mkdir(parents=True)
+            try:
+                request = folder / 'request.json'
+                request.write_text(json.dumps({'zone': int(data['zone']), 'edits': data['edits']}), encoding='utf-8')
+                result = self.assets('fixture-edit', '--request', str(request), '--backups', str(self.state / 'look-backups'))
+            finally:
+                shutil.rmtree(folder, ignore_errors=True)
+            self._fingerprint = None
             return result
 
     # ---- Items: client appearances (objects.csv) vs server ItemTemplate rows ----
@@ -1134,6 +1154,8 @@ class Handler(BaseHTTPRequestHandler):
                     self.send(self.editor.merchant_list(q['id'][0]))
                 elif url.path == '/api/zone':
                     self.send(self.editor.zone(int(q['id'][0])))
+                elif url.path == '/api/fixtures':
+                    self.send(self.editor.fixtures(q['zone'][0]))
                 elif url.path == '/api/mesh':
                     with self.editor.lock:
                         self.send(self.editor.mesh(int(q['id'][0])))
@@ -1214,6 +1236,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send(ed.install_look(data))
             elif self.path == '/api/look-uninstall':
                 self.send(ed.uninstall_look(data['id']))
+            elif self.path == '/api/fixture-edit':
+                self.send(ed.edit_fixtures(data))
             else:
                 self.send({'error': 'Unknown endpoint'}, 404)
         except (ValueError, KeyError, TypeError, sqlite3.Error, OSError, subprocess.SubprocessError, SystemExit) as exc:

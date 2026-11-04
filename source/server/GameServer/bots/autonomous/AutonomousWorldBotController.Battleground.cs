@@ -299,13 +299,13 @@ namespace DOL.GS
         /// <summary>The bot's own-realm teleporter: one in this region first, otherwise one in the realm's capital.</summary>
         private static GameNPC NearestRealmTeleporter(GameBot bot)
         {
-            GameNPC local = AutonomousTownTeleporters.Porters(bot.CurrentRegion)
+            GameNPC local = AutonomousTownTeleporters.Porters(bot.CurrentRegion).OfType<GameNPC>()
                 .Where(porter => porter.Realm == bot.Realm)
                 .OrderBy(porter => Vector2.DistanceSquared(new(bot.X, bot.Y), new(porter.X, porter.Y)))
                 .FirstOrDefault();
             if (local != null) return local;
             ushort capital = bot.Realm switch { eRealm.Albion => 10, eRealm.Midgard => 101, eRealm.Hibernia => 201, _ => (ushort)0 };
-            return capital == 0 ? null : AutonomousTownTeleporters.Porters(WorldMgr.GetRegion(capital))
+            return capital == 0 ? null : AutonomousTownTeleporters.Porters(WorldMgr.GetRegion(capital)).OfType<GameNPC>()
                 .FirstOrDefault(porter => porter.Realm == bot.Realm);
         }
 

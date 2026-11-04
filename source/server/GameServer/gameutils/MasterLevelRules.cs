@@ -9,9 +9,10 @@ using DOL.GS.ServerProperties;
 namespace DOL.GS
 {
     /// <summary>
-    /// Offline Master Level progression. There are no Trials of Atlantis encounters: experience earned
-    /// at level 50 fills the ML bar, and each full bar raises the Master Level (1-10). Every class may
-    /// follow any of the eight paths (class 0 careers); /ml chooses or changes the path.
+    /// Offline Master Level progression. Experience earned at level 50 fills the ML bar and each full bar
+    /// raises the Master Level (1-10); finishing all of a level's Trials of Atlantis raises it too (see
+    /// Trials/TrialManager). Every class may follow any of the eight paths (class 0 careers); /ml chooses
+    /// or changes the path.
     /// </summary>
     public static class MasterLevelRules
     {
@@ -83,6 +84,28 @@ namespace DOL.GS
 
             if (player.MLLevel != before)
                 Refresh(player);
+        }
+
+        /// <summary>Records a finished trial for the player's next Master Level and raises it when all are done.</summary>
+        public static bool CompleteTrialStep(GamePlayer player, int masterLevel, int step)
+        {
+            if (player.MLLevel + 1 != masterLevel || player.HasFinishedMLStep(masterLevel, step))
+                return false;
+
+            EnsureTraining(player);
+            player.SetFinishedMLStep(masterLevel, step);
+            player.Out.SendMessage($"You have finished trial {masterLevel}.{step}!", eChatType.CT_Important, eChatLoc.CL_SystemWindow);
+
+            if (player.GetCountMLStepsCompleted((byte)masterLevel) >= player.GetStepCountForML((byte)masterLevel))
+            {
+                player.MLLevel = masterLevel;
+                player.MLExperience = 0;
+                player.Out.SendMessage($"You have reached Master Level {player.MLLevel}!", eChatType.CT_ScreenCenter, eChatLoc.CL_SystemWindow);
+                Refresh(player);
+            }
+            else
+                player.Out.SendMasterLevelWindow((byte)masterLevel);
+            return true;
         }
 
         public static bool ChoosePath(GamePlayer player, string name, out string message)

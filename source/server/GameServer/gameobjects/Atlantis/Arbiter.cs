@@ -54,6 +54,9 @@ namespace DOL.GS
 
 			SayTo(player, eChatLoc.CL_PopupWindow, LanguageMgr.GetTranslation(player.Client.Account.Language, 
 				String.Format("{0}.Arbiter.Interact.BeginTrials", realm), player.Name));
+
+            if (DOL.GS.ServerProperties.Properties.ML_TRIALS_ENABLED)
+                SayTo(player, eChatLoc.CL_PopupWindow, "Ask me about your [progress] and I will tell you what remains.");
             return true;
         }
 
@@ -69,6 +72,12 @@ namespace DOL.GS
             GamePlayer player = source as GamePlayer;
 			String realm = GlobalConstants.RealmToName((eRealm)Realm);
 			String lowerCase = text.ToLower();
+
+			if (lowerCase == "progress" && DOL.GS.ServerProperties.Properties.ML_TRIALS_ENABLED)
+			{
+				SayTo(player, eChatLoc.CL_PopupWindow, DOL.GS.Trials.TrialManager.Describe(player, Math.Min(player.MLLevel + 1, GamePlayer.ML_MAX_LEVEL)));
+				return false;
+			}
 
 			if (lowerCase == LanguageMgr.GetTranslation(player.Client.Account.Language,
 					String.Format("{0}.Arbiter.WhisperReceive.Case1", realm)))

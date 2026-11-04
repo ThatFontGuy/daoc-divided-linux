@@ -79,6 +79,14 @@ namespace DOL.GS.Spells
 		#endregion
 
 		/// <summary>
+		/// Rolls a shot's miss chance. Util.Chance(double) takes a 0-1 fraction, so a percent must be scaled down.
+		/// </summary>
+		public static bool RollsMiss(double missPercent)
+		{
+			return Util.Chance(missPercent / 100.0);
+		}
+
+		/// <summary>
 		/// Delayed action when arrow reach the target
 		/// </summary>
 		protected class ArrowOnTargetAction : ECSGameTimerWrapperBase
@@ -138,7 +146,7 @@ namespace DOL.GS.Spells
 					return 0;
 				}
 
-				if (Util.Chance(missrate))
+				if (RollsMiss(missrate))
 				{
 					ad.AttackResult = eAttackResult.Missed;
 					m_handler.MessageToCaster("You miss!", eChatType.CT_YouHit);
@@ -158,7 +166,8 @@ namespace DOL.GS.Spells
 
 				bool arrowBlock = false;
 
-				if (target is GamePlayer && !target.IsCrowdControlled && !target.IsSitting && m_handler.Spell.LifeDrainReturn != (int)Archery.eShotType.Critical)
+				if (target is GamePlayer && !target.IsCrowdControlled && !target.IsSitting &&
+					m_handler.Spell.LifeDrainReturn is not ((int)Archery.eShotType.Critical or (int)Archery.eShotType.Power or (int)Archery.eShotType.PointBlank))
 				{
 					GamePlayer player = (GamePlayer)target;
 					DbInventoryItem lefthand = player.ActiveLeftWeapon;
@@ -223,6 +232,8 @@ namespace DOL.GS.Spells
 					double damage = m_handler.Spell.Damage / 2; // another half is physical damage
 					if (target is GamePlayer)
 						ad.ArmorHitLocation = ((GamePlayer)target).CalculateArmorHitLocation(ad);
+					else if (target is GameBot botTarget)
+						ad.ArmorHitLocation = botTarget.CalculateArmorHitLocation(ad);
 
 					DbInventoryItem armor = null;
 					if (target.Inventory != null)
@@ -296,7 +307,9 @@ namespace DOL.GS.Spells
 					{
 						subspell.Level = m_handler.Spell.Level;
 						ISpellHandler spellhandler = ScriptMgr.CreateSpellHandler(m_handler.Caster, subspell, SkillBase.GetSpellLine(GlobalSpellsLines.Combat_Styles_Effect));
-						if (spellhandler != null)
+						if (m_handler.Spell.LifeDrainReturn == (int)Archery.eShotType.PointBlank)
+							PointBlankEffects.Start(m_handler.Caster, subspell);
+						else if (spellhandler != null)
 						{
 							spellhandler.StartSpell(target);
 						}

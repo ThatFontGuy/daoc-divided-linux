@@ -35,7 +35,7 @@ namespace DOL.GS.PlayerClass
 			m_tertiaryStat = eStat.DEX;
 			m_manaStat = eStat.PIE;
 			m_wsbase = 360;
-			m_baseHP = 720;
+			m_baseHP = 760;
 		}
 
 		public override eClassType ClassType

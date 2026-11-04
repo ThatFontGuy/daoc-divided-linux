@@ -121,6 +121,7 @@ namespace DOL.GS
                 ActiveCharIndex++;
             }
 
+            GameEventMgr.Notify(DatabaseEvent.CharacterSelected, null, new CharacterEventArgs(dolChar, this));
             await DOLDB<DbCoreCharacter>.FillObjectRelationsAsync(dolChar);
             Assembly gameServerAssembly = Assembly.GetAssembly(typeof(GameServer));
             object playerObject = null;

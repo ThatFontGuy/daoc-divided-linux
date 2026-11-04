@@ -1,0 +1,14 @@
+[
+ {
+  "table": "Mob",
+  "copy": "aa126e3d-31b5-458d-92cf-ce87e7b980b0",
+  "key": "artifact-1017-kleps-30",
+  "set": {"Region": 30}
+ },
+ {
+  "table": "Mob",
+  "copy": "cdfd9745-3661-4cb8-b024-9746d9e0177a",
+  "key": "artifact-1017-klops-30",
+  "set": {"Region": 30}
+ }
+]

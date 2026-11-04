@@ -288,6 +288,7 @@ namespace DOL.GS
 			try
 			{
 				AutonomousBotGoalPolicy.Initialize(Configuration.RootDirectory);
+				BotDiagnostics.Initialize(Configuration.RootDirectory);
 				//Manually set ThreadPool min thread count.
 				ThreadPool.GetMinThreads(out int minWorkerThreads, out int minIOCThreads);
 				ThreadPool.GetMaxThreads(out int maxWorkerThreads, out int maxIOCThreads);
@@ -322,6 +323,10 @@ namespace DOL.GS
 				//Try to init Server Properties
 				if (!InitComponent(Properties.InitProperties, "Server Properties Lookup"))
 					return false;
+
+				//---------------------------------------------------------------
+				//Living Server 1.1.2: the world database's integrity check (logged; never stops the start)
+				InitComponent(WorldDatabaseSafety.CheckAtStart(), "World database check");
 
 				//---------------------------------------------------------------
 				//Try loading the commands
@@ -558,6 +563,8 @@ namespace DOL.GS
 						log.Info("Game WebAPI open for connections.");
 				}
 
+				BotWatch.Start(Configuration);
+				CombatNumbers.Start(Configuration);
 				GetPatchNotes();
 
 				if (log.IsInfoEnabled)
@@ -746,7 +753,6 @@ namespace DOL.GS
 				//---------------------------------------------------------------
 				//Load the skills
 				SkillBase.LoadSkills();
-                BotPoisonSupply.Load();
 				if (log.IsInfoEnabled)
 					log.Info("Loading skills: true");
 
@@ -1028,6 +1034,9 @@ namespace DOL.GS
 				SaveTimerProc(null);
 			}
 
+			// Living Server 1.1.2: the last saves go from the WAL into the database file.
+			WorldDatabaseSafety.CheckpointAtStop();
+
 			base.Stop();
 
 			if (log.IsInfoEnabled)
@@ -1187,7 +1196,9 @@ namespace DOL.GS
 		{
 			if (m_database == null)
 			{
-				m_database = ObjectDatabase.GetObjectDatabase(Configuration.DBType, Configuration.DBConnectionString);
+				// Living Server 1.1.2: WAL, Synchronous=Normal, pooling and a busy timeout, whatever serverconfig.xml says.
+				string connectionString = WorldDatabaseSafety.PrepareConnectionString(Configuration.DBType, Configuration.DBConnectionString);
+				m_database = ObjectDatabase.GetObjectDatabase(Configuration.DBType, connectionString);
 
 				try
 				{
@@ -1223,6 +1234,8 @@ namespace DOL.GS
 					return false;
 				}
 			}
+
+			WorldDatabaseSafety.ConfirmJournal();
 
 			if (log.IsInfoEnabled)
 				log.Info("Database Initialization: true");

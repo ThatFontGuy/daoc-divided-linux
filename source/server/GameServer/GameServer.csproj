@@ -5,6 +5,7 @@
     <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
     <ItemGroup>
         <EmbeddedResource Include="gameutils/modern-races-1130.json" LogicalName="DOL.GS.ModernRaceRegistrations.json" />
+        <EmbeddedResource Include="gameutils/BotWatch.html" LogicalName="DOL.GS.BotWatch.html" />
     </ItemGroup>
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
@@ -60,6 +61,7 @@
         <ProjectReference Include="..\CoreDatabase\CoreDatabase.csproj" Name="CoreDatabase" />
         <EmbeddedResource Include=".\config\*" />
         <EmbeddedResource Include=".\bots\autonomous\data\capnbry_classic_si_goals.json" />
+        <EmbeddedResource Include=".\bots\autonomous\data\atlantis_camp_cells.json" />
         <EmbeddedResource Include=".\bots\autonomous\data\chat\corpus.json" />
         <EmbeddedResource Include=".\bots\autonomous\data\chat\voices.json" />
         <EmbeddedResource Include=".\bots\autonomous\data\chat\places.json" />

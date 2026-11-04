@@ -11,6 +11,14 @@ namespace DOL.GS.PacketHandler.Client.v168
         protected override void HandlePacketInternal(GameClient client, GSPacketIn packet)
         {
             ushort id = client.Version >= GameClient.eClientVersion.Version1126 ? packet.ReadShortLowEndian() : packet.ReadShort();
+
+            // The client asks for a "player" it has a position for but no body: a bot shown as a player (BotPlayerPresentation).
+            if (BotPlayerPresentation.FindBySession(client.Player?.CurrentRegionID ?? 0, id) is GameBot bot)
+            {
+                client.Out.SendNPCCreate(bot);
+                return;
+            }
+
             GameClient target = ClientService.Instance.GetClientBySessionId(id);
 
             if (target == null)

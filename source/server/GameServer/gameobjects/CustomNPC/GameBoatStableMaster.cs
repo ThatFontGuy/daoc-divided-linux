@@ -9,8 +9,14 @@ namespace DOL.GS
 	/// <summary>
 	/// Stable master that sells and takes horse route tickes
 	/// </summary>
-	public class GameBoatStableMaster : GameMerchant
+	public class GameBoatStableMaster : GameStableMaster
 	{
+		// Some Atlantis dockmasters stand well back from the pier their boats leave from.
+		public const int MAX_ROUTE_START_DISTANCE = 6000;
+
+		public static bool IsRouteStartInReach(PathPoint path, int x, int y) =>
+			path != null && Math.Abs(path.X - x) < MAX_ROUTE_START_DISTANCE && Math.Abs(path.Y - y) < MAX_ROUTE_START_DISTANCE;
+
 		/// <summary>
 		/// Called when a player buys an item
 		/// </summary>
@@ -106,7 +112,7 @@ namespace DOL.GS
                     String destination = item.Name.Substring(LanguageMgr.GetTranslation(ServerProperties.Properties.DB_LANGUAGE, "GameStableMaster.ReceiveItem.TicketTo").Length);
 					PathPoint path = MovementMgr.LoadPath(item.Id_nb);
 					//PathPoint path = MovementMgr.Instance.LoadPath(this.Name + "=>" + destination);
-                    if ((path != null) && ((Math.Abs(path.X - this.X)) < 500) && ((Math.Abs(path.Y - this.Y)) < 500))
+                    if (IsRouteStartInReach(path, X, Y))
 					{
 						player.Inventory.RemoveCountFromStack(item, 1);
                         InventoryLogging.LogInventoryAction(player, this, eInventoryActionType.Merchant, item.Template);
@@ -131,6 +137,7 @@ namespace DOL.GS
 					else
 					{
                         player.Out.SendMessage(LanguageMgr.GetTranslation(player.Client.Account.Language, "GameBoatStableMaster.ReceiveItem.UnknownWay", this.Name, destination), eChatType.CT_System, eChatLoc.CL_SystemWindow);
+						return false;
 					}
 				}
 			}

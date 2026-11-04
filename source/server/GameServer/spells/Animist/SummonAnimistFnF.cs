@@ -46,7 +46,7 @@ namespace DOL.GS.Spells
             {
                 if (area is KeepArea)
                 {
-                    if (Caster.GroundTarget.Z - Caster.Z > 200)
+                    if (Caster.GroundTarget.Z - Caster.Z > 150)
                     {
                         if (playerCaster != null)
                             MessageToCaster("Cannot summon a turret this high near a keep!", eChatType.CT_SpellResisted);

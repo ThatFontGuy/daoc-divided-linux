@@ -57,6 +57,22 @@ namespace DOL.GS
             ForceReplot = true;
         }
 
+        /// <summary>
+        /// The path being walked now, whatever it was planned to, read-only. The route threat scan asked for the path to
+        /// the camp, but the bot walks to an approach point, a zone seam or a sidestep, so on 2026-11-02 most scans got
+        /// nothing and checked a straight line to a camp up to 30,000 units off: 406 of 907 low level red and purple
+        /// sightings were made inside the monster's aggro range.
+        /// </summary>
+        public int CopyActivePath(Span<Vector3> destination)
+        {
+            if (ForceReplot)
+                return 0;
+            int count = Math.Min(destination.Length, _activePath.Nodes.Count);
+            for (int i = 0; i < count; i++)
+                destination[i] = _activePath.Nodes.Peek(i).Position;
+            return count;
+        }
+
         /// <summary>Read-only lookahead for dungeon safety. Does not replot,
         /// advance nodes, alter movement, or allocate a second route.</summary>
         public int CopyUpcomingPath(Vector3 target, Span<Vector3> destination)
@@ -69,12 +85,22 @@ namespace DOL.GS
             return count;
         }
 
+        // The Atlantis sea zones are meshed as a flat sheet on the surface, with no seabed. Sea monsters stay off
+        // the mesh and move in straight lines, or Detour finds no start point and they stand still.
+        public const int ATLANTIS_SEA_LEVEL = 7950;
+
+        public static bool IsBelowAtlantisSea(ushort zoneId, int spawnZ) =>
+            spawnZ < ATLANTIS_SEA_LEVEL && zoneId is (>= 30 and <= 34) or (>= 70 and <= 72) or (>= 73 and <= 77) or (>= 130 and <= 134);
+
         public bool ShouldPath(Zone zone, Vector3 target)
         {
             if (zone == null || !zone.IsPathfindingEnabled)
                 return false;
 
             if ((Owner.Flags & (eFlags.FLYING | eFlags.SWIMMING)) != 0 || Owner is GameTaxi || Owner is GameTaxiBoat)
+                return false;
+
+            if (Owner.SpawnPoint != null && IsBelowAtlantisSea(zone.ID, (int) Owner.SpawnPoint.Z))
                 return false;
 
             // Target is in a different zone (TODO: implement this maybe? not sure if really required).
@@ -276,13 +302,17 @@ namespace DOL.GS
         // A realm's portal keep is where its bots arrive in the frontier: every bot of that realm leaves through its door.
         // Run 22 (2026-10-18): 136 Hibernian bots without an RvR objective could not leave Hibernia's portal keep in
         // Odin's Gate (120 route give-ups, door 115000902 held 35 times).
+        // A bot inside its realm's keep leaves through the doors like anyone else: when a keep falls the army's objective
+        // turns back to PvE with the army still inside. On 2026-10-30 four captured keeps held their armies
+        // (661 route give-ups, each starting right after the capture), and 213 bots were then teleported home.
         public static bool CanUseFriendlyKeepDoor(GameNPC owner, GameKeepDoor door) =>
             owner is GameBot { IsAutonomousWorldBot: true, IsAlive: true } bot &&
             (AutonomousObjectiveAssignments.Is(bot, eAutonomousObjectiveKind.RvR) ||
              BattlegroundBrackets.IsBattlegroundRegion(bot.CurrentRegionID) ||
              door?.Component?.Keep?.IsPortalKeep == true ||
              bot.TempProperties?.GetProperty<AutonomousFrontierTransport.Request>(AutonomousFrontierTransport.RequestKey)
-                 ?.Passage?.Medallion == "home_necklace") &&
+                 ?.Passage?.Medallion == "home_necklace" ||
+             door?.Component?.Keep is { } keep && AutonomousKeepGateGoals.IsWithinWalls(keep, bot.X, bot.Y)) &&
             door?.Component?.Keep != null && bot.Realm != eRealm.None && door.Realm == bot.Realm;
 
         private bool TryUsePathDoor()
@@ -460,7 +490,7 @@ namespace DOL.GS
         }
 
         public static bool RequiresExactClimbNode(bool bot, ushort zone, EDtPolyFlags current, EDtPolyFlags next) =>
-            bot && (zone is 160 or 249 or 60 or 191) && ((current | next) & EDtPolyFlags.Jump) != 0;
+            bot && (zone is 160 or 249 or 60 or 191 or 180) && ((current | next) & EDtPolyFlags.Jump) != 0;
 
         public bool TryGetClosestReachableNode(Zone zone, Vector3 position, Vector3 target, out Vector3? node)
         {

@@ -27,6 +27,13 @@ namespace DOL.GS.Spells
 	[SpellHandler(eSpellType.VampiirSkillBonusDeBuff)]
 	public class VampiirSkillBonusDeBuff : SpellHandler
 	{
+		private readonly Dictionary<eProperty, int> m_removed = new Dictionary<eProperty, int>();
+
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+		}
+
 		public override void FinishSpellCast(GameLiving target)
 		{
 			m_caster.Mana -= PowerCost(target);
@@ -44,9 +51,11 @@ namespace DOL.GS.Spells
 
                 for (eProperty property = eProperty.Skill_First; property <= eProperty.Skill_Last; property++)
                 {
-                    if (player.GetModifiedSpecLevel(SkillBase.GetPropertyName(property)) != 0)
+                    int level = player.GetModifiedSpecLevel(SkillBase.GetPropertyName(property));
+                    if (level != 0)
                     {
-                        player.BaseBuffBonusCategory[property] = -player.GetModifiedSpecLevel(SkillBase.GetPropertyName(property));
+                        player.BaseBuffBonusCategory[property] -= level;
+                        m_removed[property] = level;
                     }
                 }
 
@@ -63,10 +72,11 @@ namespace DOL.GS.Spells
 			if (effect.Owner is GamePlayer)
 			{
 				GamePlayer player = effect.Owner as GamePlayer;
-				for (eProperty property = eProperty.Skill_First; property <= eProperty.Skill_Last; property++)
+				foreach (KeyValuePair<eProperty, int> removed in m_removed)
 				{
-					player.BaseBuffBonusCategory[property] = 0;
+					player.BaseBuffBonusCategory[removed.Key] += removed.Value;
 				}
+				m_removed.Clear();
 				player.PropertiesChanged();
                 player.Out.SendCharStatsUpdate();
                 player.UpdatePlayerStatus();

@@ -1,5 +1,11 @@
 CHANGES (short tldr, newest first)
 
+2026-11-04
+- Merged upstream DividedRealms 084a433 (DR-dev-0.1a, the Fishing Update; 255 commits) on branch merge-dr-dev-0.1a. Without the Passport Desk, TestClient, Windows launcher changes. Server builds, 5692 tests pass (was 4887). Not yet run in game.
+- World updates dev8..DR-dev-0.1a (5 steps) apply to a copy of the dev7 world. build-release.sh now takes world-updates from source/tools/release-baselines instead of the release zip (the new zip is 1.2 GB with a different name; fetch-divided-release.py still fetches the dev7 world).
+- Dropped our bot death-pose change (ShowDeathPose, IPacketLib SendPlayerRevive(GameLiving)); upstream fixes the same thing with ShowDeadToViewers/ShowStandingToViewers. Check in game that bot corpses lie down.
+- Still to check in game: bracket bot gear (armor condition now counts for bots), no-players-no-bots, load governor.
+
 2026-10-30
 - Audit vs the Windows launcher: serverconfig Foreign Keys=False (was True), MailConfig.xml in defaults/; Battleground fix on the Client tab.
 - Project created from DividedRealms e7155da (0.38-dev7) minus the Godot client (World Workshop editor kept).

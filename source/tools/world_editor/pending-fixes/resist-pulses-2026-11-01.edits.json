@@ -1,0 +1,206 @@
+[
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 25"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 44"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 29"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 48"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 30"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 49"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 27"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 46"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 28"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 47"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 26"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Bard Res Song 45"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 25"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 44"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 29"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 48"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 27"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 46"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 28"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 47"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 30"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 49"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 26"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Skald Res Song 45"
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77602",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 30,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77603",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 30,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77604",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 100,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77684",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 30,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77685",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 30,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77686",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 100,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3226",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 100,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3227",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 100,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3228",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 100,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3293",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 30,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77316",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 30,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77317",
+  "set": {
+   "Pulse": 1,
+   "Frequency": 30,
+   "Duration": 30
+  }
+ }
+]

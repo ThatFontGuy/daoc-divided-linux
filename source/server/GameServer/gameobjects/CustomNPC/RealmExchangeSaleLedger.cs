@@ -24,8 +24,9 @@ public static class RealmExchangeSaleLedger
     }
     private static readonly ConditionalWeakTable<IObjectDatabase, State> States = new();
 
+    /// <param name="Crafted">The item was crafted (by a player or a gamebot), so crafted sales can be counted.</param>
     public sealed record Sale(int Realm, string ItemName, int Quantity, long PriceCopper,
-        string SellerId, string SellerName, string BuyerId, string BuyerName, DateTime SoldUtc);
+        string SellerId, string SellerName, string BuyerId, string BuyerName, DateTime SoldUtc, bool Crafted = false);
 
     [GameServerStartedEvent]
     public static void OnServerStarted(DOLEvent e, object sender, EventArgs args)
@@ -66,6 +67,7 @@ public static class RealmExchangeSaleLedger
                     Quantity = sale.Quantity, PriceCopper = sale.PriceCopper,
                     SellerId = sale.SellerId, SellerName = sale.SellerName ?? "Unknown seller",
                     BuyerId = sale.BuyerId, BuyerName = sale.BuyerName ?? "Unknown buyer",
+                    IsCrafted = sale.Crafted,
                 };
                 DataObject[] rows = paymentRows.Append(next).ToArray();
                 bool saved = database is SqlObjectDatabase sql
@@ -74,6 +76,7 @@ public static class RealmExchangeSaleLedger
                 // Replace the cached row only after commit. A failed write must
                 // neither erase the old sale nor consume a history position.
                 state.Rows[previous.SlotId - 1] = next;
+                LogSale(sale);
                 return true;
             }
             catch (Exception error)
@@ -94,6 +97,19 @@ public static class RealmExchangeSaleLedger
         if (missing.Length > 0 && !database.AddObject(missing))
             throw new InvalidOperationException("Could not initialize the Realm Exchange sale ledger.");
         state.Rows = rows;
+    }
+
+    /// <summary>The ledger keeps 50 sales; this line keeps every one, with crafted=1 for crafted items, so a run's
+    /// sales can be counted by type (the 2026-11-01 run could not tell whether crafted items sold).</summary>
+    public static string SaleLine(Sale sale) =>
+        $"AUTONOMOUS_EXCHANGE_SOLD realm={sale.Realm} item=\"{sale.ItemName}\" quantity={sale.Quantity} price={sale.PriceCopper} " +
+        $"seller=\"{sale.SellerName}\" sellerId=\"{sale.SellerId}\" buyer=\"{sale.BuyerName}\" buyerId=\"{sale.BuyerId}\" " +
+        $"crafted={(sale.Crafted ? 1 : 0)}";
+
+    private static void LogSale(Sale sale)
+    {
+        try { Logging.LoggerManager.Create(typeof(RealmExchangeSaleLedger)).Info(SaleLine(sale)); }
+        catch { } // A diagnostics failure must not undo a committed sale.
     }
 
     private static void ReportError(State state, Exception error)
@@ -120,4 +136,7 @@ public sealed class RealmExchangeSaleRecord : DataObject
     [DataElement(AllowDbNull = false)] public string SellerName { get; set; } = string.Empty;
     [DataElement(AllowDbNull = false)] public string BuyerId { get; set; } = string.Empty;
     [DataElement(AllowDbNull = false)] public string BuyerName { get; set; } = string.Empty;
+    /// <summary>Added 2026-11-02. The server adds the column to an existing table on start-up (NOT NULL DEFAULT 0), so
+    /// older rows read as not crafted.</summary>
+    [DataElement(AllowDbNull = false)] public bool IsCrafted { get; set; }
 }

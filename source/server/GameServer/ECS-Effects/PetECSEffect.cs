@@ -13,7 +13,7 @@ namespace DOL.GS
             // Don't use the entity that casted the spell here.
             // For Bonedancers, the spell is cast by the player, but the pet count is on the commander pet.
             if (Owner is GameSummonedPet summonedPet)
-                summonedPet.Owner.UpdatePetCount(summonedPet, false);
+                summonedPet.Owner?.UpdatePetCount(summonedPet, false); // Gone if the pet outlived a logout.
 
             (SpellHandler as SummonSpellHandler)?.OnPetReleased(); // Should be done before setting health to 0.
             Owner.Health = 0; // To send proper remove packet.

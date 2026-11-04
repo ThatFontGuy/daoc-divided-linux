@@ -278,6 +278,35 @@ public sealed class UT_BotModernClasses
     }
 
     [Test]
+    public void SovereignDecreesWaitForTheFight()
+    {
+        Spell decree = Spell(eSpellType.StormSovereignAbility, id: 62631);
+        Spell royalDecree = Spell(eSpellType.StormSovereignAbility, id: 62631 + PendragonRules.SpellOffset);
+        Spell tuathaDecree = Spell(eSpellType.StormSovereignAbility, id: 62633 + PendragonRules.TuathaOffset);
+        Spell renewal = Spell(eSpellType.StormSovereignAbility, id: 62634);
+        Assert.Multiple(() =>
+        {
+            Assert.That(BotClassKitPolicy.WaitsForContact(decree, inCombat: false), Is.True);
+            Assert.That(BotClassKitPolicy.WaitsForContact(royalDecree, inCombat: false), Is.True);
+            Assert.That(BotClassKitPolicy.WaitsForContact(tuathaDecree, inCombat: false), Is.True);
+            Assert.That(BotClassKitPolicy.WaitsForContact(decree, inCombat: true), Is.False, "fighting");
+            Assert.That(BotClassKitPolicy.WaitsForContact(renewal, inCombat: false), Is.False, "the self heal does not wait");
+            Assert.That(BotClassKitPolicy.WaitsForContact(Spell(eSpellType.BothAblativeArmor), inCombat: false), Is.False);
+        });
+    }
+
+    [Test]
+    public void OnlyCastTimeKitSpellsOwnTheTurn()
+    {
+        Spell channel = new(new DbSpell { SpellID = 1, Type = nameof(eSpellType.DeathKnightRegenerate), Target = "Self", CastTime = 2.5 }, 1);
+        Assert.Multiple(() =>
+        {
+            Assert.That(BotClassKitPolicy.OwnsTurn(channel), Is.True);
+            Assert.That(BotClassKitPolicy.OwnsTurn(Spell(eSpellType.StormSovereignAbility, id: 62631)), Is.False, "instant Decree");
+        });
+    }
+
+    [Test]
     public void CombatSupportKitSpells()
     {
         Assert.Multiple(() =>

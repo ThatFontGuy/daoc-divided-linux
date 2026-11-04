@@ -49,6 +49,13 @@ namespace DOL.UnitTests
             try
             {
                 foreach (Zone zone in zones) LocalPathfindingMgr.LoadNavMesh(zone);
+                // AUDIT_BENCHED_CROSSINGS = "x,y;...": zone crossings benched as bots' failures would bench them.
+                AutonomousSeamCrossingQuarantine.ResetForTests();
+                foreach (string benched in (Environment.GetEnvironmentVariable("AUDIT_BENCHED_CROSSINGS") ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    float[] v = benched.Split(',').Select(float.Parse).ToArray();
+                    AutonomousSeamCrossingQuarantine.Quarantine(region, new Vector3(v[0], v[1], 0));
+                }
                 if (Environment.GetEnvironmentVariable("AUDIT_DRAGON") is string dragon)
                 {
                     Vector3 hub = Point(dragon.Split('>')[0]), home = Point(dragon.Split('>')[1]);

@@ -69,6 +69,7 @@ namespace DOL.GS
         // 4,500 tether but simply walk home when they leave it (run 18 led a small hill cat home). Overnight 2026-10-19
         // bots stood "Fighting Lieutenant Saxe" (Hall of the Corrupt, a scripted GameNPC with a 1,500 tether and the
         // same out-of-tether immunity) until the 15-minute watchdog moved them, 88 times, and he killed 43 more.
+        // Run of 2026-10-29: Lieutenant Meade (same hall) kept the Albion raid there until its four hours ran out.
         public const int ScriptedTetherBelow = 4_500;
 
         public static bool HasEncounterTether(GameNPC npc) =>

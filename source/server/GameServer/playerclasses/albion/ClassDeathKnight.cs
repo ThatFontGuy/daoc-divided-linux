@@ -39,7 +39,7 @@ namespace DOL.GS.PlayerClass
         public override bool HasAdvancedFromBaseClass() => true;
 
         public override List<PlayerRace> EligibleRaces => ServerProperties.Properties.ENABLE_DEATH_KNIGHT_TEST
-            ? new List<PlayerRace> { PlayerRace.Briton, PlayerRace.Inconnu, PlayerRace.Saracen }
+            ? new List<PlayerRace> { PlayerRace.Avalonian, PlayerRace.Briton, PlayerRace.Inconnu, PlayerRace.Saracen }
             : new List<PlayerRace>();
     }
 }

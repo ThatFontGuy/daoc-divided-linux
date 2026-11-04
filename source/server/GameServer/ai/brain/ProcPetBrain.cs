@@ -54,6 +54,9 @@ namespace DOL.AI.Brain
 
 		
 
+		/// <summary>Locks the pet onto one target, whatever its owner has selected.</summary>
+		public void AssignTarget(GameLiving target) { m_target = target; }
+
 		public override int ThinkInterval { get { return 1500; } }
 
 		public override void Think() { AttackMostWanted(); }

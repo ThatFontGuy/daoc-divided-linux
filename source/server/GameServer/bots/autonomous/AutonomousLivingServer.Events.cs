@@ -150,11 +150,15 @@ public static partial class AutonomousLivingServer
         }
     }
 
+    /// <summary>Server firsts belong to the realm's own characters, never a visiting Epic Special Forces member or a
+    /// test account (the AI test client's characters are levelled by command).</summary>
+    public static bool MayClaimFirst(GameLiving who) =>
+        who is not (GameBot { IsEpicSpecialForce: true } or GamePlayer { Client.Account.IsTester: true });
+
     /// <summary>Claims a first once. The achiever's realm cheers in /faction; everyone gets one system line.</summary>
     public static bool TryClaimFirst(string title, GameLiving who, string what)
     {
-        // Server firsts belong to the realm's own characters, never a visiting Epic Special Forces member.
-        if (who is GameBot { IsEpicSpecialForce: true })
+        if (!MayClaimFirst(who))
             return false;
         var row = new OfflineServerFirstRecord
         {

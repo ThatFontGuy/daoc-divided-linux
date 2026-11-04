@@ -484,7 +484,7 @@ namespace DOL.GS
         {
         }
 
-        public void SendPlayerRevive(GameLiving revivedPlayer)
+        public void SendPlayerRevive(GamePlayer revivedPlayer)
         {
         }
 

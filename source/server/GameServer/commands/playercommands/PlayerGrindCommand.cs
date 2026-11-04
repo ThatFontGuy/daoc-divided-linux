@@ -153,10 +153,10 @@ namespace DOL.GS.Commands
             }
         }
 
-        private static bool Fighting(GameLiving living) => living.InCombat ||
+        internal static bool Fighting(GameLiving living) => living.InCombat ||
             living.ControlledBrain?.Body is { IsAlive: true, InCombat: true };
 
-        private static bool CombatIntent(GameLiving living) => Fighting(living) || living.IsAttacking ||
+        internal static bool CombatIntent(GameLiving living) => Fighting(living) || living.IsAttacking ||
             living is GameBot { Brain: BotBrain { HasAggro: true } } ||
             living.ControlledBrain?.Body is { IsAlive: true, IsAttacking: true };
 
@@ -241,7 +241,8 @@ namespace DOL.GS.Commands
                 if (session.ReadySince == 0) session.ReadySince = now;
                 if (now - session.ReadySince < 2000 || now < session.NextSearch) return;
                 session.NextSearch = now + 5000;
-                GameNPC target = FindTarget(session, puller, members.Length - 1, now);
+                GameNPC target = FindNearbyPull(player, puller, PullRadius, session.FailedTargets, now,
+                    npc => IsSuitableLevel(player.Level, npc.Level, player.GetConLevel(npc), members.Length - 1));
                 if (target == null)
                 { session.Detail = "Ready — no suitable reachable nearby monsters"; return; }
                 StandModeSeats(session);
@@ -262,21 +263,21 @@ namespace DOL.GS.Commands
             }
         }
 
-        private static GameNPC FindTarget(Session session, GameBot puller, int count, long now)
+        /// <summary>The monster to pull next near the player, as /grind and /bots hunt choose it. Failed targets are skipped for two minutes.</summary>
+        internal static GameNPC FindNearbyPull(GamePlayer player, GameBot puller, int radius, Dictionary<GameNPC, long> failedTargets, long now,
+            Func<GameNPC, bool> suitable)
         {
-            foreach (GameNPC expired in session.FailedTargets.Where(pair => pair.Value <= now).Select(pair => pair.Key).ToArray())
-                session.FailedTargets.Remove(expired);
-            while (session.FailedTargets.Count > 64) session.FailedTargets.Remove(session.FailedTargets.MinBy(pair => pair.Value).Key);
-            GamePlayer player = session.Player;
+            foreach (GameNPC expired in failedTargets.Where(pair => pair.Value <= now).Select(pair => pair.Key).ToArray())
+                failedTargets.Remove(expired);
+            while (failedTargets.Count > 64) failedTargets.Remove(failedTargets.MinBy(pair => pair.Value).Key);
             var nav = PathfindingProvider.Instance;
             if (puller.CurrentZone == null || !nav.HasNavmesh(puller.CurrentZone)) return null;
             // Local search only, at most four corridor checks per five seconds,
             // and only for explicitly active human grind sessions.
-            foreach (GameNPC npc in player.GetNPCsInRadius(PullRadius).Where(npc =>
+            foreach (GameNPC npc in player.GetNPCsInRadius((ushort)radius).Where(npc =>
                 PlayerMobNavigator.IsExperienceMonster(npc) && npc.IsAlive && npc.ObjectState == GameObject.eObjectState.Active &&
                 !npc.InCombat && !npc.IsAttacking && npc.CurrentZone == puller.CurrentZone &&
-                !session.FailedTargets.ContainsKey(npc) &&
-                IsSuitableLevel(player.Level, npc.Level, player.GetConLevel(npc), count) &&
+                !failedTargets.ContainsKey(npc) && suitable(npc) &&
                 GameServer.ServerRules.IsAllowedToAttack(player, npc, true))
                 .OrderBy(npc => Math.Abs(npc.Level - player.Level)).ThenBy(npc => player.GetDistanceTo(npc)).Take(4))
             {
@@ -285,7 +286,7 @@ namespace DOL.GS.Commands
                 // whole dungeon wings. Existing combat routing handles the pull.
                 if (!nav.HasLineOfSight(puller.CurrentZone, start, end, nav.BlockingDoorAvoidanceFilters) ||
                     !PlayerTravelPath.TryBuildCorridor(nav, puller.CurrentZone, start, end, out _))
-                { session.FailedTargets[npc] = now + 120_000; continue; }
+                { failedTargets[npc] = now + 120_000; continue; }
                 return npc;
             }
             return null;

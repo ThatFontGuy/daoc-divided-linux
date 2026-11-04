@@ -39,6 +39,48 @@ namespace DOL.GS
         // retarget cooldown was running. A party never pulls a monster this many levels above its average, and a monster it must
         // not pull and cannot go around makes it give up the camp even inside the cooldown (at most once a minute).
         public const int GroupMaximumLevelsAbove = 8;
+        // Playtest 2026-10-31, 40 minutes on 3,000 bots: solo single oranges killed 7% within 150 seconds (12% in Atlantis),
+        // not the 34-54% of the 2026-10-18 logs, and groups lost nobody in 95 yellow and orange pulls. A party of four bots
+        // beat level 60 reds in 15-33 seconds. Atlantis is too thick with roaming monsters to walk around them all.
+        /// <summary>From this level a lone bot takes a single orange rather than give up its camp.</summary>
+        public const int HighLevelSoloMinimum = 45;
+        public const int StrongPartyMinimumMembers = 4;
+        public const int StrongPartyMinimumLevel = 45;
+        public const int StrongPartyMaximumLevelsAbove = 12;
+        public const int StrongPartyEasyRedPack = 2;
+        // Overnight run 2026-10-31: a level 50's purple starts 11 levels up (ConLevels), so "under 12 above" left a single level,
+        // 61, and none of the 11 purple decisions of level 45+ parties fell in it: they were 13 to 16 above. 170 of 171 such parties
+        // were strong, so that was never the gate. A way around also came first, which took 9 of the 11. Yet a Hero and three bots
+        // killed a level 63 pair in 46 seconds with no deaths, and a party of five beat a 64 and 60 pair, while a dense 62 and 65
+        // camp wiped that same party. So a strong party pulls one or two purples up to 14 above, rather than walking around them,
+        // and three or more stay off limits. The mob lessons have the last word (provenDeadly).
+        public const int StrongPartyPurplePack = 2;
+        public const int StrongPartyPurpleLevelsAbove = 15;
+        /// <summary>How far around a purple a party counts its camp: the 1,800-unit scan around the leader stops short of a monster far down the route.</summary>
+        public const int CampCountRadius = 1_100;
+        /// <summary>A monster this hurt is nearly dead: running now only throws the fight away.</summary>
+        public const int BreakOffFoeHealthPercent = 40;
+        public const int BreakOffMinimumParty = 3;
+
+        /// <summary>A party that can fight well above its level: four or more at level with a healer. Pure.</summary>
+        public static bool IsStrongParty(int members, bool hasHealer, int averageLevel) =>
+            members >= StrongPartyMinimumMembers && hasHealer && averageLevel >= StrongPartyMinimumLevel;
+
+        /// <summary>
+        /// A purple a strong party takes on: one or two, none far above it, and not one the party's lessons say keeps killing
+        /// parties. <paramref name="hardestLevelsAbove"/> is the highest of the pack, not the one on the route. Pure.
+        /// </summary>
+        public static bool IsStrongPartyPurple(ConColor con, bool strongParty, int packSize, int hardestLevelsAbove, bool provenDeadly) =>
+            strongParty && !provenDeadly && con == ConColor.PURPLE && packSize <= StrongPartyPurplePack &&
+            hardestLevelsAbove < StrongPartyPurpleLevelsAbove;
+
+        /// <summary>
+        /// Half the party down, or the healer gone against an orange or worse, and the monster far from finished. A lost
+        /// healer alone is no reason to run from an easy monster (playtest 2026-10-31: six of seven ran from one sentry). Pure.
+        /// </summary>
+        public static bool ShouldBreakOff(int members, int alive, bool hadHealer, bool healerAlive, int strongestFoeHealthPercent, ConColor hardestFoe) =>
+            members >= BreakOffMinimumParty && strongestFoeHealthPercent >= BreakOffFoeHealthPercent && alive > 0 &&
+            ((members - alive) * 2 >= members + 1 || hadHealer && !healerAlive && hardestFoe >= ConColor.ORANGE);
         public const long ForcedRetargetCooldownMilliseconds = 60_000;
 
         /// <summary>
@@ -58,7 +100,8 @@ namespace DOL.GS
         /// </summary>
         public static RouteThreatAction Decide(ConColor con, bool grouped, int packSize, bool bossLike,
             bool detourAvailable, int detoursSoFar, bool mayRetarget, bool cautious = false, bool mayAbandonHopeless = false,
-            int levelsAboveReference = 0, bool mayForceRetarget = false)
+            int levelsAboveReference = 0, bool mayForceRetarget = false, bool strongParty = false, bool highLevelSolo = false,
+            bool denseWorld = false, int hardestLevelsAbove = int.MinValue, bool provenDeadly = false)
         {
             // A grey monster is no threat (and in DAoC rarely aggroes); lower cons are fought in
             // bigger packs. Run 7 (2026-10-06): 14% of give-ups were greys 6+ levels below the
@@ -69,13 +112,18 @@ namespace DOL.GS
             if (!grouped && !bossLike)
             {
                 ConColor felt = cautious && con == ConColor.YELLOW ? ConColor.ORANGE : con;
-                int easySolo = felt <= ConColor.GREEN ? 3 : felt <= ConColor.BLUE ? 2 : 0;
-                int fightableSolo = felt <= ConColor.GREEN ? 5 : felt <= ConColor.BLUE ? 3 : felt <= ConColor.ORANGE ? 1 : 0;
+                // Atlantis: solo blue packs killed more often than single oranges (14% against 12%).
+                int easySolo = felt <= ConColor.GREEN ? 3 : felt <= ConColor.BLUE ? denseWorld ? 1 : 2 : 0;
+                int fightableSolo = felt <= ConColor.GREEN ? 5 : felt <= ConColor.BLUE ? denseWorld ? 2 : 3 : felt <= ConColor.ORANGE ? 1 : 0;
                 if (packSize <= easySolo)
                     return RouteThreatAction.Pull;
                 if (canDetour)
                     return RouteThreatAction.Detour;
-                if (felt == ConColor.YELLOW && packSize <= 1)
+                // A yellow pair with no way around too: on 2026-10-31 solo give-ups took 37% of bot time for no kills, and 337 of
+                // the 1,223 were yellow packs, while a single yellow killed only 7%. The mob lessons turn back a pair that kills.
+                if (felt == ConColor.YELLOW && packSize <= 2)
+                    return RouteThreatAction.Pull;
+                if (felt == ConColor.ORANGE && highLevelSolo && packSize <= 1)
                     return RouteThreatAction.Pull;
                 if (felt == ConColor.ORANGE && mayRetarget)
                     return RouteThreatAction.Retarget;
@@ -89,14 +137,16 @@ namespace DOL.GS
             int manageablePack = grouped ? con <= ConColor.BLUE ? 6 : 4
                 : con <= ConColor.GREEN ? 5 : con <= ConColor.BLUE ? 3 : 2;
             bool easy = !bossLike && (grouped
-                ? con <= ConColor.ORANGE && packSize <= easyPack
+                ? con <= ConColor.ORANGE && packSize <= easyPack || strongParty && con == ConColor.RED && packSize <= StrongPartyEasyRedPack ||
+                  IsStrongPartyPurple(con, strongParty, packSize, Math.Max(levelsAboveReference, hardestLevelsAbove), provenDeadly)
                 : con <= ConColor.YELLOW && packSize <= easyPack);
             if (easy)
                 return RouteThreatAction.Pull;
             if (canDetour)
                 return RouteThreatAction.Detour;
+            int levelsAllowed = strongParty ? StrongPartyMaximumLevelsAbove : GroupMaximumLevelsAbove;
             bool manageable = !bossLike && (grouped
-                ? con <= ConColor.RED && packSize <= manageablePack && levelsAboveReference < GroupMaximumLevelsAbove
+                ? con <= ConColor.RED && packSize <= manageablePack && levelsAboveReference < levelsAllowed
                 : con <= ConColor.ORANGE && packSize <= manageablePack);
             if (manageable)
                 return RouteThreatAction.Pull;
@@ -108,6 +158,23 @@ namespace DOL.GS
         /// <summary>A monster a party must not walk into: a boss, a purple one, or one far above the party's average.</summary>
         public static bool IsHopeless(ConColor con, bool bossLike, int levelsAboveReference) =>
             bossLike || con >= ConColor.PURPLE || levelsAboveReference >= GroupMaximumLevelsAbove;
+
+        /// <summary>
+        /// A monster already fighting someone else still counts as a route threat when it cons orange or harder: it turns on
+        /// the next bot as soon as its fight ends. The route scan used to skip every monster in combat, and on the 2026-11-02
+        /// overnight run 878 of 1,515 bots under level 10 killed by a purple before reaching camp died to a monster of the
+        /// same name that had killed another bot within three minutes and 1,500 units. Pure.
+        /// </summary>
+        public static bool WatchesBusyMonster(ConColor seen) => seen >= ConColor.ORANGE;
+
+        /// <summary>
+        /// A busy monster is never pulled (that joins someone else's fight against a hard monster): go around it, else give up
+        /// the camp. With no camp to give up the bot walks on, as it did before. Pure.
+        /// </summary>
+        public static RouteThreatAction ForBusyMonster(RouteThreatAction action, bool canDetour, bool hasCamp) =>
+            action != RouteThreatAction.Pull ? action
+            : canDetour ? RouteThreatAction.Detour
+            : hasCamp ? RouteThreatAction.Retarget : RouteThreatAction.Ignore;
 
         /// <summary>
         /// How far past a monster's aggro range a bot that gave up its camp because of it backs off. A bot used to stop

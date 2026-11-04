@@ -30,8 +30,17 @@ public sealed record ImportSummary(long Accounts, long Characters, long Bots, lo
 public static class ImportEngine
 {
     /// <summary>This release; the "b" edition has the custom class, the plain one does not.</summary>
-    public const string Release = "0.37";
-    public static readonly Policy Rules = JsonSerializer.Deserialize<Policy>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"progress-policy.json")))!;
+    public static string Release { get; set; } = "0.37";
+    // The Divided Realms launcher carries the policy inside itself (its package ships only the launcher's own files).
+    public static readonly Policy Rules = LoadRules();
+    static Policy LoadRules()
+    {
+        string file=Path.Combine(AppContext.BaseDirectory,"progress-policy.json");
+        if(File.Exists(file))return JsonSerializer.Deserialize<Policy>(File.ReadAllText(file))!;
+        using var stream=typeof(ImportEngine).Assembly.GetManifestResourceStream("progress-policy.json")
+            ?? throw new FileNotFoundException("progress-policy.json is missing.");
+        return JsonSerializer.Deserialize<Policy>(stream)!;
+    }
     const int SluaghbinderClass = 63, AcolyteClass = 16, Hibernia = 3;
     // The Sluaghbinder client of 0.33b/0.34b, and of 0.35b / 0.36b (classic war map, red quest markers, QUEST GUIDE button).
     static readonly string[] SluaghbinderClientSha256 = ["01b1848e79b31d2822811effb3d3b098e07015db2d3db1178df5ba31ed805e96",
@@ -70,7 +79,8 @@ public static class ImportEngine
         runtimes.SelectMany(r=>new[]{r,Path.GetFullPath(Path.Combine(r,"..","new-client","runtime"))}).ToArray();
     static void CheckClosed(params string[] roots)
     {
-        if(System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpListeners().Any(p=>p.Port==10300))
+        // 10300 is the classic packages' login port, 10330 the modern 1.130 packages'.
+        if(System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpListeners().Any(p=>p.Port is 10300 or 10330))
             throw new InvalidOperationException("A local DAoC server is listening. Stop it before importing progress.");
         foreach(var process in Process.GetProcesses())
         using(process)
@@ -79,7 +89,7 @@ public static class ImportEngine
             string name=process.ProcessName;
             if(name.Equals("CoreServer",StringComparison.OrdinalIgnoreCase))
                 throw new InvalidOperationException("Stop the DAoC server before importing progress.");
-            if(name is not ("OfflineDAoC" or "game" or "camelot" or "connect" or "Godot_v4.7.2-stable_mono_win64"))continue;
+            if(name is not ("OfflineDAoC" or "game" or "camelot" or "connect" or "connect-local1130" or "Godot_v4.7.2-stable_mono_win64"))continue;
             try
             {
                 string? file=process.MainModule?.FileName;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DOL.Database;
+using DOL.GS.PacketHandler;
 using DOL.GS.PacketHandler.Client.v168;
 using DOL.Language;
 
@@ -309,7 +310,7 @@ namespace DOL.GS.Commands
                         
                         // Check 'account' table for exact match
                         DbAccount acc = GetAccount(accountname);
-                        
+
                         // If the destination account does not exist
                         if (acc == null)
                         {

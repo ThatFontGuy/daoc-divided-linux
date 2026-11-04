@@ -25,6 +25,9 @@ namespace DOL.GS.Spells
         public static bool HasVeil(GameLiving living) => living.effectListComponent.GetSpellEffects(eEffect.MasterLevel)
             .Any(effect => !effect.IsEnding && !effect.IsDisabled && PendragonRules.IsRoyalRank(effect.SpellHandler.Spell.ID) && Key(effect.SpellHandler.Spell.ID)==22);
         public static double Scale(int level) => Math.Clamp(level, 1, 50) / 50.0;
+        // Style procs never scale below level 10 strength: 40 x 1/50 rounded to 0 damage through level 5 (2026-11-03 report).
+        public const int StyleFloorLevel = 10;
+        public static double StyleDamage(int level, bool finisher) => (finisher ? 120 : 40) * Scale(Math.Max(level, StyleFloorLevel));
 
         // Percent of damage dealt returned as health, power and endurance; Storm Crown multiplies it.
         public const int MeleeHealthSteal = 30, MeleeResourceSteal = 10;
@@ -181,7 +184,7 @@ namespace DOL.GS.Spells
             var mods=action==1 ? new[]{ MLMod.Debuff(eProperty.ArmorAbsorption,10) } :
                 action==2 || action==5 ? new[]{ Buff(weapon==4?eProperty.BlockChance:eProperty.ParryChance,5) } : Array.Empty<MLMod>();
             return new MLAbility { Path="StormSovereign",Level=1,Mods=mods,Describe=s=>s.Description,Run=(h,t)=> {
-                double damage=(action==5?120:40)*Scale(h.Caster.Level);
+                double damage=StyleDamage(h.Caster.Level,action==5);
                 if(action==4) { h.Cast(t,1,eSpellType.StyleStun,db=>{db.Duration=weapon==4?4:3;}); return; }
                 Strike(h,t,damage,weapon==2?eDamageType.Cold:eDamageType.Energy);
                 if(action==1)

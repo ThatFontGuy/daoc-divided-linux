@@ -145,6 +145,18 @@ namespace DOL.UnitTests
             Assert.That(new DOL.GS.PlayerClass.ClassStormforged().ID,Is.EqualTo(64));
         }
         [Test]
+        public void StyleProcDamageHasALevelTenFloorAndStillReachesFullStrengthAt50()
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(StormSovereignAbilities.StyleDamage(1,false),Is.EqualTo(8).Within(0.001));
+                Assert.That(StormSovereignAbilities.StyleDamage(5,true),Is.EqualTo(24).Within(0.001));
+                Assert.That(StormSovereignAbilities.StyleDamage(25,false),Is.EqualTo(20).Within(0.001));
+                Assert.That(StormSovereignAbilities.StyleDamage(50,false),Is.EqualTo(40).Within(0.001));
+                Assert.That(StormSovereignAbilities.StyleDamage(50,true),Is.EqualTo(120).Within(0.001));
+            });
+        }
+        [Test]
         public void SovereignPassivesApplyUpgradeAndRespecWithoutLeakingBonuses()
         {
             var owner=NewActor();

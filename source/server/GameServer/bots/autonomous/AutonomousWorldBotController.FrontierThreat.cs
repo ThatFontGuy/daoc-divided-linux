@@ -60,7 +60,8 @@ public sealed partial class AutonomousWorldBotController
         _ignoredPvpTargets.TryGetValue(target, out long until) && until > GameLoop.GameLoopTime;
 
     /// <summary>A target this bot dropped as unreachable or stalemated; its hits do not pull the bot back in.</summary>
-    internal bool IgnoresTarget(GameLiving target) => target != null && IsIgnoredPvpTarget(target);
+    // A fleeing relic carrier takes no new aggro (relic audit 2026-10-31, L4: hits used to pull it back into the fight).
+    internal bool IgnoresTarget(GameLiving target) => target != null && (_relicCarrierFleeing || IsIgnoredPvpTarget(target));
 
     // Owner 2026-10-07: a melee bot shot at from a keep wall (an archer guard, or an enemy bot up on the wall) must
     // not run around below it for ever. A target with no walkable route (closed enemy doors block the way) is dropped
@@ -103,7 +104,7 @@ public sealed partial class AutonomousWorldBotController
         bot.StopMovingOnPath();
         bot.TargetObject = null;
         _reachWatch = null;
-        Log.Info($"AUTONOMOUS_UNREACHABLE_TARGET bot={bot.Name} id={bot.DatabaseID} realm={GlobalConstants.RealmToName(bot.Realm)} target=\"{target.Name}\" " +
+        if (BotDiagnostics.Enabled) Log.Info($"AUTONOMOUS_UNREACHABLE_TARGET bot={bot.Name} id={bot.DatabaseID} realm={GlobalConstants.RealmToName(bot.Realm)} target=\"{target.Name}\" " +
                  $"targetRealm={GlobalConstants.RealmToName(target.Realm)} heightAbove={target.Z - bot.Z} region={bot.CurrentRegionID} position={bot.X},{bot.Y},{bot.Z}");
         return true;
     }
@@ -126,6 +127,8 @@ public sealed partial class AutonomousWorldBotController
     public bool TryEngageFrontierThreat(BotBrain brain)
     {
         GameBot bot = brain?.BotBody;
+        // L4: a relic carrier does not go looking for fights; Tick decides whether it is cornered.
+        if (GameRelic.IsPlayerCarryingRelic(bot)) return false;
         if (bot?.IsAutonomousWorldBot == true && IsBattleground(bot) && (BreakPvpStalemate(brain, bot) || BreakUnreachableTarget(brain, bot))) return false;
         bool defending = AutonomousRvrDefense.IsCommittedDefender(bot);
         bool siegeFighter = AutonomousRvrDefense.IsCommittedSiegeFighter(bot);

@@ -1,5 +1,6 @@
 using System.Reflection;
 using DOL.Logging;
+using DOL.Network;
 
 namespace DOL.GS.PacketHandler.Client.v168
 {
@@ -16,7 +17,7 @@ namespace DOL.GS.PacketHandler.Client.v168
             string text = $"Client crash ({client}) dll:{dllName} clientUptime:{upTime}sec";
 
             if (log.IsInfoEnabled)
-                log.Info(text);
+                log.Info(Marshal.ToHexDump(text, packet.ToArray()));
 
             client.Out.SendPlayerQuit(true);
             client.Disconnect();

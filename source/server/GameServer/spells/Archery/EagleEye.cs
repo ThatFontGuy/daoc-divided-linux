@@ -42,5 +42,19 @@ namespace DOL.GS.Spells
 
             return base.CheckBeginCast(selectedTarget);
         }
+
+        public override void ApplyEffectOnTarget(GameLiving target)
+        {
+            ECSGameEffect bladeturn = EffectListService.GetEffectOnTarget(target, eEffect.Bladeturn);
+
+            if (bladeturn != null)
+            {
+                MessageToCaster("Your shot was absorbed by a magical barrier!", PacketHandler.eChatType.CT_SpellResisted);
+                bladeturn.End();
+                return;
+            }
+
+            base.ApplyEffectOnTarget(target);
+        }
     }
 }

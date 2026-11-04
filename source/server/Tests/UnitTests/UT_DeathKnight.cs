@@ -162,7 +162,7 @@ namespace DOL.UnitTests
                 Properties.ENABLE_DEATH_KNIGHT_TEST = false;
                 Assert.That(new ClassDeathKnight().EligibleRaces, Is.Empty);
                 Properties.ENABLE_DEATH_KNIGHT_TEST = true;
-                Assert.That(new ClassDeathKnight().EligibleRaces, Is.EquivalentTo(new[] { PlayerRace.Briton, PlayerRace.Inconnu, PlayerRace.Saracen }));
+                Assert.That(new ClassDeathKnight().EligibleRaces, Is.EquivalentTo(new[] { PlayerRace.Avalonian, PlayerRace.Briton, PlayerRace.Inconnu, PlayerRace.Saracen }));
             }
             finally { Properties.ENABLE_DEATH_KNIGHT_TEST = previous; }
         }

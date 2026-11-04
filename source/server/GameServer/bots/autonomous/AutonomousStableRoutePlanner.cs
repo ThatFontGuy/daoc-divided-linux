@@ -530,9 +530,11 @@ public static class AutonomousStableRoutePlanner
                 // Some old ticket origins are below the installed terrain.
                 // Normalize only the walking approach, never the authoritative
                 // horse waypoints.
-                Zone boardingZone = region.GetZone(route.X, route.Y);
+                // A boat leaves from open water, so its passenger boards at the dockmaster.
+                bool dock = master is GameBoatStableMaster;
+                Zone boardingZone = dock ? region.GetZone(master.X, master.Y) : region.GetZone(route.X, route.Y);
                 IPathfindingMgr nav = PathfindingProvider.Instance;
-                if (boardingZone == null || !TryResolveBoardingPoint(new(route.X, route.Y, route.Z),
+                if (boardingZone == null || !TryResolveBoardingPoint(dock ? new(master.X, master.Y, master.Z) : new(route.X, route.Y, route.Z),
                         p => nav.GetClosestPoint(boardingZone, p, 48, 48, 256, nav.DefaultFilters), out Vector3 boarding))
                     continue;
                 // Match proximity on the same walkable surface when this old
@@ -621,7 +623,8 @@ public static class AutonomousStableRoutePlanner
         endpoint = route;
         rideSeconds = 0;
         if (route == null || route.Type is not EPathType.Once ||
-            Distance(master.X, master.Y, route.X, route.Y) > MaximumBoardingDistance)
+            Distance(master.X, master.Y, route.X, route.Y) >
+            (master is GameBoatStableMaster ? GameBoatStableMaster.MAX_ROUTE_START_DISTANCE : MaximumBoardingDistance))
             return false;
 
         return TryMeasureRide(route, out endpoint, out rideSeconds);

@@ -1,0 +1,1186 @@
+[
+ {
+  "table": "Spell",
+  "key": "11237",
+  "set": {
+   "Type": "GroupAblativeHalfOnCaster",
+   "Target": "Group",
+   "Range": 1500,
+   "Value": 50.0,
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11239",
+  "set": {
+   "Type": "GroupAblativeHalfOnCaster",
+   "Target": "Group",
+   "Range": 1500,
+   "Value": 100.0,
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11240",
+  "set": {
+   "Type": "GroupAblativeHalfOnCaster",
+   "Target": "Group",
+   "Range": 1500,
+   "Value": 200.0,
+   "Power": -10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11242",
+  "set": {
+   "Type": "GroupAblativeHalfOnCaster",
+   "Target": "Group",
+   "Range": 1500,
+   "Value": 300.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76186",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76187",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76188",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76189",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76190",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76191",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76192",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76193",
+  "set": {
+   "Target": "Enemy",
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "a9e3adda-3505-44d8-9545-cea26b416458",
+  "set": {
+   "SpellID": 20660,
+   "Name": "Long Shot Debuff 1",
+   "Value": 3.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76059",
+  "set": {
+   "SubSpellID": 20660
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76166",
+  "set": {
+   "SubSpellID": 20660
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76266",
+  "set": {
+   "SubSpellID": 20660
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "dce421da-2212-4d9f-976f-efd91ff82acc",
+  "set": {
+   "SpellID": 20661,
+   "Name": "Long Shot Debuff 2",
+   "Value": 6.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76060",
+  "set": {
+   "SubSpellID": 20661
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76167",
+  "set": {
+   "SubSpellID": 20661
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76267",
+  "set": {
+   "SubSpellID": 20661
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "968f9311-454d-4e91-88c1-7bb639f8fbaa",
+  "set": {
+   "SpellID": 20662,
+   "Name": "Long Shot Debuff 3",
+   "Value": 9.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76061",
+  "set": {
+   "SubSpellID": 20662
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76168",
+  "set": {
+   "SubSpellID": 20662
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76268",
+  "set": {
+   "SubSpellID": 20662
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "bcf7580d-fedd-4406-bdff-6f8ddc3d6b81",
+  "set": {
+   "SpellID": 20663,
+   "Name": "Long Shot Debuff 4",
+   "Value": 12.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76062",
+  "set": {
+   "SubSpellID": 20663
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76169",
+  "set": {
+   "SubSpellID": 20663
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76269",
+  "set": {
+   "SubSpellID": 20663
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "26c0cb59-31da-4d3e-9ef1-a1ba95a8d44c",
+  "set": {
+   "SpellID": 20664,
+   "Name": "Long Shot Debuff 5",
+   "Value": 15.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76063",
+  "set": {
+   "SubSpellID": 20664
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76170",
+  "set": {
+   "SubSpellID": 20664
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76270",
+  "set": {
+   "SubSpellID": 20664
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "52900a99-0857-48cc-a95d-6f331c3b4fba",
+  "set": {
+   "SpellID": 20665,
+   "Name": "Long Shot Debuff 6",
+   "Value": 18.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76064",
+  "set": {
+   "SubSpellID": 20665
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76171",
+  "set": {
+   "SubSpellID": 20665
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76271",
+  "set": {
+   "SubSpellID": 20665
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "0f4900a3-40fb-4d1a-ae59-1d3bc89bd406",
+  "set": {
+   "SpellID": 20666,
+   "Name": "Long Shot Debuff 7",
+   "Value": 21.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76065",
+  "set": {
+   "SubSpellID": 20666
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76172",
+  "set": {
+   "SubSpellID": 20666
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76272",
+  "set": {
+   "SubSpellID": 20666
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "offline-artifact-826042",
+  "key": "46a5d89e-c8cc-447e-ad4d-2cd1bf8cedc4",
+  "set": {
+   "SpellID": 20667,
+   "Name": "Long Shot Debuff 8",
+   "Value": 24.0,
+   "Duration": 40,
+   "Target": "Enemy"
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76066",
+  "set": {
+   "SubSpellID": 20667
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76173",
+  "set": {
+   "SubSpellID": 20667
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76273",
+  "set": {
+   "SubSpellID": 20667
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "10305",
+  "key": "0ab7e2d5-1f9e-46b5-a155-cfa10a8ec01a",
+  "set": {
+   "SpellID": 20668,
+   "Name": "Point Blank Bladeturn 1",
+   "Duration": 10,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "11218",
+  "key": "3ea21aeb-27dd-4d80-8b4b-afe1c3c5517b",
+  "set": {
+   "SpellID": 20669,
+   "Name": "Point Blank Haste 1",
+   "Value": 22.0,
+   "Duration": 30,
+   "SubSpellID": 20668,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76175",
+  "set": {
+   "SubSpellID": 20669,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "10305",
+  "key": "8ac9a28e-b481-4580-a2ad-e41b148ccdd4",
+  "set": {
+   "SpellID": 20670,
+   "Name": "Point Blank Bladeturn 2",
+   "Duration": 8,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "11218",
+  "key": "1dab50b7-f0a1-4bc9-bfd6-445df53df4d8",
+  "set": {
+   "SpellID": 20671,
+   "Name": "Point Blank Haste 2",
+   "Value": 25.0,
+   "Duration": 30,
+   "SubSpellID": 20670,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76176",
+  "set": {
+   "SubSpellID": 20671,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "10305",
+  "key": "aceaea22-2eeb-4bc3-ac90-ac857c625fe4",
+  "set": {
+   "SpellID": 20672,
+   "Name": "Point Blank Bladeturn 3",
+   "Duration": 6,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "11218",
+  "key": "3b730812-f586-4f7e-9c3d-6ed6dac16d84",
+  "set": {
+   "SpellID": 20673,
+   "Name": "Point Blank Haste 3",
+   "Value": 29.0,
+   "Duration": 30,
+   "SubSpellID": 20672,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76177",
+  "set": {
+   "SubSpellID": 20673,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-vampiir-test-v1-69098",
+  "key": "8d20cfad-0ac9-4313-9ffd-f24388a6dd06",
+  "set": {
+   "SpellID": 20674,
+   "Name": "Point Blank Weaponskill",
+   "Value": 5.0,
+   "Duration": 30,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76275",
+  "set": {
+   "SubSpellID": 20674,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-vampiir-test-v1-69098",
+  "key": "6b83dfa2-5484-4ec1-8293-4139d315e04d",
+  "set": {
+   "SpellID": 20675,
+   "Name": "Point Blank Weaponskill",
+   "Value": 10.0,
+   "Duration": 30,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76276",
+  "set": {
+   "SubSpellID": 20675,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-vampiir-test-v1-69098",
+  "key": "fe217f43-8dde-4685-ac13-d5ab65bcd8f5",
+  "set": {
+   "SpellID": 20676,
+   "Name": "Point Blank Weaponskill",
+   "Value": 15.0,
+   "Duration": 30,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76277",
+  "set": {
+   "SubSpellID": 20676,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "1566",
+  "key": "4cde924d-ac1a-4c69-a8d3-fcdd53ad7c32",
+  "set": {
+   "SpellID": 20677,
+   "Name": "Point Blank Damage",
+   "Value": 14.0,
+   "Duration": 30,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76068",
+  "set": {
+   "SubSpellID": 20677,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "1566",
+  "key": "338dcb71-8ee6-49c4-9459-950f4580494c",
+  "set": {
+   "SpellID": 20678,
+   "Name": "Point Blank Damage",
+   "Value": 21.0,
+   "Duration": 30,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76069",
+  "set": {
+   "SubSpellID": 20678,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "1566",
+  "key": "6a1136e8-8f15-4472-8e8b-f7aaf4bfbfbd",
+  "set": {
+   "SpellID": 20679,
+   "Name": "Point Blank Damage",
+   "Value": 28.0,
+   "Duration": 30,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76070",
+  "set": {
+   "SubSpellID": 20679,
+   "CastTime": 2.0,
+   "Uninterruptible": 1
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3114",
+  "set": {
+   "Value": 125.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3115",
+  "set": {
+   "Value": 200.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3116",
+  "set": {
+   "Value": 300.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3117",
+  "set": {
+   "Value": 500.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3098",
+  "set": {
+   "Value": 175.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3099",
+  "set": {
+   "Value": 250.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3100",
+  "set": {
+   "Value": 450.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3461",
+  "set": {
+   "Damage": 62.3
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3464",
+  "set": {
+   "Damage": 134.9
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68126",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77635",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "88902422-7714-4185-aa61-416a63c0c102",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3044",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3067",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3091",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3235",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3236",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3237",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2611",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2612",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2613",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2614",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2615",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2616",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2617",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2618",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2619",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3044",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2971",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2972",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2973",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2974",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2975",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2976",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2977",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2978",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2979",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66085",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66086",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66087",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66088",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66121",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66122",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66123",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66124",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-warlock-test-v1-66125",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "ed70cb17-f953-4684-a552-3f95a2baad62",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 9,
+   "StyleID": 124,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "2192dd1b-dfbb-4b48-877a-a23104473528",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 9,
+   "StyleID": 68,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "e8405247-b447-41b5-904a-f39ce9c4f9dd",
+  "insert": {
+   "SpellID": 20302,
+   "ClassID": 9,
+   "StyleID": 141,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "7dac4f8e-df88-4462-8446-dbfb7e218463",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 11,
+   "StyleID": 68,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "927c4496-4890-4141-882b-5d917c31316c",
+  "insert": {
+   "SpellID": 20302,
+   "ClassID": 11,
+   "StyleID": 80,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "98d8a9c3-cc82-40cc-9a65-e311c8782d0f",
+  "insert": {
+   "SpellID": 20302,
+   "ClassID": 11,
+   "StyleID": 141,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "9e9c04f0-4cca-4f0b-a2f2-2ef43c8b1f6f",
+  "insert": {
+   "SpellID": 20302,
+   "ClassID": 43,
+   "StyleID": 269,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "42934eed-2b60-49ad-9b79-1ae7c5c78137",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 43,
+   "StyleID": 256,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "bc6575df-80d8-4c7a-9f8e-85d35198d797",
+  "insert": {
+   "SpellID": 20311,
+   "ClassID": 43,
+   "StyleID": 280,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "b9311eab-87e8-4d6f-8cdb-4d36b5eef08c",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 49,
+   "StyleID": 256,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "c8f5aee0-dd71-4249-9427-c16a4ef947fa",
+  "insert": {
+   "SpellID": 20311,
+   "ClassID": 49,
+   "StyleID": 280,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "7d83e986-8292-4391-b9d0-f9256571d5ac",
+  "insert": {
+   "SpellID": 20311,
+   "ClassID": 31,
+   "StyleID": 182,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "49b8ee3b-80b4-40d4-903b-68c2ea77abf3",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 31,
+   "StyleID": 171,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "fceb1554-3b44-4a7b-97d0-79b7193bf717",
+  "insert": {
+   "SpellID": 20311,
+   "ClassID": 32,
+   "StyleID": 182,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "92515e37-8f7b-4e37-827e-bed3cdc34b59",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 32,
+   "StyleID": 171,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "3092dca8-6fd1-4f39-9604-d426c5a05548",
+  "insert": {
+   "SpellID": 20301,
+   "ClassID": 23,
+   "StyleID": 201,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "4c8f5a48-13d0-43c5-9ab7-4f5e052bb24d",
+  "insert": {
+   "SpellID": 20311,
+   "ClassID": 23,
+   "StyleID": 182,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "3001",
+  "key": "1b7010d7-bd16-42ab-8344-6feb2b6048e7",
+  "set": {
+   "SpellID": 20680,
+   "Name": "Jabbing Staff Heal",
+   "Value": 10.0,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "Range": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "3131",
+  "key": "3a11750d-a1db-46dc-84a1-08f1ef28a62d",
+  "set": {
+   "SpellID": 20681,
+   "Name": "Holy Staff Regeneration",
+   "Value": 50.0,
+   "Duration": 10,
+   "Frequency": 20,
+   "Power": 0,
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "1f4018c9-661f-401e-a913-2d437e2e3cbc",
+  "insert": {
+   "SpellID": 20680,
+   "ClassID": 10,
+   "StyleID": 7007,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "e7027416-83d2-49ce-b404-c3a0931b9f3f",
+  "insert": {
+   "SpellID": 20681,
+   "ClassID": 10,
+   "StyleID": 241,
+   "Chance": 100
+  }
+ }
+]

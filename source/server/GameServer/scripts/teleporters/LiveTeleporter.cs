@@ -115,6 +115,7 @@ namespace DOL.GS.Scripts
                               "[Castle Sauvage] in Camelot Hills or \n[Snowdonia Fortress] in Black Mtns. North,\n" +
                               "[Avalon Marsh] wharf,\n" +
                               "[Gothwaite Harbor] in the [Shrouded Isles],\n" +
+                              "The ruins of [Atlantis],\n" +
                               "[Camelot] our glorious capital,\n" +
                               "[Entrance] to the areas of [Housing]\n\n" +
                               "or one of the many [towns] throughout Albion.";
@@ -141,6 +142,7 @@ namespace DOL.GS.Scripts
                               "[Druim Ligen] in Connacht or \n[Druim Cain] in Bri Leith,\n" +
                               "[Shannon Estuary] watchtower,\n" +
                               "[Domnann] Grove in the [Shrouded Isles],\n" +
+                              "The ruins of [Atlantis],\n" +
                               "[Tir na Nog] our glorious capital,\n" +
                               "[Entrance] to the areas of [Housing]\n\n" +
                               "or one of the many [towns] throughout Hibernia.";

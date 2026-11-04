@@ -33,6 +33,11 @@ namespace DOL.GS
         public ImmunityType AppliedImmunityType => !TriggersImmunity ? ImmunityType.None : (Owner is GamePlayer ? ImmunityType.Player : ImmunityType.Npc);
         public bool TriggersImmunity { get; set; }
         public int ImmunityDuration { get; protected set; } = 60000;
+        // HearthDAoC: was on SpeedEnhancementECSEffect only (#190). A pulse parent can keep an older child after
+        // a different caster renews the same spell, and that child's queued start can put it back in the effect
+        // store. This ownership flag must outlive the temporary IsBeingReplaced message-suppression flag, so the
+        // old child never removes the bonus or the icon its successor now owns.
+        internal bool IsSuperseded { get; set; }
         public bool IsBeingReplaced { get; set; } // Used externally to force an effect to be silent (no message, no immunity) when being refreshed.
         public ServiceObjectId ServiceObjectId { get; } = new(ServiceObjectType.Effect);
 

@@ -10,6 +10,21 @@ namespace DOL.Logging
 
         private LogEntryQueueProcessor _queueProcessor;
 
+        /// <summary>
+        /// When false, Info and Warn lines tagged as bot AI diagnostics (AUTONOMOUS_, BOT_, ANIMIST_, RVR_BOT_) are dropped
+        /// before they are queued or written. The game server sets it from its Bot AI diagnostics switch.
+        /// </summary>
+        public static volatile bool BotDiagnosticsEnabled = true;
+
+        private static bool IsDroppedBotDiagnostic(string message)
+        {
+            return !BotDiagnosticsEnabled && message != null &&
+                (message.StartsWith("AUTONOMOUS_", StringComparison.Ordinal) ||
+                 message.StartsWith("BOT_", StringComparison.Ordinal) ||
+                 message.StartsWith("ANIMIST_", StringComparison.Ordinal) ||
+                 message.StartsWith("RVR_BOT_", StringComparison.Ordinal));
+        }
+
         public virtual bool IsTraceEnabled { get; }
         public virtual bool IsInfoEnabled { get; }
         public virtual bool IsDebugEnabled { get; }
@@ -48,6 +63,9 @@ namespace DOL.Logging
 
         public void Info(string message)
         {
+            if (IsDroppedBotDiagnostic(message))
+                return;
+
             TryEnqueueMessage(ELogLevel.Info, message);
         }
 
@@ -63,6 +81,9 @@ namespace DOL.Logging
 
         public void InfoFormat(string message, params ReadOnlySpan<object> args)
         {
+            if (IsDroppedBotDiagnostic(message))
+                return;
+
             TryEnqueueMessage(ELogLevel.Info, message, args);
         }
 
@@ -88,6 +109,9 @@ namespace DOL.Logging
 
         public void Warn(string message)
         {
+            if (IsDroppedBotDiagnostic(message))
+                return;
+
             TryEnqueueMessage(ELogLevel.Warning, message);
         }
 
@@ -103,6 +127,9 @@ namespace DOL.Logging
 
         public void WarnFormat(string message, params ReadOnlySpan<object> args)
         {
+            if (IsDroppedBotDiagnostic(message))
+                return;
+
             TryEnqueueMessage(ELogLevel.Warning, message, args);
         }
 

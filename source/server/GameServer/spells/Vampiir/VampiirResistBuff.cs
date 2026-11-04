@@ -8,6 +8,11 @@ namespace DOL.GS.Spells
 	[SpellHandler(eSpellType.VampiirMeleeResistance)]
 	public class VampiirMeleeResistance : SpellHandler
 	{
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+		}
+
 		public override void FinishSpellCast(GameLiving target)
 		{
 			m_caster.Mana -= PowerCost(target);
@@ -88,6 +93,11 @@ namespace DOL.GS.Spells
 	[SpellHandler(eSpellType.VampiirMagicResistance)]
 	public class VampiirMagicResistance : SpellHandler
 	{
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+		}
+
 		public override void FinishSpellCast(GameLiving target)
 		{
 			m_caster.Mana -= PowerCost(target);
@@ -101,7 +111,7 @@ namespace DOL.GS.Spells
 			GamePlayer player = effect.Owner as GamePlayer;
             GameLiving living = effect.Owner as GameLiving;
 
-			BedazzlingAuraEffect boad = player.EffectList.GetOfType<BedazzlingAuraEffect>();
+			BedazzlingAuraEffect boad = player?.EffectList.GetOfType<BedazzlingAuraEffect>();
 			if (boad != null) boad.Cancel(false);
 			
             int value = (int)Spell.Value;

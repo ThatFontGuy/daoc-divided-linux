@@ -745,6 +745,13 @@ namespace DOL.GS.PacketHandler
 			else
 				stableRider = null;
 
+			if (obj is GameBot playerShaped && BotPlayerPresentation.TryGetSession(m_gameClient, playerShaped, out ushort botSession))
+			{
+				SendBotPlayerPosition(playerShaped, botSession, udp);
+				stableRider?.SendStableRideAssociation(m_gameClient.Player, true);
+				return;
+			}
+
 			ushort xOffsetInZone;
 			ushort yOffsetInZone;
 			ushort z;
@@ -884,6 +891,65 @@ namespace DOL.GS.PacketHandler
 			}
 		}
 
+		/// <summary>
+		/// A bot's position in the player layout (PlayerPositionUpdateHandler.CreateOutPak1127). The client runs a player on
+		/// from heading and speed alone, without the destination an NPC update carries, so a moving bot needs these often
+		/// (<see cref="BotPlayerPresentation.MovingUpdateInterval"/>) and a fighting one is turned to face its target here.
+		/// </summary>
+		protected void SendBotPlayerPosition(GameBot bot, ushort session, bool udp)
+		{
+			Zone zone = bot.CurrentZone;
+
+			if (zone == null)
+				return;
+
+			GameNPC mount = bot.StableRouteMountForClient;
+			GameObject target = bot.IsAttacking ? bot.TargetObject : null;
+			bool moving = bot.IsMoving && !bot.IsAtDestination;
+			ushort heading = mount?.ObjectState is GameObject.eObjectState.Active ? mount.ObjectID :
+				!moving && target?.ObjectState is GameObject.eObjectState.Active ? bot.GetHeading(target) : bot.Heading;
+			byte action = (byte) (bot.IsStealthed ? PlayerPositionUpdateHandler.ActionFlags.DIVING_IN__STEALTHED_OUT : 0);
+			byte state = BotPlayerPresentation.StateFlags(!bot.IsAlive, mount != null, (bot.Flags & GameNPC.eFlags.FLYING) != 0, bot.IsUnderwater);
+			byte health = (byte) (bot.HealthPercent + (bot.attackComponent.AttackState ? 0x80 : 0));
+
+			if (udp)
+			{
+				using var pak = PooledObjectFactory.GetForTick<GSUDPPacketOut>().Init(GetPacketCode(eServerPackets.PlayerPosition));
+				Write(pak);
+				SendUDP(pak);
+			}
+			else
+			{
+				using var pak = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.PlayerPosition));
+				Write(pak);
+				SendTCP(pak);
+			}
+
+			void Write(PacketOut pak)
+			{
+				var position = bot.movementComponent.PositionForClient;
+				pak.WriteFloatLowEndian(position.X);
+				pak.WriteFloatLowEndian(position.Y);
+				pak.WriteFloatLowEndian(position.Z);
+				pak.WriteFloatLowEndian(moving ? (float) bot.movementComponent.HorizontalVelocityForClient : 0f);
+				pak.WriteFloatLowEndian(0f); // Fall speed.
+				pak.WriteShort(session);
+				pak.WriteShort((ushort) bot.ObjectID);
+				pak.WriteShort(zone.ID);
+				pak.WriteByte(state);
+				pak.WriteByte(0);
+				pak.WriteShort(0); // Seat.
+				pak.WriteShort(heading);
+				pak.WriteByte(action);
+				pak.WriteByte(0);
+				pak.WriteByte(0);
+				pak.WriteByte(health);
+				pak.WriteByte(bot.ManaPercent);
+				pak.WriteByte(bot.EndurancePercent);
+				pak.WriteShort(0);
+			}
+		}
+
 		public virtual void SendPlayerQuit(bool totalOut)
 		{
 			using (var pak = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.Quit)))
@@ -901,10 +967,13 @@ namespace DOL.GS.PacketHandler
 		{
 			int oType = 0;
 
-			if (obj is GamePlayer)
+			if (obj is GamePlayer || obj is GameBot bot && BotPlayerPresentation.TryGetSession(m_gameClient, bot, out _))
 				oType = 2;
 			else if (obj is GameNPC npc)
-				oType = npc.Health > 0 ? 1 : 0;
+				// type 0 = "leave the corpse to fade". A gamebot's body is the bot itself (it stays in the world until
+				// raised or released), so a removal is always a move or a park: a corpse left behind showed as a second dead
+				// copy at the death spot (owner 2026-10-30, "since 0.1": release moved the dead bot to its bind point).
+				oType = npc is GameBot || npc.Health > 0 ? 1 : 0;
 
 			using (var pak = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.RemoveObject)))
 			{
@@ -1681,7 +1750,10 @@ namespace DOL.GS.PacketHandler
 
 		public virtual void SendQuestRemove(byte index)
 		{
-			if (m_gameClient.Player.QuestList.Count > JOURNAL_MAX_QUEST_COUNT)
+			// The quest is already out of the list. With 25 or more left, one may still wait past the last slot (an older
+			// save with more than 25 active quests), so the whole list is sent and it moves into the freed slot; the old
+			// "more than 25" test left it hidden when exactly 25 remained (owner 2026-10-30).
+			if (m_gameClient.Player.QuestList.Count >= JOURNAL_MAX_QUEST_COUNT)
 				SendQuestListUpdate();
 			else
 				SendQuestPacket(null, index);
@@ -2101,7 +2173,7 @@ namespace DOL.GS.PacketHandler
 			}
 		}
 
-		public virtual void SendPlayerRevive(GameLiving revivedPlayer)
+		public virtual void SendPlayerRevive(GamePlayer revivedPlayer)
 		{
 			using (var pak = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.PlayerRevive)))
 			{
@@ -2388,8 +2460,13 @@ namespace DOL.GS.PacketHandler
 
 			using (var pak = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.VariousUpdate)))
 			{
+				// Fishing is not an eCraftingSkill (see FishingCraft). It is listed as one more line only when the server
+				// setting gives it an id: the client names lines by id from its own data, not by the name sent here.
+				byte fishingId = (byte) Math.Clamp(Properties.FISHING_TRADE_SKILL_ID, 0, 255);
+				int fishingSkill = fishingId == 0 ? 0 : DOL.GS.Fishing.FishingProgressStore.PeekSkill(m_gameClient.Player);
+
 				pak.WriteByte(0x08); //subcode
-				pak.WriteByte((byte) m_gameClient.Player.CraftingSkills.Count); //count
+				pak.WriteByte((byte) (m_gameClient.Player.CraftingSkills.Count + (fishingId == 0 ? 0 : 1))); //count
 				pak.WriteByte(0x03); //subtype
 				pak.WriteByte(0x00); //unk
 
@@ -2400,6 +2477,14 @@ namespace DOL.GS.PacketHandler
 					pak.WriteByte(curentCraftingSkill.Icon); //icon
 					pak.WriteInt(1);
 					pak.WritePascalString(curentCraftingSkill.Name); //name
+				}
+
+				if (fishingId != 0)
+				{
+					pak.WriteShort((ushort) Math.Max(1, fishingSkill)); //points
+					pak.WriteByte(fishingId); //icon
+					pak.WriteInt(1);
+					pak.WritePascalString(DOL.GS.Fishing.FishingCraft.SkillName); //name
 				}
 				SendTCP(pak);
 			}
@@ -3962,7 +4047,7 @@ namespace DOL.GS.PacketHandler
 			//all the task info is sent in name field
 
 			string taskStr = string.Empty;
-			if (task == null)
+			if (task == null || !task.TaskActive)
 				taskStr = "You have no current personal task.\n";
 			else taskStr = "[" + task.Name + "] " + task.Description + ".\n";
 

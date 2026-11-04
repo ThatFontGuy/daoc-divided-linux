@@ -14,6 +14,59 @@ public sealed partial class AutonomousWorldBotController
     private Vector3? _frontierWaitingPoint;
     private long _nextWaitingPointSearch;
     private long _medallionNoRoomUntil;
+    private long _frontierPorterWaitSince;
+
+    /// <summary>
+    /// The first leg of a porter-only journey from outside the frontier regions: on foot (or by the usual rides) through
+    /// real zone connections to the realm's own frontier, where the porter and its medallion merchant stand. The overnight
+    /// run of 2026-10-31 logged 714 of 1,669 fifteen-minute rescues as "Waiting for a frontier teleporter"; all but one
+    /// stood in a capital, Atlantis or the Shrouded Isles, assigned to a siege in another frontier. Porters only serve
+    /// bots already in a frontier region, and no crossing leads to another realm's frontier, so nothing ever moved them.
+    /// </summary>
+    private bool TravelToHomeFrontierForPorter(GameBot bot, CampDestination destination)
+    {
+        if (!AutonomousFrontierTransport.NeedsHomeFrontierFirst(bot.Realm, bot.CurrentRegionID, destination.RegionId) ||
+            !AutonomousRvrStaging.TryGetBorderKeep(bot.Realm, out var keep))
+            return false;
+        int x = (int)keep.Position.X, y = (int)keep.Position.Y;
+        if (FindNextCrossing(bot, keep.RegionId, x, y) == null) return false;
+        CampDestination previous = _camp;
+        _camp = new($"rvr-porter-{keep.RegionId}", keep.Name, keep.Name, keep.RegionId, x, y, (int)keep.Position.Z, 0, false, false);
+        TravelAcrossRegions(bot);
+        bool abandoned = _camp == null;
+        _camp = previous;
+        if (abandoned) return false;
+        _frontierPorterWaitSince = 0;
+        return true;
+    }
+
+    /// <summary>
+    /// Holds a bot whose porter is not available yet, for AutonomousFrontierTransport.PorterWaitMilliseconds. Then it gives
+    /// the RvR goal up through the same release an ended siege uses: a solo bot or its whole warband takes a new goal.
+    /// </summary>
+    private bool WaitForFrontierTeleporter(GameBot bot, CampDestination destination)
+    {
+        long now = GameLoop.GameLoopTime;
+        if (_frontierPorterWaitSince == 0) _frontierPorterWaitSince = now;
+        _rvrFrontierCommittedUntil = 0;
+        _nextRvrPlanReview = Math.Min(_nextRvrPlanReview, now + 20_000);
+        bot.StopMovingOnPath();
+        if (AutonomousFrontierTransport.PorterWaitExpired(_frontierPorterWaitSince, now))
+        {
+            _frontierPorterWaitSince = 0;
+            string force = bot.TempProperties.GetProperty<string>("RvrEventForce") ?? $"rvr-{bot.DatabaseID}";
+            bot.TempProperties.RemoveProperty(AutonomousFrontierTransport.RequestKey);
+            Log.Info($"RVR_FRONTIER_WAIT_GIVEUP bot={bot.Name} id={bot.DatabaseID} realm={GlobalConstants.RealmToName(bot.Realm)} " +
+                     $"force={force} from={bot.CurrentRegionID} destination=\"{destination.ZoneName}\" region={destination.RegionId}");
+            AutonomousRvrEventLayer.ReleaseForce(force, $"No frontier teleporter to {destination.ZoneName}; choosing other work");
+            SetRvrStatus(bot, "Giving up on the frontier teleporter", destination.MonsterName,
+                $"No way to {destination.ZoneName} after {AutonomousFrontierTransport.PorterWaitMilliseconds / 1000} seconds");
+            return true;
+        }
+        SetRvrStatus(bot, "Waiting for a frontier teleporter", destination.MonsterName,
+            $"{destination.ZoneName} is reached by porter, not on foot through the frontier dungeons");
+        return true;
+    }
 
     private bool TryReturnFromForeignFrontier(GameBot bot)
     {

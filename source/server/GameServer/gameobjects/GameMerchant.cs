@@ -15,6 +15,20 @@ namespace DOL.GS
 	/// </summary>
 	public class GameMerchant : GameNPC
 	{
+		/// <summary>
+		/// The name of a currency item for "You can buy items here for ...". Item names are usually singular ("Daemon
+		/// Diamond Seal"), but some already read as plural or mass nouns: "Atlantean Glass" came out "Atlantean Glasss",
+		/// "Dragon Scales" as "Dragon Scaless".
+		/// </summary>
+		public static string CurrencyPlural(string name)
+		{
+			if (string.IsNullOrEmpty(name) || name.EndsWith('s') || name.EndsWith('S') ||
+				name.Equals("aurulite", StringComparison.OrdinalIgnoreCase))
+				return name;
+
+			return name + "s";
+		}
+
         public override bool AddToWorld()
         {
             // Teleport merchants select their live trade list in their own
@@ -670,7 +684,7 @@ namespace DOL.GS
 			}
 			else
 			{
-				text = MoneyItemName + "s";
+				text = CurrencyPlural(MoneyItemName);
 			}
 
 			player.Out.SendMessage(LanguageMgr.GetTranslation(player.Client.Account.Language, "GameMerchant.GetExamineMessages.BuyItemsFor", this.Name, text), eChatType.CT_Say, eChatLoc.CL_ChatWindow);

@@ -20,8 +20,12 @@ namespace DOL.GS
             return Vector3.DistanceSquared(position, slot) <= radius * radius;
         }
         /// <summary>Deaths on the way that make a member a no-show at once (in-game check 2026-10-17: a
-        /// level 1-3 group died about 70 times near its meetup point during the full fifteen-minute wait).</summary>
-        public const int MeetupDeathLimit = 3;
+        /// level 1-3 group died about 70 times near its meetup point during the full fifteen-minute wait).
+        /// One since 2026-11-02: with three, 25 of 55 meetup deaths in a 14 minute private copy run were a member's
+        /// second or third, released at its bind and walking the same way into the same monster (one party of eight
+        /// died 16 times to one Camelot Hills bandit camp). A member that dies on the way plays solo instead, where its
+        /// route is scanned and its own death spot is avoided.</summary>
+        public const int MeetupDeathLimit = 1;
         private readonly Dictionary<long, int> _deathsAtStart = new();
         private readonly HashSet<long> _deathLimited = new();
         private readonly Dictionary<long, long> _due = new();

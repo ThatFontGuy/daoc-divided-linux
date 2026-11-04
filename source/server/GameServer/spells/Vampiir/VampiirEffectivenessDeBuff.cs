@@ -26,6 +26,13 @@ namespace DOL.GS.Spells
 	[SpellHandler(eSpellType.VampiirEffectivenessDeBuff)]
 	public class VampiirEffectivenessDeBuff : SpellHandler
 	{
+		private double Factor => 1 - Spell.Value / 100;
+
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+		}
+
 		public override void FinishSpellCast(GameLiving target)
 		{
 			m_caster.Mana -= PowerCost(target);
@@ -40,22 +47,7 @@ namespace DOL.GS.Spells
 			{
 				base.OnEffectStart(effect);
 				GamePlayer player = effect.Owner as GamePlayer;
-				player.TempProperties.SetProperty("PreEffectivenessDebuff", player.Effectiveness);
-
-
-				double effectiveness =  player.Effectiveness;
-				double valueToAdd = (Spell.Value * effectiveness)/100;
-				valueToAdd = effectiveness - valueToAdd;
-
-				if ((valueToAdd) > 0)
-				{
-					player.Effectiveness = valueToAdd;
-				}
-				else
-				{
-					player.Effectiveness = 0;
-				}
-			
+				player.Effectiveness *= Factor;
 
 				MessageToLiving(effect.Owner, Spell.Message1, eChatType.CT_Spell);
 				Message.SystemToArea(effect.Owner, Util.MakeSentence(Spell.Message2, effect.Owner.GetName(0, true)), eChatType.CT_Spell, effect.Owner);
@@ -73,8 +65,7 @@ namespace DOL.GS.Spells
 			if (effect.Owner is GamePlayer)
 			{
 				GamePlayer player = effect.Owner as GamePlayer;
-				player.Effectiveness = player.TempProperties.GetProperty<double>("PreEffectivenessDebuff");
-				player.TempProperties.RemoveProperty("PreEffectivenessDebuff");
+				player.Effectiveness /= Factor;
 				MessageToLiving(effect.Owner, Spell.Message3, eChatType.CT_Spell);
 				Message.SystemToArea(effect.Owner, Util.MakeSentence(Spell.Message4, effect.Owner.GetName(0, true)), eChatType.CT_Spell, effect.Owner);
 

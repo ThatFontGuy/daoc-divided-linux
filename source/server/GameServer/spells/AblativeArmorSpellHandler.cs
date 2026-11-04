@@ -5,6 +5,25 @@ using DOL.Language;
 
 namespace DOL.GS.Spells
 {
+	/// <summary>
+	/// The Valewalker Bark line (1.123): a group ablative whose barrier on the caster absorbs half the amount.
+	/// </summary>
+	[SpellHandler(eSpellType.GroupAblativeHalfOnCaster)]
+	public class GroupAblativeHalfOnCasterSpellHandler : AblativeArmorSpellHandler
+	{
+		public GroupAblativeHalfOnCasterSpellHandler(GameLiving caster, Spell spell, SpellLine line) : base(caster, spell, line) { }
+
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			AblativeArmorECSGameEffect effect = (AblativeArmorECSGameEffect) base.CreateECSEffect(initParams);
+
+			if (effect != null && effect.Owner == Caster)
+				effect.RemainingValue /= 2;
+
+			return effect;
+		}
+	}
+
 	// Melee ablative.
 	[SpellHandler(eSpellType.AblativeArmor)]
 	public class AblativeArmorSpellHandler : SpellHandler

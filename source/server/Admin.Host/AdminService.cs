@@ -95,7 +95,7 @@ namespace DOL.GS.Admin
         }
 
         /// <summary>The Offline DAoC release this server code and world track. Bump with every sync (docs/UPSTREAM-SYNC.md).</summary>
-        public const string OfflineDaocVersion = "0.38-dev7";
+        public const string OfflineDaocVersion = "DR-dev-0.1a";
 
         private static ServerStatus Status()
         {

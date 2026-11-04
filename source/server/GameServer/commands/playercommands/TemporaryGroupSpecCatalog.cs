@@ -14,7 +14,57 @@ namespace DOL.GS.Commands
     /// </summary>
     public static class TemporaryGroupSpecCatalog
     {
-        public sealed record Option(string Label, eSpecType[] Families, bool WeaponSetup);
+        /// <param name="Label">What the player sees and types: the class's own advanced spell line.</param>
+        /// <param name="Line">The specialization the build trains highest (null for weapon setups); also accepted when typed.</param>
+        public sealed record Option(string Label, eSpecType[] Families, bool WeaponSetup, string Line = null);
+
+        /// <summary>
+        /// The class's own advanced (specialization) spell line for a trained specialization (owner 2026-10-29: a
+        /// Sorcerer's builds are Telekinesis, Disorientation and Domination, not the trainer's Matter, Body and Mind
+        /// Magic). Taken from the spell line table; where that table only holds an internal "... Spec" name (Healer
+        /// Mending Spec, Druid Nurture Spec) the specialization's own name is the real one and stays.
+        /// </summary>
+        private static readonly Dictionary<(eCharacterClass, string), string> SpecLines = new()
+        {
+            [(eCharacterClass.Sorcerer, Specs.Matter_Magic)] = "Telekinesis",
+            [(eCharacterClass.Sorcerer, Specs.Body_Magic)] = "Disorientation",
+            [(eCharacterClass.Sorcerer, Specs.Mind_Magic)] = "Domination",
+            [(eCharacterClass.Cabalist, Specs.Matter_Magic)] = "Matter Manipulation",
+            [(eCharacterClass.Cabalist, Specs.Body_Magic)] = "Essence Manipulation",
+            [(eCharacterClass.Cabalist, Specs.Spirit_Magic)] = "Vivification",
+            [(eCharacterClass.Theurgist, Specs.Earth_Magic)] = "Abrasion",
+            [(eCharacterClass.Theurgist, Specs.Cold_Magic)] = "Refrigeration",
+            [(eCharacterClass.Theurgist, Specs.Wind_Magic)] = "Vapormancy",
+            [(eCharacterClass.Wizard, Specs.Earth_Magic)] = "Calefaction",
+            [(eCharacterClass.Wizard, Specs.Cold_Magic)] = "Liquifaction",
+            [(eCharacterClass.Wizard, Specs.Fire_Magic)] = "Pyromancy",
+            [(eCharacterClass.Cleric, Specs.Rejuvenation)] = "Rebirth",
+            [(eCharacterClass.Cleric, Specs.Enhancement)] = "Guardian Angel",
+            [(eCharacterClass.Cleric, Specs.Smite)] = "Terrible Hammer",
+            [(eCharacterClass.Friar, Specs.Rejuvenation)] = "Rebirth",
+            [(eCharacterClass.Eldritch, Specs.Light)] = "Shadow Control",
+            [(eCharacterClass.Eldritch, Specs.Mana)] = "Vacuumancy",
+            [(eCharacterClass.Eldritch, Specs.Void)] = "Void Mastery",
+            [(eCharacterClass.Enchanter, Specs.Light)] = "Bedazzling",
+            [(eCharacterClass.Enchanter, Specs.Mana)] = "Empowering",
+            [(eCharacterClass.Enchanter, Specs.Enchantments)] = "Enchantment Mastery",
+            [(eCharacterClass.Mentalist, Specs.Light)] = "Illusions",
+            [(eCharacterClass.Mentalist, Specs.Mana)] = "Holism",
+            [(eCharacterClass.Mentalist, Specs.Mentalism)] = "Mind Mastery",
+            [(eCharacterClass.Animist, Specs.Arboreal_Path)] = "Arboreal Mastery",
+            [(eCharacterClass.Runemaster, Specs.Darkness)] = "Runes of Darkness",
+            [(eCharacterClass.Runemaster, Specs.Suppression)] = "Runes of Suppression",
+            [(eCharacterClass.Runemaster, Specs.Runecarving)] = "Runes of Destruction",
+            [(eCharacterClass.Spiritmaster, Specs.Darkness)] = "Spirit Dimming",
+            [(eCharacterClass.Spiritmaster, Specs.Suppression)] = "Spirit Suppression",
+            [(eCharacterClass.Spiritmaster, Specs.Summoning)] = "Spirit Enhancement",
+            [(eCharacterClass.Bonedancer, Specs.Darkness)] = "Bone Mystics",
+            [(eCharacterClass.Bonedancer, Specs.Suppression)] = "Bone Guardians",
+            [(eCharacterClass.Bonedancer, Specs.BoneArmy)] = "Bone Warriors",
+        };
+
+        public static string LineLabel(eCharacterClass characterClass, string trainedLine) =>
+            trainedLine != null && SpecLines.TryGetValue((characterClass, trainedLine), out string label) ? label : trainedLine;
 
         private const int Samples = 200;
         private const int SpawnTries = 400;
@@ -62,9 +112,9 @@ namespace DOL.GS.Commands
 
         private static IReadOnlyList<Option> Build(eCharacterClass characterClass)
         {
+            // A class with one build family still gets options when its variants train different lines highest
+            // (owner 2026-10-29: Infiltrator, Minstrel, Scout, Nightshade, Ranger, Valewalker, Berserker...).
             IReadOnlyList<eSpecType> families = BotSpec.GetSpecializationChoices(characterClass);
-            if (families.Count < 2 || families.All(family => family == eSpecType.None))
-                return [];
 
             List<Option> options = new();
             Dictionary<string, List<eSpecType>> byLine = new();
@@ -92,14 +142,15 @@ namespace DOL.GS.Commands
                         lineFamilies.Add(family);
                 }
             }
-            options.AddRange(order.Select(line => new Option(line, byLine[line].ToArray(), false)));
-            return options;
+            options.AddRange(order.Select(line => new Option(LineLabel(characterClass, line), byLine[line].ToArray(), false, line)));
+            return options.Count < 2 ? [] : options;
         }
 
         public static bool TryResolve(eCharacterClass characterClass, string input, out Option option)
         {
             string wanted = Normalize(input);
-            option = For(characterClass).FirstOrDefault(candidate => Normalize(candidate.Label) == wanted);
+            option = For(characterClass).FirstOrDefault(candidate => Normalize(candidate.Label) == wanted) ??
+                     For(characterClass).FirstOrDefault(candidate => candidate.Line != null && Normalize(candidate.Line) == wanted);
             return option != null;
         }
 
@@ -112,7 +163,7 @@ namespace DOL.GS.Commands
             for (int i = 0; i < SpawnTries; i++)
             {
                 spec = BotSpec.GetSpec(characterClass, option.Families[Util.Random(option.Families.Length - 1)]);
-                if (TopLine(spec) == option.Label)
+                if (TopLine(spec) == (option.Line ?? option.Label))
                     return spec;
             }
             return spec;

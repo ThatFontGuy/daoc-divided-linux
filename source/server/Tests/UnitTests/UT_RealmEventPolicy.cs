@@ -24,6 +24,7 @@ namespace DOL.Tests
         [TestCase(true, 60, EDtPolyFlags.Jump, EDtPolyFlags.Walk, true)]
         [TestCase(true, 191, EDtPolyFlags.Walk, EDtPolyFlags.Jump, true)]
         [TestCase(true, 60, EDtPolyFlags.Walk, EDtPolyFlags.Walk, false)]
+        [TestCase(true, 180, EDtPolyFlags.Jump, EDtPolyFlags.Walk, true)]
         [TestCase(true, 1, EDtPolyFlags.Jump, EDtPolyFlags.Walk, false)]
         [TestCase(false, 160, EDtPolyFlags.Jump, EDtPolyFlags.Walk, false)]
         [TestCase(false, 249, EDtPolyFlags.Jump, EDtPolyFlags.Walk, false)]

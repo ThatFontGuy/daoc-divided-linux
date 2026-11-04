@@ -105,6 +105,15 @@ Rollback (close the client first; preview without `--apply`):
 python source/tools/modern_world_overlay.py rollback artifacts/modern-client-test/runtime/client-modern/app artifacts/modern-client-test/backups/world-overlay-20261026-180051-287487 --apply
 ```
 
+### What a release client gets (October 30, 2026)
+
+The zone-table overlay above went only to the local test client, so release players on their own 1.130 client could not
+enter regions 246, 248, 250-253 and 276. `make_client_patch.py` now patches their copy: `zones/zones.mpk` keeps the whole
+stock table, with zones 250-252 moved to regions 250-252 and the missing sections added, and `ter253.mpk`/`lod253.mpk` are
+made from the client's own zone 252. Marfach Caverns (region 276: 47 NPCs, 6 entrances) needs `dat276.mpk` and its
+`sounds.dat`, which 1.130 lacks and can't make: no stock dungeon shares a placement with it. By the owner's decision the
+patch carries those two files, read from the classic client at build time (`--classic`). Its models are stock.
+
 ## Fix B: move the server to live's world
 
 **Work:**
@@ -220,7 +229,38 @@ Classic and Stormforged editions.
   the Black Mtns. North / Snowdonia ridge (544160, 368704). One Hibernian trip that worked before now fails the way it
   does in classic (Valley of Bri Leith to Cruachan Gorge, bouncing at Lough Derg / Connacht). No other trip got worse.
   Not yet seen in game.
-- **Players:** not affected. The navmesh guides bots only, and the gates in the world are unchanged.
+- **Players:** the note here used to say they were not affected. That was wrong: see the next section.
+
+**Border-keep gates walled for players (issue #2, found 2026-11-01):**
+- **Symptom:** a Heretic opened the north gate of Castle Sauvage and could see through it, but an invisible barrier stopped them.
+- **Cause:** the gates were never baked shut by a door. Live's `bound.csv` in zones 0, 3 and 206 closes each gate and the way
+  out of the zone, and the client enforces it. All 11 walk links cross such a wall on stock 1.130; none does on classic. The
+  mesh builder treats those walls as geometry, which is what left the 30-unit gaps above. Bots crossed on the links because the
+  server moves them; players can't. This also holds Snowdonia Fortress and Druim Cain, which nobody had reported.
+- **Fix:** `make_client_patch.py` `GATE_WALLS` swaps the closing walls for the classic client's, in each zone's dat and csv
+  archive. The zones beyond (11, 12, 210) are the same in both clients and their walls end where the patched ones do.
+- **Open:** checked against the client's data only. Enforcement of the patched table has not been seen in a real client.
+
+**Frenzy models (reported 2026-11-01):** model ids 3, 4, 12 and 13 are the classic table's own copies of Vendo Man, Stag Man and
+their small forms. On 1.130 they are "empty" and coconut figures, so a Berserker played the frenzy and never morphed. Both
+tables have the same forms at 582, 583, 859 and 2032, which the effects now use.
+
+**Darkness Falls mesh (issue #3, found 2026-11-01):** the 1.130 rebuild of `zone249.nav` dropped the entrance falls and climb
+pads, so it stopped matching `darkness_falls_navigation_proofs.json` and the certificate closed: gamebots got no Darkness Falls
+goals and no route down the first steps. 7,897 of 7,941 tiles are identical to the classic mesh, every Darkness Falls mob and
+exit row still matches the certificate, and `UT_DarknessFallsMeshProbe` completes 4,101 of 4,101 routes on the classic mesh and
+0 on the rebuilt one. The certified mesh `41f1489c` belongs in the modern world too, and `build_modern_test_package.py` now
+refuses a package without it.
+
+**Bots stuck in the Darkness Falls drops (issue #3 follow-up, 2026-11-01):** a server owner reported that `41f1489c` let some
+`/spawn` bots down the steps while others stuck. The "steps" are nine one-way drops of 130-200 units, three per realm. Around 40-60%
+of the way down, no mesh is in Detour's reach (`UT_DarknessFallsMeshProbe.ProbeInsideDrops`: 10 of 99 points), so a re-plan there
+returns `NoPathFound`, every retry fails the same way, and floor repair cannot help because the floor is too far down. Only
+autonomous bots had the protected fall, and it gave way as soon as the destination moved 64 units, so followers and `/spawn` bots
+were re-planned in mid-drop whenever their leader kept moving. All bots now finish a certified fall before taking the next order, and
+a bot left hanging settles on the floor below (`TryFindFloorBelowDrop`, 10 of 10 points). A closed certificate now logs
+`DF_CERTIFICATE_CLOSED` with the reason; it used to be silent. Mesh coverage was not the problem: 13,842 of 13,862 floor points around
+the drops reach the bottom. The other 20 are one cut-off Hibernian pocket near 43270,38840.
 
 **Not migrated:** saved player and gamebot positions. A bot standing in a changed spot is handled by the
 stuck watchdog and the pockets file. Not yet tested in game.

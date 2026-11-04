@@ -53,6 +53,22 @@ public static class AutonomousFrontierTransport
     /// <summary>How long a bot with a full bag and nothing to sell stays away from the medallion merchant.</summary>
     public const long MedallionNoRoomBackoffMilliseconds = 5 * 60_000;
 
+    /// <summary>
+    /// How long a bot stands at a porter-only route before it gives the RvR goal up. It leaves the worst case (a
+    /// merchant it cannot pay, a full bag) to a new goal well before the fifteen-minute watchdog's capital teleport.
+    /// </summary>
+    public const long PorterWaitMilliseconds = 2 * 60_000;
+
+    public static bool PorterWaitExpired(long waitingSince, long now) =>
+        waitingSince > 0 && now - waitingSince >= PorterWaitMilliseconds;
+
+    /// <summary>
+    /// Porters stand in the frontier regions, and a frontier a realm reaches only by porter has no zone connection from
+    /// a capital, Atlantis or the Shrouded Isles. A bot out there goes to its own frontier first.
+    /// </summary>
+    public static bool NeedsHomeFrontierFirst(eRealm realm, ushort currentRegion, ushort destinationRegion) =>
+        currentRegion is not (1 or 100 or 200) && Destination(realm, destinationRegion) != null;
+
     public static bool SliceFull(int processed, double elapsedMilliseconds) =>
         processed >= SlicePassengerLimit || elapsedMilliseconds >= SliceMilliseconds;
 

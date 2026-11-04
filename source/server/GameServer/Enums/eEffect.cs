@@ -247,6 +247,11 @@ namespace DOL.GS
         StyleZeal,
         MeleeTruth,
         Siegebreaker,
-        BlightSurge
+        BlightSurge,
+        ArtifactMezFeedback,
+        ArtifactStunFeedback,
+        ArtifactCheatDeath,
+        ArtifactMorph,
+        CampRest
     }
 }

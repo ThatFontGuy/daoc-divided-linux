@@ -370,17 +370,17 @@ namespace DOL.GS
             catch { }
         }
 
-        /// <summary>What a gamebot's PvP death paid one player (realm and bounty points), including nothing.</summary>
-        public static void PvpReward(GameBot victim, GamePlayer player, int realmPoints, int bountyPoints, bool worth, double damagePercent)
+        /// <summary>What a gamebot's PvP death paid one player (realm points, bounty points and experience), including nothing.</summary>
+        public static void PvpReward(GameBot victim, GamePlayer player, int realmPoints, int bountyPoints, long experience, bool worth, double damagePercent)
         {
             if (!Enabled || victim == null || player == null) return;
             try
             {
                 Write("pvp-reward", victim, new
                 {
-                    player = player.Name, playerLevel = player.Level, realmPoints, bountyPoints,
+                    player = player.Name, playerLevel = player.Level, realmPoints, bountyPoints, experience,
                     worthPoints = worth, damagePercent = Math.Round(damagePercent * 100, 1),
-                    reason = !worth ? "killed recently (realm point worth timer)" : realmPoints == 0 && bountyPoints == 0 ? "zero share" : null
+                    reason = !worth ? "killed recently (realm point worth timer)" : realmPoints == 0 && bountyPoints == 0 && experience == 0 ? "zero share" : null
                 });
             }
             catch { }

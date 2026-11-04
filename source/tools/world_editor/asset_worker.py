@@ -3,12 +3,15 @@
 Runs in a Python with Pillow (the editor starts it). Stock catalog rows, NIFs and skins are never edited:
 a look adds new monsters.csv / skins.csv (and monnifs.csv) rows under unused IDs, new DDS entries in the
 private skin archive figures/skins/skin099.mpk and, optionally, a new figures/<name>.nif. Every install
-backs up gamedata.mpk and skin099.mpk with hashes; uninstall restores them only if nothing else changed them.
+backs up gamedata.mpk and skin099.mpk and records exactly what it added, so looks uninstall in any order: an
+uninstall takes out only its own lines and entries, and refuses if another look was built on them.
 
   catalog   --client APP                          -> JSON list of models and their skin parts
   template  --client APP --model N                -> JSON {part column: PNG data URL} of the stock skins
   install   --client APP --request FILE --backups DIR
   uninstall --client APP --backup DIR
+  fixtures  --client APP --zone N                 -> JSON list of the buildings and scenery the client places in a zone
+  fixture-edit --client APP --request FILE --backups DIR
 """
 import argparse
 import base64
@@ -35,8 +38,13 @@ PARTS = {3: 'Body', 4: 'Head', 5: 'Arms', 6: 'Gloves', 7: 'Lower body', 8: 'Legs
 # Extra texture layers (dark/detail) that player-race models blend over a part's base skin.
 LAYERS = {3: (27, 53), 4: (37, 54), 5: (36, 55), 6: (50, 56), 7: (52, 57), 8: (41, 59), 9: (51, 58)}
 PRIVATE_ARCHIVE = 99
-MAX_MODEL = 2494          # stock table ends at 2493; IDs from 2500 are unproven in this client
+MAX_MODEL = 2494          # stock table ends at 2493; private IDs stop here unless the client's table was moved
 NIF_IDS = range(989, 1000)  # monnifs.csv stops reading at its 1000 terminator
+# The getters game.dll uses for its static monster and object tables: test eax,eax / jl / cmp eax,size / jge /
+# imul eax,eax,stride. The sizes differ by version (objects: 5000 on 1.127, 5500 on 1.130), and a row at or past
+# the size stops the client reading the rest of the table.
+TABLE_GETTER = re.compile(rb'\x85\xc0\x7c.\x3d(....)\x7d.\x69\xc0(\xd0\x01\x00\x00|\xc4\x00\x00\x00)', re.S)
+STRIDE_TABLE = {0x1D0: 'models', 0xC4: 'objects'}
 
 
 def sha(data):
@@ -94,6 +102,27 @@ def insert_rows(data, rows, terminator=None):
     return result
 
 
+def remove_lines(data, lines):
+    """insert_rows in reverse: take out exactly these lines; every other line stays byte-identical."""
+    kept = data.decode('latin1').split('\r\n')
+    for line in lines:
+        require(line in kept, f'Catalog row {line.split(",", 1)[0]} changed after it was installed')
+        kept.remove(line)
+    return '\r\n'.join(kept).encode('latin1')
+
+
+def table_caps(root):
+    """The table sizes this client's game.dll enforces, read from its own code."""
+    caps = {'models': 2500, 'objects': 5000}
+    path = Path(root) / 'game.dll'
+    if path.is_file():
+        found = {}
+        for match in TABLE_GETTER.finditer(path.read_bytes()):
+            found.setdefault(STRIDE_TABLE[struct.unpack('<I', match[2])[0]], struct.unpack('<I', match[1])[0])
+        caps.update(found)
+    return caps
+
+
 def encode_dds(image, reference=None):
     """DXT1 with a full mip chain: the skin format confirmed to work for private models in this client."""
     working = image.convert('RGB')
@@ -136,6 +165,7 @@ class Client:
         self.monsters = by_id(self.files['monsters.csv'].data)
         self.monnifs = by_id(self.files['monnifs.csv'].data)
         self.skins = by_id(self.files['skins.csv'].data)
+        self.caps = table_caps(self.root)
         self._archives = {}
 
     def files_rows(self, name):
@@ -197,8 +227,14 @@ def template(args):
     print(json.dumps(result))
 
 
+def model_limit(c):
+    return c.caps['models'] if c.caps['models'] > 2500 else MAX_MODEL
+
+
 def free_model_ids(c, used):
-    return [i for i in range(1, MAX_MODEL) if str(i) not in c.monsters and i not in used]
+    """Free IDs below the stock end; past it only on a client whose table was moved (model_table.py)."""
+    return ([i for i in range(1, MAX_MODEL) if str(i) not in c.monsters and i not in used] or
+            [i for i in range(2500, model_limit(c)) if str(i) not in c.monsters and i not in used][:1])
 
 
 def install(args):
@@ -223,8 +259,10 @@ def install(args):
     existing = {e.name.lower() for e in sentries}
     reference = next((e.data for e in sentries if e.data[84:88] == b'DXT1'), None)
 
-    model_id = request.get('modelId') or free_model_ids(c, set(request.get('usedModels', [])))[-1]
-    require(str(model_id) not in c.monsters and 0 < int(model_id) < MAX_MODEL, f'Model ID {model_id} is not free')
+    free = free_model_ids(c, set(request.get('usedModels', [])))
+    require(request.get('modelId') or free, 'No free model IDs are left in this client')
+    model_id = request.get('modelId') or free[-1]
+    require(str(model_id) not in c.monsters and 0 < int(model_id) < model_limit(c), f'Model ID {model_id} is not free')
     next_skin = max(int(k) for k in c.skins) + 1
     new_mon = list(stock)
     new_mon[0], new_mon[1] = str(model_id), name
@@ -281,7 +319,10 @@ def install(args):
     backup = Path(args.backups) / (time.strftime('%Y%m%d-%H%M%S-') + slug)
     backup.mkdir(parents=True)
     manifest = {'name': name, 'model': int(model_id), 'base': int(request['model']), 'created': time.strftime('%Y-%m-%d %H:%M'),
-                'client': str(c.root), 'files': {}, 'after': {}, 'new_files': [], 'parts': [PARTS[c] for c in images]}
+                'client': str(c.root), 'files': {}, 'after': {}, 'new_files': [], 'parts': [PARTS[c] for c in images],
+                'added': {'rows': {'monsters.csv': [row_line(new_mon)], 'skins.csv': [row_line(r) for r in new_skins],
+                                   'monnifs.csv': [row_line(r) for r in new_nif]},
+                          'entries': {skin_path.relative_to(c.root).as_posix(): [e.name for e in new_entries]} if sblob else {}}}
     for path in [c.gamedata_path] + ([skin_path] if sblob else []):
         rel = path.relative_to(c.root).as_posix()
         if path.is_file():
@@ -302,10 +343,166 @@ def install(args):
     print(json.dumps({'model': int(model_id), 'backup': str(backup), 'name': name}))
 
 
+# fixtures.csv columns. The client reads this table from csvNNN.mpk first, then datNNN.mpk, and New Towns overrides both.
+# X and Y are zone-local, A is a bearing in degrees (not the server's 0-4095 heading), and a row with Ground = 1 is
+# dropped on the terrain whatever its Z says.
+FIXTURE_FIELDS = {'x': 3, 'y': 4, 'z': 5, 'a': 6, 'scale': 7}
+FIXTURE_RANGES = {'x': (0, 65535), 'y': (0, 65535), 'z': (-65535, 65535), 'a': (0, 359), 'scale': (1, 1000)}
+FIXTURE_NAME, FIXTURE_RADIUS, FIXTURE_GROUND = 2, 9, 11
+
+
+def fixture_source(root, zone):
+    """(relative archive path, archive name, entries) of the fixtures.csv this client actually draws."""
+    name = f'zone{zone:03d}'
+    for prefix in ('newtowns', 'frontiers', ''):
+        for stem_name in ('csv', 'dat'):
+            path = Path(root) / prefix / 'zones' / name / f'{stem_name}{zone:03d}.mpk'
+            if path.is_file() and path.stat().st_size:
+                aname, entries = archive.read(path.read_bytes())
+                if any(e.name.lower() == 'fixtures.csv' for e in entries):
+                    return path.relative_to(root).as_posix(), aname, entries
+    raise ValueError(f'Zone {zone} has no fixtures.csv: cities and dungeons place their buildings another way')
+
+
+def fixture_rows(data):
+    return [r for r in table(data) if len(r) > FIXTURE_GROUND and r[0].strip().isdigit() and r[1].strip().isdigit()]
+
+
+def number(text):
+    return int(float(text or 0))
+
+
+def fixture_info(row):
+    info = {'id': row[0].strip(), 'name': row[FIXTURE_NAME].strip(), 'ground': row[FIXTURE_GROUND].strip() == '1',
+            'radius': number(row[FIXTURE_RADIUS])}
+    return {**info, **{key: number(row[col]) for key, col in FIXTURE_FIELDS.items()}}
+
+
+def fixtures(args):
+    rel, _, entries = fixture_source(Path(args.client).resolve(), args.zone)
+    entry = next(e for e in entries if e.name.lower() == 'fixtures.csv')
+    print(json.dumps({'archive': rel, 'rows': [fixture_info(r) for r in fixture_rows(entry.data)]}))
+
+
+def fixture_edit(args):
+    """Move, turn or scale placed buildings: whole fixtures.csv lines are swapped, and every other byte stays."""
+    request = json.loads(Path(args.request).read_text(encoding='utf-8'))
+    root, zone = Path(args.client).resolve(), int(request['zone'])
+    rel, aname, entries = fixture_source(root, zone)
+    entry = next(e for e in entries if e.name.lower() == 'fixtures.csv')
+    newline = '\r\n' if b'\r\n' in entry.data else '\n'
+    lines = entry.data.decode('latin1').split(newline)
+    index = {}
+    for i, line in enumerate(lines):
+        head = line.split(',', 1)[0].strip()
+        if head.isdigit() and len(next(csv.reader([line]))) > FIXTURE_GROUND:
+            index.setdefault(head, []).append(i)
+    swaps = []
+    for edit in request['edits']:
+        found = index.get(str(edit['id']), [])
+        require(len(found) == 1, f'Building {edit["id"]} is not in fixtures.csv')
+        old = lines[found[0]]
+        row = next(csv.reader([old]))
+        info = fixture_info(row)
+        for key, value in edit.get('expect', {}).items():
+            require(info[key] == value, f'Building {edit["id"]} ({info["name"]}) changed: {key} is {info[key]}, not {value}')
+        for key, value in edit['set'].items():
+            low, high = FIXTURE_RANGES[key]
+            value = int(value)
+            require(low <= value <= high, f'{key} must be {low}-{high}')
+            require(key != 'z' or not info['ground'], f'{info["name"]} sits on the terrain, so the client ignores its Z')
+            row[FIXTURE_FIELDS[key]] = str(value)
+        lines[found[0]] = row_line(row)
+        if lines[found[0]] != old:
+            swaps.append([old, lines[found[0]]])
+    require(swaps, 'Nothing changed')
+    data = newline.join(lines).encode('latin1')
+    blob = archive.write(aname, [archive.Entry(e.name, data if e is entry else e.data, e.timestamp, e.flags) for e in entries])
+    archive.verify_memory_image(blob)
+    path = root / rel
+    backup = Path(args.backups) / (time.strftime('%Y%m%d-%H%M%S-') + f'zone{zone:03d}-{sha(blob)[:6]}')
+    backup.mkdir(parents=True)
+    shutil.copy2(path, backup / path.name)
+    manifest = {'name': f'Moved {len(swaps)} building{"s" if len(swaps) != 1 else ""} in zone {zone}', 'model': 0, 'base': 0,
+                'created': time.strftime('%Y-%m-%d %H:%M'), 'client': str(root), 'files': {rel: sha(path.read_bytes())},
+                'after': {rel: sha(blob)}, 'new_files': [], 'parts': ['buildings'],
+                'added': {'rows': {}, 'entries': {}, 'lines': {rel: {'fixtures.csv': swaps}}}}
+    path.write_bytes(blob)
+    (backup / 'manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
+    print(json.dumps({'message': manifest['name'] + '. Reload textured view to see it.', 'backup': backup.name}))
+
+
+def require_unreferenced(c, rows):
+    """Refuse to remove a skin, NIF or item skin that a row staying in the client still points at."""
+    gone = {name: {line.split(',', 1)[0].strip() for line in lines} for name, lines in rows.items()}
+    skins, nifs, pskins = gone.get('skins.csv', set()), gone.get('monnifs.csv', set()), gone.get('pskins.csv', set())
+    for mid, row in c.monsters.items():
+        if mid in gone.get('monsters.csv', ()):
+            continue
+        columns = [row[col].strip() for col in [*PARTS, *(i for pair in LAYERS.values() for i in pair)] if col < len(row)]
+        require(not skins & set(columns), f'Model {mid} ({row[1]}) still uses a skin of this look. Remove it first.')
+        require(row[2].strip() not in nifs, f'Model {mid} ({row[1]}) still uses the NIF of this look. Remove it first.')
+    if pskins:
+        for oid, row in c.files_rows('objects.csv'):
+            if oid not in gone.get('objects.csv', ()):
+                used = {row[col].strip() for col in PSKIN_COLS if col < len(row)}
+                require(not pskins & used, f'Object {oid} ({row[1].strip()}) still uses a skin of this import. Remove it first.')
+
+
+def remove_added(root, manifest):
+    """Take out what this install added and leave later installs in place. Nothing is written until every check passes."""
+    c = Client(root)
+    rows = {name: lines for name, lines in manifest['added']['rows'].items() if lines}
+    require_unreferenced(c, rows)
+    replaced = {name: remove_lines(c.files[name].data, lines) for name, lines in rows.items()}
+    gblob = None
+    if replaced:
+        gblob = archive.write(c.gname, [archive.Entry(e.name, replaced.get(e.name.lower(), e.data), e.timestamp, e.flags) for e in c.gentries])
+        archive.verify_memory_image(gblob)
+    blobs, emptied = {}, []
+    for rel, files in manifest['added'].get('lines', {}).items():
+        aname, entries = archive.read((root / rel).read_bytes())
+        restored = []
+        for e in entries:
+            text = e.data.decode('latin1')
+            for old, new in files.get(e.name, []):
+                require(text.count(new) == 1, f'{e.name} line {new.split(",", 1)[0]} changed later. Undo the newer change first.')
+                text = text.replace(new, old)
+            restored.append(archive.Entry(e.name, text.encode('latin1'), e.timestamp, e.flags))
+        blobs[rel] = archive.write(aname, restored)
+        archive.verify_memory_image(blobs[rel])
+    for rel, names in manifest['added']['entries'].items():
+        aname, entries = archive.read((root / rel).read_bytes())
+        gone = {n.lower() for n in names}
+        require(gone <= {e.name.lower() for e in entries}, f'{rel} no longer holds the textures of this install')
+        kept = [e for e in entries if e.name.lower() not in gone]
+        if kept:
+            blobs[rel] = archive.write(aname, kept)
+            archive.verify_memory_image(blobs[rel])
+        else:
+            emptied.append(rel)
+    loose = [rel for rel in manifest['new_files'] if rel not in manifest['added']['entries']]
+    for rel in loose:
+        path = root / rel
+        require(not path.is_file() or sha(path.read_bytes()) == manifest['after'].get(rel), f'{rel} changed after it was installed')
+    if gblob:
+        c.gamedata_path.write_bytes(gblob)
+    for rel, blob in blobs.items():
+        (root / rel).write_bytes(blob)
+    for rel in [*emptied, *loose]:
+        (root / rel).unlink(missing_ok=True)
+
+
 def uninstall(args):
     folder = Path(args.backup)
     manifest = json.loads((folder / 'manifest.json').read_text(encoding='utf-8'))
     root = Path(args.client).resolve()
+    latest = all((root / rel).is_file() and sha((root / rel).read_bytes()) == digest for rel, digest in manifest['after'].items())
+    if 'added' in manifest and not latest:   # when nothing came later, the backups below restore every byte
+        remove_added(root, manifest)
+        (folder / 'uninstalled.txt').write_text(time.strftime('%Y-%m-%d %H:%M'), encoding='utf-8')
+        print(json.dumps({'message': f'Removed custom look {manifest["name"]} (model {manifest["model"]}).'}))
+        return
     for rel, digest in manifest['after'].items():
         path = root / rel
         require(path.is_file() and sha(path.read_bytes()) == digest,
@@ -804,6 +1001,7 @@ def import_items(args):
     for oid in ids:
         row = src_obj.get(oid)
         require(row is not None, f'Object {oid} is not in the source client')
+        require(int(oid) < dst.caps['objects'], f'Object {oid} is past the {dst.caps["objects"]} objects this client can hold')
         if oid in dst_obj:
             require(dst_obj[oid][1] != row[1], f'Object {oid} ({row[1].strip()}) is already imported in this client')
             require(dst_obj[oid] == row, f'Object {oid} already exists in this client with a different appearance')
@@ -841,7 +1039,7 @@ def import_items(args):
     gblob = archive.write(dst.gname, [archive.Entry(e.name, replaced.get(e.name.lower(), e.data), e.timestamp, e.flags) for e in dst.gentries])
     archive.verify_memory_image(gblob)
     # Texture archives: add the needed entries; an existing archive keeps all its entries byte for byte.
-    blobs = {}
+    blobs, new_entries = {}, {}
     for number, names in archives.items():
         rel = f'items/pskins/pskin{int(number):03d}.mpk'
         sname, sentries = archive.read((src.root / rel).read_bytes())
@@ -857,15 +1055,19 @@ def import_items(args):
             if len(merged) == len(dentries):
                 continue
             blobs[rel] = archive.write(dname, sorted(merged, key=lambda e: e.name.lower()))
+            new_entries[rel] = [e.name for e in wanted if e.name.lower() not in have]
         else:
             blobs[rel] = archive.write(sname, sorted(wanted, key=lambda e: e.name.lower()))
+            new_entries[rel] = [e.name for e in wanted]
         archive.verify_memory_image(blobs[rel])
     names = ', '.join(r[1].strip() for r in new_obj)
     backup = Path(args.backups) / (time.strftime('%Y%m%d-%H%M%S-') + 'import')
     backup.mkdir(parents=True)
     manifest = {'name': f'Imported: {names}', 'model': int(new_obj[0][0]), 'base': 0, 'created': time.strftime('%Y-%m-%d %H:%M'),
                 'client': str(dst.root), 'source': str(src.root), 'objects': [int(r[0]) for r in new_obj], 'pskins': remap,
-                'files': {}, 'after': {}, 'new_files': [], 'parts': ['imported item']}
+                'files': {}, 'after': {}, 'new_files': [], 'parts': ['imported item'],
+                'added': {'rows': {'objects.csv': [row_line(r) for r in new_obj], 'pskins.csv': [row_line(r) for r in new_ps]},
+                          'entries': new_entries}}
     for rel in ['gamedata.mpk', *blobs]:
         path = dst.root / rel
         if path.is_file():
@@ -882,12 +1084,13 @@ def import_items(args):
         manifest['after'][rel] = sha(blob)
     (backup / 'manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
     print(json.dumps({'objects': manifest['objects'], 'pskins': remap, 'skipped': skipped, 'backup': str(backup),
-                      'files': list(manifest['after'])}))
+                      'files': list(manifest['after']), 'objectsLeft': dst.caps['objects'] - 1 - max(int(k) for k in {*dst_obj, *ids})}))
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('command', choices=['catalog', 'template', 'install', 'uninstall', 'items', 'item-preview', 'effects', 'import-items'])
+    ap.add_argument('command', choices=['catalog', 'template', 'install', 'uninstall', 'items', 'item-preview', 'effects', 'import-items',
+                                            'fixtures', 'fixture-edit'])
     ap.add_argument('--client', required=True)
     ap.add_argument('--model', type=int)
     ap.add_argument('--request')
@@ -901,10 +1104,12 @@ def main():
     ap.add_argument('--extension', type=int, default=0)
     ap.add_argument('--color', type=int, default=0)
     ap.add_argument('--objects')
+    ap.add_argument('--zone', type=int)
     args = ap.parse_args()
     try:
         {'catalog': catalog, 'template': template, 'install': install, 'uninstall': uninstall,
-         'items': items_catalog, 'item-preview': item_preview, 'effects': effects_list, 'import-items': import_items}[args.command](args)
+         'items': items_catalog, 'item-preview': item_preview, 'effects': effects_list, 'import-items': import_items,
+         'fixtures': fixtures, 'fixture-edit': fixture_edit}[args.command](args)
     except (ValueError, KeyError, OSError) as exc:
         print(json.dumps({'error': str(exc)}))
         sys.exit(2)

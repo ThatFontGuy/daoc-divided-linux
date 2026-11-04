@@ -30,7 +30,7 @@ namespace DOL.GS.PlayerClass
 			m_profession = "PlayerClass.Profession.TempleofIronFist";
 			m_specializationMultiplier = 18;
 			m_wsbase = 440;
-			m_baseHP = 600;
+			m_baseHP = 720;
 			m_primaryStat = eStat.STR;
 			m_secondaryStat = eStat.CON;
 			m_tertiaryStat = eStat.QUI;
@@ -58,6 +58,6 @@ namespace DOL.GS.PlayerClass
 		}
 
         public override List<PlayerRace> EligibleRaces => ServerProperties.Properties.ENABLE_MAULER_TEST
-            ? new List<PlayerRace> { PlayerRace.Graoch, PlayerRace.Celt, PlayerRace.Lurikeen } : new List<PlayerRace>();
+            ? new List<PlayerRace> { PlayerRace.Graoch, PlayerRace.Celt, PlayerRace.Firbolg, PlayerRace.Lurikeen } : new List<PlayerRace>();
 	}
 }
