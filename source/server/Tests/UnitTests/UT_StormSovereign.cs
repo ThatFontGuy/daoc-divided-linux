@@ -142,7 +142,7 @@ namespace DOL.UnitTests
                 Assert.That(MasterLevelAbilities.For(id),Is.Not.Null);
                 Assert.That(ability.Run,Is.Not.Null,id.ToString());
             }
-            Assert.That(new DOL.GS.PlayerClass.ClassStormforged().ID,Is.EqualTo(64));
+            Assert.That(new DOL.GS.PlayerClass.ClassStormforged().ID,Is.EqualTo((int)eCharacterClass.Stormforged));
         }
         [Test]
         public void SovereignPassivesApplyUpgradeAndRespecWithoutLeakingBonuses()
@@ -232,6 +232,42 @@ namespace DOL.UnitTests
             Assert.That(wolf.IsAttacking,Is.False);
             owner.Hidden=false;wolf.SyncOwner();
             Assert.That(wolf.IsStealthed,Is.False);
+        }
+        [Test]
+        public void SecondAndThirdWolfAttachToTheFirstAsSubPetsCappedAtTwo()
+        {
+            // Drengr's second/third wolf (SummonDrengrWolfCompanion): same commander/sub-pet
+            // attachment as Bonedancer's CommanderPet, but every wolf -- not just the first --
+            // still resolves the real owner's stealth/speed through RootOwner/GetPlayerOwner(),
+            // so all three act like independent pets of the owner rather than a hierarchy.
+            var owner=NewActor();
+            var wolf1=new Wolf();_actors.Add(wolf1);
+            var brain1=new StormWolfBrain(owner);wolf1.SetOwnBrain(brain1);
+            wolf1.InitControlledBrainArray(2);
+
+            var wolf2=new Wolf();_actors.Add(wolf2);
+            var brain2=new StormWolfBrain(wolf1);wolf2.SetOwnBrain(brain2);
+            Assert.That(wolf1.AddControlledBrain(brain2),Is.True,"room for a second wolf");
+            Assert.That(wolf1.PetCount,Is.EqualTo(1));
+            Assert.That(wolf2.RootOwner,Is.EqualTo(owner),"RootOwner walks past the first wolf to the real owner");
+
+            owner.Hidden=true;
+            wolf2.SyncOwner();
+            Assert.That(wolf2.IsStealthed,Is.True,"second wolf follows the real owner's stealth, not the first wolf's");
+            owner.Hidden=false;wolf2.SyncOwner();
+
+            var wolf3=new Wolf();_actors.Add(wolf3);
+            var brain3=new StormWolfBrain(wolf1);wolf3.SetOwnBrain(brain3);
+            Assert.That(wolf1.AddControlledBrain(brain3),Is.True,"room for a third wolf");
+            Assert.That(wolf1.PetCount,Is.EqualTo(2));
+
+            var wolf4=new Wolf();_actors.Add(wolf4);
+            var brain4=new StormWolfBrain(wolf1);wolf4.SetOwnBrain(brain4);
+            Assert.That(wolf1.AddControlledBrain(brain4),Is.False,"capped at two sub-pets -- three wolves total");
+
+            Assert.That(wolf1.RemoveControlledBrain(brain2),Is.True);
+            Assert.That(wolf1.PetCount,Is.EqualTo(1));
+            Assert.That(wolf1.AddControlledBrain(brain4),Is.True,"a freed slot can be reused");
         }
         [Test]
         public void RoyalCleanseSupportsTheControlledCastingBypassAndTooltipsArePrivate()

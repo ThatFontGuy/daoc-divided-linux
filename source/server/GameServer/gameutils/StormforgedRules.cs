@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DOL.GS
 {
-    /// <summary>All custom-class exceptions live behind class 64; stock Thanes are unchanged.</summary>
+    /// <summary>All custom-class exceptions live behind eCharacterClass.Stormforged (retired, dormant); stock Thanes are unchanged.</summary>
     public static class StormforgedRules
     {
         public static bool IsStormforged(int classId) => classId == (int)eCharacterClass.Stormforged;

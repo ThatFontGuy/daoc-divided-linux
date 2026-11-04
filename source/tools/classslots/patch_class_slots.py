@@ -6,7 +6,8 @@ Starts from the pristine 1.130 game.dll (the input of patch_modern_client.py) an
   * class names 63-65 in the client's 100-slot class-name table (0xD92578 + 30*class);
   * a character-creation entry per class, appended after its realm's Mauler entry, built exactly like
     that Mauler entry (same struct fields, race-list ABI and 0x5AFC27 registration call):
-      63 Sluaghbinder (Hibernia), 64 Storm Sovereign (Midgard), 65 Pendragon Sovereign (Albion),
+      63 Sluaghbinder (Hibernia), 64 Drengr (Midgard; took over this slot from the retired Stormforged/
+      Storm Sovereign), 65 Pendragon Sovereign (Albion),
       66 Death Knight (Albion, the modern live Necromancer, registered right after the Pendragon entry),
       67 Tuatha Sovereign (Hibernia; it takes the Sluaghbinder's creation entry, class 63 keeps its name);
   * (off: TUATHA_HOVER) the Vampiir hover alone for the player's own Tuatha Sovereign;
@@ -68,9 +69,9 @@ class Slot:
 SLUAGHBINDER = Slot(63, 'Sluaghbinder',
                     'A Hibernian warrior-binder who calls the restless sluagh host to fight beside it, wielding rot and the old cairn oaths.',
                     (9, 10), (STR, INT, CON))
-STORM_SOVEREIGN = Slot(64, 'Storm Sovereign',
-                       'A royal master of thunder, weapons and stealth, accompanied by a loyal Storm Wolf.',
-                       (5, 6, 7, 8, 14, 17, 20), (STR, PIE, CON))
+DRENGR = Slot(64, 'Drengr',
+                       'Spear Warrior of Midgard, explorer of the vast frontiers accompanies by a loyal wolf companion.',
+                       (7, 8, 5, 6), (STR, CON, DEX))
 PENDRAGON = Slot(65, 'Pendragon Sovereign',
                  'Albion royal champion of holy fire, weapons and stealth, accompanied by a loyal Royal Lion.',
                  (1, 2, 3, 4, 13, 16, 19), (STR, PIE, CON))
@@ -80,7 +81,7 @@ DEATH_KNIGHT = Slot(66, 'Death Knight',
 TUATHA = Slot(67, 'Tuatha Sovereign',
               'Hibernian royal sovereign of the Tuatha De Danann: spirit magic, weapons and stealth, accompanied by a loyal Faerie Drake.',
               (9, 10, 11, 12, 15, 18, 21), (STR, PIE, CON))
-SLOTS = (SLUAGHBINDER, STORM_SOVEREIGN, PENDRAGON, DEATH_KNIGHT, TUATHA)
+SLOTS = (SLUAGHBINDER, DRENGR, PENDRAGON, DEATH_KNIGHT, TUATHA)
 
 # Per realm: hook right after the Mauler entry's list clear, the original bytes replaced there, where to
 # return, and how the Mauler entry set its register-held fields in that function.
@@ -88,7 +89,7 @@ SLOTS = (SLUAGHBINDER, STORM_SOVEREIGN, PENDRAGON, DEATH_KNIGHT, TUATHA)
 REALMS = {
     'Albion':   dict(slots=(PENDRAGON, DEATH_KNIGHT), hook=0x5B0B85, original='8365b8006a07', back=0x5B0B8B,
                      flags='ebx', field18='edi', realm='ebx', count=3),
-    'Midgard':  dict(slots=(STORM_SOVEREIGN,), hook=0x5B22A5, original='8365b8008365c400', back=0x5B22AD,
+    'Midgard':  dict(slots=(DRENGR,), hook=0x5B22A5, original='8365b8008365c400', back=0x5B22AD,
                      flags=1, field18=2, realm=2, count=3),
     'Hibernia': dict(slots=(TUATHA,), hook=0x5B352C, original='8365c4008365e000', back=0x5B3534,
                      flags=1, field18='ebx', realm='edi', count='edi'),

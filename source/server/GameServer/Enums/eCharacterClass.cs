@@ -96,11 +96,18 @@ namespace DOL.GS
 		Warden = 46,
 		MaulerHib = 62,
 		// 63 was the retired custom Sluaghbinder; the patched client keeps the slot's name only.
-        Stormforged = 64,
+        // Native client slot 64 (Midgard); Drengr took over this slot, so Stormforged is retired here
+        // (dormant, no live characters) and renumbered off the slot to free it.
+        Drengr = 64,
         PendragonSovereign = 65,
         // Live 1.122B+ Necromancer, beside the classic Necromancer (12); native client slot 66 only.
         DeathKnight = 66,
         // Hibernian royal class; native client slot 67, created from the Hibernia entry slot 63 used to have.
         TuathaSovereign = 67,
+        // Nosferatu (68) is a level-5 Rogue-promotion class; deployed as a bin/scripts/ runtime script,
+        // not compiled here, so it has no enum entry of its own yet.
+        // Retired: no longer in the native client slot. Kept defined (dormant) so its compiled
+        // subsystem (StormforgedRules, StormWolf, heroic abilities, etc.) still resolves by name.
+        Stormforged = 70,
 	}
 }

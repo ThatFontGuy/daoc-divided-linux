@@ -447,6 +447,9 @@ namespace DOL.GS
         MasterLevelAbility,
         StormSovereignAbility,
         StormSovereignWolf,
+        // Drengr's second/third wolf companions: sub-pets attached to the first Storm Wolf,
+        // not directly to the player (DOL.GS.Spells.SummonDrengrWolfCompanion).
+        DrengrWolfCompanion,
 
         // Valkyrie Odin's Will frontal cones: Spirit damage, then strip one concentration buff.
         ValkyrieDexQuiShearCone,

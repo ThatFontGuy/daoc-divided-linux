@@ -27,7 +27,8 @@ public sealed class UT_CustomClassSlots
     public void ClientSlotNumbersMatchServerClassIds()
     {
         // source/tools/classslots/patch_class_slots.py registers these exact client IDs.
-        Assert.That((int)eCharacterClass.Stormforged, Is.EqualTo(64));
+        // Slot 64 (Midgard) now registers Drengr; Stormforged is retired off it (dormant at 70).
+        Assert.That((int)eCharacterClass.Drengr, Is.EqualTo(64));
         Assert.That((int)eCharacterClass.PendragonSovereign, Is.EqualTo(65));
     }
 }

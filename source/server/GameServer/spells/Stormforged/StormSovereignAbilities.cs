@@ -7,7 +7,8 @@ using DOL.GS.PacketHandler;
 
 namespace DOL.GS.Spells
 {
-    // Keep class 64 and Stormforged.* database keys for save/client compatibility.
+    // eCharacterClass.Stormforged is retired (dormant, class 70) but its Stormforged.* database
+    // keys are kept as-is for save/client compatibility with this spell ID range.
     public static class StormSovereignAbilities
     {
         public const int FirstId = 62400;
