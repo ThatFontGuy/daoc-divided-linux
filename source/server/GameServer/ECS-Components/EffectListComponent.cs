@@ -715,8 +715,14 @@ namespace DOL.GS
                         ServiceObjectStore.Add(effect);
                         existingEffects[i] = effect;
                         result = existingEffect.IsActive ? AddEffectResult.RenewedActive : AddEffectResult.RenewedDisabled;
-                        if (existingEffect != effect && existingEffect is SpeedEnhancementECSEffect oldSpeed)
-                            oldSpeed.IsSuperseded = true;
+                        // HearthDAoC: every effect, not only speed songs (#190). Two companions' chants landing
+                        // in one tick left the first child active outside the list; its end took the bonus again.
+                        if (existingEffect != effect)
+                            existingEffect.IsSuperseded = true;
+                        // HearthDAoC: the renewed child's bonus stays on the target and this one takes it off at its stop,
+                        // so it takes over the Effectiveness that bonus was added with (#190).
+                        if (existingEffect != effect && result is AddEffectResult.RenewedActive && effect is ECSGameSpellEffect { AppliesBonusAtStart: true })
+                            effect.Effectiveness = existingEffect.Effectiveness;
                     }
 
                     _effects.TryAdd(effect.EffectType, existingEffects);
@@ -902,7 +908,7 @@ namespace DOL.GS
                 try
                 {
                     bool stop = effect.FinalizeState(result);
-                    if (effect is SpeedEnhancementECSEffect { IsSuperseded: true })
+                    if (effect.IsSuperseded) // HearthDAoC: every renewed effect, not only speed songs (#190)
                         stop = false;
 
                     // Keep disabled effects in the store.
@@ -947,7 +953,7 @@ namespace DOL.GS
             {
                 // A replaced speed pulse no longer owns either the live buff
                 // or its icon. Retire only that stale instance, not its successor.
-                if (effect is SpeedEnhancementECSEffect { IsSuperseded: true })
+                if (effect.IsSuperseded) // HearthDAoC: every renewed effect, not only speed songs (#190)
                     return RemoveEffectResult.Removed;
 
                 if (!_effects.TryGetValue(effect.EffectType, out List<ECSGameEffect> existingEffects))
@@ -1051,7 +1057,7 @@ namespace DOL.GS
                 _action(_effect, _state);
                 // Its original start callback may have been queued before a
                 // second singer refreshed it. Do not re-register that old child.
-                if (_effect is SpeedEnhancementECSEffect { IsSuperseded: true })
+                if (_effect.IsSuperseded) // HearthDAoC: every renewed effect, not only speed songs (#190)
                     ServiceObjectStore.Remove(_effect);
                 _effect.IsBeingReplaced = false; // This need to always be set to false.
             }

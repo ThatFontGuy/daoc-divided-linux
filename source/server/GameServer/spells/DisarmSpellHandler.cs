@@ -19,6 +19,11 @@ namespace DOL.GS.Spells
 			m_caster.Mana -= PowerCost(target);
 			base.FinishSpellCast(target);
 		}		
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+		}
+
 		/// <summary>
 		/// When an applied effect starts
 		/// duration spells only

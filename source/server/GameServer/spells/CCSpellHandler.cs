@@ -28,6 +28,12 @@ namespace DOL.GS.Spells
                 return;
             }
 
+            if (ArtifactAbilities.BlockedByFeedback(target, Spell.SpellType))
+            {
+                MessageToCaster("An artifact turns your spell aside!", eChatType.CT_SpellResisted);
+                return;
+            }
+
             base.ApplyEffectOnTarget(target);
         }
 

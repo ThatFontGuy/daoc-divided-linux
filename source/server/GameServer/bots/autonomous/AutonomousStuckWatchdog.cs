@@ -568,7 +568,7 @@ public static class AutonomousStuckWatchdog
             // operation, with an explicit cause, rather than silently removing
             // one actor and leaving seven stale group assignments behind.
             if (expedition == null) AutonomousBotGroupCoordinator.EndPvePartyBeforeIndividualRecovery(bot, reason);
-            bot.TempProperties.GetProperty<GameRelic>(GameRelic.PLAYER_CARRY_RELIC_WEAK)?.DropFromCarrier(bot);
+            bot.TempProperties.GetProperty<GameRelic>(GameRelic.PLAYER_CARRY_RELIC_WEAK)?.DropFromCarrier(bot, "stuck-watchdog:" + reason);
             if (expedition == null) bot.Group?.RemoveMember(bot);
             bot.CompleteStableMasterRoute();
             bot.StopAttack();
@@ -642,7 +642,7 @@ public static class AutonomousStuckWatchdog
     /// from the player's group without a word, and the schedule logged it off a few seconds later. Companion bots already
     /// rejoin their player this way (TryReturnTemporaryCompanionToLeader).
     /// </summary>
-    private static bool TryRecoverToPlayerLeader(GameBot bot, DateTime now, string reason, string logMarker)
+    internal static bool TryRecoverToPlayerLeader(GameBot bot, DateTime now, string reason, string logMarker)
     {
         if (bot.PlayerGroupLeader is not { IsAlive: true, ObjectState: GameObject.eObjectState.Active } leader ||
             leader.CurrentZone == null || bot.Group == null || bot.Group != leader.Group || leader.Realm != bot.Realm)

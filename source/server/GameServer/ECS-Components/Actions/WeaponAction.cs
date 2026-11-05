@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DOL.Database;
+using DOL.Events;
 using DOL.GS.PacketHandler;
 using DOL.GS.RealmAbilities;
 using DOL.GS.Spells;
@@ -375,6 +376,19 @@ namespace DOL.GS
             if (target.effectListComponent.ContainsEffectForEffectType(eEffect.ReflexAttack) ||
                 DOL.GS.RealmAbilities.ModernReflexAttack.ShouldCounter(target, attackData))
                 HandleReflexAttack(_owner, attackData.Target, attackData.AttackResult, _interval);
+
+            NotifyAttackFinished(_owner, attackData);
+        }
+
+        // Raised here rather than in `OnAttackEnemy` because the target's defenses and the damage are final by now.
+        // Misses count too: Testudo and Blade Barrier break on any swing, and listeners filter on the result themselves.
+        public static void NotifyAttackFinished(GameLiving attacker, AttackData attackData)
+        {
+            if (attackData.AttackResult is eAttackResult.HitUnstyled or eAttackResult.HitStyle or eAttackResult.Missed or
+                eAttackResult.Blocked or eAttackResult.Evaded or eAttackResult.Parried or eAttackResult.Fumbled)
+            {
+                attacker.Notify(GameLivingEvent.AttackFinished, attacker, new AttackFinishedEventArgs(attackData));
+            }
         }
 
         private static void HandleDamageAdd(GameLiving owner, AttackData ad)

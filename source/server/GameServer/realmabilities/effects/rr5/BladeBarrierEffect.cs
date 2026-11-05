@@ -82,6 +82,8 @@ namespace DOL.GS.Effects
 		{
             //Commented out for removal
 			//m_owner.BuffBonusCategory4[eProperty.ParryChance] -= 90;
+			GameEventMgr.RemoveHandler(m_owner, GameLivingEvent.AttackFinished, new DOLEventHandler(attackEventHandler));
+			GameEventMgr.RemoveHandler(m_owner, GameLivingEvent.AttackedByEnemy, new DOLEventHandler(TakeDamage));
 			base.Stop();
 		}
 

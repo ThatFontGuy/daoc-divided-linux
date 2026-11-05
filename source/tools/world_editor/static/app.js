@@ -654,6 +654,49 @@ function renderZoneFields() {
   if(!S.data||!S.config)return;const z=S.data.zone;form($('zoneFields'),zoneEntity(),Object.keys(S.config.fields.Zones),'Layout and other columns');
   $('zoneBounds').textContent=`Region ${z.RegionID}\nOrigin ${z.OffsetX*8192}, ${z.OffsetY*8192}\nExtent ${z.Width*8192} × ${z.Height*8192}\n${z.layoutMatches?'Client bounds match server':'CLIENT / SERVER BOUNDS DIFFER'}`;
 }
+// Client buildings (fixtures.csv): zone-local coordinates and a bearing in degrees, unlike the server's rows.
+const fixtureState={rows:[],zone:null};
+const fixtureNow=()=>fixtureState.rows.find(r=>r.id===$('fixtureList').value);
+function renderFixtures(){
+  const text=$('fixtureSearch').value.trim().toLowerCase();
+  const rows=fixtureState.rows.filter(r=>!text||r.name.toLowerCase().includes(text)||r.id===text).slice(0,500);
+  $('fixtureList').replaceChildren(...rows.map(r=>{const o=document.createElement('option');o.value=r.id;o.textContent=`${r.name} · ${r.id}`;return o;}));
+}
+function showFixture(){
+  const r=fixtureNow();$('fixtureForm').classList.toggle('hidden',!r);if(!r)return;
+  $('fixtureX').value=r.x;$('fixtureY').value=r.y;$('fixtureZ').value=r.z;$('fixtureA').value=r.a;$('fixtureScale').value=r.scale;
+  $('fixtureZ').disabled=r.ground;$('fixtureNote').textContent=r.ground?'Sits on the terrain: the client ignores its Z.':'';
+  const center=new THREE.Vector3(r.x*.025,r.ground?controls.target.y:r.z*.025,r.y*.025);
+  controls.target.copy(center);camera.position.copy(center).add(new THREE.Vector3(15,20,25));controls.update();
+}
+// A door keeps its place on the building: the same turn about the building's centre, then the same move.
+function fixtureDoors(r,dx,dy,dz,da){
+  const z=S.data.zone,turn=da*Math.PI/180,cos=Math.cos(turn),sin=Math.sin(turn),radius=+$('fixtureDoorRadius').value;
+  const doors=allEntities().filter(e=>e.table==='Door'&&!isDeleted(e)).map(e=>({e,v:pendingValues(e)})).map(d=>({...d,lx:d.v.X-z.OffsetX*8192-r.x,ly:d.v.Y-z.OffsetY*8192-r.y})).filter(d=>Math.hypot(d.lx,d.ly)<=radius);
+  for(const d of doors)stage(d.e,{X:Math.round(d.v.X-d.lx+d.lx*cos-d.ly*sin+dx),Y:Math.round(d.v.Y-d.ly+d.lx*sin+d.ly*cos+dy),Z:d.v.Z+dz,Heading:(d.v.Heading+Math.round(da*4096/360)+4096)%4096});
+  return doors.length;
+}
+async function loadFixtures(){
+  const data=await api('fixtures?zone='+S.data.zone.ZoneID);fixtureState.rows=data.rows;fixtureState.zone=S.data.zone.ZoneID;
+  ['fixtureSearch','fixtureList'].forEach(id=>$(id).classList.remove('hidden'));renderFixtures();showFixture();
+}
+$('fixtureLoad').onclick=guarded(loadFixtures);
+$('fixtureSearch').oninput=renderFixtures;$('fixtureList').onchange=showFixture;
+$('fixtureApply').onclick=guarded(async()=>{
+  const r=fixtureNow();if(!r)return;
+  const next={x:+$('fixtureX').value,y:+$('fixtureY').value,z:+$('fixtureZ').value,a:+$('fixtureA').value,scale:+$('fixtureScale').value};
+  const set=Object.fromEntries(Object.entries(next).filter(([k,v])=>v!==r[k]));
+  if(!Object.keys(set).length)return toast('Nothing changed.');
+  const expect=Object.fromEntries(Object.keys(set).map(k=>[k,r[k]]));
+  if(!await askConfirm('Save to client',`Change ${r.name} in this client's zone files? You can undo it from the Custom looks list.`))return;
+  busy('Writing the zone file…');
+  try{
+    const result=await api('fixture-edit',{zone:S.data.zone.ZoneID,edits:[{id:r.id,expect,set}]});
+    const moved=$('fixtureDoors').checked?fixtureDoors(r,next.x-r.x,next.y-r.y,r.ground?0:next.z-r.z,next.a-r.a):0;
+    if(moved)changed();toast(result.message+(moved?` ${moved} door${moved===1?'':'s'} moved with it (pending).`:''));
+    await loadFixtures();$('fixtureList').value=r.id;showFixture();
+  }finally{busy(null);}
+});
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('#worldView .tab').forEach(x=>x.classList.toggle('hidden',x.id!==b.dataset.tab));});
 $('audit').onclick=()=>{
   if(!collision)return toast('Load buildings / floors first.',true);
@@ -838,14 +881,14 @@ function renderLooks() {
   for(const look of S.looks){
     const card=document.createElement('div');card.className='lookCard'+(look.model===S.lastLook?' fresh':'');
     const h=document.createElement('strong');h.textContent=look.name;const s=document.createElement('div');s.className='muted';
-    s.textContent=`Model ${look.model} · based on ${look.base} · ${look.parts.join(', ')||'mesh only'} · ${look.created}`;
+    s.textContent=look.model?`Model ${look.model} · based on ${look.base} · ${look.parts.join(', ')||'mesh only'} · ${look.created}`:`Client zone file · ${look.created}`;
     const row=document.createElement('div');row.className='row';
     const use=document.createElement('button');use.textContent='Use on selected NPC';use.onclick=()=>useLook(look.model);
     const copy=document.createElement('button');copy.textContent='Copy ID';copy.onclick=()=>{navigator.clipboard?.writeText(String(look.model));toast(`Model ${look.model} copied.`);};
     const remove=document.createElement('button');remove.textContent='Uninstall';remove.className='danger';
     remove.onclick=guarded(async()=>{if(!await askConfirm('Uninstall custom look',`Remove "${look.name}" (model ${look.model}) from the client? NPCs still using model ${look.model} will be invisible until you change their Model.`,'Uninstall'))return;
       busy('Restoring client files…');try{const r=await api('look-uninstall',{id:look.id});toast(r.message);await loadModels();}finally{busy(null);}});
-    row.append(use,copy,remove);card.append(h,s,row);list.append(card);
+    if(look.model)row.append(use,copy);row.append(remove);card.append(h,s,row);list.append(card);
   }
 }
 function useLook(model) {

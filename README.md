@@ -7,9 +7,22 @@ folder that runs on Linux (including SteamOS / Steam Deck), with a terminal admi
 
 You play with the **original retail 1.130 client**. No game files are included in this project.
 
-> **Status: development.** The server builds and runs on Linux, and the six expansion classes (Vampiir, Bainshee, Heretic,
-> Valkyrie, Warlock, Mauler) were created and played in-game on the stock client. Everything else DividedRealms offers is
-> included as it ships upstream and has not been separately tested here. See [Known gaps](#known-gaps).
+> **Status: development. Based on DividedRealms DR-dev-0.1a, "the Fishing Update" (2026-11-04).** The server builds and runs on
+> Linux and its ~5,700 unit tests pass. The six expansion classes (Vampiir, Bainshee, Heretic, Valkyrie, Warlock, Mauler) and the
+> battleground bracket bots were played in-game on the stock client. Everything else DividedRealms offers is included as it ships
+> upstream and has not been separately tested here. See [Known gaps](#known-gaps).
+
+## What is in this version
+
+Everything in DividedRealms DR-dev-0.1a, plus the Linux layer:
+
+- **From DividedRealms (see their [changelog](CHANGELOG.md)):** fishing (own rod model, camps, cooking, `/fish`); gamebots that do
+  classic quests, craft, and trade crafted gear; guild merit and dues for bots you invite; faster power regeneration; bots with
+  player-like armor; safer world-database saving with daily backups; relic carriers that keep the relic across regions; many bot AI
+  and loot-table fixes.
+- **Added here:** the terminal admin screen, portable Linux packaging, world updates on start, the client patch toggle and
+  `launcher.bat`, and the [battleground bracket bots](#battleground-bracket-bots-new-in-this-project) with their gear kit, the
+  "no players, no bots" rule and the load governor.
 
 ## What is different from DividedRealms on Windows
 
@@ -19,11 +32,12 @@ You play with the **original retail 1.130 client**. No game files are included i
 | Control | Windows launcher (WinForms) | **Terminal admin screen** (`./daoc-admin`) and a command line, no GUI toolkit needed |
 | Client | Launcher copies your install and patches the copy | **Client tab** switches two files in your client between patched and original; no copy |
 | Starting the game | Launcher button | A generated **`launcher.bat`** that you run with your own Wine setup |
-| Godot "new client" | Included | **Not included** (removed on purpose) |
+| Godot "new client", Passport Desk (bring a character to a friend's world), Host/Join Friend | Included | **Not included** (Windows launcher features, left out on purpose) |
 | Updates | Launcher applies world updates in place | `daoc-server.sh start` applies them automatically, with a backup (see [Upgrading](#upgrading)) |
 
 The game logic, bots, classes, world data and navmeshes are DividedRealms' own. We change as little of their code as possible
-so their updates stay easy to merge (each edit is marked `daoc-divided-linux` in the source).
+so their updates stay easy to merge (each edit is marked `daoc-divided-linux` in the source and listed in [UPSTREAM.md](UPSTREAM.md);
+`tools/sync-upstream.sh` brings in a newer DividedRealms).
 
 ## Quick start
 
@@ -184,13 +198,13 @@ bundled Python, which carries Pillow and NumPy for the previews (about 90 MB; bu
 1. `dotnet publish`es the server (`CoreServer`) and the command-line admin tool (`DaocAdmin`) for linux-x64, self-contained.
 2. Builds the native pathing library (Detour) with CMake, linking the C++ runtime statically so it runs on older glibc systems.
 3. Fetches the world data from the DividedRealms release with `tools/fetch-divided-release.py` (reads only the needed files out
-   of the ~950 MB zip with HTTP range requests; cached in `.cache/divided/`): the world database, the navmeshes, quest data and
+   of the ~1.2 GB zip with HTTP range requests; cached in `.cache/divided/`): the world database, the navmeshes, quest data and
    the login connector.
 4. Bundles Python 3.12 and [Textual](https://github.com/Textualize/textual) for the admin screen (`tools/fetch-python.sh`).
 5. Writes `dist/daoc-divided/` and the tarball.
 
 Building directly with .NET also works: `cd source/server && dotnet build DOLLinux.sln -c Release` then
-`dotnet test Tests/Tests.csproj -c Release --no-build` (about 4,900 tests).
+`dotnet test Tests/Tests.csproj -c Release --no-build` (about 5,700 tests).
 
 ## Upgrading
 
@@ -210,6 +224,9 @@ DividedRealms' own updater (`tools/world_update.py`).
 
 ## Known gaps
 
+- **New in DR-dev-0.1a, not separately tested here:** bot quests and crafting, fishing, and the new bot armor rules (`bot_quests`,
+  `bot_crafting` and `bot_craft_orders` switch the first three off). The bracket bots' behaviour in a full battleground is
+  upstream's: a realm with 8 or more bots in a battleground marches on the central keep, a smaller group roams.
 - **Not separately tested:** Master Levels, Champion Levels, the bot raids and sieges, mounts and Trials of Atlantis items are included
   as DividedRealms ships them. They are not independently verified here.
 - **Battleground exit portal has no graphic:** the exit portal in each portal keep exists, but the arch draws without the portal graphic with the 1.130 client, so you have to know where it is. Cosmetic; not fixed.

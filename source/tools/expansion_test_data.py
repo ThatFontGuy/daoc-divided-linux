@@ -383,8 +383,8 @@ def heretic():
 
     # Rejuvenation specialization (the Rejuvenation baseline is the shared Albion line and is left alone).
     for sid, lv in zip(range(14044, 14053), [1, 4, 9, 15, 21, 26, 31, 37, 47]):
-        # 1.125: interruptible focus DD range 1650. Arawn's Singe art is not in this client.
-        k.eod(RS, lv, sid, Range=1650, **({'Icon': 14045} if sid == 14044 else {}))
+        # 1.125: interruptible focus DD range 1650. Arawn's Singe art and spell effect are not in this client.
+        k.eod(RS, lv, sid, Range=1650, **({'Icon': 14045, 'ClientEffect': 14045} if sid == 14044 else {}))
     for sid, lv in [(14065, 3), (14066, 6), (14064, 10), (14067, 13), (14068, 20), (14069, 29), (14070, 38), (14071, 49)]:
         k.eod(RS, lv, sid, Value=50)  # class library: 50% snare
     for sid, lv in zip(range(14055, 14062), [9, 14, 19, 25, 32, 40, 50]):

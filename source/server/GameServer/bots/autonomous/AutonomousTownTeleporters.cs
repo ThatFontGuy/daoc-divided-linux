@@ -31,13 +31,14 @@ public static class AutonomousTownTeleporters
     public const double ChannelSeconds = 6;
     public const int ChannelMilliseconds = 6_000;
     public const float MaximumWalkToPorter = 15_000f;
+    public const float MaximumWalkToStone = 60_000f;
     public const float SameTownRadius = 2_500f;
     public const int ArrivalRadius = 250;
     public const double MinimumSavingSeconds = 60;
     public const double MinimumSavingFraction = 0.30;
 
     /// <param name="Walk">The priced walk to the porter (route length, at least the straight line).</param>
-    public sealed record Plan(GameNPC Porter, DbTeleport Destination, double Seconds, double BaselineSeconds, float Walk = 0);
+    public sealed record Plan(GameObject Porter, DbTeleport Destination, double Seconds, double BaselineSeconds, float Walk = 0);
 
     /// <summary>How far from the teleporter NPC a bot stops to use it (inside ArrivalRadius).</summary>
     public const int StandOffDistance = 170;
@@ -48,7 +49,7 @@ public static class AutonomousTownTeleporters
     /// per bot so a group fans out around it (owner 2026-10-08: bots walked onto the NPC itself and players could not
     /// click the teleporter). Snapped to the navmesh; the NPC's own spot only when no ground is found around it.
     /// </summary>
-    public static Vector3 StandOff(GameNPC porter, GameLiving bot)
+    public static Vector3 StandOff(GameObject porter, GameLiving bot)
     {
         double angle = bot.X == porter.X && bot.Y == porter.Y ? 0 : Math.Atan2(bot.Y - porter.Y, bot.X - porter.X);
         angle += ((int)(bot.ObjectID % 7) - 3) * 0.35;
@@ -65,17 +66,17 @@ public static class AutonomousTownTeleporters
         return nav.GetClosestPoint(zone, spot, 160, 160, 256, nav.DefaultFilters) ?? spot;
     }
 
-    private static readonly ConcurrentDictionary<GameNPC, Vector3> ReachedStandOffs = new();
+    private static readonly ConcurrentDictionary<GameObject, Vector3> ReachedStandOffs = new();
 
     /// <summary>A stand-off point a bot actually reached a route to; later bots try it first.</summary>
-    public static void RememberStandOff(GameNPC porter, Vector3 point) => ReachedStandOffs[porter] = point;
+    public static void RememberStandOff(GameObject porter, Vector3 point) => ReachedStandOffs[porter] = point;
 
     /// <summary>
     /// Stand-off points to try in order: one a bot already reached, then the bot's own side (<see cref="StandOff"/>),
     /// then the rest of the circle. The side a bot comes from can snap onto a ledge or roof that no route reaches
     /// (Master Visur in Caer Diogel, 2026-10-13: "no connected route to the teleporter", and the bot took a horse).
     /// </summary>
-    public static IEnumerable<Vector3> StandOffs(GameNPC porter, GameLiving bot)
+    public static IEnumerable<Vector3> StandOffs(GameObject porter, GameLiving bot)
     {
         var seen = new List<Vector3>();
         bool Fresh(Vector3 p)
@@ -111,20 +112,28 @@ public static class AutonomousTownTeleporters
 
     private static readonly HashSet<ushort> NeverPlannedRegions = [2, 102, 202, 73, 130, 60, 160, 191, 249];
 
-    private sealed record PorterCache(long Until, GameNPC[] Porters);
+    private sealed record PorterCache(long Until, GameObject[] Porters);
     private static readonly ConcurrentDictionary<ushort, PorterCache> PortersByRegion = new();
 
-    public static GameNPC[] Porters(Region region)
+    public static GameObject[] Porters(Region region)
     {
         if (region == null) return [];
         long now = GameLoop.GameLoopTime;
         if (PortersByRegion.TryGetValue(region.ID, out var cached) && now < cached.Until) return cached.Porters;
-        GameNPC[] porters = region.Objects.OfType<LiveTeleporter>()
-            .Where(npc => npc.ObjectState == GameObject.eObjectState.Active && npc.Realm != eRealm.None)
-            .Cast<GameNPC>().ToArray();
+        GameObject[] porters = AutonomousAtlantisPolicy.IsAtlantisRegion(region.ID)
+            ? region.Objects.OfType<DjinnStone>().Where(stone => stone.ObjectState == GameObject.eObjectState.Active)
+                .Cast<GameObject>().ToArray()
+            : region.Objects.OfType<LiveTeleporter>()
+                .Where(npc => npc.ObjectState == GameObject.eObjectState.Active && npc.Realm != eRealm.None)
+                .Cast<GameObject>().ToArray();
         PortersByRegion[region.ID] = new(now + 600_000, porters);
         return porters;
     }
+
+    /// <summary>Atlantis travels by djinn stone, stone to stone within the realm's own copy.</summary>
+    public static IEnumerable<DbTeleport> DjinnDestinations(eRealm realm, ushort region) =>
+        WorldMgr.GetTeleportLocations(realm, "Djinn").Where(destination => destination.RegionID == region &&
+            AutonomousAtlantisPolicy.IsStoneDestination(destination.TeleportID));
 
     public static IEnumerable<DbTeleport> Destinations(eRealm realm) => WorldMgr.GetTeleportLocations(realm, string.Empty)
         .Where(destination => destination.RegionID > 0 && !NeverPlannedRegions.Contains((ushort)destination.RegionID) &&
@@ -137,24 +146,29 @@ public static class AutonomousTownTeleporters
     /// 30% against <paramref name="baselineSeconds"/> (walking, or the stable route when cheaper).
     /// </summary>
     public static Plan TryPlan(GameBot bot, ushort goalRegion, Vector3 goal, double baselineSeconds,
-        IReadOnlyDictionary<GameNPC, long> excluded = null)
+        IReadOnlyDictionary<GameObject, long> excluded = null)
     {
         if (bot?.CurrentRegion == null || !double.IsFinite(baselineSeconds) || baselineSeconds <= MinimumSavingSeconds)
             return null;
         double speed = Math.Max(150, (int)bot.MaxSpeed);
         long now = GameLoop.GameLoopTime;
-        DbTeleport[] destinations = BattlegroundBrackets.IsBattlegroundRegion(goalRegion)
+        bool djinn = AutonomousAtlantisPolicy.IsAtlantisRegion(bot.CurrentRegionID);
+        if (djinn && (goalRegion != bot.CurrentRegionID || AutonomousAtlantisPolicy.PrefersBoats(bot.DatabaseID) &&
+                      AutonomousStableRoutePlanner.FindBest(bot, goal) != null))
+            return null;
+        DbTeleport[] destinations = djinn ? DjinnDestinations(bot.Realm, goalRegion).ToArray()
+            : BattlegroundBrackets.IsBattlegroundRegion(goalRegion)
             ? BattlegroundDestinations(bot, goalRegion)
             : Destinations(bot.Realm).Where(destination => destination.RegionID == goalRegion).ToArray();
         if (destinations.Length == 0) return null;
         Vector3 actor = new(bot.X, bot.Y, bot.Z);
-        var options = new List<(GameNPC Porter, DbTeleport Destination, float ToPorter, double Remaining)>();
-        foreach (GameNPC porter in Porters(bot.CurrentRegion))
+        var options = new List<(GameObject Porter, DbTeleport Destination, float ToPorter, double Remaining)>();
+        foreach (GameObject porter in Porters(bot.CurrentRegion))
         {
-            if (porter.Realm != bot.Realm || excluded != null && excluded.TryGetValue(porter, out long until) && now < until)
+            if (!djinn && porter.Realm != bot.Realm || excluded != null && excluded.TryGetValue(porter, out long until) && now < until)
                 continue;
             float toPorter = Vector2.Distance(new(actor.X, actor.Y), new(porter.X, porter.Y));
-            if (toPorter > MaximumWalkToPorter) continue;
+            if (toPorter > (djinn ? MaximumWalkToStone : MaximumWalkToPorter)) continue;
             foreach (DbTeleport destination in destinations)
             {
                 if (destination.RegionID == porter.CurrentRegionID &&
@@ -168,7 +182,7 @@ public static class AutonomousTownTeleporters
         // away in a straight line can be a 40,000-unit walk around a ridge (the owner's 2026-10-17 session: 342 of 381
         // failed trips never came within 2,000 units of their teleporter; one bot ended 34,000 away after 5 minutes).
         Plan best = null;
-        var walked = new Dictionary<GameNPC, float>();
+        var walked = new Dictionary<GameObject, float>();
         foreach (var option in options.OrderBy(o => o.ToPorter / speed + o.Remaining).Take(RoutePricedOptions))
         {
             if (!walked.TryGetValue(option.Porter, out float walk))
@@ -184,7 +198,7 @@ public static class AutonomousTownTeleporters
     }
 
     public const int RoutePricedOptions = 3;
-    private static readonly System.Collections.Concurrent.ConcurrentDictionary<(GameNPC Porter, int X, int Y), (float Length, long Until)>
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<(GameObject Porter, int X, int Y), (float Length, long Until)>
         WalkLengths = new();
 
     /// <summary>
@@ -192,7 +206,7 @@ public static class AutonomousTownTeleporters
     /// zone (AutonomousZoneRoads), remembered per 1,024-unit area for ten minutes; the straight line where the
     /// zone has no road data, the porter stands in another zone, or no road route joins them.
     /// </summary>
-    public static float WalkToPorter(GameBot bot, Vector3 actor, GameNPC porter, float straight)
+    public static float WalkToPorter(GameBot bot, Vector3 actor, GameObject porter, float straight)
     {
         Zone zone = bot.CurrentZone;
         if (zone == null || porter.CurrentZone != zone || !AutonomousZoneRoads.Covers(zone)) return straight;

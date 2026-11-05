@@ -256,7 +256,7 @@ namespace DOL.AI.Brain
 
 			AttackMostWanted();
 			if (Owner is GamePlayer player && Body == player.ControlledBrain?.Body)
-				PlayerLedPullCoordinator.LeaderEngaged(player, target as GameLiving);
+				PlayerLedPullCoordinator.LeaderEngaged(player, target as GameLiving, fromPet: true);
 		}
 
 		/// <summary>
@@ -818,6 +818,7 @@ namespace DOL.AI.Brain
 
 			if (!m_orderAttackTarget.IsAlive ||
 				m_orderAttackTarget.ObjectState is not GameObject.eObjectState.Active ||
+				LosesStealthedTarget(m_orderAttackTarget) ||
 				!GameServer.ServerRules.IsAllowedToAttack(Body, m_orderAttackTarget, true))
 			{
 				m_orderAttackTarget = null;

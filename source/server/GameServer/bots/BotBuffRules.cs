@@ -34,8 +34,15 @@ public static class BotBuffRules
     /// short timed buffs are not. Speed is kept up while travelling.
     /// </summary>
     public static bool IsMaintainedOutOfCombat(eSpellType spellType, bool isConcentration, bool isPulsing, long durationMs) =>
-        spellType == eSpellType.SpeedEnhancement || isConcentration || isPulsing ||
-        durationMs <= 0 || durationMs >= LongBuffMinDurationMs;
+        spellType == eSpellType.SpeedEnhancement || isConcentration || isPulsing || durationMs >= LongBuffMinDurationMs;
+
+    /// <summary>
+    /// A buff with no duration, no concentration and no pulse leaves no effect behind (SpellHandler only keeps an effect with
+    /// one of those), so no bot can ever see it land. The Healer's Eir and Bard's Ivy armor buffs are like this in the
+    /// modern world: all 12 ranks were cast without end, every cast stopping the bot (the owner's Jordheim Healers, 2026-10-30).
+    /// </summary>
+    public static bool LeavesNoEffect(bool isConcentration, bool isPulsing, long durationMs) =>
+        !isConcentration && !isPulsing && durationMs <= 0;
 
     /// <summary>A timed long buff with less than a minute left is recast before it runs out.</summary>
     public static bool NeedsRefresh(bool isConcentration, bool isPulsing, long durationMs, long remainingMs) =>
@@ -168,6 +175,9 @@ public static class BotBuffRules
     {
         if (spell == null || target == null)
             return BotBuffNeed.None;
+        if (RefusedByOwnStats(spell.SpellType, target.HasAbility(Abilities.VampiirStrength), target.HasAbility(Abilities.VampiirDexterity),
+                target.HasAbility(Abilities.VampiirConstitution), target.HasAbility(Abilities.VampiirQuickness)))
+            return BotBuffNeed.None;
         bool pet = IsPet(target);
         bool player = IsRealPlayer(target);
         // Only acuity (everyone) and base strength (bots) depend on the class; skip the lookup otherwise.
@@ -189,6 +199,22 @@ public static class BotBuffRules
         int weaponSpec = spell.SpellType == eSpellType.StrengthBuff && IsHealerType(cls) ? HighestWeaponSpec(target) : 0;
         return NeedFor(spell.SpellType, player, pet, cls, isListCaster, target.Level, weaponSpec);
     }
+
+    /// <summary>
+    /// A Vampiir's own Strength, Dexterity, Constitution and Quickness abilities refuse the matching buffs ("Your target
+    /// already has an effect of that type!", SingleStatBuff and DualStatBuff). On a 2026-11-03 private copy two level 50
+    /// Bards cast strength, dexterity and constitution at one Vampiir over and over. Pure.
+    /// </summary>
+    public static bool RefusedByOwnStats(eSpellType spellType, bool strength, bool dexterity, bool constitution, bool quickness) =>
+        spellType switch
+        {
+            eSpellType.StrengthBuff => strength,
+            eSpellType.DexterityBuff => dexterity,
+            eSpellType.ConstitutionBuff => constitution,
+            eSpellType.StrengthConstitutionBuff => strength || constitution,
+            eSpellType.DexterityQuicknessBuff => dexterity || quickness,
+            _ => false,
+        };
 
     public static int TargetTier(Spell spell, GameLiving target) =>
         TargetTier(IsRealPlayer(target), IsPet(target), NeedFor(spell, target));

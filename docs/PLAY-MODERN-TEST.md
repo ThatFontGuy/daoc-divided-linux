@@ -33,5 +33,5 @@ If the setup is cancelled or fails, nothing is set up. It asks again on the next
 - **Saves:** your characters and bots are saved in `runtime/data`. To move to a new version of this test, keep that
   folder, or use the progress importer once one ships for this edition.
 - **Patch file:** the client patch is `runtime/client-patch.json`, made by `source/tools/make_client_patch.py` from the
-  class-slot patch `source/tools/classslots/patch_class_slots.py`. It holds only this project's changes; no
-  Broadsword file is in the download.
+  class-slot patch `source/tools/classslots/patch_class_slots.py`. It holds this project's changes, plus the two small
+  Marfach Caverns zone files that the 1.130 client lacks. No other Broadsword file is in the download.

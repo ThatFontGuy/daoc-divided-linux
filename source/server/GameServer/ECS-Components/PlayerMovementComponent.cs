@@ -12,7 +12,7 @@ namespace DOL.GS
         private static readonly Logger log = LoggerManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int BROADCAST_MINIMUM_INTERVAL = 200; // Clients send a position or heading update packet every 200ms at most (when moving or rotating).
-        private const int SOFT_LINK_DEATH_THRESHOLD = 5000; // How long does it take without receiving a packet for a client to enter the soft link death state.
+        private const int SOFT_LINK_DEATH_THRESHOLD = 15000; // How long does it take without receiving a packet for a client to enter the soft link death state. A standing 1.130 client was recorded 6.4 s apart on official servers.
 
         private long _nextPositionBroadcast;
         private bool _needBroadcastPosition;

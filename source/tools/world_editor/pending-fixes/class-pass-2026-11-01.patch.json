@@ -1,0 +1,5746 @@
+{
+ "format": "offline-daoc-world-editor-2",
+ "created": "2026-11-01T14:33:43.340082+00:00",
+ "clientWorld": "e7a9b42ab562d78adb1f6f4247ef14aaaaae1803a3a5639b545e69a8b78bb342",
+ "changes": [
+  {
+   "table": "SpecXAbility",
+   "key": 409,
+   "op": "update",
+   "before": {
+    "SpecLevel": 15
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 273,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 273,
+    "Spec": "ArmsmanCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 408,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 408,
+    "Spec": "ArmsmanCareer",
+    "SpecLevel": 5,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 4,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 411,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 274,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 274,
+    "Spec": "ArmsmanCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 410,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 410,
+    "Spec": "ArmsmanCareer",
+    "SpecLevel": 5,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 275,
+   "op": "update",
+   "before": {
+    "SpecLevel": 15
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 272,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 271,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 319,
+   "op": "update",
+   "before": {
+    "SpecLevel": 15
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 3303,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 218,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 246,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 246,
+    "Spec": "ChampionCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "HibArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 407,
+   "op": "update",
+   "before": {
+    "SpecLevel": 2,
+    "AbilityLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1,
+    "AbilityLevel": 3
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 247,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 247,
+    "Spec": "ChampionCareer",
+    "SpecLevel": 5,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 401,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 112,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 112,
+    "Spec": "ClericCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 400,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 400,
+    "Spec": "ClericCareer",
+    "SpecLevel": 10,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 402,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 113,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 113,
+    "Spec": "ClericCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 314,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 263,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 263,
+    "Spec": "DruidCareer",
+    "SpecLevel": 10,
+    "AbilityKey": "HibArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 264,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 266,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 266,
+    "Spec": "FighterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 217,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 227,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 227,
+    "Spec": "GuardianCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 233,
+   "op": "update",
+   "before": {
+    "SpecLevel": 15
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 220,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 220,
+    "Spec": "HeroCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "HibArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 234,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 259,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 259,
+    "Spec": "HeroCareer",
+    "SpecLevel": 5,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 211,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 422,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 308,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 416,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 418,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 417,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 417,
+    "Spec": "MercenaryCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 288,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 404,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 141,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 141,
+    "Spec": "MinstrelCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 403,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 403,
+    "Spec": "MinstrelCareer",
+    "SpecLevel": 10,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 405,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 413,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 280,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 280,
+    "Spec": "PaladinCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 412,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 412,
+    "Spec": "PaladinCareer",
+    "SpecLevel": 10,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 4,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 415,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 281,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 281,
+    "Spec": "PaladinCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 414,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 414,
+    "Spec": "PaladinCareer",
+    "SpecLevel": 5,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 282,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 186,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 419,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 302,
+   "op": "update",
+   "before": {
+    "SpecLevel": 17
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 303,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 406,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 143,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 143,
+    "Spec": "ScoutCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "AlbArmor",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 144,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 221,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 210,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 210,
+    "Spec": "SeerCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "MidArmor",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 213,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 213,
+    "Spec": "SeerCareer",
+    "SpecLevel": 10,
+    "AbilityKey": "MidArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 174,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 57,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 58,
+   "op": "update",
+   "before": {
+    "AbilityLevel": 1
+   },
+   "after": {
+    "AbilityLevel": 2
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 60,
+   "op": "update",
+   "before": {
+    "SpecLevel": 12
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 59,
+   "op": "update",
+   "before": {
+    "SpecLevel": 12,
+    "AbilityLevel": 2
+   },
+   "after": {
+    "SpecLevel": 1,
+    "AbilityLevel": 3
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 591,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 591,
+    "Spec": "ThaneCareer",
+    "SpecLevel": 12,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 3564,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 3477,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 3477,
+    "Spec": "ValkyrieCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 34,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 3563,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 3563,
+    "Spec": "ValkyrieCareer",
+    "SpecLevel": 5,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 2,
+    "ClassId": 34,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 317,
+   "op": "update",
+   "before": {
+    "SpecLevel": 20
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 252,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 252,
+    "Spec": "WardenCareer",
+    "SpecLevel": 10,
+    "AbilityKey": "HibArmor",
+    "AbilityLevel": 3,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 316,
+   "op": "update",
+   "before": {
+    "SpecLevel": 5,
+    "AbilityLevel": 2
+   },
+   "after": {
+    "SpecLevel": 1,
+    "AbilityLevel": 3
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 73,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 72,
+   "op": "update",
+   "before": {
+    "SpecLevel": 10
+   },
+   "after": {
+    "SpecLevel": 1
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 71,
+   "op": "delete",
+   "before": {
+    "SpecXabilityID": 71,
+    "Spec": "WarriorCareer",
+    "SpecLevel": 5,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 2,
+    "ClassId": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   },
+   "after": {}
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5460,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5460,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 3,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5461,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5461,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 4,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5462,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5462,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 5,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5463,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5463,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 5,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5464,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5464,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 5,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5465,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5465,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 5,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5466,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5466,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 6,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5467,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5467,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 6,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5468,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5468,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 7,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5469,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5469,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 7,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5470,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5470,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 7,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5471,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5471,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 7,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5472,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5472,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 8,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5473,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5473,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 8,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5474,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5474,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 8,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5475,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5475,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 8,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5476,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5476,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 9,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5477,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5477,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 10,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5478,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5478,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 10,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5479,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5479,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 12,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5480,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5480,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 12,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5481,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5481,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 12,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5482,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5482,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 12,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5483,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5483,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 13,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5484,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5484,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 13,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5485,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5485,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 13,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5486,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5486,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 13,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5487,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5487,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 33,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5488,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5488,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 33,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5489,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5489,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 60,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5490,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5490,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 60,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5491,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5491,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 60,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5492,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5492,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 60,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5493,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5493,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Slashing",
+    "AbilityLevel": 0,
+    "ClassId": 66,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5494,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5494,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Crushing",
+    "AbilityLevel": 0,
+    "ClassId": 66,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5495,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5495,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Thrusting",
+    "AbilityLevel": 0,
+    "ClassId": 66,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5496,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5496,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 66,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5497,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5497,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 23,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5498,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5498,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 25,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5499,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5499,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 25,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5500,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5500,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 25,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5501,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5501,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Swords",
+    "AbilityLevel": 0,
+    "ClassId": 26,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5502,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5502,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 26,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5503,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5503,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Swords",
+    "AbilityLevel": 0,
+    "ClassId": 27,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5504,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5504,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 27,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5505,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5505,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 27,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5506,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5506,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 27,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5507,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5507,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Swords",
+    "AbilityLevel": 0,
+    "ClassId": 28,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5508,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5508,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 28,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5509,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5509,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Swords",
+    "AbilityLevel": 0,
+    "ClassId": 29,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5510,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5510,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 29,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5511,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5511,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 29,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5512,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5512,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 29,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5513,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5513,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Swords",
+    "AbilityLevel": 0,
+    "ClassId": 30,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5514,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5514,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 30,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5515,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5515,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 30,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5516,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5516,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 30,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5517,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5517,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 34,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5518,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5518,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 34,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5519,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5519,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Swords",
+    "AbilityLevel": 0,
+    "ClassId": 59,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5520,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5520,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 59,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5521,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5521,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 59,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5522,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5522,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 59,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5523,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5523,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Swords",
+    "AbilityLevel": 0,
+    "ClassId": 61,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5524,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5524,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Axes",
+    "AbilityLevel": 0,
+    "ClassId": 61,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5525,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5525,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Hammers",
+    "AbilityLevel": 0,
+    "ClassId": 61,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5526,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5526,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 61,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5527,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5527,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 39,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5528,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5528,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 39,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5529,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5529,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 39,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5530,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5530,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 39,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5531,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5531,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 40,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5532,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5532,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 40,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5533,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5533,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 40,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5534,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5534,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 40,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5535,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5535,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 41,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5536,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5536,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 41,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5537,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5537,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 41,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5538,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5538,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 41,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5539,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5539,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 42,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5540,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5540,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 42,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5541,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5541,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 42,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5542,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5542,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 42,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5543,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5543,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 46,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5544,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5544,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 47,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5545,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5545,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 48,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5546,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5546,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 49,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5547,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5547,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 50,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5548,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5548,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 55,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5549,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5549,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 55,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5550,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5550,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 55,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5551,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5551,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 55,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5552,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5552,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 56,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5553,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5553,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 56,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5554,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5554,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 56,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5555,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5555,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 56,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5556,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5556,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 58,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5557,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5557,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 58,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5558,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5558,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 58,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5559,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5559,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Staves",
+    "AbilityLevel": 0,
+    "ClassId": 58,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5560,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5560,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blades",
+    "AbilityLevel": 0,
+    "ClassId": 62,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5561,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5561,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Blunt",
+    "AbilityLevel": 0,
+    "ClassId": 62,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5562,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5562,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Weaponry: Piercing",
+    "AbilityLevel": 0,
+    "ClassId": 62,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 5563,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpecXabilityID": 5563,
+    "Spec": "CharacterCareer",
+    "SpecLevel": 1,
+    "AbilityKey": "Shield",
+    "AbilityLevel": 1,
+    "ClassId": 62,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 29,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 113,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 114,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 234,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 247,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 318,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 342,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 351,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 364,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 5
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 258,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 10
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 333,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 10
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 334,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 10
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 335,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 15
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 354,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 15
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 344,
+   "op": "update",
+   "before": {
+    "LevelAcquired": 17
+   },
+   "after": {
+    "LevelAcquired": 1
+   }
+  },
+  {
+   "table": "ClassXSpecialization",
+   "key": 878,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "ClassXSpecializationID": 878,
+    "ClassID": 46,
+    "SpecKeyName": "Shields",
+    "LevelAcquired": -6,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "SpecXAbility",
+   "key": 3574,
+   "op": "update",
+   "before": {
+    "AbilityKey": "Quickcast"
+   },
+   "after": {
+    "AbilityKey": "QuickCast"
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3300,
+   "op": "update",
+   "before": {
+    "ID": 71
+   },
+   "after": {
+    "ID": 3300
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3301,
+   "op": "update",
+   "before": {
+    "ID": 529,
+    "OpeningRequirementValue": 71
+   },
+   "after": {
+    "ID": 3301,
+    "OpeningRequirementValue": 3300
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3302,
+   "op": "update",
+   "before": {
+    "ID": 72
+   },
+   "after": {
+    "ID": 3302
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3303,
+   "op": "update",
+   "before": {
+    "ID": 73
+   },
+   "after": {
+    "ID": 3303
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3304,
+   "op": "update",
+   "before": {
+    "ID": 74
+   },
+   "after": {
+    "ID": 3304
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3305,
+   "op": "update",
+   "before": {
+    "ID": 75,
+    "OpeningRequirementValue": 72
+   },
+   "after": {
+    "ID": 3305,
+    "OpeningRequirementValue": 3302
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3306,
+   "op": "update",
+   "before": {
+    "ID": 76
+   },
+   "after": {
+    "ID": 3306
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3307,
+   "op": "update",
+   "before": {
+    "ID": 77,
+    "OpeningRequirementValue": 74
+   },
+   "after": {
+    "ID": 3307,
+    "OpeningRequirementValue": 3304
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3308,
+   "op": "update",
+   "before": {
+    "ID": 78
+   },
+   "after": {
+    "ID": 3308
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3309,
+   "op": "update",
+   "before": {
+    "ID": 79
+   },
+   "after": {
+    "ID": 3309
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3310,
+   "op": "update",
+   "before": {
+    "ID": 80
+   },
+   "after": {
+    "ID": 3310
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3311,
+   "op": "update",
+   "before": {
+    "ID": 81
+   },
+   "after": {
+    "ID": 3311
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3312,
+   "op": "update",
+   "before": {
+    "ID": 82
+   },
+   "after": {
+    "ID": 3312
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3313,
+   "op": "update",
+   "before": {
+    "ID": 83,
+    "OpeningRequirementValue": 76
+   },
+   "after": {
+    "ID": 3313,
+    "OpeningRequirementValue": 3306
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3314,
+   "op": "update",
+   "before": {
+    "ID": 84,
+    "OpeningRequirementValue": 81
+   },
+   "after": {
+    "ID": 3314,
+    "OpeningRequirementValue": 3311
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3315,
+   "op": "update",
+   "before": {
+    "ID": 85,
+    "OpeningRequirementValue": 82
+   },
+   "after": {
+    "ID": 3315,
+    "OpeningRequirementValue": 3312
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3316,
+   "op": "update",
+   "before": {
+    "ID": 583
+   },
+   "after": {
+    "ID": 3316
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3317,
+   "op": "update",
+   "before": {
+    "ID": 554
+   },
+   "after": {
+    "ID": 3317
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3318,
+   "op": "update",
+   "before": {
+    "ID": 355
+   },
+   "after": {
+    "ID": 3318
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3319,
+   "op": "update",
+   "before": {
+    "ID": 356
+   },
+   "after": {
+    "ID": 3319
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3320,
+   "op": "update",
+   "before": {
+    "ID": 357
+   },
+   "after": {
+    "ID": 3320
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3321,
+   "op": "update",
+   "before": {
+    "ID": 358
+   },
+   "after": {
+    "ID": 3321
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3322,
+   "op": "update",
+   "before": {
+    "ID": 359
+   },
+   "after": {
+    "ID": 3322
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3323,
+   "op": "update",
+   "before": {
+    "ID": 360,
+    "OpeningRequirementValue": 359
+   },
+   "after": {
+    "ID": 3323,
+    "OpeningRequirementValue": 3322
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3324,
+   "op": "update",
+   "before": {
+    "ID": 361
+   },
+   "after": {
+    "ID": 3324
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3325,
+   "op": "update",
+   "before": {
+    "ID": 362
+   },
+   "after": {
+    "ID": 3325
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3326,
+   "op": "update",
+   "before": {
+    "ID": 363
+   },
+   "after": {
+    "ID": 3326
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3327,
+   "op": "update",
+   "before": {
+    "ID": 364
+   },
+   "after": {
+    "ID": 3327
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3328,
+   "op": "update",
+   "before": {
+    "ID": 365
+   },
+   "after": {
+    "ID": 3328
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3329,
+   "op": "update",
+   "before": {
+    "ID": 366
+   },
+   "after": {
+    "ID": 3329
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3330,
+   "op": "update",
+   "before": {
+    "ID": 367,
+    "OpeningRequirementValue": 361
+   },
+   "after": {
+    "ID": 3330,
+    "OpeningRequirementValue": 3324
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3331,
+   "op": "update",
+   "before": {
+    "ID": 368,
+    "OpeningRequirementValue": 365
+   },
+   "after": {
+    "ID": 3331,
+    "OpeningRequirementValue": 3328
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3332,
+   "op": "update",
+   "before": {
+    "ID": 369
+   },
+   "after": {
+    "ID": 3332
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3333,
+   "op": "update",
+   "before": {
+    "ID": 563
+   },
+   "after": {
+    "ID": 3333
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3334,
+   "op": "update",
+   "before": {
+    "ID": 221
+   },
+   "after": {
+    "ID": 3334
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3335,
+   "op": "update",
+   "before": {
+    "ID": 222
+   },
+   "after": {
+    "ID": 3335
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3336,
+   "op": "update",
+   "before": {
+    "ID": 223
+   },
+   "after": {
+    "ID": 3336
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3337,
+   "op": "update",
+   "before": {
+    "ID": 224
+   },
+   "after": {
+    "ID": 3337
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3338,
+   "op": "update",
+   "before": {
+    "ID": 225
+   },
+   "after": {
+    "ID": 3338
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3339,
+   "op": "update",
+   "before": {
+    "ID": 226
+   },
+   "after": {
+    "ID": 3339
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3340,
+   "op": "update",
+   "before": {
+    "ID": 227
+   },
+   "after": {
+    "ID": 3340
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3341,
+   "op": "update",
+   "before": {
+    "ID": 228
+   },
+   "after": {
+    "ID": 3341
+   }
+  },
+  {
+   "table": "Style",
+   "key": 3342,
+   "op": "update",
+   "before": {
+    "ID": 229
+   },
+   "after": {
+    "ID": 3342
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6600,
+   "op": "update",
+   "before": {
+    "ID": 230
+   },
+   "after": {
+    "ID": 6600
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6601,
+   "op": "update",
+   "before": {
+    "ID": 234,
+    "OpeningRequirementValue": 230
+   },
+   "after": {
+    "ID": 6601,
+    "OpeningRequirementValue": 6600
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6602,
+   "op": "update",
+   "before": {
+    "ID": 235
+   },
+   "after": {
+    "ID": 6602
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6603,
+   "op": "update",
+   "before": {
+    "ID": 240
+   },
+   "after": {
+    "ID": 6603
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6604,
+   "op": "update",
+   "before": {
+    "ID": 237
+   },
+   "after": {
+    "ID": 6604
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6605,
+   "op": "update",
+   "before": {
+    "ID": 239,
+    "OpeningRequirementValue": 240
+   },
+   "after": {
+    "ID": 6605,
+    "OpeningRequirementValue": 6603
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6606,
+   "op": "update",
+   "before": {
+    "ID": 233
+   },
+   "after": {
+    "ID": 6606
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6607,
+   "op": "update",
+   "before": {
+    "ID": 241
+   },
+   "after": {
+    "ID": 6607
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6608,
+   "op": "update",
+   "before": {
+    "ID": 242,
+    "OpeningRequirementValue": 237
+   },
+   "after": {
+    "ID": 6608,
+    "OpeningRequirementValue": 6604
+   }
+  },
+  {
+   "table": "Style",
+   "key": 6609,
+   "op": "update",
+   "before": {
+    "ID": 244,
+    "OpeningRequirementValue": 241
+   },
+   "after": {
+    "ID": 6609,
+    "OpeningRequirementValue": 6607
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5801-69131",
+   "op": "update",
+   "before": {
+    "StyleID": 5801
+   },
+   "after": {
+    "StyleID": 419
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5802-69132",
+   "op": "update",
+   "before": {
+    "StyleID": 5802
+   },
+   "after": {
+    "StyleID": 420
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5803-69133",
+   "op": "update",
+   "before": {
+    "StyleID": 5803
+   },
+   "after": {
+    "StyleID": 421
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5804-69134",
+   "op": "update",
+   "before": {
+    "StyleID": 5804
+   },
+   "after": {
+    "StyleID": 422
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5806-69135",
+   "op": "update",
+   "before": {
+    "StyleID": 5806
+   },
+   "after": {
+    "StyleID": 425
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5809-69136",
+   "op": "update",
+   "before": {
+    "StyleID": 5809
+   },
+   "after": {
+    "StyleID": 427
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5810-69137",
+   "op": "update",
+   "before": {
+    "StyleID": 5810
+   },
+   "after": {
+    "StyleID": 428
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5811-69138",
+   "op": "update",
+   "before": {
+    "StyleID": 5811
+   },
+   "after": {
+    "StyleID": 429
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5812-69139",
+   "op": "update",
+   "before": {
+    "StyleID": 5812
+   },
+   "after": {
+    "StyleID": 430
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5813-69140",
+   "op": "update",
+   "before": {
+    "StyleID": 5813
+   },
+   "after": {
+    "StyleID": 431
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5815-69141",
+   "op": "update",
+   "before": {
+    "StyleID": 5815
+   },
+   "after": {
+    "StyleID": 434
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5816-69142",
+   "op": "update",
+   "before": {
+    "StyleID": 5816
+   },
+   "after": {
+    "StyleID": 433
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5818-69143",
+   "op": "update",
+   "before": {
+    "StyleID": 5818
+   },
+   "after": {
+    "StyleID": 436
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "local-vampiir-test-v1-style-5821-69144",
+   "op": "update",
+   "before": {
+    "StyleID": 5821
+   },
+   "after": {
+    "StyleID": 439
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-valk-ow-faith-30",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-valk-ow-faith-40",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-valk-ow-faith-50",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77250",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 4
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77252",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77254",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 4
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77256",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 18
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77258",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 24
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77309",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77310",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77316",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 32
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77317",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 41
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77318",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77319",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77320",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77321",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77322",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77323",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77324",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77325",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77326",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77327",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-linked-live-v1-77328",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77463",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 4
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77464",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 9
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77465",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 13
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77466",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 21
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77467",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 28
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77468",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77469",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 13
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77470",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-envenom-live-v1-77471",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77505",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 11
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77506",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77507",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77508",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 50
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77509",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 62
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77510",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77511",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 21
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77512",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 29
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77513",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 38
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77514",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 47
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77515",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77516",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 32
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77517",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77518",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77519",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77520",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77521",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77522",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77524",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77526",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77527",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 13
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77528",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 18
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77529",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77530",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 28
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77531",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 31
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77532",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 57
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77533",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 77
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77534",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 6
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77535",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 12
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77536",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 17
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77537",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 22
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77538",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 29
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77539",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77540",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 13
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77541",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 18
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77542",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77543",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77544",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 31
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77545",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -6
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77550",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77552",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77554",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 2
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77555",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 6
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77556",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 9
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77557",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 11
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77558",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77559",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77560",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 27
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77561",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 33
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77562",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 19
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77563",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 26
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77567",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77568",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77569",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77570",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 19
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77571",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77572",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 33
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77574",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 9
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77576",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 11
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77578",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77580",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 19
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77582",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 24
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77584",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 32
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77586",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77587",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 16
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77588",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 22
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77589",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 28
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77590",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77592",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77594",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77596",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77598",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77600",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77602",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 19
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77603",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 32
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77604",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 41
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77605",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77606",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77607",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77608",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77609",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77611",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 57
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77612",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 77
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77613",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77614",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77615",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77616",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77617",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77618",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77619",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77620",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77621",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77622",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77624",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 57
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77625",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 77
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77626",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 9
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77627",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 14
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77628",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 18
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77629",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 22
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77630",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 32
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77631",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 6
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77632",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77633",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 26
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77634",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77635",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 35
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77636",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77637",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77638",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77639",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77640",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 9
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77641",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 16
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77642",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 63
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77643",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 82
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77644",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77645",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77646",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 9
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77647",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 13
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77648",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 19
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77649",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 23
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77653",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77654",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77655",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77656",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77657",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77658",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77659",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77660",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77661",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -6
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77664",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77665",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 24
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77666",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77667",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77668",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77669",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77670",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77671",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77672",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77684",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 19
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77685",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 32
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77686",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 41
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77687",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -15
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77688",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77689",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -25
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77691",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 24
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77692",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 40
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77693",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 60
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77694",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 80
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77695",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 100
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77696",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 18
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77699",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -8
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77700",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77701",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77702",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77703",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -20
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77704",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": -30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77709",
+   "op": "update",
+   "before": {
+    "Power": 0
+   },
+   "after": {
+    "Power": 31
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "1002",
+   "op": "update",
+   "before": {
+    "Value": 10.0
+   },
+   "after": {
+    "Value": 150
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "1467",
+   "op": "update",
+   "before": {
+    "Value": 52.0
+   },
+   "after": {
+    "Value": 150
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "5020",
+   "op": "update",
+   "before": {
+    "Value": 55.0
+   },
+   "after": {
+    "Value": 150
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 683,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 683,
+    "XPos": 424672,
+    "YPos": 445035,
+    "ZPos": 5952,
+    "Heading": 3929,
+    "Region": 181,
+    "MinVersion": 0,
+    "RealmID": 3,
+    "RaceID": 15,
+    "ClassID": 50,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 684,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 684,
+    "XPos": 803377,
+    "YPos": 726984,
+    "ZPos": 4680,
+    "Heading": 1257,
+    "Region": 100,
+    "MinVersion": 0,
+    "RealmID": 2,
+    "RaceID": 7,
+    "ClassID": 23,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 685,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 685,
+    "XPos": 424672,
+    "YPos": 445035,
+    "ZPos": 5952,
+    "Heading": 3929,
+    "Region": 181,
+    "MinVersion": 0,
+    "RealmID": 3,
+    "RaceID": 15,
+    "ClassID": 45,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 686,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 686,
+    "XPos": 346334,
+    "YPos": 490660,
+    "ZPos": 5318,
+    "Heading": 3049,
+    "Region": 200,
+    "MinVersion": 0,
+    "RealmID": 3,
+    "RaceID": 12,
+    "ClassID": 43,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 687,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 687,
+    "XPos": 296475,
+    "YPos": 641484,
+    "ZPos": 4848,
+    "Heading": 2468,
+    "Region": 200,
+    "MinVersion": 0,
+    "RealmID": 3,
+    "RaceID": 9,
+    "ClassID": 49,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 688,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 688,
+    "XPos": 347567,
+    "YPos": 491289,
+    "ZPos": 5235,
+    "Heading": 2978,
+    "Region": 200,
+    "MinVersion": 0,
+    "RealmID": 3,
+    "RaceID": 11,
+    "ClassID": 55,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 689,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 689,
+    "XPos": 535324,
+    "YPos": 549084,
+    "ZPos": 4800,
+    "Heading": 3094,
+    "Region": 51,
+    "MinVersion": 0,
+    "RealmID": 1,
+    "RaceID": 13,
+    "ClassID": 7,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 690,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 690,
+    "XPos": 508413,
+    "YPos": 476161,
+    "ZPos": 2304,
+    "Heading": 3087,
+    "Region": 1,
+    "MinVersion": 0,
+    "RealmID": 1,
+    "RaceID": 3,
+    "ClassID": 9,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 691,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 691,
+    "XPos": 472986,
+    "YPos": 628190,
+    "ZPos": 2048,
+    "Heading": 405,
+    "Region": 1,
+    "MinVersion": 0,
+    "RealmID": 1,
+    "RaceID": 2,
+    "ClassID": 10,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  },
+  {
+   "table": "StartupLocation",
+   "key": 692,
+   "op": "insert",
+   "before": {},
+   "after": {
+    "StartupLoc_ID": 692,
+    "XPos": 508413,
+    "YPos": 476161,
+    "ZPos": 2304,
+    "Heading": 3087,
+    "Region": 1,
+    "MinVersion": 0,
+    "RealmID": 1,
+    "RaceID": 3,
+    "ClassID": 10,
+    "ClientRegionID": 0,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00"
+   }
+  }
+ ],
+ "note": "Server-sent NPC/object positions need no client binary patch. Geometry edits require matching client assets and rebuilt navigation."
+}

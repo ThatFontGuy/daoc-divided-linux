@@ -347,7 +347,8 @@ namespace DOL.GS
             set => m_maxHealth = value;
         }
 
-        public virtual byte HealthPercent => (byte) (MaxHealth <= 0 ? 0 : Math.Clamp(Health * 100 / MaxHealth, 0, 100));
+        // From True165 9b51be6da: a living object with any health left never shows 0%, so the client doesn't play its death early.
+        public virtual byte HealthPercent => (byte) (MaxHealth <= 0 || Health <= 0 ? 0 : Math.Clamp(Health * 100 / MaxHealth, 1, 100));
         public virtual byte HealthPercentGroupWindow => HealthPercent;
 
         public virtual string GetName(int article, bool firstLetterUppercase, string lang, ITranslatableObject obj)
@@ -877,6 +878,7 @@ namespace DOL.GS
 		public virtual void TakeDamage(GameObject source, eDamageType damageType, int damageAmount, int criticalAmount)
 		{
 			Notify(GameObjectEvent.TakeDamage, this, new TakeDamageEventArgs(source, damageType, damageAmount, criticalAmount));
+			CombatNumbers.Damage(this, source, damageType, damageAmount, criticalAmount);
 		}
 
 		#endregion

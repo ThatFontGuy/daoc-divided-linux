@@ -1,0 +1,2617 @@
+{
+ "format": "offline-daoc-world-editor-2",
+ "created": "2026-11-01T19:41:56.176422+00:00",
+ "clientWorld": "e7a9b42ab562d78adb1f6f4247ef14aaaaae1803a3a5639b545e69a8b78bb342",
+ "changes": [
+  {
+   "table": "Spell",
+   "key": "local-hybrid-live-v1-74098",
+   "op": "update",
+   "before": {
+    "Type": "AblativeArmor",
+    "Damage": 60.0,
+    "Value": 30.0
+   },
+   "after": {
+    "Type": "MagicAblativeArmor",
+    "Damage": 30,
+    "Value": 60
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-hybrid-live-v1-74099",
+   "op": "update",
+   "before": {
+    "Type": "AblativeArmor",
+    "Damage": 90.0,
+    "Value": 30.0
+   },
+   "after": {
+    "Type": "MagicAblativeArmor",
+    "Damage": 30,
+    "Value": 90
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-hybrid-live-v1-74100",
+   "op": "update",
+   "before": {
+    "Type": "AblativeArmor",
+    "Damage": 120.0,
+    "Value": 30.0
+   },
+   "after": {
+    "Type": "MagicAblativeArmor",
+    "Damage": 30,
+    "Value": 120
+   }
+  },
+  {
+   "table": "Style",
+   "key": 285,
+   "op": "update",
+   "before": {
+    "OpeningRequirementValue": 231
+   },
+   "after": {
+    "OpeningRequirementValue": 7007
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-class-live-v1-75321",
+   "op": "update",
+   "before": {
+    "Duration": 8
+   },
+   "after": {
+    "Duration": 0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76295",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76296",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76297",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76298",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76299",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76300",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76301",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76302",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76079",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76080",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76081",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76082",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76083",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76084",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76085",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76086",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77682",
+   "op": "update",
+   "before": {
+    "Type": "BodySpiritEnergyBuff",
+    "Duration": 30,
+    "Power": 0,
+    "Description": "Hymn of Soul Guarding (live 1.130a Bard Nurture Spec)."
+   },
+   "after": {
+    "Type": "AllMagicResistsBuff",
+    "Duration": 1200,
+    "Power": -5,
+    "Description": "Increases all of the target's magic resistances by 8%."
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77683",
+   "op": "update",
+   "before": {
+    "Type": "BodySpiritEnergyBuff",
+    "Duration": 30,
+    "Power": 0,
+    "Description": "Hymn of Soul Protection (live 1.130a Bard Nurture Spec)."
+   },
+   "after": {
+    "Type": "AllMagicResistsBuff",
+    "Duration": 1200,
+    "Power": -5,
+    "Description": "Increases all of the target's magic resistances by 12%."
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-hybrid-live-v1-74027",
+   "op": "update",
+   "before": {
+    "Type": "BodySpiritEnergyBuff",
+    "Duration": 30,
+    "Power": 0,
+    "Description": "Soul Bolstering Chant (live 1.130a Battlesongs)."
+   },
+   "after": {
+    "Type": "AllMagicResistsBuff",
+    "Duration": 1200,
+    "Power": -5,
+    "Description": "Increases all of the target's magic resistances by 8%."
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-hybrid-live-v1-74028",
+   "op": "update",
+   "before": {
+    "Type": "BodySpiritEnergyBuff",
+    "Duration": 30,
+    "Power": 0,
+    "Description": "Soul Bolstering Song (live 1.130a Battlesongs)."
+   },
+   "after": {
+    "Type": "AllMagicResistsBuff",
+    "Duration": 1200,
+    "Power": -5,
+    "Description": "Increases all of the target's magic resistances by 12%."
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "a4071f38-819c-44db-87b9-e58ca1aec69c",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20760,
+    "ClientEffect": 5217,
+    "Icon": 5217,
+    "Name": "Stingers of the Wild",
+    "Description": "Target's melee attacks do 8.4 additional damage.",
+    "Target": "Group",
+    "Range": 1500,
+    "Power": 23,
+    "CastTime": 3.0,
+    "Damage": 8.4,
+    "DamageType": 14,
+    "Type": "DamageAdd",
+    "Duration": 1200,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 0.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "Your attacks gain a ferocious edge!",
+    "Message2": "{0} takes on a feral aura!",
+    "Message3": "Your ferocity fades.",
+    "Message4": "{0}'s ferocity fades.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 5211,
+    "EffectGroup": 40,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Druid_Nature_DamageAdd",
+    "TooltipId": 5217,
+    "LastTimeRowUpdated": "2021-11-04 02:02:24",
+    "Spell_ID": "a4071f38-819c-44db-87b9-e58ca1aec69c"
+   }
+  },
+  {
+   "table": "NpcTemplate",
+   "key": "local-round3-live-v1-pet-24",
+   "op": "update",
+   "before": {
+    "Spells": "5217"
+   },
+   "after": {
+    "Spells": "20760"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "69472688-f4f1-490d-a508-5e1cec5a9eb0",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20761,
+    "ClientEffect": 5552,
+    "Icon": 5552,
+    "Name": "Strength of the Hinterland",
+    "Description": "Strength of the Hinterland (live 1.130a Nurture).",
+    "Target": "Group",
+    "Range": 1500,
+    "Power": 20,
+    "CastTime": 4.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "StrengthConstitutionBuff",
+    "Duration": 600,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 34.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "You are affected by Strength of the Hinterland.",
+    "Message2": "{0} is affected by Strength of the Hinterland.",
+    "Message3": "Strength of the Hinterland ends.",
+    "Message4": "Strength of the Hinterland ends on {0}.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 75036,
+    "EffectGroup": 204,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "local-class-live-v1",
+    "TooltipId": 29208,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "69472688-f4f1-490d-a508-5e1cec5a9eb0"
+   }
+  },
+  {
+   "table": "NpcTemplate",
+   "key": "local-round3-live-v1-pet-22",
+   "op": "update",
+   "before": {
+    "Spells": "75096"
+   },
+   "after": {
+    "Spells": "20761"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "287e90c9-2e88-498c-bf14-a6e267222823",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20762,
+    "ClientEffect": 5554,
+    "Icon": 5554,
+    "Name": "Typhoon's Dance",
+    "Description": "Typhoon's Dance (live 1.130a Nurture).",
+    "Target": "Group",
+    "Range": 1500,
+    "Power": 20,
+    "CastTime": 4.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "DexterityQuicknessBuff",
+    "Duration": 600,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 37.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "You are affected by Typhoon's Dance.",
+    "Message2": "{0} is affected by Typhoon's Dance.",
+    "Message3": "Typhoon's Dance ends.",
+    "Message4": "Typhoon's Dance ends on {0}.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 75039,
+    "EffectGroup": 203,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "local-class-live-v1",
+    "TooltipId": 29214,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "287e90c9-2e88-498c-bf14-a6e267222823"
+   }
+  },
+  {
+   "table": "NpcTemplate",
+   "key": "local-round3-live-v1-pet-23",
+   "op": "update",
+   "before": {
+    "Spells": "75102"
+   },
+   "after": {
+    "Spells": "20762"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Alvarus_Leggings_Cloth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Alvarus_Leggings_Leather",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Alvarus_Leggings_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Alvarus_Leggings_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Alvarus_Leggings_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Alvarus_Leggings_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Alvarus_Leggings_plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Arms_Of_The_Winds_Cloth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Arms_Of_The_Winds_Leather",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Arms_Of_The_Winds_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Arms_Of_The_Winds_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Arms_Of_The_Winds_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Arms_Of_The_Winds_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Arms_Of_The_Winds_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Atens_Shield",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Atens_Shield_Medium",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Atens_Shield_Large",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "A_Flask",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Band_Of_Stars",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Alb_Crush",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Mid_Crush",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Mid_Crush_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Mid_Slash",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Mid_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Alb_Crush_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Alb_Slash",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Alb_Slash_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Hib_Blades",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Hib_Blade_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Hib_Blunt",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Battler_Hib_Blunt_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Belt_Of_The_Moon",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Belt_Of_The_Sun",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;56;58;46;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;56;58;46;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bracer_Of_Zoarkat",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;30;26;29;28;27;59"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;30;26;29;28;27;59;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bruiser_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bruiser_Blunt",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bruiser_Crush",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bruiser_Crush_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bruiser_Crush_Pole",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bruiser_Hammer",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Bruiser_Lw",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ceremonial_Bracers_Acuity",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ceremonial_Bracers_Con",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ceremonial_Bracers_Dex",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ceremonial_Bracers_Qui",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ceremonial_Bracers_Str",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Cloudsong",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;30;26;29;28;27;59"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;30;26;29;28;27;59;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crocodile_Tear_Ring",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Crush_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Crush_Mid",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Hib_Blade",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Hib_Blunt",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Hib_Trust",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Leftaxe_Mid",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Slash_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Slash_Mid",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "CrocToothDagger_Thrust_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_Of_Zahur_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_Of_Zahur_Cloth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_Of_Zahur_Leather",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_Of_Zahur_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_of_Zahur_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_Of_Zahur_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_Of_Zahur_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Cyclops_Eye_Shield_Large",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Cyclops_Eye_Shield_Medium",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Cyclops_Eye_Shield_Small",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;25;32;23;28;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Dream_Sphere",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Eerie_Darkness_Stone",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Egg_Of_Youth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "6;10;33;1;48;47;46;26;28;34"
+   },
+   "after": {
+    "AllowedClasses": "6;10;33;1;48;47;46;26;28;34;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Eirenes_Hauberk_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;45;47;44;46;26;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;45;47;44;46;26;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Eirenes_Hauberk_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;45;47;44;46;26;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;45;47;44;46;26;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Eirenes_Hauberk_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;45;47;44;46;26;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;45;47;44;46;26;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Enyalios_Boots_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Enyalios_Boots_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Enyalios_Boots_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Enyalios_Boots_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Enyalios_Boots_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Erinys_Charm",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;12;8;5;7;55;39;40;41;42;30;29;27;59"
+   },
+   "after": {
+    "AllowedClasses": "13;12;8;5;7;55;39;40;41;42;30;29;27;59;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Eternal_Plant",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Foppish_Sleeves_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Foppish_Sleeves_Cloth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Foppish_Sleeves_Leather",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Foppish_Sleeves_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Foppish_Sleeves_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Foppish_Sleeves_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Foppish_Sleeves_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;33;9;12;3;8;5;7;55;39;48;43;40;41;42;49;50;56;58;31;30;25;29;32;23;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Goddess_Necklace",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;56;31;25;32;23;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;56;31;25;32;23;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GoldenSpear_Hib",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "44;49;50;58"
+   },
+   "after": {
+    "AllowedClasses": "44;49;50;58;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GoldenSpear_Hib_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "44;49;50;58"
+   },
+   "after": {
+    "AllowedClasses": "44;49;50;58;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GoldenSpear_Mid",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "25;23;34"
+   },
+   "after": {
+    "AllowedClasses": "25;23;34;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GoldenSpear_Mid_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "25;23;34"
+   },
+   "after": {
+    "AllowedClasses": "25;23;34;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Cloth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Cloth_Int",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Leather",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "GOV_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Harpy_Feather_Cloak",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;1;19;43;45;44;56;58;46;31;32;24;21;34;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;11;1;19;43;45;44;56;58;46;31;32;24;21;34;22;60;62;61;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Healers_Embrace",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "6;10;33;1;48;47;46;26;28;34"
+   },
+   "after": {
+    "AllowedClasses": "6;10;33;1;48;47;46;26;28;34;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Jacinas_Sash",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Kalares_Necklace",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Lost_Memories_Archers",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Lost_Memories_Caster",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Lost_Memories_Melee",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Maddening_Scalars_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Maddening_Scalars_Cloth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Maddening_Scalars_Leather",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Maddening_Scalars_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Maddening_Scalars_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Maddening_Scalars_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Maddening_Scalars_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_Axe_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_slash_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Malice_Axe_Axe",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Malice_Axe_Slash",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_Blade",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_Blunt",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_crush",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_crush_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_Hammer",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_Hammer_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_Lw_Blunt",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "MaliceAxe_Lw_Slash",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;9;11;4;1;19;3;48;43;45;47;44;49;50;46;31;26;32;23;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Nailahs_Robe_Cloth",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;33;12;8;5;7;55;39;40;41;42;56;30;29;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;33;12;8;5;7;55;39;40;41;42;56;30;29;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Nailah_Robe_Leather",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;33;12;8;5;7;55;39;40;41;42;56;30;29;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;33;12;8;5;7;55;39;40;41;42;56;30;29;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Nights_Shroud_Bracelet",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Oglidarshs_Belt",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Orions_Belt_Archer",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Orions_Belt_Caster",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Orions_Belt_Frair",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Orions_Belt_Melee",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Phoebus_Harp",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ring_Of_Fire",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;33;12;8;5;7;55;39;48;47;40;41;42;46;30;26;29;28;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ring_of_Unyielding_Will",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Scepter_Blunt",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Scepter_Crush",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Scepter_Hammer",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;10;33;11;1;19;48;43;45;47;44;46;31;26;32;28;24;21;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Scorpions_Tail_Ring",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Shades_of_Mist",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;58;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;43;45;44;49;50;58;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Shield_Of_Khaos",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;1;19;44;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;1;19;44;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Snatcher",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "2;13;6;10;33;9;11;4;12;1;19;3;8;5;7;55;39;48;43;45;47;40;41;44;42;49;50;56;58;46;31;30;26;25;29;32;23;28;24;27;21;34;59;22;60;62;61;64;65;66;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOFG_Melee",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;12;8;5;7;55;39;47;40;41;42;30;26;29;28;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;12;8;5;7;55;39;47;40;41;42;30;26;29;28;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOTG_Caster",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;6;10;12;8;5;7;55;39;47;40;41;42;30;26;29;28;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;6;10;12;8;5;7;55;39;47;40;41;42;30;26;29;28;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Sword",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Alb_Thrust_1h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SoK_Slash_Pole",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Slash_Spear",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Sword_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Thrust_Celtspear",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SoK_Thrust_Pole",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Thrust_Spear",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Alb_Thrust_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Blade",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Hib_Thrust",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Hib_Thrust_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SoK_Slash",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SoK_Slash_2h",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Slash_Celtspear",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "SOK_Slash_Lw",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;11;4;1;19;48;43;45;44;56;31;25;32;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Tartaros_Gift_Caster",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Tartaros_Gift_Melee",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "TraitorsDagger_Axe",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "TraitorsDagger_Hib_Blade",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "TraitorsDagger_Hib_Thrust",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "TraitorsDagger_Leftaxe",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "TraitorsDagger_Thrust_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;9;11;4;1;19;3;48;43;45;47;44;49;50;58;46;31;25;32;23;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Traldors_Oracle_Caster",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Winged_Helm_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Winged_Helm_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Winged_Helm_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Winged_Helm_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Winged_Helm_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Wings_Dive_Chain",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Wings_Dive_Plate",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Wings_Dive_Reinforced",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Wings_Dive_Scale",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Wings_Dive_Studded",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22"
+   },
+   "after": {
+    "AllowedClasses": "2;6;11;4;1;19;3;48;43;45;47;44;50;46;31;26;25;32;28;24;21;34;22;64;65;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Traldors_Oracle_Melee",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61"
+   },
+   "after": {
+    "AllowedClasses": "13;10;12;8;5;7;55;39;40;41;42;30;29;27;59;60;62;61;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Crown_Of_Zahur_Chain_Caster",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "6;4;1;19;26;28;24;21;34"
+   },
+   "after": {
+    "AllowedClasses": "6;4;1;19;26;28;24;21;34;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Eirenes_Hauberk_Chain_Caster",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "6;4;1;19;26;28;24;21;34"
+   },
+   "after": {
+    "AllowedClasses": "6;4;1;19;26;28;24;21;34;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Stone_of_Atlantis_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "5;7;8;12;13;33"
+   },
+   "after": {
+    "AllowedClasses": "5;7;8;12;13;33;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Tablet_of_Atlantis_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "1;2;3;4;5;6;7;8;9;10;11;12;13;19;33;60"
+   },
+   "after": {
+    "AllowedClasses": "1;2;3;4;5;6;7;8;9;10;11;12;13;19;33;60;65;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Tablet_of_Atlantis_Mid",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "21;22;23;24;25;26;27;28;29;30;31;32;34;59;61"
+   },
+   "after": {
+    "AllowedClasses": "21;22;23;24;25;26;27;28;29;30;31;32;34;59;61;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Tablet_of_Atlantis_Hib",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "39;40;41;42;43;44;45;46;47;48;49;50;55;56;58;62"
+   },
+   "after": {
+    "AllowedClasses": "39;40;41;42;43;44;45;46;47;48;49;50;55;56;58;62;67"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Flamedancers_Boots_Cloth_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "5;7;8;12;13;33"
+   },
+   "after": {
+    "AllowedClasses": "5;7;8;12;13;33;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ring_of_Dances_Melee_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "1;2;3;4;9;10;11;19;60"
+   },
+   "after": {
+    "AllowedClasses": "1;2;3;4;9;10;11;19;60;65"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ring_of_Dances_Caster_Alb",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "5;6;7;8;12;13;33"
+   },
+   "after": {
+    "AllowedClasses": "5;6;7;8;12;13;33;66"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ring_of_Dances_Melee_Mid",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "21;22;23;24;25;31;32;34;61"
+   },
+   "after": {
+    "AllowedClasses": "21;22;23;24;25;31;32;34;61;64"
+   }
+  },
+  {
+   "table": "ItemTemplate",
+   "key": "Ring_of_Dances_Melee_Hib",
+   "op": "update",
+   "before": {
+    "AllowedClasses": "43;44;45;46;48;49;50;56;58;62"
+   },
+   "after": {
+    "AllowedClasses": "43;44;45;46;48;49;50;56;58;62;67"
+   }
+  }
+ ],
+ "note": "Server-sent NPC/object positions need no client binary patch. Geometry edits require matching client assets and rebuilt navigation."
+}

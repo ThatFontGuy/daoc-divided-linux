@@ -6,6 +6,9 @@ namespace DOL.GS
     {
         public StatBuffECSEffect(in ECSGameEffectInitParams initParams) : base(initParams) { }
 
+        // HearthDAoC: its bonus is added at start and taken off at stop from Effectiveness (#190).
+        internal override bool AppliesBonusAtStart => true;
+
         public override void OnStartEffect()
         {
             base.OnStartEffect();

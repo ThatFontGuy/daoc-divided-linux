@@ -9,6 +9,10 @@ namespace DOL.GS
 
         public StatDebuffECSEffect(in ECSGameEffectInitParams initParams) : base(initParams) { }
 
+        // HearthDAoC: its bonus is added at start and taken off at stop from Effectiveness (#190). Not a snare's: that one
+        // is removed by spell ID, and EffectService sets it again from Effectiveness on every tick.
+        internal override bool AppliesBonusAtStart => EffectType is not eEffect.MovementSpeedDebuff;
+
         public override void OnStartEffect()
         {
             base.OnStartEffect();

@@ -1,0 +1,8 @@
+[
+  {"table": "Door", "where": {"InternalID": 252000302}, "set": {"Heading": 1024}},
+  {"table": "Door", "where": {"InternalID": 113057702}, "set": {"Heading": 2035}},
+  {"table": "Door", "where": {"InternalID": 212006102}, "set": {"Heading": 3080}},
+  {"table": "Door", "where": {"InternalID": 14078402}, "set": {"Heading": 2}},
+  {"table": "Door", "where": {"InternalID": 15000101}, "set": {"X": 654562, "Y": 293915, "Z": 4859, "Heading": 2562}},
+  {"table": "Door", "where": {"InternalID": 15000102}, "set": {"X": 654756, "Y": 293686, "Z": 4858, "Heading": 452}}
+]

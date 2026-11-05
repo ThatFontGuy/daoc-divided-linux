@@ -195,6 +195,16 @@ namespace DOL.GS
 			return true;
 		}
 
+		/// <summary>The secondary skill a material of this model is worked with, or NoCrafting.</summary>
+		public static eCraftingSkill SecondarySkillForMaterial(int model) => model switch
+		{
+			522 or 537 => eCraftingSkill.ClothWorking, // cloth square, heavy thread
+			521 => eCraftingSkill.LeatherCrafting,     // leather square
+			519 => eCraftingSkill.MetalWorking,        // metal bars
+			520 => eCraftingSkill.WoodWorking,         // wooden boards
+			_ => eCraftingSkill.NoCrafting,
+		};
+
 		public virtual bool CheckSecondCraftingSkillRequirement(GamePlayer player, Recipe recipe)
         {
 			int minimumLevel = GetSecondaryCraftingSkillMinimumLevel(recipe);
@@ -553,7 +563,13 @@ namespace DOL.GS
 		#region Calcul functions
 		public virtual int CalculateChanceToMakeItem(GamePlayer player, int craftingLevel)
         {
-			int con = GetItemCon(player.GetCraftingSkillValue(m_eskill), craftingLevel);
+			return ChanceToMakeAt(player.GetCraftingSkillValue(m_eskill), craftingLevel);
+		}
+
+		/// <summary>Chance to make an item at this skill value; a gamebot crafts by the same table (AutonomousBotCrafting).</summary>
+		public int ChanceToMakeAt(int skillValue, int craftingLevel)
+		{
+			int con = GetItemCon(skillValue, craftingLevel);
 			if (con < -3)
 				con = -3;
 			if (con > 3)
@@ -586,37 +602,9 @@ namespace DOL.GS
 		/// </summary>
 		public virtual int CalculateChanceToGainPoint(GamePlayer player, int recipeLevel)
 		{
-			int con = GetItemCon(player.GetCraftingSkillValue(m_eskill), recipeLevel);
-			if (con < -3)
-				con = -3;
-			if (con > 3)
-				con = 3;
-			int chance;
-
-			switch (con)
-			{
-				case -3:
-					return 0;
-				case -2:
-					chance = 15;
-					break;
-				case -1:
-					chance = 30;
-					break;
-				case 0:
-					chance = 45;
-					break;
-				case 1:
-					chance = 55;
-					break;
-				case 2:
-					chance = 65;
-					break;
-				case 3:
-					return 0;
-				default:
-					return 0;
-			}
+			int chance = BaseChanceToGainAt(player.GetCraftingSkillValue(m_eskill), recipeLevel);
+			if (chance <= 0)
+				return 0;
 
 			// In capital cities bonuses to crafting apply (patch 1.86)
 			if (player.CurrentRegion.IsCapitalCity)
@@ -631,11 +619,57 @@ namespace DOL.GS
 
 			return chance;
 		}
+
+		/// <summary>Chance to gain a point at this skill value, before a capital city's bonus.</summary>
+		public int BaseChanceToGainAt(int skillValue, int recipeLevel)
+		{
+			int con = GetItemCon(skillValue, recipeLevel);
+			if (con < -3)
+				con = -3;
+			if (con > 3)
+				con = 3;
+
+			switch (con)
+			{
+				case -2:
+					return 15;
+				case -1:
+					return 30;
+				case 0:
+					return 45;
+				case 1:
+					return 55;
+				case 2:
+					return 65;
+				default:
+					return 0;
+			}
+		}
+
 		public virtual int GetCraftingTime(GamePlayer player, Recipe recipe)
 		{
 			if ((ePrivLevel) player.Client.Account.PrivLevel >= ePrivLevel.GM)
 				return 0;
 
+			// Player does check for capital city bonus as well
+			int craftingTime = (int)(BaseCraftingTime(recipe) / player.CraftingSpeed);
+			craftingTime = FinishCraftingTime(craftingTime, player.GetCraftingSkillValue(m_eskill), recipe, player.Realm);
+
+			if (player.Client.Account.PrivLevel > 1)
+			{
+				player.Out.SendMessage($"[DEBUG] Crafting time: {craftingTime}s", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+			}
+			return craftingTime;
+		}
+
+		/// <summary>Crafting time in seconds at this skill value, at crafting speed 1. A gamebot works to the same clock.</summary>
+		public int CraftingTimeAt(int skillValue, Recipe recipe, eRealm realm)
+		{
+			return FinishCraftingTime(BaseCraftingTime(recipe), skillValue, recipe, realm);
+		}
+
+		private static int BaseCraftingTime(Recipe recipe)
+		{
 			double baseMultiplier = (recipe.Level / 100) + 1;
 			if (baseMultiplier < 1) baseMultiplier = 1;
 
@@ -648,20 +682,20 @@ namespace DOL.GS
 			}
 
 			var divisorMod = 4;
-			int craftingTime = (int)(baseMultiplier * materialsCount / divisorMod);
+			return (int)(baseMultiplier * materialsCount / divisorMod);
+		}
 
-			// Player does check for capital city bonus as well
-			craftingTime = (int)(craftingTime / player.CraftingSpeed);
-
-			craftingTime = (int)(craftingTime * (1 - (.05 * RelicMgr.GetRelicCount(player.Realm))));
+		private int FinishCraftingTime(int craftingTime, int skillValue, Recipe recipe, eRealm realm)
+		{
+			craftingTime = (int)(craftingTime * (1 - (.05 * RelicMgr.GetRelicCount(realm))));
 
 			//keep bonuses reduction in crafting time
-			if (Keeps.KeepBonusMgr.RealmHasBonus(DOL.GS.Keeps.eKeepBonusType.Craft_Timers_5, (eRealm)player.Realm))
+			if (Keeps.KeepBonusMgr.RealmHasBonus(DOL.GS.Keeps.eKeepBonusType.Craft_Timers_5, realm))
 				craftingTime = (int)(craftingTime / 1.05);
-			else if (Keeps.KeepBonusMgr.RealmHasBonus(DOL.GS.Keeps.eKeepBonusType.Craft_Timers_3, (eRealm)player.Realm))
+			else if (Keeps.KeepBonusMgr.RealmHasBonus(DOL.GS.Keeps.eKeepBonusType.Craft_Timers_3, realm))
 				craftingTime = (int)(craftingTime / 1.03);
 
-			int con = GetItemCon(player.GetCraftingSkillValue(m_eskill), recipe.Level);
+			int con = GetItemCon(skillValue, recipe.Level);
 			double mod = 1.0;
 			switch (con)
 			{
@@ -697,10 +731,6 @@ namespace DOL.GS
 			else if (maxCraftingTime > 0 && craftingTime > maxCraftingTime)
 				craftingTime = maxCraftingTime;
 			
-			if (player.Client.Account.PrivLevel > 1)
-			{
-				player.Out.SendMessage($"[DEBUG] Crafting time: {craftingTime}s", eChatType.CT_System, eChatLoc.CL_SystemWindow);
-			}
 			return craftingTime;
 		}
 
@@ -714,12 +744,18 @@ namespace DOL.GS
 		/// </summary>
 		private int GetQuality(GamePlayer player, int recipeLevel)
 		{
+			return QualityAt(player.GetCraftingSkillValue(m_eskill), recipeLevel);
+		}
+
+		/// <summary>Crafted item quality at this skill value.</summary>
+		public int QualityAt(int skillValue, int recipeLevel)
+		{
 			// 2% chance to get masterpiece, 1:6 chance to get 94-99%, if legendary or if grey con
 			// otherwise moving the most load towards 94%, the higher the item con to the crafter skill
 			//1.87 patch raises min quality to 96%
 
 			// legendary
-			if (player.GetCraftingSkillValue(m_eskill) >= 1000)
+			if (skillValue >= 1000)
 			{
 				if (Util.Chance(2))
 				{
@@ -728,7 +764,7 @@ namespace DOL.GS
 				return 96 + Util.Random(3);
 			}
 
-			int delta = GetItemCon(player.GetCraftingSkillValue(m_eskill), recipeLevel);
+			int delta = GetItemCon(skillValue, recipeLevel);
 			if (delta < -2)
 			{
 				if (Util.Chance(2))

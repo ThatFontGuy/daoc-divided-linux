@@ -1,0 +1,291 @@
+[
+ {
+  "table": "Spell",
+  "copy": "local-round3-live-v1-77668",
+  "key": "d010ef5f-76a0-4509-a445-717403593747",
+  "set": {
+   "SpellID": 20700,
+   "Name": "Forest Protector",
+   "Value": 50.0,
+   "Duration": 25,
+   "Pulse": 0,
+   "Frequency": 0,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0,
+   "Range": 0
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "06568aa1-10ae-42de-a798-5d5bf7250ecf",
+  "insert": {
+   "SpellID": 20700,
+   "ClassID": 46,
+   "StyleID": 7030,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-round3-live-v1-77666",
+  "key": "b467a207-9171-495b-9081-7807e8042bef",
+  "set": {
+   "SpellID": 20701,
+   "Name": "Forest Executioner",
+   "Value": -50.0,
+   "Duration": 25,
+   "Target": "Enemy",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0,
+   "Range": 500
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "b493ff08-42db-49de-8b50-9ee9be1b377b",
+  "insert": {
+   "SpellID": 20701,
+   "ClassID": 46,
+   "StyleID": 7031,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-vampiir-test-v1-69098",
+  "key": "491dad44-0cae-4e45-9051-540e2099c6ed",
+  "set": {
+   "SpellID": 20702,
+   "Name": "Stone Shaper",
+   "Value": 25.0,
+   "Duration": 25,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0,
+   "Range": 0
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "39017aee-0740-48ac-ad66-8c564df47a6d",
+  "insert": {
+   "SpellID": 20702,
+   "ClassID": 46,
+   "StyleID": 7032,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20088",
+  "key": "1f212d52-a68e-48b0-96c9-7ab0e57302e2",
+  "set": {
+   "SpellID": 20703,
+   "Name": "Stone Temper",
+   "Type": "ArmorAbsorptionDebuff",
+   "Value": 5.0,
+   "Duration": 20
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "c1f57a8c-e42f-4f6b-988d-91cb2cfc5bd0",
+  "insert": {
+   "SpellID": 20703,
+   "ClassID": 46,
+   "StyleID": 7033,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-vampiir-test-v1-69106",
+  "key": "8e55f6be-3e43-46ef-99c9-792cc79e766f",
+  "set": {
+   "SpellID": 20704,
+   "Name": "Shadow's Nimbleness",
+   "Value": 32.0,
+   "Duration": 60,
+   "RecastDelay": 15,
+   "Power": 48
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "023b9003-9339-4f4a-a9b3-f545b78715f7",
+  "insert": {
+   "LineName": "Vampiiric Embrace",
+   "SpellID": 20704,
+   "Level": 31
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69032",
+  "set": {
+   "Duration": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69033",
+  "set": {
+   "Duration": 10,
+   "Power": 22
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69034",
+  "set": {
+   "Duration": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69085",
+  "set": {
+   "RecastDelay": 180
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69086",
+  "set": {
+   "RecastDelay": 180
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69087",
+  "set": {
+   "RecastDelay": 180
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-round3-live-v1-77609",
+  "key": "0e606ca4-13e6-471b-bb53-5d8cca5c0d24",
+  "set": {
+   "SpellID": 20705,
+   "Name": "Figure Eight",
+   "Value": 10.0,
+   "Duration": 20,
+   "Target": "Self",
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0,
+   "Range": 0
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "95b700dc-8efa-49cb-acda-1028b5aa8bcc",
+  "insert": {
+   "SpellID": 20705,
+   "ClassID": 10,
+   "StyleID": 231,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-class-live-v1-75408",
+  "key": "d2bf19e4-4ab7-4eac-9805-dc7e3a0fc184",
+  "set": {
+   "SpellID": 20706,
+   "Name": "Grand Finale Critical",
+   "Type": "Critical",
+   "Value": 25.0,
+   "Duration": 5,
+   "Target": "Group",
+   "Range": 1500,
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-class-live-v1-75408",
+  "key": "2bbb1122-3966-432f-ba24-c33983ef68ac",
+  "set": {
+   "SpellID": 20707,
+   "Name": "Grand Finale",
+   "Value": 75.0,
+   "Duration": 5,
+   "Target": "Group",
+   "Range": 1500,
+   "Power": 0,
+   "CastTime": 0.0,
+   "RecastDelay": 0,
+   "Concentration": 0,
+   "SubSpellID": 20706
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "3a9bd602-0844-4447-b321-828252283a91",
+  "insert": {
+   "SpellID": 20707,
+   "ClassID": 24,
+   "StyleID": 7041,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "1560",
+  "key": "e6dcb710-afb8-4161-9d15-8732021d9d5c",
+  "set": {
+   "SpellID": 20708,
+   "Name": "Nature Sage Proc",
+   "Value": 11243.0
+  }
+ },
+ {
+  "table": "NpcTemplate",
+  "where": {
+   "NpcTemplate_ID": "local-round3-live-v1-pet-21"
+  },
+  "set": {
+   "Spells": "20708"
+  }
+ },
+ {
+  "table": "NpcTemplate",
+  "where": {
+   "NpcTemplate_ID": "local-round3-live-v1-pet-22"
+  },
+  "set": {
+   "Spells": "75096"
+  }
+ },
+ {
+  "table": "NpcTemplate",
+  "where": {
+   "NpcTemplate_ID": "local-round3-live-v1-pet-23"
+  },
+  "set": {
+   "Spells": "75102"
+  }
+ },
+ {
+  "table": "NpcTemplate",
+  "where": {
+   "NpcTemplate_ID": "local-round3-live-v1-pet-24"
+  },
+  "set": {
+   "Spells": "5217"
+  }
+ }
+]

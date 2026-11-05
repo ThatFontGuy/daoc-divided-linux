@@ -28,6 +28,8 @@ public enum eWorldServiceKind
     VaultKeeper,
     RealmExchange,
     CraftStation,
+    // A Darkness Falls seals merchant: seal gear bought with the bot's own looted seals (owner 2026-10-30).
+    SealMerchant,
 }
 
 /// <summary>
@@ -94,6 +96,10 @@ public static class AutonomousBotDecisionEngine
 
     public sealed record Decision(eAutonomousActivity Activity, string TargetId, string Reason);
 
+    /// <summary>A trained crafter with materials to work takes a craft break now and then (AutonomousBotCrafting).</summary>
+    public static bool RollsCraft(bool canCraft, int materialStacks, double roll) =>
+        canCraft && materialStacks >= 3 && roll < 0.16;
+
     public static Decision Choose(
         State state,
         IReadOnlyCollection<Camp> camps,
@@ -121,7 +127,7 @@ public static class AutonomousBotDecisionEngine
         if (state.UnspentTrainingPoints > 0 && random.NextDouble() < 0.28 && Find(services, eWorldServiceKind.Trainer) is Service trainer)
             return new(eAutonomousActivity.Trainer, trainer.Name, "Chose to visit the real class trainer; never field auto-trained.");
 
-        if (state.CanCraft && state.CraftingMaterialStacks >= 3 && random.NextDouble() < 0.16 && Find(services, eWorldServiceKind.CraftStation) is Service craft)
+        if (RollsCraft(state.CanCraft, state.CraftingMaterialStacks, random.NextDouble()) && Find(services, eWorldServiceKind.CraftStation) is Service craft)
             return new(eAutonomousActivity.Craft, craft.Name, "Use owned materials at a reachable craft station.");
 
         // Leisure is intentionally a very low-weight choice. Recovery, a nearly

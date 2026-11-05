@@ -23,92 +23,65 @@ using DOL.GS.Effects;
 using DOL.GS.PacketHandler;
 namespace DOL.GS.Spells
 {
+	public static class CostumeSpellHandlerRules
+	{
+		/// <summary>Shape potions are for the capitals and housing, not the open world.</summary>
+		public static bool AllowedIn(ushort region) => region is 10 or 101 or 201 or 2 or 102 or 202;
+	}
+
 	/// Costume spell handler: Shape change on self
 	/// <author>Luhz</author>
 	[SpellHandler(eSpellType.Costume)]
 	class CostumeSpellHandler : SpellHandler
 	{
-		public override bool CheckBeginCast(GameLiving selectedTarget, bool quiet)
+		// The work sits in OnEffectStart and OnEffectExpires: without this a potion gave an icon and no shape (playtest 2026-10-31).
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
 		{
-			GameLiving player = selectedTarget as GamePlayer;
-
-			if (player == null)
-				return false;
-
-			switch (player.CurrentRegionID)
-			{
-				case 10: return true;// Camelot City
-				case 101: return true; // Jordheim
-				case 201: return true; // Tir Na Nog
-				case 2: return true; // Alb Housing
-				case 102: return true; // Mid Housing
-				case 202: return true; // Hib Housing
-				default: return false;
-			}
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
 		}
 
-		/// Effect starting.		
+		public override bool StartSpell(GameLiving target, DOL.Database.DbInventoryItem item)
+		{
+			if (!CostumeSpellHandlerRules.AllowedIn(Caster.CurrentRegionID))
+			{
+				MessageToCaster("This only works in a capital city or a housing zone.", eChatType.CT_SpellResisted);
+				return false;
+			}
+			return base.StartSpell(target, item);
+		}
+
+		public override bool CheckBeginCast(GameLiving selectedTarget, bool quiet) =>
+			selectedTarget is GamePlayer && CostumeSpellHandlerRules.AllowedIn(selectedTarget.CurrentRegionID);
+
+		/// Effect starting.
 		/// <param name="effect"></param>
 		public override void OnEffectStart(GameSpellEffect effect)
 		{
-			GamePlayer player = effect.Owner as GamePlayer;
-
-			if (player != null)
-			{
-				if (CheckBeginCast(player, true) == false)
-				{
-					if (effect != null)
-						effect.Cancel(true);
-					player.Model = player.CreationModel;
-					return;
-				}
-				else
-				{
-					player.Model = (ushort)effect.Spell.Value;
-				}
-				GameEventMgr.AddHandler(effect.Owner, GamePlayerEvent.RegionChanged, new DOLEventHandler(OnZone));
-			}
+			if (effect.Owner is not GamePlayer player)
+				return;
+			player.Model = (ushort)effect.Spell.Value;
+			GameEventMgr.AddHandler(player, GamePlayerEvent.RegionChanged, new DOLEventHandler(OnZone));
 		}
 
 		private void OnZone(DOLEvent e, object sender, EventArgs arguments)
 		{
-			if (sender is GamePlayer)
-			{
-				switch ((sender as GamePlayer).CurrentRegionID)
-				{
-					case 10: // Camelot City 
-					case 101: //Jordheim
-					case 201: //Tir Na Nog
-					case 2:	  //Albion Housing
-					case 102: //Midgard Housing
-					case 202: //Hibernia Housing                        
-					default:
-						GameSpellEffect costume = FindEffectOnTarget(sender as GamePlayer, this);
-						if (costume != null)
-							costume.Cancel(true);
-						return;
-				}
-			}
+			if (sender is GamePlayer player && !CostumeSpellHandlerRules.AllowedIn(player.CurrentRegionID))
+				player.Model = player.CreationModel;
 		}
 
-		/// Effect expiring (duration spells only).		
+		/// Effect expiring (duration spells only).
 		/// <returns>Immunity duration in milliseconds.</returns>
 		public override int OnEffectExpires(GameSpellEffect effect, bool noMessages)
 		{
-			GamePlayer player = effect.Owner as GamePlayer;
-
-			if (player != null)
+			if (effect.Owner is GamePlayer player)
 			{
-				effect.Cancel(false);
 				player.Model = player.CreationModel;
-
-				GameEventMgr.RemoveHandler((GamePlayer)effect.Owner, GamePlayerEvent.RegionChanged, new DOLEventHandler(OnZone));
+				GameEventMgr.RemoveHandler(player, GamePlayerEvent.RegionChanged, new DOLEventHandler(OnZone));
 			}
 			return 0;
-
 		}
 
-		/// Creates a new Costume spell handler.		
+		/// Creates a new Costume spell handler.
 		public CostumeSpellHandler(GameLiving caster, Spell spell, SpellLine line)
 			: base(caster, spell, line) { }
 	}

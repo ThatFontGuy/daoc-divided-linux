@@ -30,6 +30,12 @@ namespace DOL.GS.Spells
 			if (!base.CheckBeginCast(selectedTarget))
 				return false;
 
+			if (Spell.Name.Contains("Solo Shot") && Caster.Group != null)
+			{
+				MessageToCaster("You can't use this shot while in a group.", eChatType.CT_System);
+				return false;
+			}
+
 			// Is Shield Disarm ?
 			ShieldTripDisarmEffect shieldDisarm = Caster.EffectList.GetOfType<ShieldTripDisarmEffect>();
 			if (shieldDisarm != null)
@@ -38,7 +44,7 @@ namespace DOL.GS.Spells
 				return false;
 			}
 
-			if (Caster is GamePlayer && Caster.ActiveWeapon != null && GlobalConstants.IsBowWeapon((eObjectType) Caster.ActiveWeapon.Object_Type))
+			if (Caster is GamePlayer or GameBot && Caster.ActiveWeapon != null && GlobalConstants.IsBowWeapon((eObjectType) Caster.ActiveWeapon.Object_Type))
 			{
 				if (Spell.LifeDrainReturn == (int) eShotType.Critical && !Caster.IsStealthed)
 				{
@@ -87,7 +93,7 @@ namespace DOL.GS.Spells
 		public override double AdjustDamageForHitChance(double damage, double hitChance)
 		{
 			if (hitChance < 85)
-				damage *= (hitChance - 85) * 0.038;
+				damage *= Math.Max(0, 1 + (hitChance - 85) * 0.038);
 
 			return damage;
 		}
@@ -114,8 +120,11 @@ namespace DOL.GS.Spells
 					}
 					case (int)eShotType.Power:
 					{
-						player = target as GamePlayer;
-						player.Out.SendMessage("A shot penetrated your magic barrier!", eChatType.CT_SpellResisted, eChatLoc.CL_SystemWindow);
+						if (target is GamePlayer)
+						{
+							player = target as GamePlayer;
+							player.Out.SendMessage("A shot penetrated your magic barrier!", eChatType.CT_SpellResisted, eChatLoc.CL_SystemWindow);
+						}
 						ad.AttackResult = eAttackResult.HitUnstyled;
 						bladeturn.End();
 						break;
@@ -172,7 +181,8 @@ namespace DOL.GS.Spells
 		/// <returns></returns>
 		public override eDamageType DetermineSpellDamageType()
 		{
-			return ArrowDamageTypes.For(Caster);
+			// Elemental shots keep their element; plain shots follow the arrow switch.
+			return Spell.DamageType is >= eDamageType.Body and <= eDamageType.Spirit ? Spell.DamageType : ArrowDamageTypes.For(Caster);
 		}
 
 		public override void FinishSpellCast(GameLiving target)
@@ -218,7 +228,7 @@ namespace DOL.GS.Spells
 
 		public override int CalculateCastingTime()
 		{
-			return (eShotType) Spell.LifeDrainReturn is eShotType.Power ? 6000 : base.CalculateCastingTime();
+			return base.CalculateCastingTime();
 		}
 
 		public override int PowerCost(GameLiving target) { return 0; }

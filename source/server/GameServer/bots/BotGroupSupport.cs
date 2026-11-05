@@ -34,7 +34,7 @@ namespace DOL.GS
         public static double ProjectedHealthPercent(int health, int maxHealth, double incoming) =>
             100.0 * (health + Math.Max(0, incoming)) / Math.Max(1, maxHealth);
 
-        private static bool UnderAttack(GameBot bot) => bot.IsBeingInterruptedByOther ||
+        internal static bool UnderAttack(GameBot bot) => bot.IsBeingInterruptedByOther ||
             GameLoop.GameLoopTime - bot.LastAttackedByEnemyTick < 3000 ||
             bot.attackComponent.AttackerTracker.Attackers.Any(a => a.IsAlive && a.TargetObject == bot);
 
@@ -49,12 +49,27 @@ namespace DOL.GS
 
         public static void CancelResurrection(GameBot bot)
         {
-            if (bot.Group != null && States.TryGetValue(AutonomousRealmRaid.SupportScope(bot), out State state))
+            // The scope is null when the group was disbanded since the check above (the brain runs on a worker thread).
+            if (bot.Group != null && AutonomousRealmRaid.SupportScope(bot) is { } scope && States.TryGetValue(scope, out State state))
                 state.Resurrection.ReleaseCaster(bot);
         }
 
         /// <summary>How far from the resurrector a hostile counts as a danger to a raised player: they stand where the caster is.</summary>
         public const int RaiseDangerRadius = 1_200;
+
+        /// <summary>A hostile this far above or below a raise spot is on another floor.</summary>
+        public const int RaiseFloorGap = 400;
+
+        /// <summary>
+        /// How long a rezzer that is left alone waits for an idle aggressive monster to move off before it raises a player
+        /// anyway. The player stands up where the caster has stood unharmed all that time. A monster that is fighting
+        /// still holds the raise.
+        /// </summary>
+        public const long RaiseWaitGiveUpMs = 20_000;
+
+        /// <summary>Whether a rezzer kept from raising a player by an idle monster raises them anyway. Pure.</summary>
+        public static bool RaiseWaitGivesUp(long waitingSince, long now, bool threatFighting, bool casterAttacked) =>
+            waitingSince > 0 && now - waitingSince >= RaiseWaitGiveUpMs && !threatFighting && !casterAttacked;
 
         /// <summary>
         /// Whether a real player may be raised now. Play test 2026-10-28: a level 50 cleric raised a level 1 player in a
@@ -74,6 +89,10 @@ namespace DOL.GS
             int fighting = 0, aggressive = 0;
             foreach (RaiseHostile hostile in hostiles)
             {
+                // Discord report 2026-11-04 (Stonehenge Barrows): monsters on the floor above or below counted, so no spot in
+                // a stacked dungeon was ever clear and companions stood buffing over the dead player.
+                if (Math.Abs(point.Z - hostile.Position.Z) > RaiseFloorGap)
+                    continue;
                 float distance = Vector2.Distance(new(point.X, point.Y), new(hostile.Position.X, hostile.Position.Y));
                 if (hostile.Fighting && distance <= RaiseDangerRadius) fighting++;
                 else if (hostile.AggroReach > 0 && distance <= hostile.AggroReach) aggressive++;
@@ -84,6 +103,10 @@ namespace DOL.GS
         private static List<(GameNPC Npc, RaiseHostile Hostile)> RaiseHostiles(GameBot bot, int radius)
         {
             var list = new List<(GameNPC, RaiseHostile)>();
+            // In a dungeon a monster behind a wall can't reach the raised player either.
+            bool checkSight = bot.CurrentZone?.IsDungeon == true && PathfindingProvider.Instance.IsAvailable &&
+                PathfindingProvider.Instance.HasNavmesh(bot.CurrentZone);
+            Vector3 eye = new(bot.X, bot.Y, bot.Z + 50);
             foreach (GameNPC npc in bot.GetNPCsInRadius((ushort)Math.Min(ushort.MaxValue, radius)))
             {
                 if (npc == null || npc == bot || npc is GameBot || !npc.IsAlive || npc.ObjectState != GameObject.eObjectState.Active ||
@@ -93,9 +116,39 @@ namespace DOL.GS
                 int reach = npc.Brain is DOL.AI.Brain.StandardMobBrain brain && brain.AggroLevel > 0 && brain.AggroRange > 0
                     ? brain.AggroRange + 300 : 0;
                 if (!npc.InCombat && reach == 0) continue;
+                if (checkSight && Math.Abs(npc.Z - bot.Z) <= RaiseFloorGap &&
+                    !PathfindingProvider.Instance.HasLineOfSight(bot.CurrentZone, eye, new(npc.X, npc.Y, npc.Z + 50),
+                        PathfindingProvider.Instance.DefaultFilters))
+                    continue;
                 list.Add((npc, new RaiseHostile(new(npc.X, npc.Y, npc.Z), npc.InCombat, reach)));
             }
             return list;
+        }
+
+        /// <summary>How near a fighting red or purple monster a gamebot corpse lies when raising it only feeds the monster.</summary>
+        public const int HardFoeCorpseRadius = 600;
+
+        /// <summary>
+        /// A gamebot is raised where its corpse lies. On the 2026-11-02 overnight run a raid raised a Mauler under Prince
+        /// Ba'alorien (level 78) 78 times in an hour; it died again within 5-10 seconds each time. A corpse within
+        /// <see cref="HardFoeCorpseRadius"/> of a fighting monster that cons red or purple to it waits instead (the raid
+        /// releases it after its corpse wait, and it rejoins from its bind point). Pure.
+        /// </summary>
+        public static bool CorpseUnderHardFoe(Vector3 corpse, Vector3 foe, bool foeFighting, ConColor conToCorpse) =>
+            foeFighting && conToCorpse >= ConColor.RED &&
+            Vector2.Distance(new(corpse.X, corpse.Y), new(foe.X, foe.Y)) <= HardFoeCorpseRadius;
+
+        private static GameNPC HardFoeOverCorpse(GameLiving corpse)
+        {
+            Vector3 body = new(corpse.X, corpse.Y, corpse.Z);
+            foreach (GameNPC npc in corpse.GetNPCsInRadius(HardFoeCorpseRadius))
+            {
+                if (npc == null || npc is GameBot || !npc.IsAlive || npc.Realm != eRealm.None)
+                    continue;
+                if (CorpseUnderHardFoe(body, new(npc.X, npc.Y, npc.Z), npc.InCombat, ConLevels.GetConColor(corpse.GetConLevel(npc))))
+                    return npc;
+            }
+            return null;
         }
 
         /// <summary>The nearest hostile beside the caster that would hit a player raised there (null when it is clear).</summary>
@@ -177,6 +230,7 @@ namespace DOL.GS
                         GameLoop.GameLoopTime)) continue;
                 int cost = (int)(bot.MaxMana * Math.Max(.1f, .5f + (corpse.Level - bot.Level) / (float)Math.Max(1, (int)bot.Level)));
                 if (bot.Mana < cost) continue;
+                if (combat && corpse is GameBot && HardFoeOverCorpse(corpse) != null) continue;
                 if (state.Resurrection.TryReserve(bot, corpse, GameLoop.GameLoopTime, spell.CastTime,
                     true, combat, combat ? budget + 1 : healers, false, bot.CanCastHealSpells)) return corpse;
             }
@@ -200,12 +254,13 @@ namespace DOL.GS
             if (corpse.TempProperties.GetProperty<GameLiving>("RESURRECT_CASTER") != null) return "another resurrection is already pending on the corpse";
             int cost = (int)(bot.MaxMana * Math.Max(.1f, .5f + (corpse.Level - bot.Level) / (float)Math.Max(1, (int)bot.Level)));
             if (bot.Mana < cost) return $"not enough power for the reservation ({bot.Mana}/{cost} of {bot.MaxMana})";
+            if (corpse is GameBot && HardFoeOverCorpse(corpse) is GameNPC foe) return $"the corpse lies under {foe.Name}, still fighting";
             return "the shared reservation refused (another resurrector holds it, or healers are needed for combat)";
         }
 
         public static void CancelHeal(GameBot bot)
         {
-            if (bot.Group != null && States.TryGetValue(AutonomousRealmRaid.SupportScope(bot), out State state))
+            if (bot.Group != null && AutonomousRealmRaid.SupportScope(bot) is { } scope && States.TryGetValue(scope, out State state))
                 lock (state.Sync) state.Heals.Remove(bot);
         }
 
@@ -214,6 +269,7 @@ namespace DOL.GS
             if ((!CompanionRaid.IsMember(bot) && !AutonomousRealmRaid.HasSharedSupport(bot)) || !spell.IsHealing || spell.Target != eSpellTarget.REALM || spell.IsInstantCast || spell.Duration > 0)
                 return preferred;
             object scope = AutonomousRealmRaid.SupportScope(bot);
+            if (scope == null) return preferred; // the group was disbanded since the check above
             State state = States.GetOrCreateValue(scope);
             int range = bot.castingComponent.CalculateSpellRange(spell);
             var candidates = AutonomousRealmRaid.SupportMembers(bot).Concat(AutonomousRealmRaid.SupportPets(bot, range)).Concat(

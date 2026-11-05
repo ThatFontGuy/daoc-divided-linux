@@ -145,7 +145,15 @@ namespace DOL.GS.Quests
         {
             if (player == null || !_config.Quests.TryGetValue(questId, out QuestInfo info) || info.Races == null || info.Races.Count == 0)
                 return true;
-            string race = ((eRace)player.Race).ToString().Replace("_", "");
+            return RaceAllowed(info, player.Race);
+        }
+
+        /// <summary>The same rule by race id, for a gamebot (AutonomousBotQuests).</summary>
+        public static bool RaceAllowed(QuestInfo info, int raceId)
+        {
+            if (info?.Races == null || info.Races.Count == 0)
+                return true;
+            string race = ((eRace)raceId).ToString().Replace("_", "");
             return info.Races.Any(r => string.Equals(r.Replace(" ", ""), race, StringComparison.OrdinalIgnoreCase));
         }
 
@@ -168,9 +176,15 @@ namespace DOL.GS.Quests
         /// <summary>The version of a quest reward made for the player's class (ClassRewards), or the reward itself.</summary>
         public static DbItemTemplate RewardFor(GamePlayer player, DbItemTemplate item)
         {
-            if (player == null || item == null || _config.ClassRewards == null ||
+            return player == null ? item : RewardFor(player.CharacterClass.ID, item);
+        }
+
+        /// <summary>The same by class id, for a gamebot (AutonomousBotQuests).</summary>
+        public static DbItemTemplate RewardFor(int classId, DbItemTemplate item)
+        {
+            if (item == null || _config.ClassRewards == null ||
                 !_config.ClassRewards.TryGetValue(item.Id_nb, out Dictionary<string, string> byClass) ||
-                !byClass.TryGetValue(player.CharacterClass.ID.ToString(), out string id))
+                !byClass.TryGetValue(classId.ToString(), out string id))
                 return item;
             return GameServer.Database.FindObjectByKey<DbItemTemplate>(id) ?? item;
         }
@@ -362,13 +376,16 @@ namespace DOL.GS.Quests
         }
 
         /// <summary>Kill-task drops: a monster slain by a player (or the player's pet) on a step that lists it drops that
-        /// step's item into the player's backpack, like DataQuest's own kill-step drops.</summary>
+        /// step's item into the player's backpack, like DataQuest's own kill-step drops. The players credited for the
+        /// kill (GameLiving.ProcessDeath's list: attackers, pet and companion owners, the leader of an autonomous
+        /// gamebot's player-led group, and their groups in range) count too; owner 2026-10-30.</summary>
         private static void DropForSteps(GameNPC mob, DyingEventArgs slain)
         {
             var killers = new HashSet<GamePlayer>();
             if (slain.PlayerKillers != null) killers.UnionWith(slain.PlayerKillers);
             if (slain.Killer is GamePlayer direct) killers.Add(direct);
             else if (slain.Killer is GameNPC pet && pet.Brain is IControlledBrain controlled && controlled.GetPlayerOwner() is GamePlayer owner) killers.Add(owner);
+            else if (slain.Killer is GameBot gamebot && QuestKillCredit.GroupLeaderFor(gamebot, mob) is GamePlayer leader) killers.Add(leader);
             foreach (GamePlayer player in killers)
             {
                 if (!player.IsWithinRadius(mob, WorldMgr.VISIBILITY_DISTANCE)) continue;
@@ -459,11 +476,14 @@ namespace DOL.GS.Quests
         public static long ScaleXP(int questId, GamePlayer player, int stepIndex, long fixedXp)
         {
             if (player == null || !_config.Quests.TryGetValue(questId, out QuestInfo info) || info.XpShares == null ||
-                stepIndex < 0 || stepIndex >= info.XpShares.Count || info.XpShares[stepIndex] <= 0 || player.Level >= GamePlayer.MAX_LEVEL)
+                stepIndex < 0 || stepIndex >= info.XpShares.Count || player.Level >= GamePlayer.MAX_LEVEL)
                 return fixedXp;
-            long span = player.ExperienceForNextLevel - player.ExperienceForCurrentLevel;
-            return span <= 0 ? fixedXp : Math.Max(fixedXp, (long) (span * info.XpShares[stepIndex]));
+            return ScaleXP(info.XpShares[stepIndex], player.ExperienceForNextLevel - player.ExperienceForCurrentLevel, fixedXp);
         }
+
+        /// <summary>The step's share of a level of <paramref name="levelSpan"/> experience; never less than the fixed value.</summary>
+        public static long ScaleXP(double share, long levelSpan, long fixedXp) =>
+            share <= 0 || levelSpan <= 0 ? fixedXp : Math.Max(fixedXp, (long)(levelSpan * share));
 
         /// <summary>Separates the turns of a recorded conversation in a quest text (DataQuest step and finish lines).</summary>
         public const string NextTurn = "{next}";
@@ -674,6 +694,9 @@ namespace DOL.GS.Quests
         public static string FellowLeaderName(string mobId) =>
             !string.IsNullOrEmpty(mobId) && _config.Fellows != null && _config.Fellows.TryGetValue(mobId, out string name) ? name : null;
 
+        /// <summary>The classic quests as loaded, for the gamebot quest planner (read only).</summary>
+        public static Config Current => _config;
+
         public static bool IsQuestMonsterId(string mobId) =>
             !string.IsNullOrEmpty(mobId) && _config.QuestMonsterIds.Contains(mobId);
 
@@ -789,7 +812,7 @@ namespace DOL.GS.Quests
         /// of that name is still alive (the second of "two youths" is already there when its step comes up).
         /// </summary>
         /// <summary>A walkable point 600-900 units from the player (behind it first), else nearer, else the player's spot.</summary>
-        private static System.Numerics.Vector3 ApproachPoint(GamePlayer player, int index)
+        private static System.Numerics.Vector3 ApproachPoint(GameLiving player, int index)
         {
             var origin = new System.Numerics.Vector3(player.X, player.Y, player.Z);
             Zone zone = player.CurrentZone;
@@ -809,6 +832,21 @@ namespace DOL.GS.Quests
             return origin;
         }
 
+        /// <summary>A gamebot on a classic quest step meets the step's monster the same way a player does; only that bot
+        /// may hunt it (AutonomousBotQuests.MayHunt). The monsters leave by their own despawn timer.</summary>
+        public static List<GameNPC> SpawnEventFor(GameLiving owner, int quest, int step, EventSpawn spawn)
+        {
+            List<GameNPC> spawned = CreateEventNpcs(owner, spawn);
+            if (spawned.Count > 0 && Log.IsInfoEnabled)
+                Log.Info($"CLASSIC_QUEST_EVENT_SPAWN quest={quest} step={step} for={owner.Name} npc=\"{spawn.Name}\" count={spawned.Count} " +
+                         $"level={spawned[0].Level} region={owner.CurrentRegionID} at={owner.X},{owner.Y},{owner.Z}");
+            return spawned;
+        }
+
+        /// <summary>Whether this live event monster was spawned for this character.</summary>
+        public static bool IsEventSpawnOf(GameNPC npc, GameLiving owner) =>
+            npc != null && owner != null && npc.TempProperties.GetProperty<object>(EventSpawnProperty) is string name && name == owner.Name;
+
         private static void TrySpawnEvent(GamePlayer player, int quest, int step, EventSpawn spawn)
         {
             var key = (player, quest, step);
@@ -817,6 +855,16 @@ namespace DOL.GS.Quests
                     e.Value.Any(n => n?.IsAlive == true && string.Equals(n.Name, spawn.Name, StringComparison.OrdinalIgnoreCase)))) return;
             if (spawn.TriggerRadius > 0 && (player.CurrentRegionID != spawn.Region ||
                 !player.IsWithinRadius(new Point3D(spawn.X, spawn.Y, spawn.Z), spawn.TriggerRadius))) return;
+            List<GameNPC> spawned = CreateEventNpcs(player, spawn);
+            if (spawned.Count == 0) return;
+            EventSpawns[key] = spawned;
+            if (Log.IsInfoEnabled)
+                Log.Info($"CLASSIC_QUEST_EVENT_SPAWN quest={quest} step={step} for={player.Name} npc=\"{spawn.Name}\" count={spawned.Count} " +
+                         $"level={spawned[0].Level} region={player.CurrentRegionID} at={player.X},{player.Y},{player.Z}");
+        }
+
+        private static List<GameNPC> CreateEventNpcs(GameLiving player, EventSpawn spawn)
+        {
             var spawned = new List<GameNPC>();
             for (int i = 0; i < Math.Max(1, spawn.Count); i++)
             {
@@ -848,11 +896,7 @@ namespace DOL.GS.Quests
                 new ECSGameTimer(npc, _ => { if (npc.ObjectState == GameObject.eObjectState.Active) npc.Delete(); return 0; },
                     Math.Max(60, spawn.DespawnSeconds) * 1000);
             }
-            if (spawned.Count == 0) return;
-            EventSpawns[key] = spawned;
-            if (Log.IsInfoEnabled)
-                Log.Info($"CLASSIC_QUEST_EVENT_SPAWN quest={quest} step={step} for={player.Name} npc=\"{spawn.Name}\" count={spawned.Count} " +
-                         $"level={spawned[0].Level} region={player.CurrentRegionID} at={player.X},{player.Y},{player.Z}");
+            return spawned;
         }
     }
 

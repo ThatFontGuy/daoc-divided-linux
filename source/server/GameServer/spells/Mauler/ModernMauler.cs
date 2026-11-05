@@ -35,6 +35,9 @@ namespace DOL.GS.Spells
             IsPlayer(caster) && Aura(caster) != null &&
             MeetsStaffRequirement(Param(spell, "MaulerStaffRequired"), caster.GetBaseSpecLevel(Specs.Mauler_Staff),
                 caster.ActiveWeapon?.Object_Type == (int)eObjectType.MaulerStaff);
+        // The ranks of a gift family share a timer group: Nethuni heals, Perizor roots or drains power.
+        public static bool IsNethuniGift(Spell spell) => spell?.SpellType == eSpellType.MaulerGift && spell.SharedTimerGroup == 67300;
+        public static bool IsPerizorGift(Spell spell) => spell?.SpellType == eSpellType.MaulerGift && spell.SharedTimerGroup == 67320;
         // Test coefficient: a lost percentage of maximum health supplies the same percentage of maximum power.
         // Only actual hostile health loss qualifies; absorbed damage and self/environmental damage do not.
         public static int PowerFromDamage(int damage, int maxHealth, int maxPower) => maxHealth <= 0 ? 0 :

@@ -30,6 +30,18 @@ On the launcher, click + Lv.1 or + Lv.50 under a faction:
 /stables si
   Jumps to your realm's Shrouded Isles stable routes.
 
+/fish
+  Face open water with a fishing pole and type /fish to cast your line and relax.
+  You keep casting after each catch until you move or type /fish stop.
+  /fish active: you reel in each bite yourself by typing /fish within 4 seconds.
+  /fish stats shows your fishing skill and best catch.
+  /fish pole gives you a fishing pole if you don't have one.
+  /fish craft lists the better poles and camp kits you can make; /fish craft <number> makes one.
+  Use a camp kit from your backpack to make camp; /fish camp shows its time, /fish camp break packs it up.
+  /fish spots lists fishing spots; /fish go <number> travels to one in your realm.
+  /fish mark <name> saves the shore you stand on (facing water) as a new spot;
+  /fish unmark <number> removes one you marked.
+
 /grind
   Starts automated grinding with a companion bot group, including for AFK use.
 
@@ -63,6 +75,18 @@ On the launcher, click + Lv.1 or + Lv.50 under a faction:
   Enables a 40- or 80-member companion raid. Use BEFORE /spawn.
   Requires level 50. The total includes your own character.
 
+/bots hunt
+  Tanks and attackers in your group (any bots, gamebots too) find their own fights near you while
+  healers stay with you. Good for playing a healer or support class. You can keep moving.
+/bots attack
+  The bots in your group attack your target now.
+/bots follow
+  Stops hunting; the bots drop what they are doing and come back to you.
+/bots status
+  Shows who is following you and what the hunt is doing.
+/bots invites off
+  Stops bots inviting you to groups until you log out (/bots invites on starts them again).
+
 /aggressive
   Companions automatically attack what you attack and react defensively.
 
@@ -70,7 +94,7 @@ On the launcher, click + Lv.1 or + Lv.50 under a faction:
   Companions engage nearby threats while staying near you, letting you pull mobs
   back to the group. Useful for harder content.
 
-These controls apply to your companions, not autonomous gamebots.
+/aggressive and /defensive apply to your companions, not autonomous gamebots.
 /spawn 40 and /spawn 80 are not raid-size commands; use /raid 40 or /raid 80.
 See docs/PLAY.md for setup and docs/LLM-QUICKSTART.md for modifying your own version.
 ALL SERVER COMMANDS.txt is the exhaustive advanced reference, not this quick guide.

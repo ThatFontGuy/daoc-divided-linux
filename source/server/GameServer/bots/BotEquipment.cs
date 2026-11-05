@@ -65,6 +65,79 @@ namespace DOL.GS
             return item;
         }
 
+        /// <summary>
+        /// Owner 2026-11-01: a level-50 list caster fights with a focus staff, and the staff has to say so - fifty levels
+        /// of focus on every line it can use (AllFocusLevels). The generator rolled that bonus only sometimes, and a
+        /// caster without it pays 120% of the base power cost through BotSpellPower.Cost instead of the 80% a full focus
+        /// gives. A player's staff is untouched: this only shapes the items a bot is created with.
+        /// </summary>
+        public static void EnsureCasterFocusStaff(IGamePlayer player, byte characterLevel)
+        {
+            if (player is not GameBot bot || bot.CharacterClass == null || characterLevel < 50)
+                return;
+            if (bot.CharacterClass.ClassType != eClassType.ListCaster || !bot.CharacterClass.IsFocusCaster)
+                return;
+
+            DbInventoryItem staff = bot.Inventory?.GetItem(eInventorySlot.TwoHandWeapon);
+            if (staff == null)
+                return;
+
+            int focusType = (int)eProperty.AllFocusLevels;
+            const int focusLevel = 50;
+
+            for (int slot = 1; slot <= 5; slot++)
+            {
+                if (BonusType(staff, slot) != focusType)
+                    continue;
+                if (BonusValue(staff, slot) < focusLevel)
+                    SetBonus(staff, slot, focusType, focusLevel);
+                return;
+            }
+
+            for (int slot = 1; slot <= 5; slot++)
+            {
+                if (BonusType(staff, slot) != 0 && BonusValue(staff, slot) != 0)
+                    continue;
+                SetBonus(staff, slot, focusType, focusLevel);
+                return;
+            }
+
+            // Every bonus line is taken: the staff is a focus staff first, so the first line becomes the focus.
+            SetBonus(staff, 1, focusType, focusLevel);
+        }
+
+        private static int BonusType(DbInventoryItem item, int slot) => slot switch
+        {
+            1 => item.Bonus1Type,
+            2 => item.Bonus2Type,
+            3 => item.Bonus3Type,
+            4 => item.Bonus4Type,
+            5 => item.Bonus5Type,
+            _ => 0,
+        };
+
+        private static int BonusValue(DbInventoryItem item, int slot) => slot switch
+        {
+            1 => item.Bonus1,
+            2 => item.Bonus2,
+            3 => item.Bonus3,
+            4 => item.Bonus4,
+            5 => item.Bonus5,
+            _ => 0,
+        };
+
+        private static void SetBonus(DbInventoryItem item, int slot, int type, int value)
+        {
+            switch (slot)
+            {
+                case 1: item.Bonus1Type = type; item.Bonus1 = value; break;
+                case 2: item.Bonus2Type = type; item.Bonus2 = value; break;
+                case 3: item.Bonus3Type = type; item.Bonus3 = value; break;
+                case 4: item.Bonus4Type = type; item.Bonus4 = value; break;
+                case 5: item.Bonus5Type = type; item.Bonus5 = value; break;
+            }
+        }
+
         // Templates marked for this realm but built on another realm's model (a
         // Midgard hat on the Hibernia mesh has no Valkyn or Troll fit). Bots skip them.
         private static IList<DbItemTemplate> WithoutCrossRealmLooks(IList<DbItemTemplate> items) =>

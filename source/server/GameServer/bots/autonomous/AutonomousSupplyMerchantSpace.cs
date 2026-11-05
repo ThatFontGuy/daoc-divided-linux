@@ -99,7 +99,9 @@ namespace DOL.GS
                 IssuePath(bot, center); // another zone: walk toward the merchant; the spot is resolved on arrival in its zone
                 return false;
             }
-            if (!_supplySpacePoint.HasValue && GameLoop.GameLoopTime >= _nextSupplySpaceSearch)
+            int distance = bot.GetDistanceTo(merchant);
+            if (!_supplySpacePoint.HasValue && AutonomousSupplyMerchantSpace.ShouldResolveSpot(distance) &&
+                GameLoop.GameLoopTime >= _nextSupplySpaceSearch)
             {
                 if (AutonomousSupplyMerchantSpace.TryResolve(PathfindingProvider.Instance, bot.CurrentRegion, bot.Realm,
                     new(bot.X, bot.Y, bot.Z), center, bot.DatabaseID, radius, out var point)) _supplySpacePoint = point;
@@ -108,7 +110,7 @@ namespace DOL.GS
             }
             if (_supplySpacePoint.HasValue)
                 IssuePath(bot, _supplySpacePoint.Value, preciseArrival: true);
-            else if (!AutonomousSupplyMerchantSpace.ShouldResolveSpot(bot.GetDistanceTo(merchant)))
+            else if (!AutonomousSupplyMerchantSpace.ShouldResolveSpot(distance))
                 IssuePath(bot, center); // no interaction spot resolved from far away yet: head toward the merchant, never stand still
             else
             {

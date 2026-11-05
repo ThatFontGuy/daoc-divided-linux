@@ -3,13 +3,14 @@
     "Account", "AccountXCrafting", "AccountXCustomParam", "AccountXMoney",
     "DOLCharacters", "DOLCharactersBackup", "DOLCharactersBackupXCustomParam", "DOLCharactersXCustomParam",
     "CharacterXDataQuest", "CharacterXMasterLevel", "CharacterXOneTimeDrop", "FactionAggroLevel", "Quest", "Task", "TimeXLevel", "PlayerXEffect",
-    "Inventory", "ItemUnique", "bot_profiles", "bot_settings", "offline_world_bots", "offline_world_bot_guild", "account_companions",
+    "Inventory", "ItemUnique", "bot_profiles", "bot_settings", "offline_world_bots", "offline_world_bot_guild", "account_companions", "offline_fishing",
     "offline_auction_escrow", "offline_auction_ledger", "offline_auction_listings", "realm_exchange_sales",
     "Guild", "GuildRank", "GuildAlliance", "DBHouseCharsXPerms", "DBHousePermissions", "DBIndoorItem", "DBOutdoorItem",
     "HouseConsignmentMerchant", "househookpointitem", "PlayerBoats"
   ],
   "OptionalProgressTables": ["offline_bot_guilds", "offline_bot_guild_members", "offline_bot_scenes_heard",
-    "offline_bot_memory", "offline_bot_nemesis", "offline_server_firsts", "offline_bot_lines_heard",
-    "offline_bot_ragequits", "offline_player_reputation", "offline_bot_storylines", "offline_bot_bonds"],
+    "offline_bot_memory", "offline_bot_nemesis", "offline_server_firsts", "offline_bot_mob_lessons", "offline_bot_lines_heard",
+    "offline_bot_ragequits", "offline_player_reputation", "offline_bot_storylines", "offline_bot_bonds", "offline_artifact_progress", "offline_bot_quests",
+    "offline_bot_craft_orders"],
   "ClearTables": ["Appeal", "AuditEntry", "Ban", "BugReport", "KeepCaptureLog", "News", "PlayerInfo", "ServerInfo", "SinglePermission", "Voting", "serverstats", "offline_bot_commands", "offline_runtime_status", "offline_local_options"]
 }

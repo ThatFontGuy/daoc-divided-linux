@@ -50,6 +50,9 @@ namespace DOL.GS
             return chancePercent > _random.Next(100);
         }
 
+        /// <summary>
+        /// Rolls a 0-1 fraction, not a percent: 1 or more always succeeds. The int overload takes a percent.
+        /// </summary>
         public static bool Chance(double chancePercent)
         {
             return chancePercent > _random.NextDouble();

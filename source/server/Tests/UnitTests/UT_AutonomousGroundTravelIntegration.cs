@@ -40,6 +40,32 @@ namespace DOL.UnitTests
             typeof(NpcMovementComponent).GetMethod("UpdateVelocity",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(m,new object[]{delta.Length()});
         private static object Arrival(NpcMovementComponent m) => typeof(NpcMovementComponent).GetField("_groundTravelArrivalMilliseconds",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(m);
 
+        // Issue #3: a follower's order moves with its leader, and a re-plan halfway down a Darkness Falls drop finds no mesh.
+        [TestCase(true)]
+        [TestCase(false)]
+        public void BotInADropLandsBeforeTakingANewOrder(bool autonomous)
+        {
+            const BindingFlags Private=BindingFlags.Instance|BindingFlags.NonPublic;
+            Type mover=typeof(NpcMovementComponent);
+            var m=Movement(Actor(autonomous),Vector3.Zero);
+            Type fallType=mover.GetNestedType("FallContinuation",BindingFlags.NonPublic);
+            object descend=Enum.Parse(mover.GetNestedType("FallStage",BindingFlags.NonPublic),"Descend");
+            object fall=fallType.GetConstructors()[0].Invoke(new object[]{Vector3.One,Vector3.One,new Vector3(1000,0,0),(ushort)0,null,null,(short)191,descend});
+            FieldInfo continuation=mover.GetField("_fallContinuation",Private);
+            FieldInfo state=mover.GetField("_movementState",Private);
+            int walking=(int)Enum.Parse(mover.GetNestedType("MovementState",BindingFlags.NonPublic),"WalkTo");
+            continuation.SetValue(m,fall);
+            state.SetValue(m,Enum.ToObject(state.FieldType,walking));
+
+            Vector3 moved=new(3000,0,0);
+            m.PathTo(moved,150);
+
+            object held=continuation.GetValue(m);
+            Assert.That(held,Is.Not.Null,"The order must not cancel the fall.");
+            Assert.That(fallType.GetProperty("Final").GetValue(held),Is.EqualTo(moved),"The newest order is what the bot does after landing.");
+            Assert.That(state.GetValue(m),Is.EqualTo(Enum.ToObject(state.FieldType,walking)),"No path request is queued in mid-drop.");
+        }
+
         [Test]
         public void ActualMoverUsesGroundSpeedAndMatchingArrivalThenClearsItForCombat()
         {

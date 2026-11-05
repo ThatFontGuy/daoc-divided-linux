@@ -33,6 +33,42 @@ namespace DOL.UnitTests
         public void APartyPullsAnEpicOnlyWhenItCameForIt(bool epic, bool ownTarget, bool inOwnRaidDungeon, bool pulls) =>
             Assert.That(AutonomousDungeonPolicy.PullsOnRoute(epic, ownTarget, inOwnRaidDungeon), Is.EqualTo(pulls));
 
+        // Overnight run 2026-11-02: essence shredder packs killed 206 solo level 50s approaching Darkness Falls camps.
+        [TestCase(false, true, false, false, ConColor.RED, 0, true)]      // a red alone
+        [TestCase(false, true, false, false, ConColor.ORANGE, 2, true)]   // an orange pack
+        [TestCase(false, true, false, false, ConColor.ORANGE, 1, false)]  // an orange pair is fought
+        [TestCase(false, true, false, false, ConColor.YELLOW, 5, false)]
+        [TestCase(true, true, false, false, ConColor.RED, 3, false)]      // a party clears it as before
+        [TestCase(false, false, false, false, ConColor.RED, 3, false)]    // on the way out there is no other way
+        [TestCase(false, true, true, false, ConColor.RED, 3, false)]      // rejoining the leader
+        [TestCase(false, true, false, true, ConColor.RED, 0, false)]      // the camp's own monster
+        public void ASoloBotTurnsBackFromAHardDungeonBlocker(bool grouped, bool hasCamp, bool rejoining, bool ownTarget,
+            ConColor con, int adds, bool turnsBack) =>
+            Assert.That(AutonomousDungeonPolicy.SoloTurnsBackFrom(grouped, hasCamp, rejoining, ownTarget, con, adds), Is.EqualTo(turnsBack));
+
+        [Test]
+        public void ARedOrPurpleBlockerIsPassedOnToBotsOfTheSameLevel()
+        {
+            AutonomousRouteBlockMemory.Clear();
+            long now = 1_000_000;
+            long band10 = AutonomousRouteBlockMemory.WordOfMouthKey(eRealm.Albion, 11, 1);
+            Assert.Multiple(() =>
+            {
+                Assert.That(AutonomousRouteBlockMemory.PassedOn(ConColor.PURPLE), Is.True);
+                Assert.That(AutonomousRouteBlockMemory.PassedOn(ConColor.ORANGE), Is.False);
+                Assert.That(band10, Is.LessThan(0), "never a bot or party key");
+                Assert.That(AutonomousRouteBlockMemory.WordOfMouthKey(eRealm.Albion, 14, 1), Is.EqualTo(band10));
+                Assert.That(AutonomousRouteBlockMemory.WordOfMouthKey(eRealm.Albion, 15, 1), Is.Not.EqualTo(band10));
+                Assert.That(AutonomousRouteBlockMemory.WordOfMouthKey(eRealm.Hibernia, 11, 1), Is.Not.EqualTo(band10));
+                Assert.That(AutonomousRouteBlockMemory.WordOfMouthKey(eRealm.Albion, 11, 2), Is.Not.EqualTo(band10));
+            });
+            for (int i = 0; i < 10; i++)   // ten fields of maidens: a shared key holds more than four
+                AutonomousRouteBlockMemory.Note(band10, 1, new(500_000 + i * 5_000, 380_000), 830, now, AutonomousRouteBlockMemory.WordOfMouthSlots);
+            Assert.That(AutonomousRouteBlockMemory.Crosses(band10, 1, new(500_000, 370_000), new(500_000, 390_000), now), Is.True);
+            Assert.That(AutonomousRouteBlockMemory.Crosses(band10, 1, new(545_000, 370_000), new(545_000, 390_000), now), Is.True);
+            AutonomousRouteBlockMemory.Clear();
+        }
+
         [Test]
         public void ThreeDeathsInOnePlaceMakeItTheBotsOwnDangerSpot()
         {

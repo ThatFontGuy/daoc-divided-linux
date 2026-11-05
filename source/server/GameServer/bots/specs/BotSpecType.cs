@@ -117,5 +117,10 @@ namespace DOL.GS
         ShriekBainshee,
         WailBainshee,
         GuardBainshee,
+
+        // Added builds (owner 2026-10-29, issues 10/18): appended so saved plans keep their numeric meaning.
+        DeathServantNecro,
+        SoulrendingReaver,
+        SpearHunter,
     }
 }

@@ -363,7 +363,7 @@ public sealed partial class RealmExchangeBroker : GameNPC, IGameInventoryObject
             payment.Apply();
             SetWallet(wallet, buyer.GetCurrentMoney());
             var sale = new RealmExchangeSaleLedger.Sale((int)Realm, item.Name, item.Count, price,
-                sellerId, payment.SellerName, buyer.InternalID, buyer.Name, DateTime.UtcNow);
+                sellerId, payment.SellerName, buyer.InternalID, buyer.Name, DateTime.UtcNow, item.IsCrafted);
             if (!RealmExchangeSaleLedger.CommitSale(GameServer.Database, sale, item, buyer.DBCharacter, wallet, payment.Row))
             {
                 payment.Restore();

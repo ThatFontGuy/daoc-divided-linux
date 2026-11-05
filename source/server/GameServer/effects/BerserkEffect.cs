@@ -55,11 +55,11 @@ namespace DOL.GS.Effects
 				//TODO differentiate model between Dwarves and other races
 				if ((living as GamePlayer).Race == (int)eRace.Dwarf)
 				{
-					living.Model = 12;
+					living.Model = BerserkECSGameEffect.DwarfVendoModel;
 				}
 				else
 				{
-					living.Model = 3;
+					living.Model = BerserkECSGameEffect.VendoModel;
 				}
 			}
 		}

@@ -131,6 +131,12 @@ namespace DOL.GS.PacketHandler
 					return;
 			}
 
+			if (npc is GameBot playerShaped && BotPlayerPresentation.TryGetSession(m_gameClient, playerShaped, out ushort botSession))
+			{
+				SendBotAsPlayerCreate(playerShaped, botSession);
+				return;
+			}
+
 			if (npc is GameMovingObject)
 				SendMovingObjectCreate(npc as GameMovingObject);
 			else
@@ -297,6 +303,10 @@ namespace DOL.GS.PacketHandler
 			else if (npc is GameBotTaxi taxi && taxi.Rider?.StableRouteMountForClient == taxi)
 				taxi.Rider.SendStableRideAssociation(m_gameClient.Player, true);
 
+			// a bot first seen while resting is seated at once (the client forgets the state when an object leaves view)
+			if (npc is GameBot seated && seated.IsSeatedForClients)
+				SendEmoteAnimation(seated, GameBot.SitEmote);
+
 			// If the client needs us to send a create packet for its steed, it means we updated it in 'PlayerPositionUpdateHandler' but they fell off.
 			// It can happen because of lag or if a NPC fails to broadcast its position.
 			if (npc == m_gameClient.Player.Steed)
@@ -345,6 +355,56 @@ namespace DOL.GS.PacketHandler
 					SendObjectGuildID(player, playerGuild ?? Guild.DummyGuild);
 				}
 			}
+		}
+
+		/// <summary>A bot as the client's own kind of player (BotPlayerPresentation): same layout as <see cref="SendPlayerCreate"/>.</summary>
+		private void SendBotAsPlayerCreate(GameBot bot, ushort session)
+		{
+			GameNPC mount = bot.StableRouteMountForClient;
+
+			if (mount != null)
+				SendNPCCreate(mount);
+
+			bool masked = AutonomousNameMask.Hides(m_gameClient.Player, bot);
+			string name = masked ? AutonomousNameMask.RaceName(m_gameClient.Player, bot) : bot.Name;
+			string guildName = masked ? AutonomousNameMask.RankTitle(m_gameClient.Player, bot) : bot.GuildName;
+
+			using (var pak = PooledObjectFactory.GetForTick<GSTCPPacketOut>().Init(GetPacketCode(eServerPackets.PlayerCreate172)))
+			{
+				pak.WriteFloatLowEndian(bot.X);
+				pak.WriteFloatLowEndian(bot.Y);
+				pak.WriteFloatLowEndian(bot.Z);
+				pak.WriteShort(session);
+				pak.WriteShort((ushort) bot.ObjectID);
+				pak.WriteShort(bot.Heading);
+				pak.WriteShort(bot.Model);
+				pak.WriteByte(bot.GetDisplayLevel(m_gameClient.Player));
+
+				int flags = (GameServer.ServerRules.GetLivingRealm(m_gameClient.Player, bot) & 0x03) << 2;
+				if (!bot.IsAlive) flags |= 0x01;
+				if (bot.IsUnderwater) flags |= 0x02;
+				if (bot.IsStealthed) flags |= 0x10;
+				pak.WriteByte((byte) flags);
+
+				foreach (byte part in BotPlayerPresentation.Face(bot.Name))
+					pak.WriteByte(part);
+
+				pak.WriteByte(0x00);
+				pak.WriteByte(0x00);
+				pak.WriteByte(0x00);
+				pak.WritePascalString(name ?? string.Empty);
+				pak.WritePascalString(guildName ?? string.Empty);
+				pak.WritePascalString(string.Empty); // Last name.
+				pak.WritePascalString(string.Empty); // Prefix.
+				pak.WritePascalString(string.Empty); // Title.
+				pak.WriteByte(0); // Not on a player horse.
+				SendTCP(pak);
+			}
+
+			SendObjectGuildID(bot, masked ? null : bot.Guild);
+			SendLivingEquipmentUpdate(bot);
+			SendBotPlayerPosition(bot, session, false);
+			bot.SendStableRideAssociation(m_gameClient.Player, true);
 		}
 
 		public override void SendPlayerCreate(GamePlayer playerToCreate)

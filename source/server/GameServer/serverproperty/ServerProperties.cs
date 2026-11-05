@@ -839,6 +839,9 @@ namespace DOL.GS.ServerProperties
 		[ServerProperty("rates", "ml_xp_rate", "Master Level experience from level-50 kills. At 1.0 one Master Level takes the experience of one level 49 to 50; 2.0 is twice as fast. 0 turns ML experience off.", 1.0)]
 		public static double ML_XP_RATE;
 
+		[ServerProperty("rates", "ml_trials_enabled", "Places the Master Level trials in Atlantis. Finishing all of a level's trials raises the Master Level, beside the experience road. Set ml_xp_rate to 0 to make trials the only road.", true)]
+		public static bool ML_TRIALS_ENABLED;
+
 		/// <summary>
 		/// The Champion Level rate from realm points
 		/// </summary>
@@ -962,10 +965,19 @@ namespace DOL.GS.ServerProperties
 		/// <summary>
 		/// Health Regen Rate
 		/// </summary>
-		[ServerProperty("rates", "mana_regen_amount_modifier", "Mana regen amount modifier", 1.0)]
+		/// <summary>
+		/// Power regeneration multiplier. Living Server 1.1.2 (owner 2026-11-03, from a r/daoc report): 1.5 by default. The base
+		/// rate is the pre-1.87 one (patch 1.87 doubled it, about 23 per tick at level 50 instead of 12), so 1.5 is a middle ground.
+		/// Worlds that still had the old untouched default (1) get 1.5 once (LivingServerSettingsUpgrade).
+		/// </summary>
+		[ServerProperty("rates", "mana_regen_amount_modifier", "Power regeneration multiplier for real players and gamebots alike. 1 is the classic rate before patch 1.87, which doubled it; 1.5 (the Living Server default) is a middle ground. Set in the launcher's Living Server tab.", 1.5)]
 		public static double MANA_REGEN_AMOUNT_MODIFIER;
 
-		[ServerProperty("rates", "mana_regen_amount_halved_below_50_percent", "Should the mana regen amount be halved below 50%? Affects list casters only.", true)]
+		/// <summary>
+		/// The classic list-caster rule: half power regeneration below 50% power. Living Server 1.1.2: off by default, and it applies
+		/// to real players and GameBots alike when on (bots were exempt before).
+		/// </summary>
+		[ServerProperty("rates", "mana_regen_amount_halved_below_50_percent", "Halve power regeneration below 50% power for list casters (the classic rule). Applies to real players and gamebots alike. Off by default in the Living Server; set in the launcher's Living Server tab.", false)]
 		public static bool MANA_REGEN_AMOUNT_HALVED_BELOW_50_PERCENT;
 
 		/// <summary>
@@ -2046,6 +2058,12 @@ namespace DOL.GS.ServerProperties
 		[ServerProperty("pve", "lootgenerator_mythirian_named_multiplier", "Multiplier on the mythirian drop chance for named and epic mobs.", 5.0)]
 		public static double LOOTGENERATOR_MYTHIRIAN_NAMED_MULTIPLIER;
 
+		[ServerProperty("loot", "artifact_glass_regions", "Comma separated regions where mobs can drop Atlantean Glass.", "73,30,130,78,35,135,79,36,136,80,37,137,83,40,140,88,45,145,89,46,146,90,47,147,91")]
+		public static string ARTIFACT_GLASS_REGIONS;
+
+		[ServerProperty("loot", "artifact_glass_min_level", "Lowest mob level that can drop Atlantean Glass.", 45)]
+		public static int ARTIFACT_GLASS_MIN_LEVEL;
+
 		[ServerProperty("pve", "lootgenerator_mythirian_min_level", "Lowest mob level that can drop a mythirian.", 45)]
 		public static int LOOTGENERATOR_MYTHIRIAN_MIN_LEVEL;
 		
@@ -2491,8 +2509,15 @@ namespace DOL.GS.ServerProperties
 		/// <summary>
 		/// Guilded gamebots pay dues from real looted coin, earn merit points, and bot guild leaders buy guild buffs.
 		/// </summary>
-		[ServerProperty("guild", "bot_guild_economy", "When bot guilds are on: guilded gamebots pay their guild's dues from the real coin they loot, their level-ups earn the guild merit points as a player's do, and bot guild leaders spend 1,000 merit points on a 24-hour guild buff.", true)]
+		[ServerProperty("guild", "bot_guild_economy", "When bot guilds are on: guilded gamebots pay their guild's dues from the real coin they loot, their level-ups and realm ranks earn the guild merit points as a player's do, and bot guild leaders spend 1,000 merit points on a 24-hour guild buff.", true)]
 		public static bool BOT_GUILD_ECONOMY;
+
+		/// <summary>
+		/// Gamebots a player invited into his guild (AutonomousBotGuilds) pay its dues and earn it merit points, as players do
+		/// (owner 2026-11-03, from a r/daoc report). Guild realm points, keep claims and guild buffs still never count a bot.
+		/// </summary>
+		[ServerProperty("guild", "bot_player_guild_economy", "Gamebots you invite into your guild pay its dues (the rate its leader set) from the real coin they loot, and their level-ups and realm ranks earn it merit points as a player's do. Guild realm points, keep claims and guild buffs still never count a bot. Works whether bot guilds are on or off.", true)]
+		public static bool BOT_PLAYER_GUILD_ECONOMY;
 
 		/// <summary>
 		/// Each realm's RvR and raiding bot guilds form one alliance.
@@ -2529,6 +2554,30 @@ namespace DOL.GS.ServerProperties
 		/// </summary>
 		[ServerProperty("bots", "bot_voices_tells", "When bot voices and bot memory are on: now and then (at most every 25-45 minutes) a bot sends you a tell: a friend saying hello or passing on news, a guildmate, or a solo bot of your level nearby asking to duo.", true)]
 		public static bool BOT_VOICES_TELLS;
+
+		/// <summary>
+		/// Gamebots invite the player to a group: one who says they are looking for a group, or one farming the same camp now and then.
+		/// </summary>
+		[ServerProperty("bots", "bot_invite_players", "Gamebots invite a player who says they are LFG (/lfg, /faction, /say or the group window's LFG flag) and now and then one who is farming the same camp. A player turns it off for themselves with /bots invites off.", true)]
+		public static bool BOT_INVITE_PLAYERS;
+
+		/// <summary>
+		/// Bots are sent to a 1.130 client as player characters, so the client draws their names and bodies the way it draws players.
+		/// </summary>
+		[ServerProperty("bots", "bot_show_as_players", "Send gamebots and companions to the 1.130 client as player characters instead of NPCs (player name plates, faces, player movement). Older clients and the new client always see NPCs.", true)]
+		public static bool BOT_SHOW_AS_PLAYERS;
+
+		/// <summary>
+		/// Bot Watch: a read-only map of gamebots, players and groups in a browser, on 127.0.0.1 only (gameutils/BotWatch.cs).
+		/// </summary>
+		[ServerProperty("bots", "bot_watch", "Open Bot Watch, a read-only browser map of gamebots, players and their groups, at http://127.0.0.1:<login port + 20>/. It listens on this PC only.", true)]
+		public static bool BOT_WATCH;
+
+		/// <summary>
+		/// Floating combat numbers: hits, heals and avoided attacks streamed to the launcher overlay (gameutils/CombatNumbers.cs).
+		/// </summary>
+		[ServerProperty("server", "combat_numbers", "Stream floating combat numbers (your, your pets' and your group's hits and heals, and what is done to you) to the launcher overlay at http://127.0.0.1:<login port + 30>/combat. It listens on this PC only.", true)]
+		public static bool COMBAT_NUMBERS;
 
 		/// <summary>
 		/// How busy realm chat is (the talking update): a multiplier on how often bots start /faction and /say lines.
@@ -2686,6 +2735,36 @@ namespace DOL.GS.ServerProperties
 		/// </summary>
 		[ServerProperty("salvage", "use_new_salvage", "Enable to use a new system calcul of salvage count based on object_type.", false)]
 		public static bool USE_NEW_SALVAGE;
+
+		/// <summary>
+		/// Offline DAoC fishing: monsters (and enemy guards) do not proximity-aggro a real player who holds the fishing pole
+		/// in hand and is not in combat. Bots are never affected, and an angler who attacks is a normal target.
+		/// </summary>
+		[ServerProperty("craft", "fishing_pole_prevents_aggro", "Monsters do not aggro a player who is wielding the fishing pole and not in combat.", true)]
+		public static bool FISHING_POLE_PREVENTS_AGGRO = true;
+
+		/// <summary>
+		/// Offline DAoC fishing: the trade skill id the Fishing line is sent with in the trade skill window, or 0 to leave it out.
+		/// The 1.130 client names each line from its own tdl.crf by this id and ignores the name the server sends, so a
+		/// stock id shows that craft (15 showed as "Basic Crafting Has Been Removed"). Ids the client has no entry for
+		/// (5, 16) are untested.
+		/// </summary>
+		[ServerProperty("craft", "fishing_trade_skill_id", "Trade skill window id for the Fishing line; 0 hides it (the client names lines by id from its own data).", 0)]
+		public static int FISHING_TRADE_SKILL_ID = 0;
+
+		/// <summary>
+		/// Offline DAoC fishing: the objects.csv model every fishing pole is drawn with, applied to the pole item templates at
+		/// server start. 442 is the stock quarterstaff every client has; 4927 is the private fishing rod that
+		/// tools/pet-art/install_fishing_rod.py adds to a client (a client without it draws no pole).
+		/// </summary>
+		[ServerProperty("craft", "fishing_pole_model", "objects.csv model of fishing poles (442 stock quarterstaff; 4927 needs the private rod in every client).", 442)]
+		public static int FISHING_POLE_MODEL = 442;
+
+		/// <summary>
+		/// Offline DAoC fishing: whether casting sits the angler down. Off, they fish standing with the pole drawn.
+		/// </summary>
+		[ServerProperty("craft", "fishing_sits", "Casting a line sits the angler down; off, they fish standing with the pole in hand.", true)]
+		public static bool FISHING_SITS = true;
 
 		#endregion
 

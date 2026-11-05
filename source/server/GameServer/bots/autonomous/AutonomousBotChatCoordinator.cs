@@ -449,6 +449,8 @@ public static class AutonomousBotChatCoordinator
         SendFaction(player.Name, player.Realm, message);
         // Asking anyone for gold or items marks the player for the beggars (AutonomousBeggars).
         AutonomousBeggars.OnPlayerAsked(player, message, "faction");
+        if (AutonomousLivingServer.SaysLookingForGroup(message))
+            AutonomousLivingServer.TryInviteLookingPlayer(player);
         // Naming one side of a running storyline episode takes that side (AutonomousBotStorylines).
         bool tookSide = AutonomousBotStorylines.OnPlayerFactionChat(player, message);
         AutonomousBotDebates.PlayerSpoke(player.Realm, player);
@@ -482,6 +484,8 @@ public static class AutonomousBotChatCoordinator
         // Asking for gold or items near a beggar in a capital: the beggar takes it personally (AutonomousBeggars).
         if (AutonomousBeggars.OnPlayerSay(player, message))
             return;
+        if (AutonomousLivingServer.SaysLookingForGroup(message))
+            AutonomousLivingServer.TryInviteLookingPlayer(player);
         if (AutonomousChatIntentModel.Predict(message) == eAutonomousChatIntent.IgnoreOutOfWorld)
             return;
         if (AutonomousBotGuildSocial.TryAnswerGuildRequest(player, message, false))
@@ -784,6 +788,9 @@ public static class AutonomousBotChatCoordinator
 
     public static string JoinReply(GameBot bot, GamePlayer player, Random random)
     {
+        // The tell can land just before the invite does: the reply is worked out when it is sent (playtest 2026-10-31).
+        if (bot.Group != null && bot.Group == player.Group)
+            return random.Next(2) == 0 ? "im already with you" : "already in your group";
         if (bot.PlayerGroupLeader != null && bot.PlayerGroupLeader != player)
             return random.Next(2) == 0 ? "sorry, already grouped up with someone" : "cant right now, im in a group";
         // The talking update: a bot the invite would refuse (siege, relic, raid...) doesn't say "send me an invite".

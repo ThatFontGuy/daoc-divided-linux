@@ -35,6 +35,9 @@ public static class AutonomousObjectiveAssignments
     public static readonly TimeSpan MaximumPveTenure = TimeSpan.FromMinutes(120);
     public static readonly TimeSpan GroupMatchmakingTimeout = TimeSpan.FromMinutes(20);
     private const string BetweenTasksPrefix = "between-pve-services-";
+    public const string NoCampGoal = "Find a reachable level-appropriate XP camp";
+    public const string RvrGoal = "Active frontier RvR";
+    public const string BattlegroundGoal = "Battleground tour";
     public const string PveCompletionRequired = "awaiting-completed-pve-task";
     public static readonly TimeSpan MaximumBetweenTaskDuration = TimeSpan.FromMinutes(30);
     private static readonly object Sync = new();
@@ -57,6 +60,23 @@ public static class AutonomousObjectiveAssignments
         Enum.TryParse(value, true, out eAutonomousObjectiveKind result) ? result : eAutonomousObjectiveKind.SoloPve;
 
     public static bool Is(GameBot bot, eAutonomousObjectiveKind kind) => KindFor(bot) == kind;
+
+    /// <summary>
+    /// The status code shared with PvE (combat, route threats, replans) names a camp goal, and a frontier bot has no
+    /// camp: of 1,276 RvR deaths in the last log of the night of 2026-10-31, 1,246 reported "Find a reachable
+    /// level-appropriate XP camp" and 25 an old "Grind ..." goal, for bots whose objective was RvR. Any other goal text
+    /// is kept as it is.
+    /// </summary>
+    public static string GoalFor(eAutonomousObjectiveKind kind, string goal)
+    {
+        bool campGoal = goal == NoCampGoal || goal?.StartsWith("Grind ", StringComparison.Ordinal) == true;
+        return !campGoal ? goal : kind switch
+        {
+            eAutonomousObjectiveKind.RvR => RvrGoal,
+            eAutonomousObjectiveKind.Battleground => BattlegroundGoal,
+            _ => goal,
+        };
+    }
 
     public static TimeSpan RollRvrTenure(Random random = null)
     {
@@ -645,6 +665,9 @@ public static class AutonomousObjectiveAssignments
     public static bool WantsBetweenTaskDowntime(GameBot bot) =>
         HasBetweenTaskFlag(bot?.PersistentRecord, 'D');
 
+    public static bool WantsBetweenTaskCraft(GameBot bot) =>
+        HasBetweenTaskFlag(bot?.PersistentRecord, 'C');
+
     /// <summary>
     /// Closes a maintenance assignment as soon as the work it actually
     /// requested is complete.  The old path waited for the next global
@@ -661,7 +684,8 @@ public static class AutonomousObjectiveAssignments
         bool trainingComplete = !WantsBetweenTaskTraining(bot) ||
             (!bot.HasSpendableAutonomousTrainingPoints && !bot.HasPendingAutonomousTraining);
         bool inventoryComplete = !WantsBetweenTaskInventory(bot) || AutonomousBotEconomy.GetNeededService(bot) == null;
-        if (!trainingComplete || !inventoryComplete)
+        bool craftComplete = !WantsBetweenTaskCraft(bot) || AutonomousBotCrafting.TripDone(bot);
+        if (!trainingComplete || !inventoryComplete || !craftComplete)
             return false;
 
         CompleteBetweenTaskServices(bot);
@@ -701,7 +725,11 @@ public static class AutonomousObjectiveAssignments
     // durable phase commits to unloading even after the first slot is freed.
     private static bool TryBeginBetweenTaskServices(GameBot bot)
     {
-        if (bot?.PersistentRecord == null || bot.Group != null)
+        if (bot?.PersistentRecord == null)
+            return false;
+        // A natural task break: deliver pieces made for other bots and perhaps commission one (bot_craft_orders).
+        AutonomousBotCraftOrders.AtTaskBreak(bot);
+        if (bot.Group != null)
             return false;
         // Unload at this task boundary when the bag is nearly full, not only
         // when completely full: otherwise the next task leaves loot on the ground.
@@ -709,10 +737,15 @@ public static class AutonomousObjectiveAssignments
             AutonomousBotEconomy.IsBackpackNearlyFull(bot), Random.Shared.NextDouble(), Random.Shared.NextDouble(),
             bot.IsAutonomousTrainingOverdue);
         bool downtime = AutonomousBotPersonality.RollTownBreak(bot, Random.Shared.NextDouble());
-        if (!plan.Train && !plan.Unload && !downtime) return false;
+        // A crafter with a paid order to make always goes.
+        bool craft = AutonomousBotCrafting.WantsTrip(AutonomousBotCrafting.IsTrained(bot), bot.Level,
+            AutonomousBotCrafting.MaterialStacks(bot), Random.Shared.NextDouble()) ||
+            AutonomousBotCrafting.WantsTrip(true, bot.Level, 0, 0) && AutonomousBotCraftOrders.HasOpenWork(bot);
+        if (!plan.Train && !plan.Unload && !downtime && !craft) return false;
         OfflineWorldBotRecord record = bot.PersistentRecord;
         record.ObjectiveKind = eAutonomousObjectiveKind.SoloPve.ToString();
-        record.ObjectiveAssignmentId = BetweenTasksPrefix + (plan.Train ? "T" : "") + (plan.Unload ? "I" : "") + (downtime ? "D" : "") +
+        // A craft trip ends at the usual inventory stop: what it made goes to the Realm Exchange there.
+        record.ObjectiveAssignmentId = BetweenTasksPrefix + (plan.Train ? "T" : "") + (craft ? "C" : "") + (plan.Unload || craft ? "I" : "") + (downtime ? "D" : "") +
             "-" + bot.DatabaseID + "-" + GameLoop.GameLoopTime;
         record.ObjectiveAssignedUtc = DateTime.UtcNow.ToString("O");
         // A failed service route cannot trap the bot forever either. Existing
@@ -725,7 +758,7 @@ public static class AutonomousObjectiveAssignments
         record.TargetName = string.Empty;
         record.TravelDestination = string.Empty;
         record.ObjectiveProgress = "Task complete; " + (plan.Train ? "train earned specialization points; " : "") +
-            (plan.Unload ? "unload backpack; " : "") + (downtime ? "15-30 minute town break if reachable within the maintenance budget; " : "") + "then choose the next task";
+            (craft ? "make a trip to craft; " : "") + (plan.Unload ? "unload backpack; " : "") + (downtime ? "15-30 minute town break if reachable within the maintenance budget; " : "") + "then choose the next task";
         AutonomousBotEconomy.MarkInventoryChanged(bot);
         bot.MarkAutonomousStateDirty();
         AutonomousBotStatusPersistence.Queue(bot);
@@ -739,6 +772,8 @@ public static class AutonomousObjectiveAssignments
     public static void CompleteBetweenTaskServices(GameBot bot)
     {
         if (!IsBetweenPveTasks(bot)) return;
+        // Hand over what this break's craft trip made for other bots, not one task later.
+        AutonomousBotCraftOrders.AtTaskBreak(bot, commission: false);
         if (BetweenTaskServiceExpired(bot))
             DOL.Logging.LoggerManager.Create(typeof(AutonomousObjectiveAssignments)).Warn(
                 $"AUTONOMOUS_BETWEEN_TASK_TIMEOUT bot=\"{bot.Name}\" id={bot.DatabaseID} level={bot.Level} " +

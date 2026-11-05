@@ -44,8 +44,11 @@ namespace DOL.GS
 
         public static int SelectFixedEightManLevel(IEnumerable<int> levels, int averageLevel, int rolledBonus)
         {
-            int minimum = averageLevel + 3;
-            int maximum = averageLevel + Math.Clamp(rolledBonus, 3, 10);
+            return SelectBandLevel(levels, averageLevel + 3, averageLevel + Math.Clamp(rolledBonus, 3, 10));
+        }
+
+        public static int SelectBandLevel(IEnumerable<int> levels, int minimum, int maximum)
+        {
             int best = 0;
             foreach (int level in levels ?? Array.Empty<int>())
                 if (level >= minimum && level <= maximum)

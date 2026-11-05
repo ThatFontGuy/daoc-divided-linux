@@ -146,6 +146,40 @@ public class UT_AutonomousBotRealmPointRewards
     }
 
     [Test]
+    public void ExperienceValueIsFourLivingsAsForAPlayer()
+    {
+        Assert.That(AutonomousBotRealmPointRewards.GetPlayerEquivalentExperienceValue(1_000), Is.EqualTo(4_000));
+    }
+
+    [Test]
+    public void ExperienceRewardMatchesPlayerKillSplitCapAndDamage()
+    {
+        // Solo, full damage, equal levels: the whole value.
+        Assert.That(AutonomousBotRealmPointRewards.CalculateExperienceReward(4_000, 4_000, 125, 1, 1.0, out long solo), Is.EqualTo(4_000));
+        Assert.That(solo, Is.EqualTo(4_000));
+        // Two-man group dealing 75%: the outpost bonus works from the split, the pay is also scaled by damage.
+        Assert.That(AutonomousBotRealmPointRewards.CalculateExperienceReward(4_000, 4_000, 125, 2, 0.75, out long group), Is.EqualTo(2_000));
+        Assert.That(group, Is.EqualTo(1_500));
+        // A low awarder is capped at 125% of their own value.
+        Assert.That(AutonomousBotRealmPointRewards.CalculateExperienceReward(40_000, 4_000, 125, 1, 1.0, out long capped), Is.EqualTo(5_000));
+        Assert.That(capped, Is.EqualTo(5_000));
+        // Damage above 100% is clamped.
+        AutonomousBotRealmPointRewards.CalculateExperienceReward(4_000, 4_000, 125, 1, 1.5, out long clamped);
+        Assert.That(clamped, Is.EqualTo(4_000));
+    }
+
+    [TestCase(0, 4000, 1, 1.0)]
+    [TestCase(4000, 0, 1, 1.0)]
+    [TestCase(4000, 4000, 0, 1.0)]
+    [TestCase(4000, 4000, 1, 0.0)]
+    public void ExperienceRewardIsZeroWithoutAValidShare(long victim, long awarder, int participants, double damage)
+    {
+        Assert.That(AutonomousBotRealmPointRewards.CalculateExperienceReward(victim, awarder, 125, participants, damage, out long paid),
+            Is.EqualTo(0));
+        Assert.That(paid, Is.EqualTo(0));
+    }
+
+    [Test]
     public void CompanionAndControlledPetResolveToPlayerOwnerWithoutBecomingVictims()
     {
         GamePlayer owner = (GamePlayer)RuntimeHelpers.GetUninitializedObject(typeof(GamePlayer));

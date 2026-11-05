@@ -10,7 +10,7 @@ public static class AutonomousBotGoalPolicy
     public const string OverrideVariable = "OFFLINE_DAOC_BOT_GOALS";
     public static bool IsConfigured { get; private set; }
 
-    public static string FilePath { get; private set; }
+    public static string FilePath { get; private set; } // daoc-divided-linux: lets the admin screen edit the goals file
 
     // One startup read only. Never poll settings or query the database on AI turns.
     public static void Initialize(string serverDirectory)

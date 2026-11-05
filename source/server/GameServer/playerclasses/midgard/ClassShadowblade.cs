@@ -30,7 +30,7 @@ namespace DOL.GS.PlayerClass
 			: base()
 		{
 			m_profession = "PlayerClass.Profession.Loki";
-			m_specializationMultiplier = 22;
+			m_specializationMultiplier = 28;
 			m_primaryStat = eStat.DEX;
 			m_secondaryStat = eStat.QUI;
 			m_tertiaryStat = eStat.STR;
@@ -59,7 +59,7 @@ namespace DOL.GS.PlayerClass
 
 		public override List<PlayerRace> EligibleRaces => new List<PlayerRace>()
 		{
-			 PlayerRace.Kobold, PlayerRace.Norseman, PlayerRace.Valkyn,
+			 PlayerRace.Dwarf, PlayerRace.Kobold, PlayerRace.Norseman, PlayerRace.Valkyn,
 		};
 	}
 }

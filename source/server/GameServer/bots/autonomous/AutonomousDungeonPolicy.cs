@@ -79,6 +79,16 @@ namespace DOL.GS
         public static bool PullsOnRoute(bool epic, bool ownTarget, bool inOwnRaidDungeon) =>
             !epic || ownTarget || inOwnRaidDungeon;
 
+        /// <summary>
+        /// A solo bot on its way to a dungeon camp gives that camp up rather than pull a red corridor blocker, or an orange one
+        /// with two or more others in reach of it. On the 2026-11-02 overnight run essence shredders (57-60, 263 of them in
+        /// Darkness Falls) killed 206 solo level 50s approaching their camps, 174 of them to three or more attackers. A bot with
+        /// no camp (on its way out) or rejoining its leader still clears the corridor: that is the only way it has. Pure.
+        /// </summary>
+        public static bool SoloTurnsBackFrom(bool grouped, bool hasCamp, bool rejoiningLeader, bool ownTarget, ConColor con, int nearbyAdds) =>
+            !grouped && hasCamp && !rejoiningLeader && !ownTarget &&
+            (con >= ConColor.RED || con == ConColor.ORANGE && nearbyAdds >= 2);
+
         public static bool IsReliableAutonomousGoal(ushort region, string name) =>
             (region != AutonomousDarknessFallsPolicy.RegionId || AutonomousDarknessFallsNavigation.IsReady) &&
             !(region == 129 && string.Equals(name, "haunt", StringComparison.OrdinalIgnoreCase)) &&

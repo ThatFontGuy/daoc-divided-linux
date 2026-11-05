@@ -25,6 +25,10 @@ public static class AutonomousDarknessFallsNavigation
     // This is the full ordinary DB baseline, not the number of eligible goals.
     public const int RequiredCombatSpawns = AutonomousDarknessFallsGoalScope.OrdinaryCombatRows;
     private const string ResourceSuffix = "darkness_falls_navigation_proofs.json";
+    private const float MaximumDropHeight = 256;
+    // A drop's walk runs about 35 units from lip to landing, so a bot in it may not be over the landing yet.
+    private const float MaximumDropRun = 48;
+    private static readonly Logging.Logger log = Logging.LoggerManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
     private static readonly Lazy<Certificate> CertificateData = new(LoadCertificate, true);
     private static readonly Lazy<Dictionary<string, SpawnProof>> ProofIndex = new(() =>
         CertificateData.Value?.Spawns.ToDictionary(proof => proof.Id, StringComparer.Ordinal) ??
@@ -297,26 +301,38 @@ public static class AutonomousDarknessFallsNavigation
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             if (certificate?.Spawns == null || certificate.ExcludedOrdinarySpawns == null ||
                 certificate.TraversalLinks?.Length is not > 0 ||
-                certificate.TraversalLinks.Any(link => !ValidTraversalLink(link)) || !HasFullCombatCoverage(
+                certificate.TraversalLinks.Any(link => !ValidTraversalLink(link)))
+                return Closed("its file is malformed");
+            if (!HasFullCombatCoverage(
                     DOLDB<DbMob>.SelectObjects(DB.Column("Region").IsEqualTo(
                         AutonomousDarknessFallsPolicy.RegionId)), certificate.Spawns,
-                    certificate.ExcludedOrdinarySpawns) ||
-                !HasAuthoritativeRealmExits(certificate.Spawns,
-                    GameServer.Database.SelectAllObjects<DbZonePoint>())) return null;
+                    certificate.ExcludedOrdinarySpawns))
+                return Closed("the monsters in region 249 differ from the audited world");
+            if (!HasAuthoritativeRealmExits(certificate.Spawns,
+                    GameServer.Database.SelectAllObjects<DbZonePoint>()))
+                return Closed("the exits of region 249 differ from the audited world");
             string path = Path.GetFullPath(Path.Combine("navmesh", "zone249.nav"));
             if (!File.Exists(path)) path = Path.GetFullPath(Path.Combine("pathing", "zone249.nav"));
-            if (!File.Exists(path) || string.IsNullOrWhiteSpace(certificate.NavSha256)) return null;
+            if (!File.Exists(path) || string.IsNullOrWhiteSpace(certificate.NavSha256))
+                return Closed($"{path} is missing");
             using Stream nav = File.OpenRead(path);
             string actualHash = Convert.ToHexString(SHA256.HashData(nav));
             return string.Equals(actualHash, certificate.NavSha256, StringComparison.OrdinalIgnoreCase)
-                ? certificate : null;
+                ? certificate : Closed($"{path} has SHA-256 {actualHash}, the certificate needs {certificate.NavSha256}");
         }
-        catch
+        catch (Exception e)
         {
             // No proof, a malformed proof, or a different mesh must never
             // create a random PvE objective in a disconnected DF wing.
-            return null;
+            return Closed(e.Message);
         }
+    }
+
+    private static Certificate Closed(string reason)
+    {
+        if (log.IsWarnEnabled)
+            log.Warn($"DF_CERTIFICATE_CLOSED {reason}. Gamebots get no Darkness Falls goals or routes.");
+        return null;
     }
 
     public static bool IsStrictSegment(PathfindingResult result, ReadOnlySpan<WrappedPathfindingNode> nodes,
@@ -473,8 +489,32 @@ public static class AutonomousDarknessFallsNavigation
         return false;
     }
 
+    /// <summary>
+    /// The floor under a bot left hanging in Darkness Falls: nothing in the mesh's reach around it, so no path can start, and
+    /// a floor below within a drop's height and run. Never upward, and never onto a floor it stands beside.
+    /// </summary>
+    public static bool TryFindFloorBelowDrop(IPathfindingMgr nav, Zone zone, Vector3 position, out Vector3 floor)
+    {
+        floor = position;
+        if (zone?.ID != AutonomousDarknessFallsPolicy.RegionId || nav == null ||
+            nav.GetClosestPoint(zone, position, nav.DefaultFilters).HasValue ||
+            nav.GetClosestPointInBounds(zone, position, new(-MaximumDropRun, -MaximumDropRun, -MaximumDropHeight),
+                new(MaximumDropRun, MaximumDropRun, 0), nav.DefaultFilters) is not { } below)
+            return false;
+        floor = below;
+        return true;
+    }
+
     public static float DistanceFromEntrance(SpawnProof proof, eRealm realm) =>
         proof?.Routes?.FirstOrDefault(route => route.Realm == realm)?.DistanceFromEntrance ?? float.PositiveInfinity;
+
+    /// <summary>A room two realms reach about equally. Worked from the proof, so a group's members and a bot
+    /// reloaded at its saved camp all know it.</summary>
+    public static bool IsMeetingRoomCamp(string campId) =>
+        AutonomousDarknessFallsRoutePlan.TryGetCampMobId(campId, out string mobId) &&
+        TryGetProof(mobId, out SpawnProof proof) &&
+        AutonomousDarknessFallsPolicy.IsMeetingRoom(DistanceFromEntrance(proof, eRealm.Albion),
+            DistanceFromEntrance(proof, eRealm.Midgard), DistanceFromEntrance(proof, eRealm.Hibernia));
 
     public static bool IsInAssignedRoom(Vector3 camp, Vector3 monster) =>
         Math.Abs(camp.Z - monster.Z) <= 220 &&

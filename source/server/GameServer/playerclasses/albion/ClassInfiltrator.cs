@@ -30,7 +30,7 @@ namespace DOL.GS.PlayerClass
 			: base()
 		{
 			m_profession = "PlayerClass.Profession.GuildofShadows";
-			m_specializationMultiplier = 25;
+			m_specializationMultiplier = 29;
 			m_primaryStat = eStat.DEX;
 			m_secondaryStat = eStat.QUI;
 			m_tertiaryStat = eStat.STR;
@@ -56,7 +56,7 @@ namespace DOL.GS.PlayerClass
 
 		public override List<PlayerRace> EligibleRaces => new List<PlayerRace>()
 		{
-			 PlayerRace.Briton, PlayerRace.Inconnu, PlayerRace.Saracen,
+			 PlayerRace.Briton, PlayerRace.Highlander, PlayerRace.Inconnu, PlayerRace.Saracen,
 		};
 	}
 }

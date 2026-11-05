@@ -688,7 +688,7 @@ namespace DOL.GS.PacketHandler
         void SendMerchantWindow(MerchantTradeItems itemlist, eMerchantWindowType windowType);
         void SendTradeWindow();
         void SendCloseTradeWindow();
-        void SendPlayerDied(GamePlayer killedPlayer, GameObject killer);
+        void SendPlayerDied(GameLiving killedPlayer, GameObject killer);
         void SendPlayerRevive(GamePlayer revivedPlayer);
         void SendUpdatePlayer();
         void SendUpdatePlayerSkills(bool updateInternalCache);

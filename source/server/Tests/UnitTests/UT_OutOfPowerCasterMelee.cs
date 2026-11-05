@@ -33,6 +33,18 @@ namespace DOL.UnitTests
         }
 
         [Test]
+        public void ADruidWithNoAttackSpellYetFightsInMelee()
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(BotBrain.FightsAtSpellRange(true, true, () => false), Is.False, "a level 1 Druid knows only buffs and heals");
+                Assert.That(BotBrain.FightsAtSpellRange(true, true, () => true), Is.True, "with a nuke it keeps spell range");
+                Assert.That(BotBrain.FightsAtSpellRange(true, false, () => false), Is.True, "a pure caster still holds back without spells");
+                Assert.That(BotBrain.FightsAtSpellRange(false, false, () => true), Is.False, "melee classes are unchanged");
+            });
+        }
+
+        [Test]
         public void TemporaryCompanionHealersHoldTheirPositionDuringAFight()
         {
             Assert.Multiple(() =>

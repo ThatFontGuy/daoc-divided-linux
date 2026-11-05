@@ -117,6 +117,11 @@ public class UT_BotBuffRules
     {
         Assert.That(BotBuffRules.IsMaintainedOutOfCombat(eSpellType.StrengthBuff, false, false, 20 * 60_000), Is.True);
         Assert.That(BotBuffRules.IsMaintainedOutOfCombat(eSpellType.StrengthBuff, false, false, 300_000), Is.True);
+        Assert.That(BotBuffRules.IsMaintainedOutOfCombat(eSpellType.BaseArmorFactorBuff, false, false, 0), Is.False, "Eir's Barrier leaves nothing to maintain");
+        Assert.That(BotBuffRules.LeavesNoEffect(false, false, 0), Is.True);
+        Assert.That(BotBuffRules.LeavesNoEffect(true, false, 0), Is.False, "concentration");
+        Assert.That(BotBuffRules.LeavesNoEffect(false, true, 0), Is.False, "pulse");
+        Assert.That(BotBuffRules.LeavesNoEffect(false, false, 1), Is.False, "a timed buff");
         Assert.That(BotBuffRules.IsMaintainedOutOfCombat(eSpellType.StrengthBuff, true, false, 0), Is.True, "concentration");
         Assert.That(BotBuffRules.IsMaintainedOutOfCombat(eSpellType.Buff, false, true, 6_000), Is.True, "songs and chants");
         Assert.That(BotBuffRules.IsMaintainedOutOfCombat(eSpellType.CelerityBuff, false, false, 60_000), Is.False);

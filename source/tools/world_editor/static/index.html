@@ -12,7 +12,14 @@
 <div id="layout" class="notice"></div>
 <div class="tabs"><button class="active" data-tab="entities">Entities</button><button data-tab="zone">Zone</button><button data-tab="sync">Client sync</button></div>
 <section id="entities" class="tab"><input id="search" placeholder="Find a name, title, or ID…"><details id="layerBox" open><summary>Layers</summary><div id="layerFilters"></div></details><label class="check"><input type="checkbox" id="townOnly"> Town NPCs / trainers / merchants only</label><div id="entityCount"></div><div id="entityList"></div></section>
-<section id="zone" class="tab hidden"><p>Server zone properties. Layout coordinates are read from the client and checked against the server.</p><div id="zoneFields"></div><div id="zoneBounds" class="notice"></div></section>
+<section id="zone" class="tab hidden"><p>Server zone properties. Layout coordinates are read from the client and checked against the server.</p><div id="zoneFields"></div><div id="zoneBounds" class="notice"></div>
+<label>CLIENT BUILDINGS</label><p class="muted">Moves the client's own buildings and scenery on this install only. Close the game and server first. Bots and NPCs keep walking the old navmesh.</p>
+<div class="row"><button id="fixtureLoad">List buildings</button><input id="fixtureSearch" placeholder="Filter by name or ID" class="hidden"></div>
+<select id="fixtureList" size="8" class="hidden"></select>
+<div id="fixtureForm" class="hidden"><div class="row"><label>X <input id="fixtureX" type="number"></label><label>Y <input id="fixtureY" type="number"></label><label>Z <input id="fixtureZ" type="number"></label></div>
+<div class="row"><label>Bearing ° <input id="fixtureA" type="number" min="0" max="359"></label><label>Scale % <input id="fixtureScale" type="number" min="1" max="1000"></label></div>
+<div class="row"><label><input id="fixtureDoors" type="checkbox" checked> Move server doors within</label><input id="fixtureDoorRadius" type="number" min="1" value="800"><span class="muted">units too (pending)</span></div>
+<div class="row"><button id="fixtureApply">Save to client</button></div><p id="fixtureNote" class="muted"></p></div></section>
 <section id="sync" class="tab hidden"><p>Copy the reference client's world files into another client so both draw the same world. Game executables and character art stay unchanged.</p><label>REFERENCE CLIENT</label><div id="sourcePath" class="path"></div><label>TARGET CLIENT</label><select id="targets"></select><button id="compare">Compare world files</button><div id="syncResult" class="notice"></div><button id="syncApply" class="primary" disabled>Apply reviewed world sync</button><p class="muted">Different geometry also needs matching server placements and navigation. File sync does not rebuild navmeshes.</p></section>
 <footer><button id="import">Import patch</button><input id="importFile" type="file" accept=".json" hidden><button id="backups">Restore edits…</button></footer></aside>
 <div id="viewport"><div id="viewBadge">3D ZONE VIEW <span id="geometryStatus">terrain</span></div>

@@ -55,6 +55,17 @@ namespace DOL.UnitTests
         }
 
         [Test]
+        public void HeldFocusDoesNotReplayItsCast()
+        {
+            // The handler wraps its spell in a FocusSpell, so this is the spell the pulse service sees. The database row has IsFocus 0.
+            Assert.That(EffectService.ReplaysCastOnPulse(new FocusSpell(Singe())), Is.False);
+            Assert.That(EffectService.ReplaysCastOnPulse(new Spell(new DbSpell { Type = "Nearsight", Target = "Enemy", Pulse = 1, Frequency = 30, IsFocus = true }, 1)), Is.False);
+
+            Spell chant = new(new DbSpell { Type = "DirectDamage", Target = "Enemy", Pulse = 1, Frequency = 30, Radius = 350 }, 1);
+            Assert.That(EffectService.ReplaysCastOnPulse(chant), Is.True, "a harmful chant still shows each pulse");
+        }
+
+        [Test]
         public void ResistIsTheNormalSpellChance()
         {
             Actor caster = New(), target = New();

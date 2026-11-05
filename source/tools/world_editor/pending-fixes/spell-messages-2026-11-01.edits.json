@@ -1,0 +1,172 @@
+[
+ {
+  "table": "Spell",
+  "key": "11237",
+  "set": {
+   "Message1": "A shell of bark closes around you.",
+   "Message2": "{0} is covered in a shell of bark.",
+   "Message3": "The shell of bark falls away.",
+   "Message4": "{0}'s shell of bark falls away."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11239",
+  "set": {
+   "Message1": "A shell of bark closes around you.",
+   "Message2": "{0} is covered in a shell of bark.",
+   "Message3": "The shell of bark falls away.",
+   "Message4": "{0}'s shell of bark falls away."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11240",
+  "set": {
+   "Message1": "A shell of bark closes around you.",
+   "Message2": "{0} is covered in a shell of bark.",
+   "Message3": "The shell of bark falls away.",
+   "Message4": "{0}'s shell of bark falls away."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11242",
+  "set": {
+   "Message1": "A shell of bark closes around you.",
+   "Message2": "{0} is covered in a shell of bark.",
+   "Message3": "The shell of bark falls away.",
+   "Message4": "{0}'s shell of bark falls away."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "8d20cfad-0ac9-4313-9ffd-f24388a6dd06",
+  "set": {
+   "Message1": "Your aim sharpens.",
+   "Message2": "{0}'s aim sharpens.",
+   "Message3": "Your aim returns to normal.",
+   "Message4": "{0}'s aim returns to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "6b83dfa2-5484-4ec1-8293-4139d315e04d",
+  "set": {
+   "Message1": "Your aim sharpens.",
+   "Message2": "{0}'s aim sharpens.",
+   "Message3": "Your aim returns to normal.",
+   "Message4": "{0}'s aim returns to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "fe217f43-8dde-4685-ac13-d5ab65bcd8f5",
+  "set": {
+   "Message1": "Your aim sharpens.",
+   "Message2": "{0}'s aim sharpens.",
+   "Message3": "Your aim returns to normal.",
+   "Message4": "{0}'s aim returns to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4cde924d-ac1a-4c69-a8d3-fcdd53ad7c32",
+  "set": {
+   "Message1": "Your blows strike harder.",
+   "Message2": "{0}'s blows strike harder.",
+   "Message3": "Your blows return to normal.",
+   "Message4": "{0}'s blows return to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "338dcb71-8ee6-49c4-9459-950f4580494c",
+  "set": {
+   "Message1": "Your blows strike harder.",
+   "Message2": "{0}'s blows strike harder.",
+   "Message3": "Your blows return to normal.",
+   "Message4": "{0}'s blows return to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "6a1136e8-8f15-4472-8e8b-f7aaf4bfbfbd",
+  "set": {
+   "Message1": "Your blows strike harder.",
+   "Message2": "{0}'s blows strike harder.",
+   "Message3": "Your blows return to normal.",
+   "Message4": "{0}'s blows return to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "d010ef5f-76a0-4509-a445-717403593747",
+  "set": {
+   "Message1": "Your healing grows stronger.",
+   "Message2": "{0}'s healing grows stronger.",
+   "Message3": "Your healing returns to normal.",
+   "Message4": "{0}'s healing returns to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "b467a207-9171-495b-9081-7807e8042bef",
+  "set": {
+   "Message1": "Healing has less effect on you.",
+   "Message2": "Healing has less effect on {0}.",
+   "Message3": "Healing returns to normal.",
+   "Message4": "Healing returns to normal on {0}."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "491dad44-0cae-4e45-9051-540e2099c6ed",
+  "set": {
+   "Message1": "Your blades feel lighter.",
+   "Message2": "{0}'s blades move faster.",
+   "Message3": "Your blades return to normal.",
+   "Message4": "{0}'s blades return to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1f212d52-a68e-48b0-96c9-7ab0e57302e2",
+  "set": {
+   "Message1": "Your armor is weakened.",
+   "Message2": "{0}'s armor is weakened.",
+   "Message3": "Your armor recovers.",
+   "Message4": "{0}'s armor recovers."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "0e606ca4-13e6-471b-bb53-5d8cca5c0d24",
+  "set": {
+   "Message1": "Your staff moves with new skill.",
+   "Message2": "{0}'s staff moves with new skill.",
+   "Message3": "Your staff skill returns to normal.",
+   "Message4": "{0}'s staff skill returns to normal."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2bbb1122-3966-432f-ba24-c33983ef68ac",
+  "set": {
+   "Message1": "You reflect the damage done to you.",
+   "Message2": "{0} reflects the damage done to them.",
+   "Message3": "You no longer reflect damage.",
+   "Message4": "{0} no longer reflects damage."
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "d2bf19e4-4ab7-4eac-9805-dc7e3a0fc184",
+  "set": {
+   "Message1": "You feel your strikes grow keener.",
+   "Message2": "{0}'s strikes grow keener.",
+   "Message3": "Your strikes return to normal.",
+   "Message4": "{0}'s strikes return to normal."
+  }
+ }
+]

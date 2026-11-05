@@ -43,6 +43,17 @@ namespace DOL.GS
             points.Any(bind => System.Math.Abs(z - bind.Point.Z) <= 200 &&
                 (x - bind.Point.X) * (x - bind.Point.X) + (y - bind.Point.Y) * (y - bind.Point.Y) <= clearance * clearance);
 
+        // Owner 2026-10-27: Ciaronan (level 23) released 202 times in a day at a Sheeroe Hills bind ringed by level 40-52
+        // glimmers: every route out passed them, it died within a minute and released at the same bind again. A gamebot
+        // back at the same bind this soon for the second time in a row releases at its realm's safe capital instead.
+        public const long QuickReturnMilliseconds = 6 * 60_000;
+        public const int QuickReturnsBeforeCapital = 1;
+
+        public static int NextQuickReturns(int quickReturns, bool sameBind, long sinceLastRelease) =>
+            sameBind && sinceLastRelease < QuickReturnMilliseconds ? quickReturns + 1 : 0;
+
+        public static bool SendsToCapital(int quickReturns) => quickReturns >= QuickReturnsBeforeCapital;
+
         public static Point3D? Resolve(IPathfindingMgr nav, Zone zone, Vector3 anchor)
         {
             if (zone == null) return null;

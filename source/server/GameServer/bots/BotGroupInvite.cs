@@ -58,7 +58,8 @@ public static class BotGroupInvite
         return duty == Duty.None && AutonomousBeggars.Is(bot) ? Duty.Begging : duty;
     }
 
-    public static bool TryInvite(GamePlayer player, GameBot bot)
+    /// <param name="invitedByBot">The bot invited the player, so nobody is told it left its group to answer.</param>
+    public static bool TryInvite(GamePlayer player, GameBot bot, bool invitedByBot = false)
     {
         if (!ServerRules.HybridCoopRules.CanGroup(player, bot))
         {
@@ -98,7 +99,8 @@ public static class BotGroupInvite
             }
 
             bot.Group.RemoveMember(bot);
-            ChatUtil.SendSystemMessage(player, $"{bot.Name} leaves the autonomous group to answer your invitation.");
+            if (!invitedByBot)
+                ChatUtil.SendSystemMessage(player, $"{bot.Name} leaves the autonomous group to answer your invitation.");
         }
 
         if (player.Group == null)

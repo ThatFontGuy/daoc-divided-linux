@@ -38,6 +38,20 @@ namespace DOL.GS
             PreloadLootTemplates();
         }
 
+        /// <summary>
+        /// Every entry of the loot tables the mob's MobXLootTemplate rows name, without entries whose item is missing.
+        /// </summary>
+        public static List<DbLootTemplate> MobTable(string mobName)
+        {
+            PreloadLootTemplates();
+            if (mobName == null || !m_mobXLootTemplates.TryGetValue(mobName.ToLower(), out List<DbMobXLootTemplate> rows))
+                return [];
+            return rows.SelectMany(row => m_lootTemplates.TryGetValue(row.LootTemplateName.ToLower(),
+                    out Dictionary<string, DbLootTemplate> table) ? table.Values : Enumerable.Empty<DbLootTemplate>())
+                .Distinct()
+                .ToList();
+        }
+
         public static void ReloadLootTemplates()
         {
             m_lootTemplates = null;
@@ -404,13 +418,33 @@ namespace DOL.GS
                         // and add every 100% chance items to the loots Fixed list and add the rest to the Random list
                         // due to the fact that 100% items always drop regardless of the drop limit
 
-                        List<DbLootTemplate> lootTemplatesToDrop = new List<DbLootTemplate>();
-
                         long dropChan = 0;
                         long tmp = 0;
+                        bool hasOwnRow = killedMobXLootTemplates.Exists(x =>
+                            string.Equals(x.LootTemplateName, x.MobName, StringComparison.OrdinalIgnoreCase));
+                        bool ownTableRead = false;
                         foreach (DbMobXLootTemplate mobXLootTemplate in killedMobXLootTemplates)
                         {
-                            loot = GenerateLootFromMobXLootTemplates(mobXLootTemplate, lootTemplatesToDrop, loot,
+                            // Each row's own table (its LootTemplateName), rolled once (owner 2026-10-31: every row used to
+                            // re-read the mob's own table and the list carried over between rows, so a mob with two rows
+                            // rolled its items three times and dropped its 100% items twice). A row naming a table that
+                            // doesn't exist falls back to the mob's own table, once, when no row names that one.
+                            string templateName = string.IsNullOrEmpty(mobXLootTemplate.LootTemplateName)
+                                ? mobXLootTemplate.MobName : mobXLootTemplate.LootTemplateName;
+                            if (!m_lootTemplates.ContainsKey(templateName.ToLower()))
+                            {
+                                if (hasOwnRow)
+                                    continue;
+                                templateName = mobXLootTemplate.MobName;
+                            }
+                            if (string.Equals(templateName, mobXLootTemplate.MobName, StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (ownTableRead)
+                                    continue;   // the mob's own table counts once, however many rows name it
+                                ownTableRead = true;
+                            }
+                            List<DbLootTemplate> lootTemplatesToDrop = new List<DbLootTemplate>();
+                            loot = GenerateLootFromMobXLootTemplates(mobXLootTemplate, templateName, lootTemplatesToDrop, loot,
                                 lootOwner);
 
                             if (lootTemplatesToDrop != null)
@@ -550,7 +584,7 @@ namespace DOL.GS
         /// <param name="lootList">List to hold loot.</param>
         /// <param name="player">Player used to determine realm</param>
         /// <returns>lootList (for readability)</returns>
-        private LootList GenerateLootFromMobXLootTemplates(DbMobXLootTemplate mobXLootTemplates,
+        private LootList GenerateLootFromMobXLootTemplates(DbMobXLootTemplate mobXLootTemplates, string templateName,
             List<DbLootTemplate> lootTemplates, LootList lootList, GameLiving lootOwner)
         {
             if (mobXLootTemplates == null || lootTemplates == null || lootOwner == null)
@@ -560,10 +594,10 @@ namespace DOL.GS
 
             Dictionary<string, DbLootTemplate> templateList = null;
 
-            if (m_lootTemplates.ContainsKey(mobXLootTemplates.MobName.ToLower()))
-            {
-                templateList = m_lootTemplates[mobXLootTemplates.MobName.ToLower()];
-            }
+            // The table the caller resolved from the row's LootTemplateName (it used to read MobName, so every row re-read
+            // the mob's own table and a row naming another table was never used).
+            if (templateName != null)
+                m_lootTemplates.TryGetValue(templateName.ToLower(), out templateList);
 
             if (templateList != null)
             {

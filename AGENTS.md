@@ -36,6 +36,7 @@ From 0.37 on a version is a game patch (both editions) plus a new-client patch, 
 | `source/tools/build_newclient_037.py` | Builds the 0.37c new-client reference package (`build_newclient_036.py` + `seal_newclient_036.py` made the 0.36c full download) |
 | `source/tools/make_downloaders_037.py` | Makes the downloader zips (`Download-OfflineDAoC-v0.37*.zip`) |
 | `source/tools/smoke_release_037.py` | Starts a package's server and logs in, as a player would |
+| `source/tools/OfflineDaoc.TestClient` | Headless client that plays on the real server: MCP tools for AI testers and saved scenarios ([README](source/tools/OfflineDaoc.TestClient/README.md)) |
 | `source/tools/release-world-defaults.json` | The default keep owners, levels and doors every release world starts with |
 | `source/new-client` | The new client: Godot 4 project (`godot/`), its C# network client and the content pipeline. Converted game content is not in Git. |
 | `source/tools/*_035.py`, `*_02.py` | Earlier releases' pipelines, kept for reference |

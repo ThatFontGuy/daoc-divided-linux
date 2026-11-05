@@ -159,6 +159,9 @@ namespace DOL.GS.PacketHandler
 
         private static readonly System.Collections.Concurrent.ConcurrentDictionary<int, byte> _unhandledLogged = new();
 
+        // Notices the 1.130 client sends on world entry and exit; official servers do not answer them either.
+        public static bool IsKnownUnhandledClientPacket(int code) => code is 0x1D or 0x42 or 0x43 or 0xAC or 0xB8;
+
         public void ProcessInboundPacket(GSPacketIn packet)
         {
             int code = packet.Code;
@@ -182,10 +185,11 @@ namespace DOL.GS.PacketHandler
             {
                 // Logged once per code: client buttons whose packet the server has no handler for (owner 2026-10-08:
                 // the Quest Journal's QUEST GUIDE button reached nothing; this shows what the client sends).
-                if (_unhandledLogged.TryAdd(code, 0) && log.IsInfoEnabled)
+                // Warn, because logconfig.xml drops this class's Info messages.
+                if (!IsKnownUnhandledClientPacket(code) && _unhandledLogged.TryAdd(code, 0) && log.IsWarnEnabled)
                 {
                     string account = _client.Account != null ? _client.Account.Name : _client.TcpEndpointAddress;
-                    log.Info(Marshal.ToHexDump($"UNHANDLED_CLIENT_PACKET <{account}> code=0x{code:X2} length={packet.PacketSize}", packet.ToArray()));
+                    log.Warn(Marshal.ToHexDump($"UNHANDLED_CLIENT_PACKET <{account}> code=0x{code:X2} length={packet.PacketSize}", packet.ToArray()));
                 }
                 return;
             }

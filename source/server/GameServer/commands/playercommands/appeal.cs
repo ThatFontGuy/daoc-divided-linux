@@ -60,7 +60,7 @@ namespace DOL.GS.Commands
                     AppealMgr.MessageToClient(client, LanguageMgr.GetTranslation(client.Account.Language, "Scripts.Players.Appeal.AlreadyActiveAppeal", client.Player.Name));
                     return;
                 }
-                if (args.Length < 5)
+                if (!HasEnoughDetail(args))
                 {
                     AppealMgr.MessageToClient(client, LanguageMgr.GetTranslation(client.Account.Language, "Scripts.Players.Appeal.NeedMoreDetail"));
                     return;
@@ -101,12 +101,20 @@ namespace DOL.GS.Commands
                         }
 
                 }
-                string message = string.Join(" ", args, 1, args.Length - 1);
+                string message = string.Join(" ", args, 1, args.Length - 1).Trim();
+                if (message.Length == 0)
+                    message = "Stuck";
                 GamePlayer p = client.Player as GamePlayer;
                 AppealMgr.CreateAppeal(p, severity, "Open", message);
                 return;
             }
             return;
+        }
+
+        // The client's own stuck dialog can send little or no text.
+        public static bool HasEnoughDetail(string[] args)
+        {
+            return args.Length >= 5 || args[1].Equals("stuck", System.StringComparison.OrdinalIgnoreCase);
         }
     }
 

@@ -1237,6 +1237,15 @@ public static partial class AutonomousBotGroupCoordinator
     public static bool StartsBetweenPullRecovery(bool combatObserved, bool groupPveTaskStarted, bool membersReady) =>
         combatObserved || groupPveTaskStarted && !membersReady;
 
+    /// <summary>
+    /// Whether this pulse looks at the party's resources. A rest that began with no fight seen, or after a resurrection, only
+    /// looked while someone was below 90/80/80: from there to full nothing looked again, so the rest could never end and the party
+    /// stood rested until its task ran out or something attacked it. Overnight 2026-10-31: 114 of 389 PvE parties ended with members
+    /// parked so, all 572 of those members at full, 26 of the 34 with an Atlantis camp, a long walk with few fights to break it.
+    /// </summary>
+    public static bool ReviewsBetweenPullRecovery(bool recovering, bool combatObserved, bool groupPveTaskStarted, bool membersReady) =>
+        recovering || StartsBetweenPullRecovery(combatObserved, groupPveTaskStarted, membersReady);
+
     private static bool MembersReadyForPull(GameBot[] members) => members.Length >= 2 &&
         members.All(member => ReadyForGroupPull(member.HealthPercent, member.ManaPercent,
             member.EndurancePercent, member.MaxMana > 0));
@@ -2037,7 +2046,7 @@ public static partial class AutonomousBotGroupCoordinator
             session.CombatObserved = true;
             session.RecoveringBetweenPulls = false;
         }
-        else if (!session.Recovery.IsRegrouping && StartsBetweenPullRecovery(session.CombatObserved,
+        else if (!session.Recovery.IsRegrouping && ReviewsBetweenPullRecovery(session.RecoveringBetweenPulls, session.CombatObserved,
                      session.ObjectiveKind == eAutonomousObjectiveKind.GroupPve && session.TaskClock.HasStarted,
                      MembersReadyForPull(members)))
         {

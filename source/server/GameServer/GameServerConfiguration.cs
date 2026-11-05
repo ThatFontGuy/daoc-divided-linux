@@ -48,6 +48,11 @@ namespace DOL.GS
 		protected bool m_autoAccountCreation;
 
 		/// <summary>
+		/// The hash of the password a friend's new account must use; empty for none
+		/// </summary>
+		protected string m_hostPasswordHash = string.Empty;
+
+		/// <summary>
 		/// The game server type
 		/// </summary>
 		protected EGameServerType m_serverType;
@@ -152,6 +157,7 @@ namespace DOL.GS
             m_scriptAssemblies = root["Server"]["ScriptAssemblies"].GetString(m_scriptAssemblies);
             m_enableCompilation = root["Server"]["EnableCompilation"].GetBoolean(true);
             m_autoAccountCreation = root["Server"]["AutoAccountCreation"].GetBoolean(m_autoAccountCreation);
+            m_hostPasswordHash = root["Server"]["HostPasswordHash"].GetString(m_hostPasswordHash);
 
             string serverType = root["Server"]["GameType"].GetString("Normal");
             switch (serverType.ToLower())
@@ -281,6 +287,7 @@ namespace DOL.GS
 			root["Server"]["ScriptAssemblies"].Set(m_scriptAssemblies);
 			root["Server"]["EnableCompilation"].Set(m_enableCompilation);
 			root["Server"]["AutoAccountCreation"].Set(m_autoAccountCreation);
+			root["Server"]["HostPasswordHash"].Set(m_hostPasswordHash);
 
 			string serverType = "Normal";
 
@@ -383,7 +390,10 @@ namespace DOL.GS
 		    m_invalidNamesFile = Path.Combine(Path.Combine(".", "config"), "invalidnames.txt");
 
 			m_dbType = EConnectionType.DATABASE_SQLITE;
-			m_dbConnectionString = string.Format("Data Source={0};Version=3;Pooling=False;Cache Size=1073741824;Journal Mode=Off;Synchronous=Off;Foreign Keys=True;Default Timeout=60",
+			// Living Server 1.1.2: WAL with Synchronous=Normal (was Journal Mode=Off, Synchronous=Off: a crash in the middle
+			// of a save could corrupt the world). The server applies the same settings to any configured string
+			// (WorldDatabaseSafety.PrepareConnectionString); this is what a new serverconfig.xml is written with.
+			m_dbConnectionString = string.Format("Data Source={0};Version=3;Pooling=True;Cache Size=1073741824;Journal Mode=WAL;Synchronous=Normal;Foreign Keys=True;BusyTimeout=10000;Default Timeout=60",
 			                                     Path.Combine(m_rootDirectory, "dol.sqlite3.db"));
 			m_autoSave = true;
 			m_saveInterval = 10;
@@ -459,6 +469,15 @@ namespace DOL.GS
 		{
 			get { return m_autoAccountCreation; }
 			set { m_autoAccountCreation = value; }
+		}
+
+		/// <summary>
+		/// The hash of the password a friend's new account must use (see HostPassword); empty for none
+		/// </summary>
+		public string HostPasswordHash
+		{
+			get { return m_hostPasswordHash; }
+			set { m_hostPasswordHash = value; }
 		}
 
 		/// <summary>

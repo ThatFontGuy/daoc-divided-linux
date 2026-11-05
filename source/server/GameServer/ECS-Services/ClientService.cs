@@ -139,6 +139,12 @@ namespace DOL.GS
                             player.NextWorldUpdate = GameLoop.GameLoopTime + Properties.WORLD_PLAYER_UPDATE_INTERVAL;
                         }
 
+                        if (player != null && GameServiceUtils.ShouldTick(player.NextRegenerationCheck))
+                        {
+                            player.NextRegenerationCheck = GameLoop.GameLoopTime + 10_000;
+                            player.EnsureRegeneration();
+                        }
+
                         Send(client);
                         break;
                     }
@@ -849,6 +855,9 @@ namespace DOL.GS
                     // A stealthed gamebot the player can no longer detect disappears from the client (else it lingers).
                     if (cachedNpc is GameBot { IsStealthed: true } or StormWolf { IsStealthed: true } && cachedNpc.ObjectState is GameObject.eObjectState.Active)
                         player.Out.SendObjectRemove(cachedNpc);
+                    // The client lets go of an NPC by itself; a player it keeps until told, and a bot may be shown as one.
+                    else if (cachedNpc is GameBot shownBot && BotPlayerPresentation.TryGetSession(player.Client, shownBot, out _))
+                        player.Out.SendObjectRemove(cachedNpc);
                 }
             }
 
@@ -861,6 +870,13 @@ namespace DOL.GS
                     CreateNpcForPlayerInternal(player, npcInRange);
                 else if (GameServiceUtils.ShouldTick(cachedNpcValues.LastUpdateTime + Properties.WORLD_NPC_UPDATE_INTERVAL))
                     UpdateObjectForPlayerInternal(player, npcInRange, false);
+                else if (npcInRange is GameBot shownBot &&
+                         GameServiceUtils.ShouldTick(cachedNpcValues.LastUpdateTime + BotPlayerPresentation.UpdateInterval(shownBot.IsMoving, cachedNpcValues.WasMoving)) &&
+                         BotPlayerPresentation.TryGetSession(player.Client, shownBot, out _))
+                {
+                    cachedNpcValues.WasMoving = shownBot.IsMoving;
+                    UpdateObjectForPlayerInternal(player, npcInRange, false);
+                }
                 else if (npcInRange == targetObject || npcInRange == pet)
                 {
                     if (GameServiceUtils.ShouldTick(cachedNpcValues.LastUpdateTime + 250) && npcInRange.HealthPercent != cachedNpcValues.HealthPercent)
@@ -994,9 +1010,14 @@ namespace DOL.GS
         {
             public long LastUpdateTime { get; set; }
             public byte HealthPercent { get; set; }
+            /// <summary>The last position sent for a bot shown as a player had it moving.</summary>
+            public bool WasMoving { get; set; }
+            /// <summary>When the NPC was first sent to this player (its create packet).</summary>
+            public long CreatedTime { get; }
 
             public CachedNpcValues(long time, byte healthPercent)
             {
+                CreatedTime = time;
                 LastUpdateTime = time;
                 HealthPercent = healthPercent;
             }

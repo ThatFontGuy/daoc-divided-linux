@@ -16,7 +16,7 @@ namespace DOL.UnitTests
         [TestCase(ConColor.ORANGE, false, 1, false, false, 0, false, ExpectedResult = RouteThreatAction.Pull, TestName = "Solo: no way around and no second give-up yet, a single orange is fought")]
         [TestCase(ConColor.ORANGE, false, 2, false, false, 0, false, ExpectedResult = RouteThreatAction.Ignore, TestName = "Solo: an orange pair is never pulled")]
         [TestCase(ConColor.YELLOW, false, 1, false, true, 0, true, ExpectedResult = RouteThreatAction.Detour, TestName = "Solo: a yellow single is gone around when possible")]
-        [TestCase(ConColor.YELLOW, false, 2, false, false, 0, true, ExpectedResult = RouteThreatAction.Retarget, TestName = "Solo: a yellow pair with no way around ends the camp")]
+        [TestCase(ConColor.YELLOW, false, 2, false, false, 0, true, ExpectedResult = RouteThreatAction.Pull, TestName = "Solo: a yellow pair with no way around is fought")]
         [TestCase(ConColor.ORANGE, false, 1, false, true, 2, true, ExpectedResult = RouteThreatAction.Retarget, TestName = "Solo: after two detours, a single orange ends the camp")]
         [TestCase(ConColor.RED, false, 1, false, false, 0, true, ExpectedResult = RouteThreatAction.Retarget, TestName = "Solo: a red with no way around ends the camp")]
         [TestCase(ConColor.RED, false, 1, false, false, 0, false, ExpectedResult = RouteThreatAction.Ignore, TestName = "Solo: no second give-up within 10 minutes")]

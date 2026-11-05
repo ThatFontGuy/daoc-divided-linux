@@ -52,6 +52,11 @@ namespace DOL.GS
             return MatchesBuild(spec, type);
         }
 
+        /// <summary>
+        /// Every class can equip a small shield, but a staff or two-handed build never has a hand free for one.
+        /// </summary>
+        public static bool ShieldFitsBuild(GameBot bot) => bot?.BotSpec is not { Is2H: true };
+
         public static bool MatchesBuild(BotSpec spec, eObjectType type)
         {
             if (type == spec.WeaponOneType && type != 0) return true;

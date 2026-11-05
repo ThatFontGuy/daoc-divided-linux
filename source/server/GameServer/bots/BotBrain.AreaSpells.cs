@@ -69,7 +69,8 @@ namespace DOL.AI.Brain
             if (living == null || living == Body || !living.IsAlive || living.ObjectState != GameObject.eObjectState.Active ||
                 IsUntargetable(living) || !GameServer.ServerRules.IsAllowedToAttack(Body, living, true))
                 return;
-            _blastCandidates.Add(new(center.GetDistanceTo(living), IsEngagedEnemy(living), living.IsMezzed));
+            // Mesmerized, or rooted by a root that damage breaks: the blast would free it.
+            _blastCandidates.Add(new(center.GetDistanceTo(living), IsEngagedEnemy(living), IsBreakablyControlled(living)));
         }
 
         private bool HasBlastPlayerLike()
@@ -101,6 +102,10 @@ namespace DOL.AI.Brain
         /// <summary>An instant point blank spell (Thane, Reaver, Cleric, Shaman): worth it when it hits two or more and wakes or pulls nothing.</summary>
         private bool InstantPointBlankWorthwhile(Spell spell, GameLiving target)
         {
+            // A pulsing aura (Reaver): one at a time. Starting a pulsing spell ends the others, so the Reaver's three
+            // auras cancelled each other every turn and it stood in place (run of 2026-10-28: 1,374 stuck Reavers).
+            if (IsHarmfulAura(spell) && ActiveHarmfulAura() != null)
+                return false;
             BotAoePolicy.Blast blast = EvaluateBlast(Body, spell);
             if (!blast.Worthwhile)
                 return false;
@@ -305,13 +310,64 @@ namespace DOL.AI.Brain
             return true;
         }
 
+        private long _auraIdleSince;
+        private const long AuraIdleMilliseconds = 3_000;
+
+        /// <summary>A pulsing point blank spell that harms: the Reaver's auras and curses.</summary>
+        private static bool IsHarmfulAura(Spell spell) => spell is { IsPulsing: true, IsHarmful: true, IsPBAoE: true };
+
+        private ECSPulseEffect ActiveHarmfulAura()
+        {
+            if (Body.effectListComponent?.ContainsEffectForEffectType(eEffect.Pulse) != true)
+                return null;
+            foreach (ECSPulseEffect pulse in Body.effectListComponent.GetPulseEffects())
+                if (!pulse.IsEnding && !pulse.IsEnded && IsHarmfulAura(pulse.SpellHandler?.Spell))
+                    return pulse;
+            return null;
+        }
+
+        /// <summary>
+        /// Every turn: a harmful aura runs only while a monster in the fight is within its reach. It is ended at once
+        /// when it would reach a mesmerized monster or one not in the fight, and three seconds after nothing in the
+        /// fight is in reach (the fight is over), so a Reaver never walks on with an aura pulsing.
+        /// </summary>
+        private void WatchHarmfulAura()
+        {
+            ECSPulseEffect aura = ActiveHarmfulAura();
+            if (aura == null)
+            {
+                _auraIdleSince = 0;
+                return;
+            }
+            BotAoePolicy.Blast blast = EvaluateBlast(Body, aura.SpellHandler.Spell);
+            long now = GameLoop.GameLoopTime;
+            if (blast.Vetoed)
+            {
+                aura.End();
+                _auraIdleSince = 0;
+                return;
+            }
+            if (blast.Hits > 0)
+            {
+                _auraIdleSince = 0;
+                return;
+            }
+            if (_auraIdleSince == 0)
+                _auraIdleSince = now;
+            else if (now - _auraIdleSince >= AuraIdleMilliseconds)
+            {
+                aura.End();
+                _auraIdleSince = 0;
+            }
+        }
+
         private void ReportArea(string kind, Spell spell, int hits)
         {
             long now = GameLoop.GameLoopTime;
             if (now < _nextAreaReport)
                 return;
             _nextAreaReport = now + 30_000;
-            log.Info($"BOT_AREA_SPELL kind={kind} bot=\"{Body.Name}\" class=\"{BotBody.ClassName}\" spell=\"{spell.Name}\" " +
+            if (BotDiagnostics.Enabled) log.Info($"BOT_AREA_SPELL kind={kind} bot=\"{Body.Name}\" class=\"{BotBody.ClassName}\" spell=\"{spell.Name}\" " +
                      $"hits={hits} radius={spell.Radius} region={Body.CurrentRegionID} at={Body.X},{Body.Y} " +
                      $"companion={BotBody.IsTemporaryGroupHelper}");
         }

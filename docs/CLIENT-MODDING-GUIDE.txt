@@ -155,12 +155,23 @@ CONFIRMED
 - Monster skin DDS: DXT1 with a full mip chain works (install_pet_art.encode_dds).
   Same size as the original is safest (the badh skin is 256x512).
 - The client caches delve (tooltip) info locally (PacketLib1110 notes).
+- Static table sizes, read from each game.dll's own getters (2026-10-31; World
+  Workshop's asset_worker.table_caps reads them the same way):
+    objects.csv   5000 on classic clients, 5500 on 1.130 (196 bytes an entry)
+    monsters.csv  2500 on both (464 bytes an entry)
+  Highest IDs in use: classic objects 4926 and monsters 2499; modern objects
+  4926 and monsters 2441.
+- Monster model IDs >= 2500: the getter and the monsters.csv loader both refuse
+  them. The stock table ends at 2493; private pets use 2494-2499; the ghastly
+  healer uses gap 2072. Prefer unused gaps below 2500 (2067-2071 were free;
+  check no Mob or NpcTemplate uses the ID). Camelot Studio measured on 1.127
+  that a row at 2500 stops the client parsing the rest of the table, so don't
+  add one on an unpatched client.
 UNCONFIRMED
-- Monster model IDs >= 2500. The stock table ends at 2493; private pets use
-  2494-2499; the ghastly healer uses gap 2072. 2500 was invisible once, but
-  that test was spoiled by the Expansion Only flag and other changes, so the
-  limit is NOT proven. Prefer unused gaps below 2500 (2067-2071 were free;
-  check no Mob or NpcTemplate uses the ID) until someone tests 2500+ cleanly.
+- source/tools/classslots/model_table.py moves the 1.130 monster table to a new
+  section and raises the ceiling to 32768. Checked by unit tests and an emulated
+  getter on 2026-10-31, NOT tried in game, and not part of the normal client
+  build. Camelot Studio's version of this patch rendered model 10000 on 1.127.
 - spnifs "1500 limit" (header text; private ids 1402-1409 used, never exceeded).
 - Adding brand-new sound files (section 8).
 
@@ -345,9 +356,9 @@ UNCONFIRMED
   lines (section 3).
 - Copied "Expansion Only" = 1 from the Shrouded Isles badh rows onto private
   rows. Set to 0 like every working private pet.
-- Blamed monster ID 2500 for invisibility without proof; the real cause was
-  the blank line. Lesson: diff against a working private row and test one
-  change at a time.
+- Blamed monster ID 2500 for invisibility without proof; that test's cause was
+  the blank line, though IDs of 2500 and up are refused anyway (section 4).
+  Lesson: diff against a working private row and test one change at a time.
 - NIF rows appended after the monnifs "1000, MAX MONNIFS" terminator -> model
   invisible (walking dead history). Fix: insert before the terminator.
 - 590xx server SpellIDs used as TooltipId -> blank hovers (signed 16-bit);

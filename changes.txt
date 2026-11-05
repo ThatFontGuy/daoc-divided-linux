@@ -1,5 +1,16 @@
 CHANGES (short tldr, newest first)
 
+2026-11-04
+- Bracket bot gear fix 2: the kit's generated items had AllowAdd=false in a persistent inventory, so every save logged "not allowed to be added to Database" (~100 lines/s, 50 MB of log in 40 min) and the gear would have reloaded blank. EquipBracketKit now sets AllowAdd on the kit's items. Seen in the in-game test. Confirmed in game: 35 bracket bots logged in to Thidranki with 0 such warnings and 0 slot errors, and 48 torso pieces were saved to the database. Not yet checked: gear still there after a server restart.
+- Removed the Windows-era root clutter (GET-OFFLINE-DAOC cmds, Get-OfflineDAoC.ps1, older-versions, package-files*, READ ME FIRST, RELEASE VERIFICATION, START WORLD EDITOR, DEVELOPMENT - START HERE); listed in tools/upstream-exclude.txt so syncs skip them.
+- Easier future syncs: tools/sync-upstream.sh (+ tools/upstream-exclude.txt) applies upstream's diff since "Merged-upstream:" in UPSTREAM.md, 3-way, minus what we cut out; UPSTREAM.md lists every edit we made to an upstream file. build-release.sh keeps only the newest tarball. Untracked 47 CMake build files from git.
+- Merged upstream DividedRealms 084a433 (DR-dev-0.1a, the Fishing Update; 255 commits) on branch merge-dr-dev-0.1a. Without the Passport Desk, TestClient, Windows launcher changes. Server builds, 5692 tests pass (was 4887). Not yet run in game.
+- World updates dev8..DR-dev-0.1a (5 steps) apply to a copy of the dev7 world. build-release.sh now takes world-updates from source/tools/release-baselines instead of the release zip (the new zip is 1.2 GB with a different name; fetch-divided-release.py still fetches the dev7 world).
+- tools/fetch-divided-release.py finds the release zip and its top folder through the GitHub API (the dev7 zip is gone, and DR-dev-0.1 renamed it); build-release.sh now defaults to RELEASE_TAG=DR-dev-0.1a. Built dist/daoc-divided (988 MB tarball) from the merge; the old one is in dist/daoc-divided.backup-dev7. Not started yet.
+- Bracket bot gear kit fix: it ran after the starter-weapon steps, so its weapons hit occupied slots ("Destination slot is not empty (10)") and were lost. The kit now runs first. Found in the first in-game test of the merge; the bug predates the merge. Bots already created before the fix keep their starter weapon and need deleting and recreating.
+- Dropped our bot death-pose change (ShowDeathPose, IPacketLib SendPlayerRevive(GameLiving)); upstream fixes the same thing with ShowDeadToViewers/ShowStandingToViewers. Check in game that bot corpses lie down.
+- Still to check in game: bracket bot gear (armor condition now counts for bots), no-players-no-bots, load governor.
+
 2026-10-30
 - Audit vs the Windows launcher: serverconfig Foreign Keys=False (was True), MailConfig.xml in defaults/; Battleground fix on the Client tab.
 - Project created from DividedRealms e7155da (0.38-dev7) minus the Godot client (World Workshop editor kept).
@@ -20,3 +31,4 @@ CHANGES (short tldr, newest first)
 - "No players, no bots": ordinary bots log out 120 s after the last player leaves the world and stay out until a player enters (option bots_only_with_players, on by default; bots_only_with_players_grace_seconds). Unit tested; checked on the test server with no player; logout/return with a real player not yet seen.
 - Admin screen: Client tab buttons now resize with their label ("Switch to original" was cut to "Switch to").
 - Battleground fix no longer needs an OpenDAoC client: the classic zone table (zones.mpk, 9.8 KB) ships in the server folder (tools/zones-classic.mpk); the Client tab box for the classic folder is gone.
+- 2026-10-30: bots now show the death pose (PlayerDeath/Revive packet sent for the bot's object id; IPacketLib SendPlayerDied/Revive take GameLiving) - bot corpses stood upright before.

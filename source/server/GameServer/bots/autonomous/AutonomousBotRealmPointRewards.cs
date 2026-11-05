@@ -6,6 +6,7 @@ using DOL.Database;
 using DOL.GS.Keeps;
 using DOL.GS.PacketHandler;
 using DOL.GS.ServerProperties;
+using DOL.GS.ServerRules;
 using static DOL.GS.ServerRules.IServerRules;
 
 namespace DOL.GS;
@@ -75,6 +76,26 @@ public static class AutonomousBotRealmPointRewards
         int baseBountyPoints = victimBountyPointValue / participantCount;
         baseBountyPoints = Math.Min(baseBountyPoints, awarderBountyPointValue * 2);
         return Math.Max(0, (int)(baseBountyPoints * Math.Min(1.0, damagePercent)));
+    }
+
+    /// <summary>Experience value of a gamebot: a level's living value times four, as GamePlayer.ExperienceValue.</summary>
+    public static long GetPlayerEquivalentExperienceValue(long livingExperienceValue) => livingExperienceValue * 4;
+
+    /// <summary>
+    /// The share of a kill's experience before the outpost bonus, as AbstractServerRules.AwardPlayerOnPlayerKill
+    /// pays it: the victim's value split by participants, capped at xp_pvp_cap_percent of the awarder's own value.
+    /// The caller adds the bonus to <paramref name="damageShare"/>, which is the capped share scaled by damage.
+    /// </summary>
+    public static long CalculateExperienceReward(long victimExperienceValue, long awarderExperienceValue,
+        int capPercent, int participantCount, double damagePercent, out long damageShare)
+    {
+        damageShare = 0;
+        if (victimExperienceValue <= 0 || awarderExperienceValue <= 0 || participantCount <= 0 || damagePercent <= 0)
+            return 0;
+
+        long baseExperience = Math.Min(victimExperienceValue / participantCount, awarderExperienceValue * capPercent / 100);
+        damageShare = (long)(baseExperience * Math.Min(1.0, damagePercent));
+        return baseExperience;
     }
 
     private static int CalculateOutpostBountyBonus(GamePlayer player, int bountyPoints)
@@ -185,6 +206,7 @@ public static class AutonomousBotRealmPointRewards
                 int groupContributorCount = player.Group == null ? 1 : contributorCount;
                 int realmPointsEarned = 0;
                 int bountyPointsPaid = 0;
+                long experiencePaid = 0;
 
                 if (isWorthRealmPoints)
                 {
@@ -210,17 +232,30 @@ public static class AutonomousBotRealmPointRewards
                             player.GainBountyPoints(bountyPointsEarned);
                         bountyPointsPaid = bountyPointsEarned;
                     }
+
+                    // Experience, as for killing a real player: at level 50 this feeds Master Levels, below it levels.
+                    long baseExperience = CalculateExperienceReward(
+                        GetPlayerEquivalentExperienceValue(killedBot.ExperienceValue), player.ExperienceValue,
+                        Properties.XP_PVP_CAP_PERCENT, contributorCount, damagePercent, out long experience);
+                    experience += AbstractServerRules.CalculateOutpostExperienceBonus(player, baseExperience);
+
+                    if (experience > 0)
+                        player.GainExperience(eXPSource.Player, experience);
+                    experiencePaid = experience;
                 }
                 else
                 {
-                    player.Out.SendMessage($"{AutonomousNameMask.NameFor(player, killedBot, 0, true)} has been killed recently and is worth no realm points!",
+                    string name = AutonomousNameMask.NameFor(player, killedBot, 0, true);
+                    player.Out.SendMessage($"{name} has been killed recently and is worth no realm points!",
+                        eChatType.CT_Important, eChatLoc.CL_SystemWindow);
+                    player.Out.SendMessage($"{name} has been killed recently and is worth no experience!",
                         eChatType.CT_Important, eChatLoc.CL_SystemWindow);
                 }
 
                 bool deathBlow = ReferenceEquals(player, creditedKiller);
                 bool soloKill = damagePercent >= 1.0 && contributorCount == 1;
                 player.UpdateKillStatsOnPlayerKill(killedBot.Realm, deathBlow, soloKill, realmPointsEarned);
-                BotTesterLog.PvpReward(killedBot, player, realmPointsEarned, bountyPointsPaid, isWorthRealmPoints, damagePercent);
+                BotTesterLog.PvpReward(killedBot, player, realmPointsEarned, bountyPointsPaid, experiencePaid, isWorthRealmPoints, damagePercent);
             }
         }
     }

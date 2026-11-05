@@ -196,7 +196,8 @@ namespace DOL.GS
         {
             if (bot == null) return;
             AutonomousGoalAttempt attempt = Interlocked.Exchange(ref bot.GoalDiagnosticAttempt, null);
-            if (attempt == null || !AutonomousDiagnosticsProperties.GoalAttempts) return;
+            // The attempt is already detached above; only its summary line depends on the diagnostics switch.
+            if (attempt == null || !AutonomousDiagnosticsProperties.GoalAttempts || !BotDiagnostics.Enabled) return;
             // A logging problem must never prevent movement, recovery or logout.
             try
             {

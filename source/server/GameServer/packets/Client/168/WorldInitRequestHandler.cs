@@ -69,7 +69,7 @@ namespace DOL.GS.PacketHandler.Client.v168
                         {
                             if (playerGuild == null || item.Emblem != playerGuild.Emblem)
                                 item.Emblem = 0;
-                            if (player.Level < 20)
+                            if (player.Level < EmblemNPC.MIN_EMBLEM_LEVEL)
                             {
                                 if (player.CraftingPrimarySkill == eCraftingSkill.NoCrafting)
                                     item.Emblem = 0;

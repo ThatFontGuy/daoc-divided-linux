@@ -11,7 +11,7 @@ namespace DOL.GS.PlayerClass
 			: base()
 		{
 			m_profession = "PlayerClass.Profession.DefendersofAlbion";
-			m_specializationMultiplier = 15;
+			m_specializationMultiplier = 18;
 			m_primaryStat = eStat.PIE;
 			m_secondaryStat = eStat.CON;
 			m_tertiaryStat = eStat.STR;
@@ -32,7 +32,7 @@ namespace DOL.GS.PlayerClass
 
 		public override List<PlayerRace> EligibleRaces => new List<PlayerRace>()
 		{
-			 PlayerRace.Briton, //atlas only briton friars should be allowed
+			 PlayerRace.Avalonian, PlayerRace.Briton, PlayerRace.Highlander,
 		};
 	}
 }

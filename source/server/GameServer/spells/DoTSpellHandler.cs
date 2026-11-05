@@ -30,6 +30,16 @@ namespace DOL.GS.Spells
             base.FinishSpellCast(target);
         }
 
+        public override double CalculateDamageBase(GameLiving target)
+        {
+            // Owner's rule: a spell line DoT ticks for its row, with no mana stat or spec scaling.
+            // Style effects still scale with weapon skill in the base method.
+            if (SpellLine.KeyName is GlobalSpellsLines.Combat_Styles_Effect)
+                return base.CalculateDamageBase(target);
+
+            return Math.Max(0, Spell.Damage);
+        }
+
         public override double CalculateDamageVarianceOffsetFromLevelDifference(GameLiving caster, GameLiving target)
         {
             return 0;

@@ -31,6 +31,11 @@ namespace DOL.GS.Spells
 			base.FinishSpellCast(target);
 		}
 
+		public override ECSGameSpellEffect CreateECSEffect(in ECSGameEffectInitParams initParams)
+		{
+			return ECSGameEffectFactory.Create(initParams, static (in i) => new LegacySpellECSEffect(i));
+		}
+
 		public override void OnEffectStart(GameSpellEffect effect)
 		{
 

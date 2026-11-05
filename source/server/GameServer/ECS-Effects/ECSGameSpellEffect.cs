@@ -19,6 +19,10 @@ namespace DOL.GS
         public override string Name => SpellHandler.Spell.Name;
         public override bool HasPositiveEffect => SpellHandler != null && SpellHandler.HasPositiveEffect;
         public bool IsAllowedToPulse => NextTick > 0 && PulseFreq > 0;
+        // HearthDAoC: true when OnStartEffect adds a bonus from Effectiveness and OnStopEffect takes the same off (#190).
+        // A child renewed in place leaves its bonus on the target for its successor to take off, so EffectListComponent
+        // gives the successor the predecessor's Effectiveness. Effects that read Effectiveness per hit or tick keep false.
+        internal virtual bool AppliesBonusAtStart => false;
 
         public ECSGameSpellEffect(in ECSGameEffectInitParams initParams) : base(initParams)
         {

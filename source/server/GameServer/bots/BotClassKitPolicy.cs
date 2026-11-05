@@ -63,13 +63,26 @@ namespace DOL.GS
                 eSpellType.MaulerStance or eSpellType.DeathKnightForm or eSpellType.DeathKnightServant or
                 eSpellType.DeathKnightRegenerate or eSpellType.PowerTransfer or eSpellType.BothAblativeArmor => true,
             eSpellType.StormSovereignAbility => !spell.IsHarmful,
+            eSpellType.MaulerGift => ModernMauler.IsNethuniGift(spell),
             _ => false
         };
 
         /// <summary>Kit spells that belong in the middle of a fight, including cast-time ones.</summary>
         public static bool IsCombatSupport(Spell spell) => spell?.SpellType is
             eSpellType.DeathKnightRegenerate or eSpellType.PowerTransfer or eSpellType.BothAblativeArmor ||
-            spell?.SpellType == eSpellType.StormSovereignAbility && !spell.IsHarmful;
+            spell?.SpellType == eSpellType.StormSovereignAbility && !spell.IsHarmful || ModernMauler.IsNethuniGift(spell);
+
+        /// <summary>
+        /// A Sovereign's Decree lasts 10 seconds on a 30 second timer, so one spent walking to a pull is gone by
+        /// contact. Three of them also took the three turns of the aggro window, and the pull expired untouched
+        /// (2,608 Stormforged pull timeouts in the 2026-11-01 overnight run).
+        /// </summary>
+        public static bool WaitsForContact(Spell spell, bool inCombat) => !inCombat &&
+            spell?.SpellType == eSpellType.StormSovereignAbility && PendragonRules.IsRoyalRank(spell.ID) &&
+            SovereignGroupBuffs.Contains(StormSovereignAbilities.Key(spell.ID));
+
+        /// <summary>A cast-time kit spell owns the turn. An instant one goes out and the bot still attacks.</summary>
+        public static bool OwnsTurn(Spell spell) => spell?.IsInstantCast == false;
 
         /// <summary>Bonedancer commands: the commander must be alive and within its order's range of the target.</summary>
         public static bool CommanderCanAct(GameBot bot, Spell command, GameLiving target)
@@ -82,6 +95,8 @@ namespace DOL.GS
 
         /// <summary>Regenerate Flesh: the Death Knight's own heal over time, below this health.</summary>
         public const int RegenerateBelowHealthPercent = 70;
+        /// <summary>Gift of Nethuni: the Mauler's own healing gift, below this health.</summary>
+        public const int NethuniBelowHealthPercent = 60;
         /// <summary>Gift of Power: give power only while above this much, to a member below the next value.</summary>
         public const int PowerGiftDonorPercent = 50, PowerGiftRecipientPercent = 40;
         /// <summary>Enchanted Barrier: shield a fighting member below this health.</summary>
@@ -131,6 +146,9 @@ namespace DOL.GS
                         return null;
                     return bot.Spells.Where(s => s?.SpellType == eSpellType.MaulerStance).Min(s => s.ID) == spell.ID ? bot : null;
 
+                case eSpellType.MaulerGift:
+                    return bot.HealthPercent < NethuniBelowHealthPercent && ModernMauler.GiftReady(bot, spell) ? bot : null;
+
                 case eSpellType.StormSovereignAbility:
                     if (!PendragonRules.IsRoyalRank(spell.ID))
                         return null;
@@ -162,7 +180,8 @@ namespace DOL.GS
             return !bot.Spells.Any(other => other != null && other.ID != spell.ID && other.SpellType == spell.SpellType &&
                 other.Level <= bot.Level && other.Level > spell.Level &&
                 (!sovereign || StormSovereignAbilities.Key(other.ID) == key) &&
-                (spell.SpellType != eSpellType.DeathKnightForm || IsDefaultDeathKnightForm(other)));
+                (spell.SpellType != eSpellType.DeathKnightForm || IsDefaultDeathKnightForm(other)) &&
+                (spell.SpellType != eSpellType.MaulerGift || other.SharedTimerGroup == spell.SharedTimerGroup));
         }
 
         private static bool HasOwnEffect(GameBot bot, Spell spell, bool sameType) =>

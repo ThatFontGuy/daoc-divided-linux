@@ -1,0 +1,3268 @@
+[
+ {
+  "table": "Spell",
+  "key": "90",
+  "set": {
+   "Radius": 150
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "91",
+  "set": {
+   "Radius": 250
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "92",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "101",
+  "set": {
+   "Range": 1875,
+   "Duration": 45
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "102",
+  "set": {
+   "Range": 1875,
+   "Duration": 45
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "103",
+  "set": {
+   "Range": 1875,
+   "Duration": 45
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "104",
+  "set": {
+   "Range": 1875,
+   "Duration": 45
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "261",
+  "set": {
+   "Range": 1875
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "262",
+  "set": {
+   "Range": 1875
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "263",
+  "set": {
+   "Range": 1875
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "264",
+  "set": {
+   "Range": 1875
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "265",
+  "set": {
+   "Range": 1875
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "266",
+  "set": {
+   "Range": 1875
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "267",
+  "set": {
+   "Range": 1875
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "312",
+  "set": {
+   "Value": 20.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "579",
+  "set": {
+   "Damage": 70.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "771",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "801",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "802",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "803",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "804",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "805",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1021",
+  "set": {
+   "Damage": 1.4
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1022",
+  "set": {
+   "Damage": 2.2
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1023",
+  "set": {
+   "Damage": 2.8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1024",
+  "set": {
+   "Damage": 3.8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1025",
+  "set": {
+   "Damage": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1026",
+  "set": {
+   "Damage": 6.4
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1027",
+  "set": {
+   "Damage": 8.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1028",
+  "set": {
+   "Damage": 10.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1111",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1113",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1115",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1117",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1173",
+  "set": {
+   "Duration": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1200",
+  "set": {
+   "Range": 1000
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1324",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1407",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1414",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1544",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1545",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1546",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1560",
+  "set": {
+   "Duration": 600
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1561",
+  "set": {
+   "Duration": 600
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1562",
+  "set": {
+   "Duration": 600
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1651",
+  "set": {
+   "Damage": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1655",
+  "set": {
+   "Damage": 10.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1656",
+  "set": {
+   "Damage": 14.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1658",
+  "set": {
+   "Damage": 22.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1659",
+  "set": {
+   "Damage": 35.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1713",
+  "set": {
+   "Duration": 5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1714",
+  "set": {
+   "Duration": 5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "1715",
+  "set": {
+   "Duration": 5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2858",
+  "set": {
+   "Damage": 70.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2970",
+  "set": {
+   "Damage": 331.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3157",
+  "set": {
+   "Value": 150.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3251",
+  "set": {
+   "Damage": 1.6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3252",
+  "set": {
+   "Damage": 2.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3253",
+  "set": {
+   "Damage": 3.1
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3254",
+  "set": {
+   "Damage": 3.9
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3255",
+  "set": {
+   "Damage": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3256",
+  "set": {
+   "Damage": 6.3
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3257",
+  "set": {
+   "Damage": 7.9
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3258",
+  "set": {
+   "Damage": 9.1
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3259",
+  "set": {
+   "Damage": 10.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3511",
+  "set": {
+   "Damage": 1.6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3512",
+  "set": {
+   "Damage": 3.1
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3513",
+  "set": {
+   "Damage": 3.9
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3514",
+  "set": {
+   "Damage": 5.2
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3515",
+  "set": {
+   "Damage": 6.4
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3516",
+  "set": {
+   "Damage": 8.4
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3517",
+  "set": {
+   "Damage": 10.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3601",
+  "set": {
+   "Damage": 1.8,
+   "Frequency": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3602",
+  "set": {
+   "Damage": 2.6,
+   "Frequency": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3603",
+  "set": {
+   "Damage": 3.6,
+   "Frequency": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3604",
+  "set": {
+   "Damage": 4.6,
+   "Frequency": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3605",
+  "set": {
+   "Damage": 5.8,
+   "Frequency": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3606",
+  "set": {
+   "Damage": 7.8,
+   "Frequency": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3607",
+  "set": {
+   "Damage": 10.0,
+   "Frequency": 40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4161",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4162",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4163",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4164",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4165",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4365",
+  "set": {
+   "CastTime": 2.5,
+   "Power": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4381",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4383",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4384",
+  "set": {
+   "Radius": 350
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4481",
+  "set": {
+   "Power": -25
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4702",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4703",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4704",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4705",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4851",
+  "set": {
+   "Power": 5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4867",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4891",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "4964",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5084",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5085",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5086",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5111",
+  "set": {
+   "Damage": 1.8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5112",
+  "set": {
+   "Damage": 2.6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5113",
+  "set": {
+   "Damage": 3.6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5114",
+  "set": {
+   "Damage": 4.6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5115",
+  "set": {
+   "Damage": 5.8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5116",
+  "set": {
+   "Damage": 7.8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "5117",
+  "set": {
+   "Damage": 10.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9651",
+  "set": {
+   "Power": 4,
+   "Duration": 900
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9652",
+  "set": {
+   "Power": 8,
+   "Duration": 900
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9653",
+  "set": {
+   "Power": 14,
+   "Duration": 900
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9654",
+  "set": {
+   "Power": 18,
+   "Duration": 900
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9655",
+  "set": {
+   "Power": 23,
+   "Duration": 900
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9656",
+  "set": {
+   "Power": 27,
+   "Duration": 900
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9657",
+  "set": {
+   "Power": 34,
+   "Duration": 900
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9672",
+  "set": {
+   "Damage": 62.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9674",
+  "set": {
+   "Damage": 95.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "9676",
+  "set": {
+   "Damage": 120.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11232",
+  "set": {
+   "Power": 3
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11233",
+  "set": {
+   "Power": 7
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11234",
+  "set": {
+   "Power": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11235",
+  "set": {
+   "Power": 20
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11317",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11318",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11319",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11320",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11321",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11322",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11323",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11324",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11325",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11463",
+  "set": {
+   "CastTime": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11464",
+  "set": {
+   "CastTime": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11465",
+  "set": {
+   "CastTime": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11466",
+  "set": {
+   "CastTime": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11467",
+  "set": {
+   "CastTime": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11468",
+  "set": {
+   "CastTime": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11469",
+  "set": {
+   "CastTime": 5.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11501",
+  "set": {
+   "Power": 2
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11502",
+  "set": {
+   "Power": 3
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11503",
+  "set": {
+   "Power": 5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11504",
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11505",
+  "set": {
+   "Power": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11506",
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11507",
+  "set": {
+   "Power": 21
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11508",
+  "set": {
+   "Power": 27
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11545",
+  "set": {
+   "CastTime": 3.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11546",
+  "set": {
+   "CastTime": 3.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11547",
+  "set": {
+   "CastTime": 3.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11548",
+  "set": {
+   "CastTime": 3.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11549",
+  "set": {
+   "CastTime": 3.5,
+   "Duration": 1200
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11550",
+  "set": {
+   "CastTime": 3.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11551",
+  "set": {
+   "CastTime": 3.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11552",
+  "set": {
+   "CastTime": 3.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11553",
+  "set": {
+   "Duration": 28000
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11657",
+  "set": {
+   "Duration": 120
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11658",
+  "set": {
+   "Duration": 120
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11659",
+  "set": {
+   "Duration": 120
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11660",
+  "set": {
+   "Duration": 120
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11661",
+  "set": {
+   "Duration": 120
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11662",
+  "set": {
+   "Duration": 120
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-cone-dd-8",
+  "set": {
+   "RecastDelay": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-cone-dd-18",
+  "set": {
+   "RecastDelay": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-cone-dd-28",
+  "set": {
+   "RecastDelay": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-cone-dd-38",
+  "set": {
+   "RecastDelay": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-cone-dd-48",
+  "set": {
+   "RecastDelay": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67100",
+  "set": {
+   "RecastDelay": 15,
+   "Duration": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67101",
+  "set": {
+   "RecastDelay": 15,
+   "Duration": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67130",
+  "set": {
+   "RecastDelay": 8,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67131",
+  "set": {
+   "RecastDelay": 8,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67132",
+  "set": {
+   "RecastDelay": 8,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67133",
+  "set": {
+   "RecastDelay": 8,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67134",
+  "set": {
+   "RecastDelay": 8,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67135",
+  "set": {
+   "RecastDelay": 8,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67145",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67270",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67303",
+  "set": {
+   "Power": 50
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67304",
+  "set": {
+   "Power": 65
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67322",
+  "set": {
+   "Range": 1550
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-mauler-test-v1-67351",
+  "set": {
+   "CastTime": 2.0,
+   "RecastDelay": 45
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68001",
+  "set": {
+   "Power": 3
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68002",
+  "set": {
+   "Power": 4
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68003",
+  "set": {
+   "Power": 6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68004",
+  "set": {
+   "Power": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68005",
+  "set": {
+   "Power": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68006",
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68007",
+  "set": {
+   "Power": 19
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68008",
+  "set": {
+   "Power": 25
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68009",
+  "set": {
+   "Power": 33
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68012",
+  "set": {
+   "Duration": 1200
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68014",
+  "set": {
+   "Power": 3
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68024",
+  "set": {
+   "Power": 6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68025",
+  "set": {
+   "Power": 9
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68026",
+  "set": {
+   "Power": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68027",
+  "set": {
+   "Power": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68054",
+  "set": {
+   "Power": 6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68101",
+  "set": {
+   "Duration": 8,
+   "Power": 4
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68102",
+  "set": {
+   "Duration": 8,
+   "Power": 7
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68103",
+  "set": {
+   "Duration": 8,
+   "Power": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68104",
+  "set": {
+   "Duration": 8,
+   "Power": 18
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68105",
+  "set": {
+   "Duration": 8,
+   "Power": 24
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68106",
+  "set": {
+   "Duration": 8,
+   "Power": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68107",
+  "set": {
+   "Duration": 8,
+   "Power": 36
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68108",
+  "set": {
+   "Duration": 8,
+   "Power": 42
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68123",
+  "set": {
+   "Duration": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68124",
+  "set": {
+   "Duration": 21
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68125",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68126",
+  "set": {
+   "Duration": 42,
+   "Power": 35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68127",
+  "set": {
+   "Power": 60
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69059",
+  "set": {
+   "Power": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70010",
+  "set": {
+   "Power": 3
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70024",
+  "set": {
+   "CastTime": 2.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70025",
+  "set": {
+   "CastTime": 2.5
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70042",
+  "set": {
+   "Value": 40.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70043",
+  "set": {
+   "Value": 40.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70044",
+  "set": {
+   "Value": 40.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70045",
+  "set": {
+   "Value": 40.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70046",
+  "set": {
+   "Value": 40.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70053",
+  "set": {
+   "Power": 27
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70092",
+  "set": {
+   "Power": 16
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70109",
+  "set": {
+   "Value": 150.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-heretic-test-v1-70139",
+  "set": {
+   "Value": 35.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71083",
+  "set": {
+   "RecastDelay": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71084",
+  "set": {
+   "RecastDelay": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71085",
+  "set": {
+   "RecastDelay": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71086",
+  "set": {
+   "RecastDelay": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71087",
+  "set": {
+   "RecastDelay": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71111",
+  "set": {
+   "Power": 92
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71134",
+  "set": {
+   "CastTime": 7.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-deathknight-test-v1-71145",
+  "set": {
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-hybrid-live-v1-74085",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-hybrid-live-v1-74101",
+  "set": {
+   "CastTime": 0.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-class-live-v1-75321",
+  "set": {
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77329",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77330",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77331",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77332",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77333",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-envenom-live-v1-77481",
+  "set": {
+   "Duration": 1200
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-envenom-live-v1-77484",
+  "set": {
+   "Duration": 1200
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77545",
+  "set": {
+   "CastTime": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-round3-live-v1-77745",
+  "set": {
+   "Value": 350.0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Calefaction_54",
+  "set": {
+   "Level": 9
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Calefaction_22",
+  "set": {
+   "Level": 14
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Abrasion_1",
+  "set": {
+   "Level": 2
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Abrasion_2",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Refrigeration_2",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Refrigeration_1",
+  "set": {
+   "Level": 2
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vapormancy_2",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Matter Manipulation_3",
+  "set": {
+   "Level": 2
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Matter Manipulation_13",
+  "set": {
+   "Level": 10
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Matter Manipulation_6",
+  "set": {
+   "Level": 4
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Animation_7",
+  "set": {
+   "Level": 11
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Animation_12",
+  "set": {
+   "Level": 21
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Animation_20",
+  "set": {
+   "Level": 31
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Animation_32",
+  "set": {
+   "Level": 41
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Animation_5",
+  "set": {
+   "Level": 4
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Animation_13",
+  "set": {
+   "Level": 14
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Animation_28",
+  "set": {
+   "Level": 24
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vivification_3",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vivification_22",
+  "set": {
+   "Level": 26
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vivification_33",
+  "set": {
+   "Level": 36
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vivification_24",
+  "set": {
+   "Level": 27
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vivification_36",
+  "set": {
+   "Level": 37
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vivification_28",
+  "set": {
+   "Level": 29
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vivification_37",
+  "set": {
+   "Level": 39
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Domination_49",
+  "set": {
+   "Level": 46
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Terrible Hammer_5",
+  "set": {
+   "Level": 4
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Terrible Hammer_35",
+  "set": {
+   "Level": 34
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Terrible Hammer_43",
+  "set": {
+   "Level": 44
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Bedazzling_7",
+  "set": {
+   "Level": 5
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Bedazzling_20",
+  "set": {
+   "Level": 17
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Bedazzling_36",
+  "set": {
+   "Level": 37
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Vacuumancy_12",
+  "set": {
+   "Level": 8
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Enchantment_14",
+  "set": {
+   "Level": 15
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Enchantment_34",
+  "set": {
+   "Level": 35
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Way of the Eclipse_8",
+  "set": {
+   "Level": 7
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Void Mastery_39",
+  "set": {
+   "Level": 35
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Void Mastery_49",
+  "set": {
+   "Level": 46
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Enchantment_7",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Enchantment_12",
+  "set": {
+   "Level": 21
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Enchantment_20",
+  "set": {
+   "Level": 11
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Enchantment_32",
+  "set": {
+   "Level": 41
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Druid Nature Spec_1",
+  "set": {
+   "Level": 3
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Druid Nature Spec_12",
+  "set": {
+   "Level": 13
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Druid Nature Spec_11",
+  "set": {
+   "Level": 12
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Bard Music_43",
+  "set": {
+   "Level": 44
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Arboreal Mastery_50",
+  "set": {
+   "Level": 47
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Arboreal Mastery_22_2",
+  "set": {
+   "Level": 22
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Valewalker Arb Path Spec_20",
+  "set": {
+   "Level": 15
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Valewalker Arb Path Spec_30",
+  "set": {
+   "Level": 25
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Verdant Path Spec_40",
+  "set": {
+   "Level": 41
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-mauler-test-v1-67141",
+  "set": {
+   "Level": 33
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68062",
+  "set": {
+   "Level": 4
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68063",
+  "set": {
+   "Level": 9
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68064",
+  "set": {
+   "Level": 15
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68065",
+  "set": {
+   "Level": 23
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68066",
+  "set": {
+   "Level": 27
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68067",
+  "set": {
+   "Level": 35
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68068",
+  "set": {
+   "Level": 45
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-bainshee-test-v1-68123",
+  "set": {
+   "Level": 19
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-heretic-test-v1-70040",
+  "set": {
+   "Level": 39
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-heretic-test-v1-70115",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-heretic-test-v1-70139",
+  "set": {
+   "Level": 32
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-deathknight-test-v1-71043",
+  "set": {
+   "Level": 36
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76050",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76051",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76052",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76053",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76054",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76055",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76056",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76057",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76058",
+  "set": {
+   "DamageType": 14
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76096",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76097",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76098",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76099",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76100",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76101",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76102",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76103",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76104",
+  "set": {
+   "DamageType": 10
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76135",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76136",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76137",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76138",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76139",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76140",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76141",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76142",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76143",
+  "set": {
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76212",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76213",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76214",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76215",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76216",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76217",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76218",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76219",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76220",
+  "set": {
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76257",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76258",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76259",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76260",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76261",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76262",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76263",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76264",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76265",
+  "set": {
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76286",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76287",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76288",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76289",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76290",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76291",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76292",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76293",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76294",
+  "set": {
+   "DamageType": 13
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-9-AtlasOF_MasteryOfMagery",
+  "insert": {
+   "CharClass": 9,
+   "AbilityKey": "AtlasOF_MasteryOfMagery"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-9-AtlasOF_Determination",
+  "insert": {
+   "CharClass": 9,
+   "AbilityKey": "AtlasOF_Determination"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-9-Strike Prediction",
+  "insert": {
+   "CharClass": 9,
+   "AbilityKey": "Strike Prediction"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Minstrel1-0-5"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-1-AtlasOF_WildHealing",
+  "insert": {
+   "CharClass": 1,
+   "AbilityKey": "AtlasOF_WildHealing"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-1-AtlasOF_MasteryOfHealing",
+  "insert": {
+   "CharClass": 1,
+   "AbilityKey": "AtlasOF_MasteryOfHealing"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-1-AtlasOF_MasteryOfMagery"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-1-AtlasOF_WildPower"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-19-Charge",
+  "insert": {
+   "CharClass": 19,
+   "AbilityKey": "Charge"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-3-AtlasOF_Serenity",
+  "insert": {
+   "CharClass": 3,
+   "AbilityKey": "AtlasOF_Serenity"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-3-AtlasOF_EtherealBond",
+  "insert": {
+   "CharClass": 3,
+   "AbilityKey": "AtlasOF_EtherealBond"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-3-AtlasOF_MCL",
+  "insert": {
+   "CharClass": 3,
+   "AbilityKey": "AtlasOF_MCL"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-3-AtlasOF_RagingPower",
+  "insert": {
+   "CharClass": 3,
+   "AbilityKey": "AtlasOF_RagingPower"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-55-AtlasOF_Ichor",
+  "insert": {
+   "CharClass": 55,
+   "AbilityKey": "AtlasOF_Ichor"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Animist1-1-1"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Bard1-0-5"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-43-AtlasOF_ReflexAttack",
+  "insert": {
+   "CharClass": 43,
+   "AbilityKey": "AtlasOF_ReflexAttack"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Druid1-0-3"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-40-AtlasOF_Ichor",
+  "insert": {
+   "CharClass": 40,
+   "AbilityKey": "AtlasOF_Ichor"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Eldritch1-3-3"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-49-AtlasOF_Determination",
+  "insert": {
+   "CharClass": 49,
+   "AbilityKey": "AtlasOF_Determination"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-49-Strike Prediction",
+  "insert": {
+   "CharClass": 49,
+   "AbilityKey": "Strike Prediction"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Nightshade1-3-3"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-49-AtlasOF_WildPower"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Ranger1-1-5"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-46-AtlasOF_MasteryOfMagery"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-46-AtlasOF_WildPower"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Healer1-0-3"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Hunter1-1-4"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-25-AtlasOF_MasteryOfMagery"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-25-AtlasOF_WildPower"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-25-Mastery of Focus"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-32-AtlasOF_EtherealBond"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-32-AtlasOF_WildPower"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-32-AtlasOF_Serenity"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-32-Mastery of Focus"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-rr5-32"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-23-AtlasOF_MasteryOfMagery",
+  "insert": {
+   "CharClass": 23,
+   "AbilityKey": "AtlasOF_MasteryOfMagery"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-23-AtlasOF_Determination",
+  "insert": {
+   "CharClass": 23,
+   "AbilityKey": "AtlasOF_Determination"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-23-Strike Prediction",
+  "insert": {
+   "CharClass": 23,
+   "AbilityKey": "Strike Prediction"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Shaman1-0-3"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Shaman1-2-8"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "key": "ClassPass-24-AtlasOF_Determination",
+  "insert": {
+   "CharClass": 24,
+   "AbilityKey": "AtlasOF_Determination"
+  }
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "Skald1-0-5"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-59-AtlasOF_Concentration"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-60-AtlasOF_AugAcuity"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-60-AtlasOF_Serenity"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-61-AtlasOF_AugAcuity"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-61-AtlasOF_Serenity"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-62-AtlasOF_AugAcuity"
+ },
+ {
+  "table": "ClassXRealmAbility_Atlas",
+  "delete": "modern-shared-62-AtlasOF_Serenity"
+ },
+ {
+  "table": "SpecXAbility",
+  "delete": 337
+ },
+ {
+  "table": "NpcTemplate",
+  "where": {
+   "TemplateId": 60161717
+  },
+  "set": {
+   "Race": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "88902422-7714-4185-aa61-416a63c0c102",
+  "set": {
+   "SpellID": 20620,
+   "Name": "Righteous Fury",
+   "Damage": 175.0,
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "0ed3560e-0de8-46ae-a1e6-0a973e823121",
+  "insert": {
+   "SpellID": 20620,
+   "ClassID": 10,
+   "StyleID": 239,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "a82f9e21-ca81-4de1-9290-7bb5bfbd6ed1",
+  "set": {
+   "SpellID": 20621,
+   "Name": "Excommunication",
+   "Damage": 75.0,
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "211713c7-069f-458c-9ab4-813c2db35fab",
+  "insert": {
+   "SpellID": 20621,
+   "ClassID": 10,
+   "StyleID": 244,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20300",
+  "key": "50ac3962-db63-4b23-a537-4b9acf673312",
+  "set": {
+   "SpellID": 20622,
+   "Name": "Hindered",
+   "Value": 60.0,
+   "Duration": 5
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "2ff0c05a-1a01-42a1-b366-9bd44bac0f32",
+  "insert": {
+   "SpellID": 20622,
+   "ClassID": 33,
+   "StyleID": 7008,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20088",
+  "key": "800efc50-3c52-4051-b1e4-99f8ccb4e160",
+  "set": {
+   "SpellID": 20623,
+   "Name": "Slashed Armor",
+   "Type": "ArmorAbsorptionDebuff",
+   "Value": 2.0,
+   "Duration": 30
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "6ddcf1b6-4d00-42bd-926c-7a48eea94620",
+  "insert": {
+   "SpellID": 20623,
+   "ClassID": 9,
+   "StyleID": 7010,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "3302eb1e-e64c-43e6-b981-ea8fa22e453d",
+  "insert": {
+   "SpellID": 20623,
+   "ClassID": 9,
+   "StyleID": 7011,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20088",
+  "key": "c6f73155-8c62-4a74-ac4a-9d9ef322362b",
+  "set": {
+   "SpellID": 20624,
+   "Name": "AF Debuff",
+   "Type": "ArmorFactorDebuff",
+   "Value": 50.0,
+   "Duration": 15
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "511a39bc-bed7-44b4-b271-ef0e64c46a6a",
+  "insert": {
+   "SpellID": 20624,
+   "ClassID": 9,
+   "StyleID": 125,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20088",
+  "key": "3af0419b-5ca7-4164-85de-a0c29c8111e6",
+  "set": {
+   "SpellID": 20625,
+   "Name": "AF Debuff",
+   "Type": "ArmorFactorDebuff",
+   "Value": 100.0,
+   "Duration": 15
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "15c484d7-db9e-44ff-81c9-24d5395555dc",
+  "insert": {
+   "SpellID": 20625,
+   "ClassID": 11,
+   "StyleID": 125,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "95400ed6-1288-4ac8-8c39-0d9a912b9509",
+  "insert": {
+   "SpellID": 20623,
+   "ClassID": 49,
+   "StyleID": 7010,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "964e179f-47e6-4114-9c9f-edcc329fd6b9",
+  "insert": {
+   "SpellID": 20623,
+   "ClassID": 49,
+   "StyleID": 7011,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20300",
+  "key": "88a04f0f-498d-4219-a1f1-fe79e7963bce",
+  "set": {
+   "SpellID": 20626,
+   "Name": "Rooted",
+   "Value": 99.0,
+   "Duration": 15
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "58e0995a-8df1-4ad8-bc38-f1ea59db656b",
+  "insert": {
+   "SpellID": 20626,
+   "ClassID": 50,
+   "StyleID": 7026,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "ae41ba65-e487-446c-a99f-a240ff05ee2f",
+  "set": {
+   "SpellID": 20627,
+   "Name": "Icy Mists",
+   "Damage": 125.9,
+   "DamageType": 11
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "dae8f10c-73c6-4ff3-bd02-fa493cf60971",
+  "insert": {
+   "SpellID": 20627,
+   "ClassID": 56,
+   "StyleID": 7028,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "48bd1802-0729-43aa-a8ef-23bd26003a47",
+  "insert": {
+   "SpellID": 20600,
+   "ClassID": 58,
+   "StyleID": 7020,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "a865505b-2afe-44a8-8d8a-1d1c46a53382",
+  "insert": {
+   "SpellID": 20400,
+   "ClassID": 58,
+   "StyleID": 7029,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "81053451-f5fb-462d-9063-90976a38689d",
+  "insert": {
+   "SpellID": 20625,
+   "ClassID": 31,
+   "StyleID": 198,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "3b5aebc6-b312-46c0-afef-9ce2ec9018d2",
+  "insert": {
+   "SpellID": 20623,
+   "ClassID": 23,
+   "StyleID": 7010,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "59594eec-82d4-488c-8181-6624fec8e643",
+  "insert": {
+   "SpellID": 20623,
+   "ClassID": 23,
+   "StyleID": 7011,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "44705b16-3360-4038-aab9-4cc1903961ad",
+  "insert": {
+   "SpellID": 20624,
+   "ClassID": 23,
+   "StyleID": 198,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "ba3b2a2c-b7b1-46a6-96bb-458135f8df2a",
+  "set": {
+   "SpellID": 20628,
+   "Name": "Spite II",
+   "Damage": 50.0,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "62ab6ca0-f592-4336-962f-93f4354efad0",
+  "insert": {
+   "SpellID": 20628,
+   "ClassID": 21,
+   "StyleID": 155,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "1b239efd-a8ee-4f28-99e2-5f01aa411703",
+  "set": {
+   "SpellID": 20629,
+   "Name": "Spite III",
+   "Damage": 45.3,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "d0ffbb62-4291-4025-95cd-9763a0247747",
+  "insert": {
+   "SpellID": 20629,
+   "ClassID": 21,
+   "StyleID": 157,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "d7b07e69-b996-432b-8d57-fef833f62d66",
+  "set": {
+   "SpellID": 20630,
+   "Name": "Spite I",
+   "Damage": 20.0,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "922a663a-c513-4a5e-a24e-64b51b023c62",
+  "insert": {
+   "SpellID": 20630,
+   "ClassID": 21,
+   "StyleID": 179,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "f5446b34-93f6-4753-b0da-d1816d00ffc1",
+  "set": {
+   "SpellID": 20631,
+   "Name": "Spite III",
+   "Damage": 100.0,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "e6b57b2b-a1af-46d1-b563-6c592937b3ee",
+  "insert": {
+   "SpellID": 20631,
+   "ClassID": 21,
+   "StyleID": 189,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "f8377cc4-6b75-4af1-ac9a-bb2334b9b63f",
+  "set": {
+   "SpellID": 20632,
+   "Name": "Hammerspite II",
+   "Damage": 50.0,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "ce9f4a09-f73c-4501-b3cc-e0291f91991d",
+  "insert": {
+   "SpellID": 20632,
+   "ClassID": 21,
+   "StyleID": 170,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "77045c90-6078-4e95-a9a3-2a257e6fe56c",
+  "set": {
+   "SpellID": 20633,
+   "Name": "Spite III",
+   "Damage": 40.0,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "3e774dd7-f412-4ca2-930d-1176bab02c43",
+  "insert": {
+   "SpellID": 20633,
+   "ClassID": 21,
+   "StyleID": 7038,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "bbc60ce0-9717-4bc3-ae9f-eca4a379b5ed",
+  "set": {
+   "SpellID": 20634,
+   "Name": "Spite IV",
+   "Damage": 110.0,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "d4d918ff-f953-4825-b190-11cb7834d6a3",
+  "insert": {
+   "SpellID": 20634,
+   "ClassID": 21,
+   "StyleID": 174,
+   "Chance": 100
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "20503",
+  "key": "7763bb65-d01b-4eee-a8cf-fbbf2c0fba4d",
+  "set": {
+   "SpellID": 20635,
+   "Name": "Valkyrie's Rage",
+   "Damage": 150.0,
+   "DamageType": 15
+  }
+ },
+ {
+  "table": "StyleXSpell",
+  "key": "6bbe77f3-3d29-4ff3-b3b7-04ecb0e6013e",
+  "insert": {
+   "SpellID": 20635,
+   "ClassID": 34,
+   "StyleID": 7043,
+   "Chance": 100
+  }
+ }
+]

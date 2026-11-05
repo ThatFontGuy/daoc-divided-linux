@@ -9,14 +9,65 @@ namespace DOL.GS;
 /// DFEnterJumpPoint; these helpers make its keep-control and local-PvP rules
 /// independently testable.
 /// </summary>
+public enum eDarknessFallsGoal
+{
+    None,
+    Pve,
+    Pvp,
+}
+
 public static class AutonomousDarknessFallsPolicy
 {
     public const ushort RegionId = 249;
 
-    // Solo bots may still grind Darkness Falls, but only from level 25 and only
-    // against targets that con blue or easier. Groups keep their own rules.
-    public const int SoloMinimumLevel = 25;
+    // Solo bots grind Darkness Falls from level 20 (owner 2026-11-01), only against
+    // targets that con blue or easier. Groups keep their own rules.
+    public const int SoloMinimumLevel = 20;
     public const ConColor SoloMaximumCon = ConColor.BLUE;
+
+    // Each new camp pick from level 20 can become a Darkness Falls goal, solo or
+    // grouped, while the dungeon has room. The usual dungeon draw stays as well.
+    public const int PveGoalPercent = 15;
+    public const int PvpGoalPercent = 15;
+    public const int GoalPopulationLimit = 150;
+
+    // The wings only join deep inside. Of the 1,367 proved spawns, rooms below monster
+    // level 40 are at least 13,400 units further from the second entrance than the
+    // first, and every route into another wing passes aggressive level 57-65 monsters
+    // (2026-11-01). Lower levels stay on their own side, as on live (owner 2026-11-01).
+    public const int PvpMinimumLevel = 45;
+    public const float MeetingRoomGap = 7_500;
+    public const int MeetingRoomChoices = 6;
+
+    // Nearly every meeting room holds level 48+ monsters, above a solo bot's blue limit.
+    // First private copy run, 2026-11-01: no solo bot took a PvP goal.
+    public const ConColor SoloPvpMaximumCon = ConColor.ORANGE;
+
+    /// <summary>roll is 0-99. A full dungeon or a level below 20 keeps the ordinary camp pick.</summary>
+    public static eDarknessFallsGoal RollGoal(int level, int population, int roll)
+    {
+        if (level < SoloMinimumLevel || population >= GoalPopulationLimit)
+            return eDarknessFallsGoal.None;
+        if (roll < PveGoalPercent)
+            return eDarknessFallsGoal.Pve;
+        return level >= PvpMinimumLevel && roll < PveGoalPercent + PvpGoalPercent
+            ? eDarknessFallsGoal.Pvp : eDarknessFallsGoal.None;
+    }
+
+    /// <summary>How much further a room is from the second closest realm entrance than from the closest.</summary>
+    public static float EntranceGap(float albion, float midgard, float hibernia)
+    {
+        float nearest = Math.Min(albion, Math.Min(midgard, hibernia));
+        float farthest = Math.Max(albion, Math.Max(midgard, hibernia));
+        float second = albion + midgard + hibernia - nearest - farthest;
+        return second - nearest;
+    }
+
+    public static bool IsMeetingRoom(float albion, float midgard, float hibernia)
+    {
+        float gap = EntranceGap(albion, midgard, hibernia);
+        return float.IsFinite(gap) && gap <= MeetingRoomGap;
+    }
 
     public static ushort HomeRegion(eRealm realm) => realm switch
     {

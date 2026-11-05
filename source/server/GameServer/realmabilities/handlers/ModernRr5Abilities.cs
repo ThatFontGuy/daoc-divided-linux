@@ -97,6 +97,7 @@ namespace DOL.GS.RealmAbilities
                 if (shield.Remaining <= 0) shield.End();
             }
             ModernSputinsLegacy.CheatDeath(target, ad);
+            DOL.GS.Spells.ArtifactAbilities.CheatDeath(target, ad);
         }
         private static void Scale(AttackData ad, double factor)
         {

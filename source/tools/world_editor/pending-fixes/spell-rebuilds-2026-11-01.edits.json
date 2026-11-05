@@ -1,0 +1,1076 @@
+[
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-faith-30",
+  "set": {
+   "Value": 100.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Pulse": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-valk-ow-link-faith-30",
+  "set": {
+   "Level": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-faith-40",
+  "set": {
+   "Value": 175.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Pulse": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-valk-ow-link-faith-40",
+  "set": {
+   "Level": 33
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-valk-ow-faith-50",
+  "set": {
+   "Value": 300.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Pulse": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-valk-ow-link-faith-50",
+  "set": {
+   "Level": 43
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-valk-ow-faith-30",
+  "key": "a741a528-2dfa-4080-a6bf-05845d7d0f9e",
+  "set": {
+   "SpellID": 65196,
+   "Name": "Odin's Hope",
+   "Value": 50.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Power": -10,
+   "Pulse": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "b8ce73f7-5d8c-4251-bb89-213001aa00f2",
+  "insert": {
+   "LineName": "Odin's Will",
+   "SpellID": 65196,
+   "Level": 13
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68035",
+  "set": {
+   "Value": 300.0,
+   "Damage": 100.0,
+   "CastTime": 2.8,
+   "Duration": 30,
+   "RecastDelay": 60,
+   "Power": -10,
+   "Pulse": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68036",
+  "set": {
+   "Value": 375.0,
+   "Damage": 100.0,
+   "CastTime": 2.8,
+   "Duration": 30,
+   "RecastDelay": 60,
+   "Power": -15,
+   "Pulse": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-bainshee-test-v1-68037",
+  "set": {
+   "Value": 500.0,
+   "Damage": 100.0,
+   "CastTime": 2.8,
+   "Duration": 30,
+   "RecastDelay": 60,
+   "Power": -20,
+   "Pulse": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11237",
+  "set": {
+   "Type": "AblativeArmor",
+   "Value": 25.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Power": -20,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11239",
+  "set": {
+   "Type": "AblativeArmor",
+   "Value": 50.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Power": -20,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11240",
+  "set": {
+   "Type": "AblativeArmor",
+   "Value": 100.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Power": -20,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11242",
+  "set": {
+   "Type": "AblativeArmor",
+   "Value": 150.0,
+   "Damage": 100.0,
+   "Duration": 30,
+   "RecastDelay": 30,
+   "Power": -10,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Valewalker Arb Path Spec_50",
+  "set": {
+   "Level": 43
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11209",
+  "set": {
+   "Type": "DirectDamage",
+   "Damage": 22.0,
+   "Duration": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11211",
+  "set": {
+   "Type": "DirectDamage",
+   "Damage": 40.9,
+   "Duration": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Valewalker Arb Path Spec_12",
+  "set": {
+   "Level": 6
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11212",
+  "set": {
+   "Type": "DirectDamage",
+   "Damage": 58.9,
+   "Duration": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Valewalker Arb Path Spec_18",
+  "set": {
+   "Level": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11214",
+  "set": {
+   "Type": "DirectDamage",
+   "Damage": 86.9,
+   "Duration": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Valewalker Arb Path Spec_29",
+  "set": {
+   "Level": 23
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11215",
+  "set": {
+   "Type": "DirectDamage",
+   "Damage": 115.9,
+   "Duration": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "11217",
+  "set": {
+   "Type": "DirectDamage",
+   "Damage": 160.9,
+   "Duration": 0,
+   "Frequency": 0
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Valewalker Arb Path Spec_49",
+  "set": {
+   "Level": 42
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3293",
+  "set": {
+   "Type": "HeatColdMatterBuff",
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3226",
+  "set": {
+   "Type": "BodySpiritEnergyBuff",
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3227",
+  "set": {
+   "Type": "BodySpiritEnergyBuff",
+   "Duration": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3228",
+  "set": {
+   "Type": "BodySpiritEnergyBuff",
+   "Duration": 30
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Healer Augmentation Spec_24"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Healer Augmentation Spec_27"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Healer Augmentation Spec_36"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Healer Augmentation Spec_37"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Healer Augmentation Spec_47"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Healer Augmentation Spec_48"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Shaman Augmentation Spec_23"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Shaman Augmentation Spec_24"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Shaman Augmentation Spec_30"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Shaman Augmentation Spec_35"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Shaman Augmentation Spec_43"
+ },
+ {
+  "table": "LineXSpell",
+  "delete": "Shaman Augmentation Spec_45"
+ },
+ {
+  "table": "Spell",
+  "key": "2561",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2562",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2563",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2564",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2565",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2566",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2567",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2568",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2569",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2570",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8,
+   "DamageType": 12
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "351",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "352",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "353",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "354",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "355",
+  "set": {
+   "Type": "DirectDamageWithDebuff",
+   "Value": 10.0,
+   "Duration": 8
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2581",
+  "set": {
+   "Duration": 8,
+   "RecastDelay": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2582",
+  "set": {
+   "Duration": 8,
+   "RecastDelay": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2583",
+  "set": {
+   "Duration": 8,
+   "RecastDelay": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2584",
+  "set": {
+   "Duration": 8,
+   "RecastDelay": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2585",
+  "set": {
+   "Duration": 8,
+   "RecastDelay": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2586",
+  "set": {
+   "Duration": 8,
+   "RecastDelay": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "2587",
+  "set": {
+   "Duration": 8,
+   "RecastDelay": 0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3361",
+  "set": {
+   "Value": 2.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3362",
+  "set": {
+   "Value": 4.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3363",
+  "set": {
+   "Value": 6.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3364",
+  "set": {
+   "Value": 8.0
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3365",
+  "set": {
+   "Value": 10.0
+  }
+ },
+ {
+  "table": "Spell",
+  "copy": "local-class-live-v1-75463",
+  "key": "ca58cb04-d15b-46e2-9c12-a7ced49d46f3",
+  "set": {
+   "SpellID": 75553,
+   "Name": "Purifying Reconstruction",
+   "Value": 302.0,
+   "Power": 30,
+   "CastTime": 2.5
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "12471285-3f2c-41a5-b631-e8e0a67c7daa",
+  "insert": {
+   "LineName": "Subterranean Spec",
+   "SpellID": 75553,
+   "Level": 46
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-linked-live-v1-77287",
+  "set": {
+   "Level": 40
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "cdfca6b0-d004-485f-9b40-66a85fcc8aa8",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "4838f94d-9d3b-4534-9119-68f1ce46dca2",
+  "set": {
+   "Level": 5
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "a1878fbf-6da1-4d7f-a2a6-2a07e506ed32",
+  "set": {
+   "Level": 21
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "01ade6ea-9653-40ed-92bc-4fa75774dcf7",
+  "set": {
+   "Level": 35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77275",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77276",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77277",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77278",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77279",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77280",
+  "set": {
+   "Power": -60
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "10056",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "10054",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77281",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "10006",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-linked-live-v1-77287",
+  "set": {
+   "Power": -40
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "10156",
+  "set": {
+   "Power": -35
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Beastcraft_1",
+  "set": {
+   "Level": 2
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3590",
+  "set": {
+   "RecastDelay": 105
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "3592",
+  "set": {
+   "RecastDelay": 60
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Druid Nature Spec_1",
+  "set": {
+   "LineName": "Druid Nature Magic",
+   "Level": 3
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Druid Nature Spec_7",
+  "set": {
+   "LineName": "Druid Nature Magic",
+   "Level": 7
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Druid Nature Spec_12",
+  "set": {
+   "LineName": "Druid Nature Magic",
+   "Level": 13
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Druid Nature Spec_20",
+  "set": {
+   "LineName": "Druid Nature Magic",
+   "Level": 20
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69035",
+  "set": {
+   "RecastDelay": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69036",
+  "set": {
+   "RecastDelay": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69037",
+  "set": {
+   "RecastDelay": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-vampiir-test-v1-69038",
+  "set": {
+   "RecastDelay": 30
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76186",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76187",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76188",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76189",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76190",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76191",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76192",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "Spell",
+  "key": "local-archery-live-v1-76193",
+  "set": {
+   "Target": "Cone",
+   "Radius": 90
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Dimming_48",
+  "set": {
+   "Level": 46
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Suppression_6",
+  "set": {
+   "Level": 8
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Summoning_35",
+  "set": {
+   "Level": 33
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Enhancement_22",
+  "set": {
+   "Level": 19
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Enhancement_30",
+  "set": {
+   "Level": 29
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Enhancement_40",
+  "set": {
+   "Level": 39
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Spirit Enhancement_50",
+  "set": {
+   "Level": 49
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Runes of Suppression_1",
+  "set": {
+   "Level": 2
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Runes of Suppression_2",
+  "set": {
+   "Level": 1
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Runes of Destruction_45",
+  "set": {
+   "Level": 48
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Runes of Destruction_36",
+  "set": {
+   "Level": 35
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Runes of Destruction_48",
+  "set": {
+   "Level": 45
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Runes of Destruction_46",
+  "set": {
+   "Level": 44
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "Runes of Destruction_44",
+  "set": {
+   "Level": 43
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-warlock-test-v1-66014",
+  "set": {
+   "Level": 38
+  }
+ },
+ {
+  "table": "LineXSpell",
+  "key": "local-warlock-test-v1-66322",
+  "set": {
+   "Level": 44
+  }
+ },
+ {
+  "table": "Style",
+  "key": 147,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 2,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 63,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 2,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 976,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 0,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 907,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 0,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 377,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 1,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 467,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 1,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 1783,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 0,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 1182,
+  "set": {
+   "OpeningRequirementType": 2,
+   "OpeningRequirementValue": 2,
+   "AttackResultRequirement": 0
+  }
+ },
+ {
+  "table": "Style",
+  "key": 1057,
+  "set": {
+   "OpeningRequirementType": 1,
+   "OpeningRequirementValue": 0,
+   "AttackResultRequirement": 5
+  }
+ },
+ {
+  "table": "Style",
+  "key": 981,
+  "set": {
+   "OpeningRequirementType": 0,
+   "OpeningRequirementValue": 299,
+   "AttackResultRequirement": 7
+  }
+ }
+]

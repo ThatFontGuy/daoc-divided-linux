@@ -1,0 +1,2468 @@
+{
+ "format": "offline-daoc-world-editor-2",
+ "created": "2026-11-01T15:52:11.680177+00:00",
+ "clientWorld": "e7a9b42ab562d78adb1f6f4247ef14aaaaae1803a3a5639b545e69a8b78bb342",
+ "changes": [
+  {
+   "table": "Spell",
+   "key": "11237",
+   "op": "update",
+   "before": {
+    "Type": "AblativeArmor",
+    "Target": "Self",
+    "Range": 0,
+    "Value": 25.0,
+    "Power": -20
+   },
+   "after": {
+    "Type": "GroupAblativeHalfOnCaster",
+    "Target": "Group",
+    "Range": 1500,
+    "Value": 50.0,
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11239",
+   "op": "update",
+   "before": {
+    "Type": "AblativeArmor",
+    "Target": "Self",
+    "Range": 0,
+    "Value": 50.0,
+    "Power": -20
+   },
+   "after": {
+    "Type": "GroupAblativeHalfOnCaster",
+    "Target": "Group",
+    "Range": 1500,
+    "Value": 100.0,
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11240",
+   "op": "update",
+   "before": {
+    "Type": "AblativeArmor",
+    "Target": "Self",
+    "Range": 0,
+    "Value": 100.0,
+    "Power": -20
+   },
+   "after": {
+    "Type": "GroupAblativeHalfOnCaster",
+    "Target": "Group",
+    "Range": 1500,
+    "Value": 200.0,
+    "Power": -10
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "11242",
+   "op": "update",
+   "before": {
+    "Type": "AblativeArmor",
+    "Target": "Self",
+    "Range": 0,
+    "Value": 150.0
+   },
+   "after": {
+    "Type": "GroupAblativeHalfOnCaster",
+    "Target": "Group",
+    "Range": 1500,
+    "Value": 300.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76186",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76187",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76188",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76189",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76190",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76191",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76192",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76193",
+   "op": "update",
+   "before": {
+    "Target": "Cone",
+    "Radius": 90
+   },
+   "after": {
+    "Target": "Enemy",
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "a9e3adda-3505-44d8-9545-cea26b416458",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20660,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 1",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 3.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "a9e3adda-3505-44d8-9545-cea26b416458"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76059",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20660
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76166",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20660
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76266",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20660
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "dce421da-2212-4d9f-976f-efd91ff82acc",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20661,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 2",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 6.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "dce421da-2212-4d9f-976f-efd91ff82acc"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76060",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20661
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76167",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20661
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76267",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20661
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "968f9311-454d-4e91-88c1-7bb639f8fbaa",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20662,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 3",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 9.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "968f9311-454d-4e91-88c1-7bb639f8fbaa"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76061",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20662
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76168",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20662
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76268",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20662
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "bcf7580d-fedd-4406-bdff-6f8ddc3d6b81",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20663,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 4",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 12.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "bcf7580d-fedd-4406-bdff-6f8ddc3d6b81"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76062",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20663
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76169",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20663
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76269",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20663
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "26c0cb59-31da-4d3e-9ef1-a1ba95a8d44c",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20664,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 5",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 15.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "26c0cb59-31da-4d3e-9ef1-a1ba95a8d44c"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76063",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20664
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76170",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20664
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76270",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20664
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "52900a99-0857-48cc-a95d-6f331c3b4fba",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20665,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 6",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 18.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "52900a99-0857-48cc-a95d-6f331c3b4fba"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76064",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20665
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76171",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20665
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76271",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20665
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "0f4900a3-40fb-4d1a-ae59-1d3bc89bd406",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20666,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 7",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 21.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "0f4900a3-40fb-4d1a-ae59-1d3bc89bd406"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76065",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20666
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76172",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20666
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76272",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20666
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "46a5d89e-c8cc-447e-ad4d-2cd1bf8cedc4",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20667,
+    "ClientEffect": 11416,
+    "Icon": 11416,
+    "Name": "Long Shot Debuff 8",
+    "Description": "Bedazzled",
+    "Target": "Enemy",
+    "Range": 350,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "CastingSpeedDebuff",
+    "Duration": 40,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 24.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "OfflineArtifacts",
+    "TooltipId": 0,
+    "LastTimeRowUpdated": "2026-10-30 00:00:00",
+    "Spell_ID": "46a5d89e-c8cc-447e-ad4d-2cd1bf8cedc4"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76066",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20667
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76173",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20667
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76273",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0
+   },
+   "after": {
+    "SubSpellID": 20667
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "0ab7e2d5-1f9e-46b5-a155-cfa10a8ec01a",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20668,
+    "ClientEffect": 531,
+    "Icon": 531,
+    "Name": "Point Blank Bladeturn 1",
+    "Description": "Absorbs one melee blow.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "Bladeturn",
+    "Duration": 10,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 0.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "A crystal shield covers you.",
+    "Message2": "A crystal shield covers {0}'s skin.",
+    "Message3": "Your crystal shield fades.",
+    "Message4": "{0}'s crystal shield fades.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 52,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Public_DB",
+    "TooltipId": 10305,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "0ab7e2d5-1f9e-46b5-a155-cfa10a8ec01a"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3ea21aeb-27dd-4d80-8b4b-afe1c3c5517b",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20669,
+    "ClientEffect": 11218,
+    "Icon": 11218,
+    "Name": "Point Blank Haste 1",
+    "Description": "Increases the target's combat speed by 16%",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "CombatSpeedBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 22.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "Your attack speed increases.",
+    "Message2": "{0} begins attacking faster.",
+    "Message3": "Your attacks return to normal.",
+    "Message4": "{0}'s attacks return to normal.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 11209,
+    "EffectGroup": 100,
+    "SubSpellID": 20668,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 70,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Valewalker_DOT",
+    "TooltipId": 11218,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "3ea21aeb-27dd-4d80-8b4b-afe1c3c5517b"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76175",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20669,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "8ac9a28e-b481-4580-a2ad-e41b148ccdd4",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20670,
+    "ClientEffect": 531,
+    "Icon": 531,
+    "Name": "Point Blank Bladeturn 2",
+    "Description": "Absorbs one melee blow.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "Bladeturn",
+    "Duration": 8,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 0.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "A crystal shield covers you.",
+    "Message2": "A crystal shield covers {0}'s skin.",
+    "Message3": "Your crystal shield fades.",
+    "Message4": "{0}'s crystal shield fades.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 52,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Public_DB",
+    "TooltipId": 10305,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "8ac9a28e-b481-4580-a2ad-e41b148ccdd4"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "1dab50b7-f0a1-4bc9-bfd6-445df53df4d8",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20671,
+    "ClientEffect": 11218,
+    "Icon": 11218,
+    "Name": "Point Blank Haste 2",
+    "Description": "Increases the target's combat speed by 16%",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "CombatSpeedBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 25.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "Your attack speed increases.",
+    "Message2": "{0} begins attacking faster.",
+    "Message3": "Your attacks return to normal.",
+    "Message4": "{0}'s attacks return to normal.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 11209,
+    "EffectGroup": 100,
+    "SubSpellID": 20670,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 70,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Valewalker_DOT",
+    "TooltipId": 11218,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "1dab50b7-f0a1-4bc9-bfd6-445df53df4d8"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76176",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20671,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "aceaea22-2eeb-4bc3-ac90-ac857c625fe4",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20672,
+    "ClientEffect": 531,
+    "Icon": 531,
+    "Name": "Point Blank Bladeturn 3",
+    "Description": "Absorbs one melee blow.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "Bladeturn",
+    "Duration": 6,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 0.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "A crystal shield covers you.",
+    "Message2": "A crystal shield covers {0}'s skin.",
+    "Message3": "Your crystal shield fades.",
+    "Message4": "{0}'s crystal shield fades.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 52,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Public_DB",
+    "TooltipId": 10305,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "aceaea22-2eeb-4bc3-ac90-ac857c625fe4"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3b730812-f586-4f7e-9c3d-6ed6dac16d84",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20673,
+    "ClientEffect": 11218,
+    "Icon": 11218,
+    "Name": "Point Blank Haste 3",
+    "Description": "Increases the target's combat speed by 16%",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "CombatSpeedBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 29.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "Your attack speed increases.",
+    "Message2": "{0} begins attacking faster.",
+    "Message3": "Your attacks return to normal.",
+    "Message4": "{0}'s attacks return to normal.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 11209,
+    "EffectGroup": 100,
+    "SubSpellID": 20672,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 70,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Valewalker_DOT",
+    "TooltipId": 11218,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "3b730812-f586-4f7e-9c3d-6ed6dac16d84"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76177",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20673,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "8d20cfad-0ac9-4313-9ffd-f24388a6dd06",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20674,
+    "ClientEffect": 13061,
+    "Icon": 13061,
+    "Name": "Point Blank Weaponskill",
+    "Description": "Buffs the target's weapon skill by the specified amount. Can be cast while in combat.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "WeaponSkillBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 5.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 1,
+    "Uninterruptible": 1,
+    "IsFocus": 0,
+    "SharedTimerGroup": 71,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "local-vampiir-test-v1",
+    "TooltipId": 18498,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "8d20cfad-0ac9-4313-9ffd-f24388a6dd06"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76275",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20674,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "6b83dfa2-5484-4ec1-8293-4139d315e04d",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20675,
+    "ClientEffect": 13061,
+    "Icon": 13061,
+    "Name": "Point Blank Weaponskill",
+    "Description": "Buffs the target's weapon skill by the specified amount. Can be cast while in combat.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "WeaponSkillBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 10.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 1,
+    "Uninterruptible": 1,
+    "IsFocus": 0,
+    "SharedTimerGroup": 71,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "local-vampiir-test-v1",
+    "TooltipId": 18498,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "6b83dfa2-5484-4ec1-8293-4139d315e04d"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76276",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20675,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "fe217f43-8dde-4685-ac13-d5ab65bcd8f5",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20676,
+    "ClientEffect": 13061,
+    "Icon": 13061,
+    "Name": "Point Blank Weaponskill",
+    "Description": "Buffs the target's weapon skill by the specified amount. Can be cast while in combat.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "WeaponSkillBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 15.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 1,
+    "Uninterruptible": 1,
+    "IsFocus": 0,
+    "SharedTimerGroup": 71,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "local-vampiir-test-v1",
+    "TooltipId": 18498,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "fe217f43-8dde-4685-ac13-d5ab65bcd8f5"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76277",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20676,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "4cde924d-ac1a-4c69-a8d3-fcdd53ad7c32",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20677,
+    "ClientEffect": 1566,
+    "Icon": 1566,
+    "Name": "Point Blank Damage",
+    "Description": "Target does 15% additional damages with melee attacks.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "MeleeDamageBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 14.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "Your weapon is blessed by the heavens!",
+    "Message2": "{0}'s weapon is blessed by the heavens!",
+    "Message3": "Your weapon returns to normal.",
+    "Message4": "{0}'s weapon returns to normal.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Cleric_Self_DMG",
+    "TooltipId": 1566,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "4cde924d-ac1a-4c69-a8d3-fcdd53ad7c32"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76068",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20677,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "338dcb71-8ee6-49c4-9459-950f4580494c",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20678,
+    "ClientEffect": 1566,
+    "Icon": 1566,
+    "Name": "Point Blank Damage",
+    "Description": "Target does 15% additional damages with melee attacks.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "MeleeDamageBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 21.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "Your weapon is blessed by the heavens!",
+    "Message2": "{0}'s weapon is blessed by the heavens!",
+    "Message3": "Your weapon returns to normal.",
+    "Message4": "{0}'s weapon returns to normal.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Cleric_Self_DMG",
+    "TooltipId": 1566,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "338dcb71-8ee6-49c4-9459-950f4580494c"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76069",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20678,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "6a1136e8-8f15-4472-8e8b-f7aaf4bfbfbd",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20679,
+    "ClientEffect": 1566,
+    "Icon": 1566,
+    "Name": "Point Blank Damage",
+    "Description": "Target does 15% additional damages with melee attacks.",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 10,
+    "Type": "MeleeDamageBuff",
+    "Duration": 30,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 28.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "Your weapon is blessed by the heavens!",
+    "Message2": "{0}'s weapon is blessed by the heavens!",
+    "Message3": "Your weapon returns to normal.",
+    "Message4": "{0}'s weapon returns to normal.",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 0,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Cleric_Self_DMG",
+    "TooltipId": 1566,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "6a1136e8-8f15-4472-8e8b-f7aaf4bfbfbd"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-archery-live-v1-76070",
+   "op": "update",
+   "before": {
+    "SubSpellID": 0,
+    "CastTime": 0.0,
+    "Uninterruptible": 0
+   },
+   "after": {
+    "SubSpellID": 20679,
+    "CastTime": 2.0,
+    "Uninterruptible": 1
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3114",
+   "op": "update",
+   "before": {
+    "Value": 66.0
+   },
+   "after": {
+    "Value": 125.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3115",
+   "op": "update",
+   "before": {
+    "Value": 84.0
+   },
+   "after": {
+    "Value": 200.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3116",
+   "op": "update",
+   "before": {
+    "Value": 99.0
+   },
+   "after": {
+    "Value": 300.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3117",
+   "op": "update",
+   "before": {
+    "Value": 132.0
+   },
+   "after": {
+    "Value": 500.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3098",
+   "op": "update",
+   "before": {
+    "Value": 81.0
+   },
+   "after": {
+    "Value": 175.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3099",
+   "op": "update",
+   "before": {
+    "Value": 108.0
+   },
+   "after": {
+    "Value": 250.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3100",
+   "op": "update",
+   "before": {
+    "Value": 141.0
+   },
+   "after": {
+    "Value": 450.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3461",
+   "op": "update",
+   "before": {
+    "Damage": 7.0
+   },
+   "after": {
+    "Damage": 62.3
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3464",
+   "op": "update",
+   "before": {
+    "Damage": 63.0
+   },
+   "after": {
+    "Damage": 134.9
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-bainshee-test-v1-68126",
+   "op": "update",
+   "before": {
+    "Duration": 42
+   },
+   "after": {
+    "Duration": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-round3-live-v1-77635",
+   "op": "update",
+   "before": {
+    "Duration": 42
+   },
+   "after": {
+    "Duration": 30
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "88902422-7714-4185-aa61-416a63c0c102",
+   "op": "update",
+   "before": {
+    "Radius": 0
+   },
+   "after": {
+    "Radius": 350
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3044",
+   "op": "update",
+   "before": {
+    "CastTime": 3.0
+   },
+   "after": {
+    "CastTime": 2.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3067",
+   "op": "update",
+   "before": {
+    "CastTime": 2.8
+   },
+   "after": {
+    "CastTime": 2.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3091",
+   "op": "update",
+   "before": {
+    "CastTime": 3.1
+   },
+   "after": {
+    "CastTime": 2.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3235",
+   "op": "update",
+   "before": {
+    "CastTime": 3.0
+   },
+   "after": {
+    "CastTime": 2.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3236",
+   "op": "update",
+   "before": {
+    "CastTime": 3.0
+   },
+   "after": {
+    "CastTime": 2.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3237",
+   "op": "update",
+   "before": {
+    "CastTime": 3.0
+   },
+   "after": {
+    "CastTime": 2.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2611",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2612",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2613",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2614",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2615",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2616",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2617",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2618",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2619",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2971",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2972",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2973",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2974",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2975",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2976",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2977",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2978",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "2979",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66085",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66086",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66087",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66088",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66121",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66122",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66123",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66124",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "local-warlock-test-v1-66125",
+   "op": "update",
+   "before": {
+    "CastTime": 2.0
+   },
+   "after": {
+    "CastTime": 0.0
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "ed70cb17-f953-4684-a552-3f95a2baad62",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 9,
+    "StyleID": 124,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "ed70cb17-f953-4684-a552-3f95a2baad62"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "2192dd1b-dfbb-4b48-877a-a23104473528",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 9,
+    "StyleID": 68,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "2192dd1b-dfbb-4b48-877a-a23104473528"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "e8405247-b447-41b5-904a-f39ce9c4f9dd",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20302,
+    "ClassID": 9,
+    "StyleID": 141,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "e8405247-b447-41b5-904a-f39ce9c4f9dd"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "7dac4f8e-df88-4462-8446-dbfb7e218463",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 11,
+    "StyleID": 68,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "7dac4f8e-df88-4462-8446-dbfb7e218463"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "927c4496-4890-4141-882b-5d917c31316c",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20302,
+    "ClassID": 11,
+    "StyleID": 80,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "927c4496-4890-4141-882b-5d917c31316c"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "98d8a9c3-cc82-40cc-9a65-e311c8782d0f",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20302,
+    "ClassID": 11,
+    "StyleID": 141,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "98d8a9c3-cc82-40cc-9a65-e311c8782d0f"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "9e9c04f0-4cca-4f0b-a2f2-2ef43c8b1f6f",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20302,
+    "ClassID": 43,
+    "StyleID": 269,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "9e9c04f0-4cca-4f0b-a2f2-2ef43c8b1f6f"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "42934eed-2b60-49ad-9b79-1ae7c5c78137",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 43,
+    "StyleID": 256,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "42934eed-2b60-49ad-9b79-1ae7c5c78137"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "bc6575df-80d8-4c7a-9f8e-85d35198d797",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20311,
+    "ClassID": 43,
+    "StyleID": 280,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "bc6575df-80d8-4c7a-9f8e-85d35198d797"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "b9311eab-87e8-4d6f-8cdb-4d36b5eef08c",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 49,
+    "StyleID": 256,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "b9311eab-87e8-4d6f-8cdb-4d36b5eef08c"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "c8f5aee0-dd71-4249-9427-c16a4ef947fa",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20311,
+    "ClassID": 49,
+    "StyleID": 280,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "c8f5aee0-dd71-4249-9427-c16a4ef947fa"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "7d83e986-8292-4391-b9d0-f9256571d5ac",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20311,
+    "ClassID": 31,
+    "StyleID": 182,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "7d83e986-8292-4391-b9d0-f9256571d5ac"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "49b8ee3b-80b4-40d4-903b-68c2ea77abf3",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 31,
+    "StyleID": 171,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "49b8ee3b-80b4-40d4-903b-68c2ea77abf3"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "fceb1554-3b44-4a7b-97d0-79b7193bf717",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20311,
+    "ClassID": 32,
+    "StyleID": 182,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "fceb1554-3b44-4a7b-97d0-79b7193bf717"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "92515e37-8f7b-4e37-827e-bed3cdc34b59",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 32,
+    "StyleID": 171,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "92515e37-8f7b-4e37-827e-bed3cdc34b59"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "3092dca8-6fd1-4f39-9604-d426c5a05548",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20301,
+    "ClassID": 23,
+    "StyleID": 201,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "3092dca8-6fd1-4f39-9604-d426c5a05548"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "4c8f5a48-13d0-43c5-9ab7-4f5e052bb24d",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20311,
+    "ClassID": 23,
+    "StyleID": 182,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "4c8f5a48-13d0-43c5-9ab7-4f5e052bb24d"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "1b7010d7-bd16-42ab-8344-6feb2b6048e7",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20680,
+    "ClientEffect": 3001,
+    "Icon": 3001,
+    "Name": "Jabbing Staff Heal",
+    "Description": "Heals the target for 6",
+    "Target": "Self",
+    "Range": 0,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "Heal",
+    "Duration": 0,
+    "Frequency": 0,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 0,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 10.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "",
+    "Message2": "",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 130,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Mending",
+    "TooltipId": 3001,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "1b7010d7-bd16-42ab-8344-6feb2b6048e7"
+   }
+  },
+  {
+   "table": "Spell",
+   "key": "3a11750d-a1db-46dc-84a1-08f1ef28a62d",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20681,
+    "ClientEffect": 3131,
+    "Icon": 3131,
+    "Name": "Holy Staff Regeneration",
+    "Description": "Causes the target to regain 37 health during the spell's duration.",
+    "Target": "Group",
+    "Range": 2000,
+    "Power": 0,
+    "CastTime": 0.0,
+    "Damage": 0.0,
+    "DamageType": 0,
+    "Type": "HealOverTime",
+    "Duration": 10,
+    "Frequency": 20,
+    "Pulse": 0,
+    "PulsePower": 0,
+    "Radius": 0,
+    "RecastDelay": 30,
+    "ResurrectHealth": 0,
+    "ResurrectMana": 0,
+    "Value": 50.0,
+    "Concentration": 0,
+    "LifeDrainReturn": 0,
+    "AmnesiaChance": 0,
+    "Message1": "You start healing faster.",
+    "Message2": "{0} starts healing faster.",
+    "Message3": "",
+    "Message4": "",
+    "InstrumentRequirement": 0,
+    "SpellGroup": 3131,
+    "EffectGroup": 0,
+    "SubSpellID": 0,
+    "MoveCast": 0,
+    "Uninterruptible": 0,
+    "IsFocus": 0,
+    "SharedTimerGroup": 0,
+    "IsPrimary": 0,
+    "IsSecondary": 0,
+    "AllowBolt": 0,
+    "PackageID": "Friar_GroupHot",
+    "TooltipId": 3131,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "Spell_ID": "3a11750d-a1db-46dc-84a1-08f1ef28a62d"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "1f4018c9-661f-401e-a913-2d437e2e3cbc",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20680,
+    "ClassID": 10,
+    "StyleID": 7007,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "1f4018c9-661f-401e-a913-2d437e2e3cbc"
+   }
+  },
+  {
+   "table": "StyleXSpell",
+   "key": "e7027416-83d2-49ce-b404-c3a0931b9f3f",
+   "op": "insert",
+   "before": {},
+   "after": {
+    "SpellID": 20681,
+    "ClassID": 10,
+    "StyleID": 241,
+    "Chance": 100,
+    "LastTimeRowUpdated": "2000-01-01 00:00:00",
+    "StyleXSpell_ID": "e7027416-83d2-49ce-b404-c3a0931b9f3f"
+   }
+  }
+ ],
+ "note": "Server-sent NPC/object positions need no client binary patch. Geometry edits require matching client assets and rebuilt navigation."
+}

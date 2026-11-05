@@ -105,4 +105,15 @@ public class UT_ItemChargeSelection
             else Index.Spells.Remove(SecondaryId);
         }
     }
+
+    [Test]
+    public void EachAbilityOfAnItemHasItsOwnReuseTimer()
+    {
+        LoggerManager.InitializeWithExplicitLibrary(null, LogLibrary.None);
+        using var server = new EpicTestServerScope();
+
+        Assert.That(GamePlayer.ItemReuseKey("Shades_of_Mist", 1), Is.Not.EqualTo(GamePlayer.ItemReuseKey("Shades_of_Mist", 2)));
+        Assert.That(GamePlayer.ItemReuseKey("Shades_of_Mist", 1), Is.EqualTo(GamePlayer.ItemReuseKey("Shades_of_Mist", 1)));
+        Assert.That(GamePlayer.ItemReuseKey("Shades_of_Mist", 1), Is.Not.EqualTo(GamePlayer.ItemReuseKey("A_Flask", 1)));
+    }
 }

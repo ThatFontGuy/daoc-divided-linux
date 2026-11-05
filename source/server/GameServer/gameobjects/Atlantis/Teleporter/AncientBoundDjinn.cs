@@ -98,7 +98,8 @@ namespace DOL.GS
         {
             get
             {
-                switch (CurrentZone.ID)
+                // PermanentDjinn asks before it is in the world, when X and Y still read 0.
+                switch (CurrentRegion?.GetZone(RealX, RealY)?.ID)
                 {
                     // Oceanus Hesperos.
 
@@ -229,7 +230,7 @@ namespace DOL.GS
 		protected override bool GetTeleportLocation(GamePlayer player, string text)
 		{
 			// special cases
-			if (text.ToLower() == "battlegrounds" || text.ToLower() == "personal")
+			if (text.ToLower() is "battlegrounds" or "personal" or "guild" or "hearth")
 			{
 				return base.GetTeleportLocation(player, text);
 			}
@@ -282,7 +283,7 @@ namespace DOL.GS
                     {
                         String reply = String.Format("Do you wish to approach [Typhon's Reach] from the Haven {0} {1}",
                             "of Volcanus or do you perhaps have more ambitious plans, such as attacking",
-                            "[Thusia Nesos], the Temple of [Apollo], [Vazul's Fortress], or the [Chimera] herself?");
+                            "[Vazul's Fortress] or the [Chimera] herself?");
                         SayTo(player, reply);
                         return;
                     }
@@ -327,10 +328,9 @@ namespace DOL.GS
                     }
                 case "city":
                     {
-                        String reply = String.Format("I can send you to the entrance near the [portal], the great {0} {1} {2}",
-                            "Unifier, [Lethos], the [ancient kings] remembered now only for their reputations, the",
-                            "famous teacher, [Nelos], the most well known and honored avriel, [Katri], or even",
-                            "the [Phoenix] itself.");
+                        String reply = String.Format("I can send you to the entrance near the [portal], the great {0} {1}",
+                            "Unifier, [Lethos], the famous teacher, [Nelos], the most well known and honored",
+                            "avriel, [Katri], or even the [Phoenix] itself.");
                         SayTo(player, reply);
                         return;
                     }
@@ -352,7 +352,19 @@ namespace DOL.GS
 
             if (Region.IsAtlantis(player.CurrentRegionID) &&
                 Region.IsAtlantis(destination.RegionID))
-                destination.RegionID = player.CurrentRegionID;
+            {
+                // Stay in this copy of Atlantis. The row is shared, so work on a copy of it.
+                destination = new DbTeleport
+                {
+                    TeleportID = destination.TeleportID,
+                    Realm = destination.Realm,
+                    RegionID = player.CurrentRegionID,
+                    X = destination.X,
+                    Y = destination.Y,
+                    Z = destination.Z,
+                    Heading = destination.Heading
+                };
+            }
 
             String teleportInfo = "The magic of the {0} delivers you to the Haven of {1}.";
 

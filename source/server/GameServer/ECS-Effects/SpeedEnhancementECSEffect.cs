@@ -4,10 +4,7 @@
     {
         public SpeedEnhancementECSEffect(in ECSGameEffectInitParams initParams) : base(initParams) { }
 
-        // Pulse parents can retain an older child after a different singer
-        // refreshes the same spell. This ownership flag must outlive the
-        // temporary IsBeingReplaced message-suppression flag.
-        internal bool IsSuperseded { get; set; }
+        // HearthDAoC: IsSuperseded moved to ECSGameEffect, so every renewed effect is guarded, not only speed songs (#190).
 
         public override bool Enable()
         {

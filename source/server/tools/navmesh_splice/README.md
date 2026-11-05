@@ -40,6 +40,8 @@ Find the step with `navcomp` (two areas whose open edges lie 20-30 units apart, 
 (`UT_RaidDungeonRoutesProbe.LordGildasIsReachable`). Used on 2026-10-22 for Lord Gildas's room in Hall of the Corrupt.
 Zone 277 has no seams, roads or pockets entries; for a mesh that does, regenerate those files afterwards.
 
+An end may lie in a neighbouring tile, and `:jump` after a link flags it Jump, so the server handles it as a climb. `modern-dungeon-links.json` holds the links of 2026-10-31 for Koalinth Caverns (one 32-unit step) and Fomor (9 climbs that end inside solid pillars). After adding links to a dungeon, regenerate its proofs with `UT_DungeonProofGenerator`, or bots get no goals on the new floors. That generator needs one complete path, so spawns past Detour's 256-point limit get no proof even when a walker reaches them by replanning.
+
 # Zone road graph (navmesh/roads.json)
 
 Detour's search stops at a dead end when the only way to a far point first leads away from it.

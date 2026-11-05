@@ -1,0 +1,30 @@
+# Paths of upstream DividedRealms that this Linux build does not take (git pathspecs, one per line; # = comment).
+# tools/sync-upstream.sh leaves them out of every sync, so they never come back as conflicts.
+source/new-client
+source/tools/OfflineDaoc.Launcher
+source/tools/OfflineDaoc.Launcher.Tests
+# Passport Desk (bring a character to a friend's world). Windows launcher feature; see UPSTREAM.md for the hooks we cut out.
+source/tools/OfflineDaoc.Passport
+source/tools/OfflineDaoc.Passport.Cli
+source/tools/OfflineDaoc.Passport.Tests
+source/server/GameServer/gameutils/PassportDesk.cs
+source/server/GameServer/gameutils/PassportLock.cs
+source/server/Tests/UnitTests/UT_PassportLock.cs
+# Headless test client (needs the Godot shim)
+source/tools/OfflineDaoc.TestClient
+source/server/Tests/UnitTests/UT_TestClientRules.cs
+# We hand-merge these two project files (Passport/TestClient links are left out)
+source/server/GameServer/GameServer.csproj
+source/server/Tests/Tests.csproj
+# Windows download/installer-era root files (Offline DAoC 0.3x). Removed here; keep them out of every sync.
+GET-OFFLINE-DAOC-v0.37.cmd
+GET-OFFLINE-DAOC-v0.37b.cmd
+GET-OFFLINE-DAOC-v0.37c.cmd
+Get-OfflineDAoC.ps1
+older-versions
+package-files
+package-files-0.36c
+READ ME FIRST.txt
+RELEASE VERIFICATION.txt
+START WORLD EDITOR.cmd
+DEVELOPMENT - START HERE.md

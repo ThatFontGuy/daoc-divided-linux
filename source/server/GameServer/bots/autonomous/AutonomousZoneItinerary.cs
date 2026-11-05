@@ -173,7 +173,8 @@ namespace DOL.GS
                     (int)goal.X >> 11, (int)goal.Y >> 11, allowedMask);
                 long now = GameLoop.GameLoopTime;
                 if (FailedSteps.TryGetValue(key, out long until) && now < until) return false;
-                if (SolvedSteps.TryGetValue(key, out var solved) && now < solved.Until)
+                if (SolvedSteps.TryGetValue(key, out var solved) && now < solved.Until &&
+                    !AutonomousSeamCrossingQuarantine.IsQuarantined(region.ID, solved.Step.Inside))
                 {
                     step = solved.Step;
                     return true;
@@ -363,11 +364,24 @@ namespace DOL.GS
                 var reaches = new Dictionary<int, bool>();
                 var reachesMain = new Dictionary<int, bool?>();
                 var picks = new List<(float Score, SeamStep First, SeamStep? Second)>();
+                bool? ReachesMain(int area) => reachesMain.TryGetValue(area, out bool? known) ? known
+                    : reachesMain[area] = ChainReachesMain(topology, route, area);
                 foreach (SeamStep[] group in areas)
                 {
+                    // Within one near-side area, crossings onto ground that reaches the destination's main area come first:
+                    // all of Black Mountains North's crossings into Snowdonia start on its main ground, and the two nearest
+                    // land on a ridge that only turns back, so Albion bots went Black Mtns North > Snowdonia > back for
+                    // Pennine camps (2026-10-30: 2,399 goals, 574 bots at 544160,368576).
+                    // Only when passing through: a camp in the next zone may stand on ground apart from its main area.
+                    bool anyMain = !Contains(edge.To, goal) && group.Any(s => ReachesMain(s.OutsideArea) == true &&
+                        !AutonomousSeamCrossingQuarantine.IsQuarantined(topology.RegionId, s.Step.Inside) &&
+                        (reaches.TryGetValue(s.OutsideArea, out bool ok) ? ok : reaches[s.OutsideArea] = ChainContinues(topology, route, s.OutsideArea)));
                     SeamStep? best = null, next = null; float bestScore = float.MaxValue, nextScore = float.MaxValue;
                     foreach (SeamStep s in group)
                     {
+                        // A benched crossing gives its place among the area's two picks to the next one along the border.
+                        if (anyMain && ReachesMain(s.OutsideArea) == false ||
+                            AutonomousSeamCrossingQuarantine.IsQuarantined(topology.RegionId, s.Step.Inside)) continue;
                         if (!(reaches.TryGetValue(s.OutsideArea, out bool known) ? known
                                 : reaches[s.OutsideArea] = ChainContinues(topology, route, s.OutsideArea))) continue;
                         float score = Vector3.DistanceSquared(start, s.Step.Inside) + Vector3.DistanceSquared(s.Step.Outside, goal);
@@ -435,6 +449,11 @@ namespace DOL.GS
                 // With seam data an unlisted crossing takes the area of the listed point at the same
                 // spot: none means it is not on real ground, and passing through, its ground must
                 // continue along the zone chain. Checked first: data lookups, no corridor proofs.
+                if (AutonomousSeamCrossingQuarantine.IsQuarantined(topology.RegionId, candidate.Inside))
+                {
+                    _probeTrace?.Add($"  {edge.From.ID}>{edge.To.ID} {(listed ? "seam" : "sample")} {candidate.Inside} benched (bots could not reach it)");
+                    continue;
+                }
                 int? area = listed ? null : SeamAreaAt(topology, edge, candidate);
                 if (area == NoSeamArea || area is int known && !Contains(edge.To, goal) && !ChainContinues(topology, route, known))
                 {

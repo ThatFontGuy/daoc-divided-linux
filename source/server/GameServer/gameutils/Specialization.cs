@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using DOL.Database;
+using DOL.GS.Spells;
 using DOL.GS.Styles;
 
 namespace DOL.GS
@@ -107,6 +108,23 @@ namespace DOL.GS
 		#region Getters
 		
 		/// <summary>
+		/// The specialization lines a class gets from a spec's lines. A line hinted for the class replaces the
+		/// neutral line (Infiltrator Envenom replaces Mundane Poisons), except for Maulers: their realm gift lines
+		/// are added to Aura Manipulation. Replacing it took the auras, the better Discipline of Laresh ranks,
+		/// Strength of the Forge and every other gift from all three Maulers, and a gift needs an aura.
+		/// </summary>
+		public static IEnumerable<Tuple<SpellLine, int>> SpecLinesForClass(IEnumerable<Tuple<SpellLine, int>> lines, int classId)
+		{
+			List<Tuple<SpellLine, int>> own = lines.Where(item => !item.Item1.IsBaseLine && item.Item2 == classId).ToList();
+			IEnumerable<Tuple<SpellLine, int>> neutral = lines.Where(item => !item.Item1.IsBaseLine && item.Item2 == 0);
+
+			if (own.Count == 0)
+				return neutral;
+
+			return ModernMauler.IsMauler(classId) ? neutral.Concat(own) : own;
+		}
+		
+		/// <summary>
 		/// Default getter for SpellLines
 		/// Retrieve spell line depending on advanced class and class hint
 		/// Order by Baseline
@@ -176,35 +194,22 @@ namespace DOL.GS
 				}
 				
 				// try spec with class hint
-				var specline = tmp.Where(item => !item.Item1.IsBaseLine && item.Item2 == spellClassId);
-				if (specline.Any())
+				foreach (Tuple<SpellLine, int> ls in SpecLinesForClass(tmp, spellClassId))
 				{
-					foreach (Tuple<SpellLine, int> ls in specline)
-					{
-						ls.Item1.Level = level;
-						list.Add(ls.Item1);
-					}
-				}
-				else
-				{
-					foreach (Tuple<SpellLine, int> ls in tmp.Where(item => !item.Item1.IsBaseLine && item.Item2 == 0))
-					{
-						ls.Item1.Level = level;
-						list.Add(ls.Item1);
-					}
+					ls.Item1.Level = level;
+					list.Add(ls.Item1);
 				}
 				
 			}
 			else if (living is GameBot bot && bot.CharacterClass != null)
 			{
 				int classId = bot.CharacterClass.ID;
-				// /spawn Bonedancers have a real, point-funded build. The generic
-				// NPC 75% estimate hid their first subordinate summon even with
-				// 15+ points trained. Leave all other bots on their existing path.
-				int spellSpecLevel = bot.IsTemporaryGroupHelper && !bot.IsAutonomousWorldBot &&
-					classId == (int)eCharacterClass.Bonedancer
-					? Math.Clamp(level, 1, Math.Max(1, (int)living.Level))
-					: Math.Max(1, living.Level - (living.Level >> 2));
+				// Owner 2026-11-02: a companion or an autonomous bot has a real, point-funded build, so its spell lines are
+				// read at the trained specialization level. The old three-quarter NPC estimate (38 at level 50) silently
+				// dropped every rank above it - a Minstrel with Instruments 50 was left with the 189% speed song instead of
+				// the 204% one, and the same ceiling hid the top of every other line. Mobs keep the estimate.
+				bool trainsRealSpecs = bot.IsTemporaryGroupHelper || bot.IsAutonomousWorldBot;
+				int spellSpecLevel = BotSpellLineLevel.For(trainsRealSpecs, level, living.Level);
 
 				// Apply the same class-based filtering as GamePlayer
 				var baseline = spsl.Where(item => item.Item1.IsBaseLine && item.Item2 == classId);
@@ -225,22 +230,10 @@ namespace DOL.GS
 					}
 				}
 
-				var specline = spsl.Where(item => !item.Item1.IsBaseLine && item.Item2 == classId);
-				if (specline.Any())
+				foreach (var ls in SpecLinesForClass(spsl, classId))
 				{
-					foreach (var ls in specline)
-					{
-						ls.Item1.Level = spellSpecLevel;
-						list.Add(ls.Item1);
-					}
-				}
-				else
-				{
-					foreach (var ls in spsl.Where(item => !item.Item1.IsBaseLine && item.Item2 == 0))
-					{
-						ls.Item1.Level = spellSpecLevel;
-						list.Add(ls.Item1);
-					}
+					ls.Item1.Level = spellSpecLevel;
+					list.Add(ls.Item1);
 				}
 			}
 			else
@@ -422,7 +415,10 @@ namespace DOL.GS
 			else
 			{
 				styles = SkillBase.GetStyleList(KeyName, classid);
-				
+
+				if (styles.Count == 0)
+					styles = BaseClassStyles(KeyName, classid);
+
 				if (styles.Count == 0)
 					styles = SkillBase.GetStyleList(KeyName, 0);
 			}
@@ -433,6 +429,43 @@ namespace DOL.GS
 				.ThenBy(item => item.ID).ToList();
 			
 		}
+
+		/// <summary>
+		/// The styles a base class (Fighter, Viking, Guardian, the rogues ...) gets in a weapon line it trains before
+		/// choosing its class at level 5: the styles the classes it leads to have in that line. The style table lists
+		/// styles only for those classes, so a base-class Fighter with Slash 2 had no style at all where a classic one
+		/// had Slash's first style (Living Server, reported on r/daoc 2026-10-30). Empty for any other class.
+		/// </summary>
+		public static List<Style> BaseClassStyles(string keyName, int classId, Func<string, int, List<Style>> stylesOf = null)
+		{
+			stylesOf ??= SkillBase.GetStyleList;
+			var styles = new List<Style>();
+			var seen = new HashSet<int>();
+			foreach (int advanced in ClassesLedToBy(classId))
+				foreach (Style style in stylesOf(keyName, advanced))
+					if (seen.Add(style.ID))
+						styles.Add(style);
+			return styles;
+		}
+
+		private static readonly System.Collections.Concurrent.ConcurrentDictionary<int, int[]> s_classesLedTo = new();
+
+		/// <summary>The classes a base class can choose at level 5 (their BaseName is its name); empty for any other class.</summary>
+		public static int[] ClassesLedToBy(int classId) => s_classesLedTo.GetOrAdd(classId, id =>
+		{
+			ICharacterClass baseClass = ScriptMgr.FindCharacterClass(id);
+			if (baseClass == null || baseClass.HasAdvancedFromBaseClass() || baseClass.BaseName != baseClass.Name)
+				return [];
+			return Enum.GetValues<eCharacterClass>()
+				.Select(value => (int)value)
+				.Where(other => other != id)
+				.Distinct()
+				.Select(ScriptMgr.FindCharacterClass)
+				.Where(other => other != null && other.HasAdvancedFromBaseClass() && other.BaseName == baseClass.Name)
+				.Select(other => other.ID)
+				.OrderBy(other => other)
+				.ToArray();
+		});
 
 		/// <summary>
 		/// Resolve a class hint for both connected players and player-like bots.

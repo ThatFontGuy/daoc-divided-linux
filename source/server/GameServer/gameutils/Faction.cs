@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
@@ -15,7 +16,7 @@ namespace DOL.GS
 
         public int _baseAggroLevel;
         private ConcurrentDictionary<string, AggroLevel> _aggroLevels = [];
-        private readonly Lock _saveLoadLock = new(); // Used to prevent `SaveAggroLevels` from removing a player from `_aggroLevels` while `TryLoadAggroLevel` is updating the `GamePlayer` reference.
+        private readonly Lock _saveLoadLock = new();
 
         public string Name { get; private set; } = string.Empty;
         public int Id { get; private set; }
@@ -43,13 +44,18 @@ namespace DOL.GS
                 foreach (KeyValuePair<string, AggroLevel> pair in _aggroLevels)
                 {
                     AggroLevel playerAggro = pair.Value;
+                    string characterId = pair.Key;
+                    bool isDeleted = playerAggro.Player.ObjectState is GameObject.eObjectState.Deleted;
+
+                    // ICollection.Remove ensures the item is only removed if both the key and the exact struct value still match.
+                    // If they reconnected on another thread, TryLoadAggroLevel created a new struct, and this safely does nothing.
+                    if (playerAggro.Player.ObjectState is GameObject.eObjectState.Deleted)
+                        ((ICollection<KeyValuePair<string, AggroLevel>>) _aggroLevels).Remove(pair);
 
                     if (!playerAggro.Dirty)
                         continue;
 
-                    playerAggro.Dirty = false;
                     int aggro = playerAggro.Aggro;
-                    string characterId = pair.Key;
                     DbFactionAggroLevel dbFactionAggroLevel = DOLDB<DbFactionAggroLevel>.SelectObject(DB.Column("CharacterID").IsEqualTo(characterId).And(DB.Column("FactionID").IsEqualTo(Id)));
 
                     if (dbFactionAggroLevel == null)
@@ -69,8 +75,8 @@ namespace DOL.GS
                         GameServer.Database.SaveObject(dbFactionAggroLevel);
                     }
 
-                    if (playerAggro.Player.Client.ClientState == GameClient.eClientState.Disconnected)
-                        _aggroLevels.TryRemove(pair);
+                    if (!isDeleted)
+                        _aggroLevels.TryUpdate(characterId, playerAggro with { Dirty = false }, playerAggro);
 
                     count++;
                 }
@@ -93,18 +99,12 @@ namespace DOL.GS
             lock (_saveLoadLock)
             {
                 // Update our `GamePlayer` reference if it's new.
-                _aggroLevels.AddOrUpdate(player.ObjectId, Add, Update);
-            }
-
-            AggroLevel Add(string characterId)
-            {
-                return new(player, aggro);
-            }
-
-            AggroLevel Update(string characterId, AggroLevel oldValue)
-            {
-                oldValue.Player = player;
-                return oldValue;
+                _aggroLevels.AddOrUpdate(
+                    player.ObjectId,
+                    static (_, arg) => new(arg.Player, arg.Aggro),
+                    static (_, oldValue, arg) => oldValue with { Player = arg.Player },
+                    (Player: player, Aggro: aggro)
+                );
             }
         }
 
@@ -112,20 +112,20 @@ namespace DOL.GS
         {
             if (Util.Chance(20))
             {
-                AggroLevel playerAggro = _aggroLevels.GetOrAdd(player.ObjectId, (key) => new(player, _baseAggroLevel));
-                int oldAggro = playerAggro.Aggro;
-                int newAggro = oldAggro + amount;
-
-                if (newAggro < MIN_AGGRO_VALUE)
-                    newAggro = MIN_AGGRO_VALUE;
-                else if (newAggro > MAX_AGGRO_VALUE)
-                    newAggro = MAX_AGGRO_VALUE;
-
-                if (newAggro != oldAggro)
-                {
-                    playerAggro.Aggro = newAggro;
-                    playerAggro.Dirty = true;
-                }
+                _aggroLevels.AddOrUpdate(
+                    player.ObjectId,
+                    static (_, arg) =>
+                    {
+                        int newAggro = Math.Clamp(arg.BaseAggro + arg.Amount, MIN_AGGRO_VALUE, MAX_AGGRO_VALUE);
+                        return new(arg.Player, newAggro, Dirty: newAggro != arg.BaseAggro);
+                    },
+                    static (_, oldValue, arg) =>
+                    {
+                        int newAggro = Math.Clamp(oldValue.Aggro + arg.Amount, MIN_AGGRO_VALUE, MAX_AGGRO_VALUE);
+                        return newAggro == oldValue.Aggro ? oldValue : oldValue with { Aggro = newAggro, Dirty = true };
+                    },
+                    (Player: player, BaseAggro: _baseAggroLevel, Amount: amount)
+                );
             }
 
             string message = $"Your relationship with {Name} has {(amount > 0 ? "decreased" : "increased")}";
@@ -154,8 +154,7 @@ namespace DOL.GS
 
                 if (newAggro != playerAggro.Aggro)
                 {
-                    playerAggro.Aggro = newAggro;
-                    playerAggro.Dirty = true;
+                    _aggroLevels[player.ObjectId] = playerAggro with { Aggro = newAggro, Dirty = true };
                 }
 
                 return newAggro;
@@ -206,18 +205,12 @@ namespace DOL.GS
 
         public enum Standing
         {
-            // From least aggressive to most aggressive.
             FRIENDLY,
             NEUTRAL,
             HOSTILE,
             AGGRESIVE
         }
 
-        public class AggroLevel(GamePlayer player, int aggro)
-        {
-            public GamePlayer Player { get; set; } = player;
-            public int Aggro { get; set; } = aggro;
-            public bool Dirty { get; set; }
-        }
+        public readonly record struct AggroLevel(GamePlayer Player, int Aggro, bool Dirty = false);
     }
 }

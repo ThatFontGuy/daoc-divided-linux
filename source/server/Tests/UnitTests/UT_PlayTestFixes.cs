@@ -252,6 +252,44 @@ namespace DOL.GS.Tests
         }
 
         [Test]
+        public void AVampiirIsNotOfferedTheStatBuffsItRefuses()
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(BotBuffRules.RefusedByOwnStats(eSpellType.StrengthBuff, true, false, false, false), Is.True);
+                Assert.That(BotBuffRules.RefusedByOwnStats(eSpellType.StrengthConstitutionBuff, false, false, true, false), Is.True);
+                Assert.That(BotBuffRules.RefusedByOwnStats(eSpellType.DexterityQuicknessBuff, false, false, false, true), Is.True);
+                Assert.That(BotBuffRules.RefusedByOwnStats(eSpellType.DexterityBuff, true, false, true, true), Is.False, "strength does not block dexterity");
+                Assert.That(BotBuffRules.RefusedByOwnStats(eSpellType.AcuityBuff, true, true, true, true), Is.False);
+                Assert.That(BotBuffRules.RefusedByOwnStats(eSpellType.StrengthBuff, false, false, false, false), Is.False, "everyone else");
+            });
+        }
+
+        [Test]
+        public void APointBlankGroupBuffReachesItsRadius()
+        {
+            // Archangel's Allotment (75007): realm target, no range, radius 1,000. It used to reach only the caster.
+            var allotment = new Spell(new DOL.Database.DbSpell { Type = eSpellType.StrengthConstitutionBuff.ToString(), Target = "Realm", Range = 0, Radius = 1000, Duration = 600 }, 50);
+            Assert.That(allotment.IsPBAoE, Is.True);
+            Assert.That(DOL.GS.Spells.SpellHandler.BuffReach(allotment, null), Is.EqualTo(1000));
+        }
+
+        [Test]
+        public void AGamebotCorpseUnderAFightingBossWaits()
+        {
+            // Overnight run 2026-11-02: one Mauler raised under Prince Ba'alorien 78 times in an hour.
+            var corpse = new System.Numerics.Vector3(36502, 15481, 16051);
+            var boss = new System.Numerics.Vector3(36470, 15549, 16050);
+            Assert.Multiple(() =>
+            {
+                Assert.That(BotGroupSupport.CorpseUnderHardFoe(corpse, boss, true, ConColor.PURPLE), Is.True);
+                Assert.That(BotGroupSupport.CorpseUnderHardFoe(corpse, boss, false, ConColor.PURPLE), Is.False, "the fight is over");
+                Assert.That(BotGroupSupport.CorpseUnderHardFoe(corpse, boss, true, ConColor.ORANGE), Is.False, "an orange is a fair fight to come back to");
+                Assert.That(BotGroupSupport.CorpseUnderHardFoe(corpse, boss + new System.Numerics.Vector3(900, 0, 0), true, ConColor.RED), Is.False, "far enough away");
+            });
+        }
+
+        [Test]
         public void ARaiseSpotIsClearOfFightsAndAggroRange()
         {
             // In-game check 2026-10-28: in a camp that respawns, the cleric rezzes from its edge instead of clearing forever.
@@ -266,6 +304,22 @@ namespace DOL.GS.Tests
             Assert.That(BotGroupSupport.PointIsSafeToRaise(new System.Numerics.Vector3(BotGroupSupport.RaiseDangerRadius - 10, 0, 0), fight), Is.False);
             Assert.That(BotGroupSupport.PointIsSafeToRaise(new System.Numerics.Vector3(BotGroupSupport.RaiseDangerRadius + 10, 0, 0), fight), Is.True);
             Assert.That(BotGroupSupport.PointIsSafeToRaise(new System.Numerics.Vector3(0, 0, 0), new BotGroupSupport.RaiseHostile[0]), Is.True);
+        }
+
+        [Test]
+        public void ARaiseIgnoresOtherFloorsAndStopsWaitingOnIdleMonsters()
+        {
+            // Discord report 2026-11-04, Stonehenge Barrows: companions never raised the player under a stacked dungeon floor.
+            var above = new[] { new BotGroupSupport.RaiseHostile(new System.Numerics.Vector3(0, 0, BotGroupSupport.RaiseFloorGap + 50), true, 800) };
+            Assert.That(BotGroupSupport.PointIsSafeToRaise(new System.Numerics.Vector3(0, 0, 0), above), Is.True, "another floor");
+            var level = new[] { new BotGroupSupport.RaiseHostile(new System.Numerics.Vector3(0, 0, 100), false, 800) };
+            Assert.That(BotGroupSupport.PointIsSafeToRaise(new System.Numerics.Vector3(0, 0, 0), level), Is.False, "same floor");
+            long wait = BotGroupSupport.RaiseWaitGiveUpMs;
+            Assert.That(BotGroupSupport.RaiseWaitGivesUp(1_000, 1_000 + wait, false, false), Is.True);
+            Assert.That(BotGroupSupport.RaiseWaitGivesUp(1_000, 1_000 + wait - 1, false, false), Is.False, "too soon");
+            Assert.That(BotGroupSupport.RaiseWaitGivesUp(1_000, 1_000 + wait, true, false), Is.False, "monster fighting");
+            Assert.That(BotGroupSupport.RaiseWaitGivesUp(1_000, 1_000 + wait, false, true), Is.False, "caster under attack");
+            Assert.That(BotGroupSupport.RaiseWaitGivesUp(0, 1_000 + wait, false, false), Is.False, "not waiting");
         }
     }
 }

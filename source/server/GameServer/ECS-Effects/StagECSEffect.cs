@@ -12,6 +12,10 @@ namespace DOL.GS
             EffectType = eEffect.Stag;
 		}
 
+        // Stag Man and Lurikeen Stag Man, in both client tables: see BerserkECSGameEffect.VendoModel.
+        public const ushort StagModel = 583;
+        public const ushort LurikeenStagModel = 859;
+
         /// <summary>
 		/// The amount of max health gained
 		/// </summary>
@@ -33,8 +37,8 @@ namespace DOL.GS
 			if (OwnerPlayer != null)
 			{
 				if (OwnerPlayer.Race == (int)eRace.Lurikeen)
-					OwnerPlayer.Model = 13;
-				else OwnerPlayer.Model = 4;
+					OwnerPlayer.Model = LurikeenStagModel;
+				else OwnerPlayer.Model = StagModel;
 			}
 
 

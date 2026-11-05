@@ -1,6 +1,6 @@
 OFFLINE DAOC 0.3 - SERVER COMMAND REFERENCE
 
-286 command registrations read from the shipped server assemblies.
+287 command registrations read from the shipped server assemblies.
 Normal commands can still have level, realm, cooldown or state requirements.
 GM/admin commands can change or delete game data. Back up before using them.
 Descriptions containing a localization key have no matching shipped English text.
@@ -36,6 +36,23 @@ NORMAL PLAYER COMMANDS
   '/afk' - '/afk' - Enables/disables a flag that indicates you are "away from keyboard," and allows you to attach a message that will auto-send to any player that uses '/send' to you (e.g., '/afk Bio break').
   '/afk <message>' - Sets yourself as "away from keyboard," and attaches a message that will auto-send to any player that uses '/send' to you.
   Handler: DOL.GS.Commands.AFKCommandHandler
+
+/bots hunt
+  Tanks and attackers in your group find their own fights near you, one pull at a time, while
+  healers stay with you. Works with any bot in your group and you can keep moving. The next pull
+  waits until everyone is alive with 70% health and 30% power.
+
+/bots attack
+  The bots in your group attack your target now.
+
+/bots follow
+  Stops hunting; the bots drop what they are doing and come back to you.
+
+/bots status
+  Shows who is following you and what the hunt is doing.
+
+/bots invites on|off
+  Whether bots invite you to groups (until you log out).
 
 /aggressive
   Restore normal companion assisting (default)
@@ -362,6 +379,21 @@ NORMAL PLAYER COMMANDS
   Turns off the bad word filter.
   /filter
   Handler: DOL.GS.Commands.FilterCommandHandler
+
+/fish
+  Relax and fish. Face open water with a fishing pole and type /fish.
+  '/fish' - Fishes and casts again after each catch until you move or type /fish stop.
+  '/fish active' - Like /fish, but you reel in each bite yourself: type /fish within 4 seconds.
+  '/fish stop' - Reels in your line and stops fishing.
+  '/fish stats' - Shows your fishing skill, pole, casts, catches and best catch.
+  '/fish pole' - Gives you a fishing pole if you don't have one.
+  '/fish craft' - Lists the poles and camp kits you can make; '/fish craft <number>' makes one.
+  '/fish camp' - Shows how long your camp has left; '/fish camp break' packs it up. Use a camp kit from your backpack to make camp.
+  '/fish spots' - Lists the fishing spots you can travel to.
+  '/fish go <number>' - Travels to a fishing spot in your realm from the /fish spots list.
+  '/fish mark <name>' - Saves the shore you stand on, facing open water, as a new fishing spot.
+  '/fish unmark <number>' - Removes a fishing spot you marked.
+  Handler: DOL.GS.Commands.FishCommandHandler
 
 /flex
   Makes a flexing gesture

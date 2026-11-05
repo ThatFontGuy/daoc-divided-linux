@@ -505,7 +505,7 @@ namespace DOL.GS
                 int Count(AnimistShroomKind kind) => counts.TryGetValue(kind, out int value) ? value : 0;
                 string main = (bot.ControlledBrain?.Body as TurretPet)?.TurretSpell is Spell payload
                     ? AnimistShroomPlanner.ClassifyMainPayload(payload).ToString() : "none";
-                Log.Info($"ANIMIST_SHROOMS bot={bot.Name} kind={(bot.IsAutonomousWorldBot ? "gamebot" : "companion")} " +
+                if (BotDiagnostics.Enabled) Log.Info($"ANIMIST_SHROOMS bot={bot.Name} kind={(bot.IsAutonomousWorldBot ? "gamebot" : "companion")} " +
                          $"level={bot.Level} group={bot.Group?.MemberCount ?? 1} main={main} " +
                          $"preferred={kit.PreferredMain.Spell?.Name ?? "none"} damage={Count(AnimistShroomKind.Damage)}/{desired} " +
                          $"vents={Count(AnimistShroomKind.ResistVent)} ablative={Count(AnimistShroomKind.Ablative)} " +

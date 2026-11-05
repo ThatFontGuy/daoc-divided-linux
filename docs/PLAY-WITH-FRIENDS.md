@@ -1,69 +1,75 @@
 # Play with friends
 
 One of you **hosts**: your server runs as usual and friends join your world. The others **join**: they start only
-their game client, against your server. You connect in one of three ways:
-
-| Way | Installs | Router | Works for |
-|---|---|---|---|
-| Home network | nothing | nothing | friends in your house |
-| [Tailscale](https://tailscale.com) (a free private network between your PCs) | Tailscale on every PC | nothing | nearly everyone |
-| Internet mode | nothing | opened by the server (UPnP) while it runs, for the friends you list | hosts whose internet address isn't shared (see [Internet mode](#internet-mode-no-tailscale)) |
+their game client, against your server. The host sends an **invite code**, and friends paste it in. Nothing extra
+needs installing, and no outside service is involved: the code simply holds the host's addresses.
 
 You all need the same game: Classic with Classic, Stormforged with Stormforged, the modern 1.130 test with the modern
-test. Join Friend does not support the new (Godot) client yet.
+test. A code made for another game is refused. Join Friend does not support the new (Godot) client yet.
 
-**Characters stay in the host's world.** A friend makes a new character on your server, and it is saved in your
-world, not theirs. Taking your own character along and back is the next step:
-[CHARACTER-PASSPORT.md](CHARACTER-PASSPORT.md).
+**A friend can make a new character in your world, or bring their own.** A new character stays in the host's world.
+A brought character is locked in its owner's save while it visits, and goes home with what it earned. See
+[Bringing your own character](#bringing-your-own-character).
 
-## Once, on both PCs
+## Bringing your own character
 
-1. Install Tailscale and sign in.
-2. Make the host PC reachable to the friend: either both sign in to the same tailnet, or the host shares their PC
-   with the friend (Tailscale admin console → the PC → Share).
+You need your own copy of the same game, with your own server stopped.
 
-Friends in the same house can skip Tailscale and use the host PC's home-network address (192.168.x.x or 10.x.x.x).
+1. In **JOIN FRIEND**, fill in the code, your account and password as usual.
+2. Choose a character under **Bring a character from your own save**.
+3. Press **JOIN FRIEND**. The character goes to your friend's world with all its gear and the coin in that realm's
+   wallet, and the game starts. Pick it on the character screen.
+4. To go back, close the game, wait a moment, and press **COME HOME** with that character chosen. It returns with what it
+   earned, and its coin.
+
+A character can only be in one world at a time, so nothing can be duplicated. While it is away you can't play or delete
+it at home.
+
+- **What stays behind:** your house, guild, shared account vault and companion bots, and anything for sale on the Realm
+  Exchange or in a house. Your other characters in that realm keep nothing from the wallet while the coin is away.
+- **In your friend's world** a visitor can't buy a house. Before coming home it must take back anything it has for sale
+  there and collect its sale money.
+- **Name taken?** Type another in **Visiting name**. Your character gets its own name back at home.
+- **RECALL** is for a world that has gone for good. The character comes back as it left, with the coin it carried, and
+  everything it earned on that trip is lost.
 
 ## Hosting
 
 1. In your launcher, press **HOST FOR FRIENDS**.
-2. **TURN ON**. The server will listen on Tailscale and your home network as well as this PC. Your previous settings
-   are saved as `runtime\server\config\serverconfig.before-host-for-friends.xml`.
-3. **ADD FIREWALL RULES** (once). Windows asks for permission. The rules let in TCP 10300 and UDP 10400 (the modern
-   test uses its own login port) for this game's `CoreServer.exe` only, and only from Tailscale (100.64.0.0/10) and
-   your local subnet. The script is kept as `runtime\host-for-friends-firewall.cmd` if you'd rather run it yourself.
-4. Start the server (or stop and start it, if it was running).
-5. **COPY ADDRESS** and send it to your friend.
+2. Type a password for your friends, 6 to 20 characters. It may be empty only if the internet box is unticked, so
+   only your home network can join.
+3. Leave **Friends outside my home can join over the internet** ticked unless everyone is in your house.
+4. **START HOSTING**. Windows asks for permission the first time, for the firewall rules. Your server then starts.
+   If it was already running, stop and start it.
+5. **COPY CODE**, and send your friends the code and the password.
 
-Your own ENTER REALM works the same as before. To stop hosting, **TURN OFF** (the server listens on this PC only
-again after its next start) and, if you like, **REMOVE FIREWALL RULES**.
+Your own ENTER REALM works the same as before. **STOP HOSTING** takes effect at the server's next start, and it
+clears the password. Your previous settings are saved as
+`runtime\server\config\serverconfig.before-host-for-friends.xml`.
 
-## Internet mode (no Tailscale)
+If the window shows a message about your router:
 
-For friends who'd rather not install anything. Hosting must be on first.
+- "Router OK (UPnP)": good, the code works from the internet.
+- "Your provider shares addresses (CGNAT)": friends outside your home can't reach you. The code still works for your
+  home network, and over [Tailscale](https://tailscale.com) if you both run it.
+- "Your router did not answer UPnP": turn UPnP on in the router's settings, or forward the two ports to this PC by
+  hand and put your internet address in `<PublicIP>` in `runtime\server\config\serverconfig.xml`.
 
-1. **INTERNET: TURN ON**. The window asks your router for your internet address:
-   - "Router OK (UPnP). Friends join at …": good, that's the address to send.
-   - "Your provider shares addresses (CGNAT)": internet mode can't work on your connection. Use Tailscale.
-   - "Your router did not answer UPnP": turn UPnP on in the router's settings, or forward the two ports to this PC
-     by hand and put your internet address in `<PublicIP>` in `runtime\server\config\serverconfig.xml`.
-2. Each friend searches "what is my IP" and sends you the address. Type them into the box, separated by commas.
-3. **UPDATE FIREWALL RULES** (Windows asks). Only those addresses, Tailscale and your home network get in. When a
-   friend's address changes (home addresses do, now and then), update the list and the rules again.
-4. Start (or restart) the server. While it runs, it opens TCP 10300 / UDP 10400 on your router (the modern test:
-   10330 / 10430), and it closes them when it stops normally.
-5. **COPY ADDRESS** copies your internet address for your friend's JOIN FRIEND.
+A new code is needed when your internet address changes. Home addresses do, now and then. If friends suddenly can't
+reach you, open the window and send the code it shows.
 
-The game's login isn't encrypted the way Tailscale's tunnel is. Keep the friend list short and turn internet mode
-off when you're done playing.
+While hosting over the internet, your game port is open to any address, so the password is what keeps strangers from
+making accounts. Send the code only to people you want in your world, and stop hosting when you're done. The game's
+login is not encrypted, so don't reuse a password from anywhere else.
 
 ## Joining
 
 1. Your own server doesn't need to run.
 2. Press **JOIN FRIEND** in your launcher, or double-click `Join Friend.cmd` beside it.
-3. Enter the host's address, then an account name and password **for their server**. The first time, their server
+3. Paste the invite code. A plain host address works too.
+4. Choose an account name for their server. The first time, use the password your friend gave you, and their server
    creates the account. Use the same name and password each time to get back to your characters there.
-4. **JOIN FRIEND**. The window checks the host can be reached before starting the client.
+5. **JOIN FRIEND**. The window tries each address in the code and starts the client on the first that answers.
 
 Tick "Remember my password" to skip typing it next time. It's stored encrypted for your Windows user, in
 `%LOCALAPPDATA%\OfflineDAoC\join-friend.json`.
@@ -72,9 +78,10 @@ Tick "Remember my password" to skip typing it next time. It's stored encrypted f
 
 | Message | Check |
 |---|---|
-| Cannot reach the host | Tailscale is on for both of you, the host's server is running with hosting on, and the host added the firewall rules. |
-| The client starts but login fails | The account name and password for the host's server. A different password from the first time is refused. |
-| Internet mode: cannot reach the host | Your address is in the host's friend list and they updated the firewall rules; the host's server log shows `[UPNP] Router forwards …` at start. |
+| That invite code isn't right | Copy the whole code, starting with DR. |
+| This code is for a different game | You both need the same game. |
+| Cannot reach your friend's server | Their server has finished starting and they are hosting. Ask for a new code; their internet address may have changed. |
+| The client starts but login fails | First time: the host's password. After that: the password you used the first time. |
 | Logged in, but stuck when entering the world or changing region | Tell us: the UDP side (port 10400) or the region address. Session details are in your `runtime\logs\client-diagnostics.log` (look for `remote10300`). |
 
 ## How it works (for developers)
@@ -82,14 +89,23 @@ Tick "Remember my password" to skip typing it next time. It's stored encrypted f
 - Hosting sets `IP` and `UdpIP` to `0.0.0.0` in `serverconfig.xml` and leaves `RegionIP` at `127.0.0.1`. The
   server then tells each client the address that client connected to (`RegionAddress.ForClient`, used by the
   packet libraries), so this PC gets 127.0.0.1 and a friend gets the Tailscale or home-network address.
-- Internet mode sets `EnableUPnP` (and `PublicIP` to `auto`; `DetectRegionIP` stays off). At start the server maps
-  its ports on the router to this PC's address on the router's network (`UpnpNat.LocalAddress`, not the first
-  address the PC has), keeps the router's internet address as `PublicIP`, and removes the mapping in
-  `BaseServer.Stop`. Only clients connecting from a public address are given `PublicIP` for the game connection.
-  `UpnpNat` speaks both `WANIPConnection` and `WANPPPConnection` routers; the launcher compiles the same file for
-  its router check. The friend list is `runtime\host-for-friends.json`.
+- `InviteCode` packs up to three IPv4 addresses, the login port and a check into Crockford base 32. Addresses go in
+  the order Tailscale, internet, home network, because a home address could be some other device on the friend's
+  own network. It holds no password.
+- The login packet has only an account and a password, so `HostPasswordHash` in `serverconfig.xml` guards account
+  creation: a new account from another PC must use the host's password (`HostPassword`, `LoginRequestHandler`).
+  Existing accounts and this PC are unaffected. `HostForFriends.HashHostPassword` is the launcher's copy of the hash.
+- Internet mode sets `EnableUPnP` (and `PublicIP` to `auto`; `DetectRegionIP` stays off), and needs a host password.
+  At start the server maps its ports on the router to this PC's address on the router's network
+  (`UpnpNat.LocalAddress`, not the first address the PC has), keeps the router's internet address as `PublicIP`, and
+  removes the mapping in `BaseServer.Stop`. Only clients connecting from a public address are given `PublicIP` for
+  the game connection. `UpnpNat` speaks both `WANIPConnection` and `WANPPPConnection` routers; the launcher compiles
+  the same file for its router check.
 - The firewall rules are tied to `CoreServer.exe` (`program=`), so Windows doesn't show its own unrestricted
-  "allow access" prompt when the server first listens on the network.
-- Code: `HostForFriends.cs` / `HostForFriendsForm.cs` (host), `JoinFriend.cs` / `JoinFriendForm.cs` /
+  "allow access" prompt when the server first listens on the network. They admit Tailscale (100.64.0.0/10) and the
+  local subnet, or any address for internet hosting. `runtime\host-for-friends.json` records which, and the script
+  is kept as `runtime\host-for-friends-firewall.cmd`. The rules stay when hosting stops; they only admit
+  `CoreServer.exe`, which then listens on this PC alone.
+- Code: `HostForFriends.cs` / `HostForFriendsForm.cs` (host), `InviteCode.cs`, `JoinFriend.cs` / `JoinFriendForm.cs` /
   `JoinFriendProfile.cs` (guest), `Program.cs --join`. Join Friend comes from the
   [stefanrows/OfflineDAoC](https://github.com/stefanrows/OfflineDAoC) fork (its `docs/TAILSCALE_COOP.md`).

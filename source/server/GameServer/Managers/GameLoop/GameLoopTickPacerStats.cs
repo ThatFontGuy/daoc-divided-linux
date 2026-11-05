@@ -55,49 +55,59 @@ namespace DOL.GS
 
         private void GetAverageTicksInternal(List<(int, double)> result)
         {
-            List<double> ticks = new((int) _capacity);
+            uint writeIndex = Volatile.Read(ref _writeIndex);
+            int count = (int) Math.Min(writeIndex, _capacity);
 
-            // Calculate how many valid entries we have and determine the range of valid indices in the ring buffer.
-            uint start = _writeIndex >= _capacity ? (_writeIndex & (_capacity - 1)) : 0;
-            uint end = Math.Min(_writeIndex, _capacity);
-
-            // Collect valid ticks from the ring buffer.
-            for (uint i = 0; i < end; i++)
+            if (count <= 0)
             {
-                uint index = (start + i) & (_capacity - 1);
-                double tick = _buffer[index];
+                foreach (int interval in _intervals)
+                    result.Add((interval, 0));
 
-                if (tick > 0)
-                    ticks.Add(tick);
+                return;
             }
 
+            uint mask = _capacity - 1;
+            uint start = writeIndex >= _capacity ? writeIndex & mask : 0;
+            double latestTick = _buffer[(start + (uint) (count - 1)) & mask];
             int startIndex = 0;
 
             // Count ticks per interval and calculate averages.
             foreach (int interval in _intervals)
             {
-                double intervalStart = ticks[^1] - interval;
-                int tickCount = 0;
+                double intervalStart = latestTick - interval;
+                double firstTick = 0;
 
-                // Find the number of ticks within this interval.
-                for (int i = startIndex; i < ticks.Count; i++)
+                // Advance startIndex until we find a tick within the current interval.
+                while (startIndex < count)
                 {
-                    if (ticks[i] >= intervalStart)
+                    double tick = _buffer[(start + (uint) startIndex) & mask];
+
+                    if (tick >= intervalStart)
                     {
-                        tickCount = ticks.Count - i;
-                        startIndex = i;
+                        firstTick = tick;
                         break;
                     }
+
+                    startIndex++;
                 }
 
-                if (tickCount < 2)
+                int ticksInInterval = count - startIndex;
+
+                if (ticksInInterval < 2)
                 {
                     result.Add((interval, 0));
                     continue;
                 }
 
-                double actualInterval = ticks[^1] - ticks[startIndex];
-                double average = (tickCount - 1) / (actualInterval / 1000.0);
+                double actualInterval = latestTick - firstTick;
+
+                if (actualInterval <= 0)
+                {
+                    result.Add((interval, 0));
+                    continue;
+                }
+
+                double average = (ticksInInterval - 1) / (actualInterval / 1000.0);
                 result.Add((interval, average));
             }
         }

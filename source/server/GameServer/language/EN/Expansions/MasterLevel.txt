@@ -185,3 +185,15 @@ SendMasterLevelWindow.Complete.ML9.Step7:	[Completed] missing text
 SendMasterLevelWindow.Complete.ML9.Step8:	[Completed] missing text
 SendMasterLevelWindow.Complete.ML9.Step9:	[Completed] missing text
 SendMasterLevelWindow.Complete.ML9.Step10:	[Completed] missing text
+
+# 3. Celestius
+SendMasterLevelWindow.Uncomplete.ML10.Step1:	Sagittarius still stands guard in Celestius! This is a battlegroup encounter.
+SendMasterLevelWindow.Complete.ML10.Step1:	You have defeated Sagittarius in Celestius!
+SendMasterLevelWindow.Uncomplete.ML10.Step2:	Scorpius still stands guard in Celestius! This is a battlegroup encounter.
+SendMasterLevelWindow.Complete.ML10.Step2:	You have defeated Scorpius in Celestius!
+SendMasterLevelWindow.Uncomplete.ML10.Step3:	Centaurus still stands guard in Celestius! This is a battlegroup encounter.
+SendMasterLevelWindow.Complete.ML10.Step3:	You have defeated Centaurus in Celestius!
+SendMasterLevelWindow.Uncomplete.ML10.Step4:	Leo still stands guard in Celestius! This is a battlegroup encounter.
+SendMasterLevelWindow.Complete.ML10.Step4:	You have defeated Leo in Celestius!
+SendMasterLevelWindow.Uncomplete.ML10.Step5:	Draco still stands guard in Celestius! This is a battlegroup encounter.
+SendMasterLevelWindow.Complete.ML10.Step5:	You have defeated Draco in Celestius!
