@@ -67,7 +67,7 @@ namespace DOL.UnitTests
             GameServer.LoadTestDouble(_previous);
         }
 
-        [TestCase(61, 2, true, 64)]
+        [TestCase(61, 2, true, 70)]
         [TestCase(61, 2, false, 61)]
         [TestCase(21, 2, true, 21)]
         [TestCase(61, 1, true, 61)]
@@ -77,10 +77,10 @@ namespace DOL.UnitTests
             Assert.That(StormforgedRules.CreationClass(selected, realm, enabled), Is.EqualTo(expected));
         }
 
-        [TestCase(64, 2, 61)]
+        [TestCase(70, 2, 61)]
         [TestCase(21, 2, 21)]
         [TestCase(63, 3, 63)]
-        [TestCase(64, 1, 64)]
+        [TestCase(70, 1, 70)]
         public void OverviewKeepsServerIdentitySeparate(int server, int realm, int client)
         {
             Assert.That(StormforgedRules.OverviewClass(server, realm), Is.EqualTo(client));
@@ -292,7 +292,7 @@ namespace DOL.UnitTests
             var thane = new ClassThane();
             var storm = new ClassStormforged();
             Assert.That(thane.ID, Is.EqualTo(21));
-            Assert.That(storm.ID, Is.EqualTo(64));
+            Assert.That(storm.ID, Is.EqualTo(70));
             Assert.That(thane.SpecPointsMultiplier, Is.EqualTo(20));
             Assert.That(storm.ManaStat, Is.EqualTo(eStat.PIE));
         }

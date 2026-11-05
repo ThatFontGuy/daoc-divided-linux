@@ -20,7 +20,7 @@ namespace DOL.UnitTests
             Assert.That(albion.ClassType,Is.EqualTo(midgard.ClassType));
             Assert.That(albion.EligibleRaces.Select(r=>r.ID),Is.EquivalentTo(PlayerRace.AllRaces.Where(r=>r.Realm==eRealm.Albion).Select(r=>r.ID)));
             Assert.That(StormforgedRules.OverviewClass(65,1),Is.EqualTo(60));
-            Assert.That(StormforgedRules.OverviewClass(64,2),Is.EqualTo(61));
+            Assert.That(StormforgedRules.OverviewClass(70,2),Is.EqualTo(61));
             Assert.That(StormforgedRules.OverviewClass(65,2),Is.EqualTo(65));
         }
         [Test]
