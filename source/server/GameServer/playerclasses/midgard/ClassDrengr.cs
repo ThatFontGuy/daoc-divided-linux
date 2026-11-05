@@ -10,6 +10,11 @@ namespace DOL.GS.PlayerClass
     [CharacterClass((int)eCharacterClass.Drengr, "Drengr", "Viking")]
     public class ClassDrengr : ClassWarrior
     {
+        // Drengr trains Spear/Staff/Parry, not ClassWarrior's Axe/Hammer/Sword (none of which are
+        // even in her spec list), so the inherited autotrain list gave her no baseline competency
+        // in either weapon she can actually use.
+        private static readonly string[] AutotrainableSkills = new[] { Specs.Spear, Specs.Staff };
+
         public ClassDrengr()
             : base()
         {
@@ -17,6 +22,11 @@ namespace DOL.GS.PlayerClass
         }
 
         public override eClassType ClassType => eClassType.Hybrid;
+
+        public override IList<string> GetAutotrainableSkills()
+        {
+            return AutotrainableSkills;
+        }
 
         public override List<PlayerRace> EligibleRaces => new List<PlayerRace>()
         {

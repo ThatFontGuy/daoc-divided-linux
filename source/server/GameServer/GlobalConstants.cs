@@ -968,7 +968,7 @@ namespace DOL.GS
 			{eRealm.Midgard, new List<eCharacterClass>() {eCharacterClass.Viking, eCharacterClass.Mystic, eCharacterClass.Seer, eCharacterClass.MidgardRogue,
 				// post 1.93
 				eCharacterClass.Thane, 		// Thane = 21,
-                eCharacterClass.Stormforged,
+                eCharacterClass.Drengr,		// Drengr = 64 (native client slot 64; Stormforged is retired off it, dormant at 70),
 				eCharacterClass.Warrior, 		// Warrior = 22,
 				eCharacterClass.Shadowblade, 	// Shadowblade = 23,
 				eCharacterClass.Skald, 		// Skald = 24,

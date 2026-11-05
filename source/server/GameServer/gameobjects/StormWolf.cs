@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using DOL.AI.Brain;
 using DOL.Events;
@@ -32,6 +33,7 @@ namespace DOL.GS
             if(InstantHarmfulSpells!=null) InstantHarmfulSpells=InstantHarmfulSpells.ConvertAll(GetScaledSpell);
         }
         public override bool SetPetLevel() { SummonSpellDamage=-100; SummonSpellValue=50; return base.SetPetLevel(); }
+        private bool _stealthHandlerAdded;
         public override bool AddToWorld()
         {
             if(!base.AddToWorld()) return false;
@@ -43,13 +45,25 @@ namespace DOL.GS
             // Player-only event: a /spawn or gamebot owner threw here and the casting service removed the bot.
             // Bot owners are kept in sync by StormWolfBrain.Think instead. RootOwner (not Owner) walks past
             // the first wolf for a sub-pet, to the real player at the top of the chain.
-            if(RootOwner is GamePlayer rootPlayer) GameEventMgr.AddHandler(rootPlayer,GamePlayerEvent.StealthStateChanged,OwnerStealthChanged);
+            if(RootOwner is GamePlayer rootPlayer)
+            {
+                GameEventMgr.AddHandler(rootPlayer,GamePlayerEvent.StealthStateChanged,OwnerStealthChanged);
+                _stealthHandlerAdded=true;
+            }
             SyncOwner();
             return true;
         }
         public override bool RemoveFromWorld()
         {
-            if(RootOwner is GamePlayer rootPlayer) GameEventMgr.RemoveHandler(rootPlayer,GamePlayerEvent.StealthStateChanged,OwnerStealthChanged);
+            // Guarded by _stealthHandlerAdded: a zero-health sub-pet deleted by
+            // SummonStormWolf.OnPetReleased's cascade can have RemoveFromWorld called again by
+            // the NPC service's own cleanup pass, and unsubscribing twice throws (the handler
+            // chain is already gone after the first removal).
+            if(_stealthHandlerAdded && RootOwner is GamePlayer rootPlayer)
+            {
+                GameEventMgr.RemoveHandler(rootPlayer,GamePlayerEvent.StealthStateChanged,OwnerStealthChanged);
+                _stealthHandlerAdded=false;
+            }
             return base.RemoveFromWorld();
         }
         private void OwnerStealthChanged(DOLEvent e,object sender,EventArgs args)=>SyncOwner();
@@ -160,7 +174,36 @@ namespace DOL.GS.Spells
         public override bool IsSummoningSpell=>true;
         public override string ShortDescription=>Spell.Description;
         protected override IControlledBrain GetPetBrain(GameLiving owner)=>new StormWolfBrain(owner);
-        protected override GameSummonedPet GetGamePet(INpcTemplate template)=>new StormWolf(template);
+        protected override GameSummonedPet GetGamePet(INpcTemplate template)
+        {
+            // Named distinctly from the second/third wolf companions, since all three otherwise
+            // share the same reused NPC template's name.
+            var pet=new StormWolf(template);
+            pet.Name="Male Wolf";
+            return pet;
+        }
+        public override void OnPetReleased()
+        {
+            // Releasing the commander wolf (this one) otherwise leaves any Drengr second/third
+            // wolf companions attached to it behind, since ending its own Pet effect only
+            // despawns itself, not the sub-pets it holds. Delete them directly here (matching
+            // what PetECSGameEffect.OnStopEffect does for the main pet) rather than cascading
+            // through their own Pet effect, which depends on ECS tick timing we don't control
+            // from inside this callback.
+            if(Pet is StormWolf commander && commander.ControlledNpcList!=null)
+            {
+                foreach(IControlledBrain subBrain in commander.ControlledNpcList.Where(b=>b!=null).ToArray())
+                {
+                    commander.RemoveControlledBrain(subBrain);
+                    if(subBrain.Body is GameSummonedPet subPet)
+                    {
+                        subPet.Health=0;
+                        subPet.Delete();
+                    }
+                }
+            }
+            base.OnPetReleased();
+        }
     }
 
     // Drengr's second/third wolf: attaches another Storm Wolf as a sub-pet of the player's first
@@ -189,7 +232,14 @@ namespace DOL.GS.Spells
             return base.CheckBeginCast(selectedTarget);
         }
         protected override IControlledBrain GetPetBrain(GameLiving owner)=>new StormWolfBrain(Caster.ControlledBrain.Body);
-        protected override GameSummonedPet GetGamePet(INpcTemplate template)=>new StormWolf(template);
+        protected override GameSummonedPet GetGamePet(INpcTemplate template)
+        {
+            var pet=new StormWolf(template);
+            // Distinguish the companions from each other and from the first (Male) wolf, which
+            // otherwise all share the same reused NPC template's name.
+            pet.Name=Spell.ID==62652?"Wolf Youngling":"Female Wolf";
+            return pet;
+        }
         protected override void SetBrainToOwner(IControlledBrain brain)=>Caster.ControlledBrain.Body.AddControlledBrain(brain);
     }
 }

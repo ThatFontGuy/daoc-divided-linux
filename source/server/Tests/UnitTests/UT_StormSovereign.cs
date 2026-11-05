@@ -270,6 +270,29 @@ namespace DOL.UnitTests
             Assert.That(wolf1.AddControlledBrain(brain4),Is.True,"a freed slot can be reused");
         }
         [Test]
+        public void ReleasingTheCommanderAlsoReleasesItsAttachedWolves()
+        {
+            // SummonStormWolf.OnPetReleased: ending the commander's own Pet effect only despawns
+            // itself, so without this override any Drengr second/third wolf companions attached
+            // to it would be left behind in the world.
+            var owner=NewActor();
+            var wolf1=new Wolf();_actors.Add(wolf1);
+            var brain1=new StormWolfBrain(owner);wolf1.SetOwnBrain(brain1);
+            wolf1.InitControlledBrainArray(2);
+
+            var wolf2=new Wolf();_actors.Add(wolf2);var sub1=new StormWolfBrain(wolf1);wolf2.SetOwnBrain(sub1);
+            var wolf3=new Wolf();_actors.Add(wolf3);var sub2=new StormWolfBrain(wolf1);wolf3.SetOwnBrain(sub2);
+            wolf1.AddControlledBrain(sub1);wolf1.AddControlledBrain(sub2);
+            Assert.That(wolf1.PetCount,Is.EqualTo(2));
+
+            var handler=new SummonStormWolf(owner,SpellFor(5),Line);
+            typeof(SummonSpellHandler).GetField("m_pet",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(handler,wolf1);
+            handler.OnPetReleased();
+
+            Assert.That(wolf1.PetCount,Is.EqualTo(0),"both attached wolves are detached when the commander is released");
+            Assert.That(wolf1.ControlledNpcList,Is.All.Null,"their slots are freed, not just forgotten");
+        }
+        [Test]
         public void RoyalCleanseSupportsTheControlledCastingBypassAndTooltipsArePrivate()
         {
             Assert.That(MasterLevelAbilities.For(SpellFor(12).ID).BreaksControl,Is.True);
